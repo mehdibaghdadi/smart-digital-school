@@ -1,0 +1,82 @@
+<!--# RESOURCES JINJA2 #-->
+{% set JR = config.JINJA2_RESOURCES %}
+{% if current_user and current_user.is_authenticated %}
+    {% from '_includes/x-global-variables.html' import
+        menuJJ,controls_menu,url_home,url_message,url_profile,url_icon_school,
+        calendar_menu,url_calendar,title_calendar,assistance_menu,url_assistance,url_contact,url_password,
+        current_icon,current_title,current_title_header,user_image,school_image,home_menu,title_home,title_assistance,
+        contact_menu,title_contact,message_menu,title_message,profile_menu,title_profile,password_menu,title_password,
+        current_package,is_demo,show_remaining_days,show_package_alert
+    with context  %}
+<!--# RESOURCES JINJA2 #-->
+
+<!DOCTYPE html>
+<html lang="{{g.current_language}}" ng-app="appSDS" ng-cloak>
+<head>
+    <base href="/" />
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/static/app-assets/img/favicon.png" rel="icon">
+    <title>{{config.APP_TITLE}} | {{current_title_header if errors!=True else error_title}} {% block contentTitleHeader %}{% endblock %}</title>
+    {% include '_includes/x-links-header.html' %}
+    <link href="/static/app-assets/css/site.min.css?version={{app_version()}}" rel="stylesheet" />
+    {% block head %}
+    {% endblock %}
+    <link href="/static/app-assets/themes/look-and-feel.css" rel="stylesheet" />
+</head>
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed text-sm sidebar-collapse">
+
+    <div class="wrapper">
+        <!-- Navbar -->
+        {% include '_includes/navigation-menu-top.html' %}
+        <!-- /.navbar -->
+        <!-- Main Sidebar Container -->
+        {% include '_includes/sidebar-menu-left.html' %}
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            {% include '_includes/content-title-header.html' %}
+            <section id="Layout-content-section" class="content">
+                <div class="container-fluid">
+                    {% block content %}{% endblock %}
+                </div>
+            </section>
+            {% block contentBottom %}{% endblock %}
+
+            <!-- trick Footer, more space bottom -->
+            <div class="more-space-bottom">
+                &nbsp;
+            </div>
+        </div>
+
+        <!-- Main Footer -->
+        {% block footerBottom %} {% endblock %}
+        <!-- /.package tag -->
+        {% include '_includes/package-tag.html' %}
+
+        <!-- /.content-wrapper -->
+        <!-- Control Sidebar -->
+        {% include '_includes/sidebar-control-right.html' %}
+
+    </div>
+
+    <input id="__X_RVT" name="__X_RVT" type="hidden" value="{{TOKEN_API}}" />
+
+    <!--********************************
+        IMPORTANT : GLOBAL SCRIPT
+    ************************************-->
+    {% include '_includes/x-global-resourses-js.html'%}
+    {% include '_includes/x-links-footer.html' %}
+
+    <!--********************************
+        TEMPLATES SCRIPTS
+    ************************************-->
+    {% block scripts %}
+    {% endblock %}
+
+    <!--SCRIPTS for INCLUDES -->
+    <script src="/static/app-core/_shared/app.navigation.min.js?version={{app_version()}}"></script>
+    <script src="/static/app-core/_shared/jquery.pack-validation.min.js?version={{app_version()}}"></script>
+</body>
+</html>
+{% endif %}

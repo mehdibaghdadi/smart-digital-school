@@ -1,0 +1,61 @@
+.form-control {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.ribbon-wrapper {
+    right: 0px;
+    top: 0px;
+}
+
+.bg-profil-picture, .dz-image-preview {
+    background-size: :auto 320px;
+    background-repeat: no-repeat;
+    background-clip: content-box;
+    background-color: #161616;
+    background-position: center center;
+    height: 320px;
+    width: 320px;
+    text-align: center;
+    display: block;
+    border-radius: 50%;
+}
+
+.bg-profil-picture {
+    background-size: auto 320px;
+    margin-left: -3px !important;
+}
+
+.dz-image-preview {
+    margin-left: 0px !important;
+}
+
+    .dz-image-preview .preview {
+        display: flex;
+        border-radius: 50%;
+        overflow: hidden;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .dz-image-preview img {
+        height: 320px;
+        vertical-align: middle;
+    }
+
+.profil-user .col-md-8, .profil-user .col-md-4, .profil-user .col-md-7, .profil-user .col-md-5 {
+    padding-right: 0 !important;
+}
+
+.profil-user .col-md-4 {
+    max-height: 370px !important;
+    max-width: 345px !important;
+}
+
+.profil-user .col-md-8.card, .profil-user .col-md-7.card, .profil-user .col-md-5.card {
+    box-shadow: rgba(0, 0, 0, 0.13) 0 0 1px,rgba(0, 0, 0, 0.48) 0 1px 3px;
+}
+
+.profil-user .col-md-8 input:not([readonly]) {
+    text-transform: capitalize !important;
+}

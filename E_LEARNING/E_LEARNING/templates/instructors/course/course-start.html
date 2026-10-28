@@ -1,0 +1,100 @@
+{% extends "_layouts/layout.html" %}
+{% block head %}
+<title>Création Course</title>
+<link href="/static/app-assets/css/course-ai.min.css" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+<!-- course-start.html : bloc de choix de mode de création -->
+
+<section class="course-start-wrapper">
+    <h1 class="course-start-title">Comment voulez-vous créer votre cours ?</h1>
+
+    <div class="course-start-cards">
+        <!-- Option 1 : Création manuelle -->
+        <article class="course-card">
+            <div class="course-card-icon-box">
+                <i class="fa fa-ew-man-course"></i>
+            </div>
+
+            <div class="course-card-content">
+                <header class="course-card-header">
+                    <span class="course-card-header-icon"><i class="fa fa-ew-instructor"></i></span>
+                    <h2 class="course-card-title">Création manuelle</h2>
+                </header>
+                <p class="course-card-subtitle course-card-subtitle-green">
+                    Construire le cours étape par étape
+                </p>
+
+                <!-- Adapter href / onclick selon votre routing -->
+                <a href="{{course_create_url}}"
+                   class="course-card-button course-card-button-outline btn-dark mt-3 mb-3">
+                    Créer manuellement mon cours
+                </a>
+
+                <ul class="course-card-features">
+                    <li>
+                        Vous définissez vous-même le plan, les modules et les activités.
+                    </li>
+                    <li>
+                        Assistant IA disponible plus tard pour vous aider ponctuellement.
+                    </li>
+                    <li>
+                        Recommandé si vous avez déjà un contenu structuré.
+                    </li>
+                </ul>
+
+
+            </div>
+        </article>
+        <!-- Option 2 : AI-Cours -->
+        <article class="course-card">
+            <div class="course-card-icon-box">
+                <i class="fa fa-ew-newcourse"></i>
+            </div>
+
+            <div class="course-card-content">
+                <header class="course-card-header">
+                    <span class="course-card-header-icon"><i class="fa fa-ew-ai-course"></i></span>
+                    <h2 class="course-card-title">IA-Cours</h2>
+                </header>
+                <p class="course-card-subtitle course-card-subtitle-blue">
+                    Agent générateur de contenu
+                </p>
+
+                <!-- Adapter href / onclick selon votre routing -->
+                <a href="{{course_ai_wizard}}"
+                   class="course-card-button btn-primary mt-3 mb-3">
+                    Créer mon cours avec AI-Cours
+                </a>
+
+                <ul class="course-card-features">
+                    <li>
+                        Génère automatiquement le plan, les modules et les QCM.
+                    </li>
+                    <li>
+                        S’adapte au niveau de vos apprenants.
+                    </li>
+                    <li>
+                        Vous pouvez ensuite modifier librement tout le contenu.
+                    </li>
+                </ul>
+
+
+            </div>
+        </article>
+
+
+    </div>
+</section>
+
+<!-- Styles spécifiques à ce bloc (à déplacer dans votre fichier CSS global si besoin) -->
+
+
+
+    {% endblock %}
+    {% block contentBottom %}{% endblock %}
+
+    {% block scripts %}
+
+    {% endblock %}

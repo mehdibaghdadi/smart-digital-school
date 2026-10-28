@@ -1,0 +1,57 @@
+span:not(:has(img)):not(:has(video)):not(:has(.fc-list-event-dot)):not(.fc-list-event-dot)
+:not(.select2):not(:has(.select2)),
+a:not(:has(img)):not(:has(video)):not(:has(.fc-daygrid-event)):not(.fc-daygrid-event),
+table:not(.fc-scrollgrid):not(:has(.fc-daygrid-event)):not(:has(.fc-list-event-dot)):not(:has(.fc-timegrid-event)):not(.fc-list-event-dot),
+ul:not(:has(img)):not(:has([role='option'])), ::-webkit-scrollbar-thumb,
+h1, h2, h3, h4, h5, h6, h7,
+canvas, label, b, textarea, select, option,
+input:not([type='color']),
+.custom-switch, .switch, .dropdown-menu,
+.btn, .fa, .progress, nav, .sidebar, i, .card-header, .timeline .bg-gradient-video,
+.btn-primary, div.bg-primary, .small-box, .bg-gradient-chapter, .bg-success, .bg-orange,
+aside.control-sidebar, ::-webkit-scrollbar-thumb, .content-header, .bg-gradient-dm-assist-plus,.footer-fix, .bg-gradient-dm-assist-minus {
+    filter: hue-rotate(var(--main-hue-rotate)) saturate(var(--saturate)) ;
+}
+    .small-box:hover {
+        filter: hue-rotate(var(--main-hue-rotate)) saturate(var(--saturate)) contrast(1.1) !important;
+    }
+    .btn-danger, .footer-fix *,.text-info, .btn-outline-danger, .bg-danger, .text-red, .bg-red, .text-danger, .bg-gradient-chapter:hover, .timeline-header span b {
+        filter: hue-rotate(var(--hue-rotate2)) saturate(var(--saturate)) ;
+    }
+
+    b.text-info, .bg-warning, .btn-warning, .sorting_disabled, .badge-warning, .text-warning, .text-yellow, .modal-header,
+    .bg-gradient-file:hover,
+    .bg-gradient-video:hover,
+    .bg-gradient-audio:hover,
+    .bg-gradient-text:hover{
+        filter: hue-rotate(var(--hue-rotate4)) saturate(var(--saturate)) contrast(1.2) !important;
+    }
+
+a:has(.brand-image), a:has(.brand-text),
+.bg-info, .btn-info, .active, .text-green, .info-box-icon {
+    filter: hue-rotate(var(--hue-rotate1)) saturate(var(--saturate)) !important;
+}
+.img-circle:not(.brand-image), td img {
+    filter: hue-rotate(var(--hue-rotate4)) !important;
+}
+
+/*// Font Awesome Icons*/
+i.fa:before, i.fa:before, i.fas:before, i.far:before, i.fab:before {
+    filter: hue-rotate(var(--hue-rotate4)) !important;
+    text-shadow: 1px 1px 0px #8181815f;
+}
+
+i.fa-eye:before,.fa-eye:before {
+    content: "💡";
+    font-size: var(--ew-percent-1);
+    color: #ffc107 !important;
+}
+i.fa-eye.text-success {
+    color: #ffc107 !important;
+}
+
+i.fa-eye-slash:before, .fa-eye-slash:before {
+    content: "💡";
+    font-size: var(--ew-percent-1);
+    filter: saturate(0) !important;
+}

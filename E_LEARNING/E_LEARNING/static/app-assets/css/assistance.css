@@ -1,0 +1,48 @@
+.table tbody > tr > th:last-of-type {
+    padding-right: 0.5rem !important;
+}
+
+.table-bordered td {
+    border-bottom: 3px solid #02112e !important;
+}
+
+.slider-time {
+    width: 60px !important;
+    text-align: center;
+    border: 0;
+    border-bottom: thin solid #808080;
+}
+
+.note-editable.card-block {
+    min-height: 250px;
+    max-height: 800px;
+}
+
+.note-icon-link, .note-icon-chain-broken {
+    color: var(--dark);
+    text-transform: none;
+    font-weight: bold;
+    font-style: normal;
+}
+
+    .note-icon-link:after {
+        content: " : WEB";
+        font-size:10px;
+    }
+
+    .note-icon-chain-broken:after {
+        content: "";
+    }
+
+.response-demand-prof a {
+    text-decoration: underline;
+    color: red;
+}
+
+    .response-demand-prof a:hover {
+        color: var(--info);
+    }
+
+table tr td {
+    position: relative;
+}

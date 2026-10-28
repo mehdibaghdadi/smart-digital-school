@@ -1,0 +1,19 @@
+<div class="dropdown-menu dropdown-menu-left p-0 rounded" role="menu" style="max-width:340px">
+    <div class="p-2 pl-1 bg-black border-bottom">
+        <div class="text-xs" style="min-width:300px"><i class="fa fa-ew-notebook mr-2 "></i>  <b>{{JR.total}} : {$ course_chapter_list.length $}</b></div>
+    </div>
+    <div ng-repeat="ch in course_chapter_list track by $index" class="bg-white mt-2">
+        <div class="pl-1" style="max-width:100%">
+            <a class="dropdown-item cursor-pointer text-xs text-truncate" ng-class="ch.currentId ? 'text-gray' : 'text-black'" ng-href="{$ !ch.currentId ? ch.href : ch.href+'#' $}">
+                <b class="text-sm">{$ch.sequence  | numberToLetter $}</b> - <span>{$ch.chapter_title$}</span>
+            </a>
+            <div class="dropdown-divider mt-2 mb-2 bg-white" ng-hide="$last"></div>
+        </div>
+    </div>
+    <div class="p-1">
+        <a class="btn btn-xs  mt-2 w-100 d-block btn-outline-danger" data-toggle="modal" data-target="#editModalChapter"
+           ng-click="createChapter($event)" role="button">
+            <i class="fas fa-plus text-xs mr-2 text-warning"></i>{{JR.add}} {{JR.chapter}}
+        </a>
+    </div>
+</div>

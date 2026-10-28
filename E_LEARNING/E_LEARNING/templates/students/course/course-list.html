@@ -1,0 +1,179 @@
+{% extends "_layouts/layout.html" %}
+
+{% set status = course_list.json["status"]==200 %}
+{% set length = (course_list.json["response"]|length) if status else 0 %}
+
+{% set list_subject=course_list.json["response"] |groupby('label_subject') if status else [] %}
+
+{% set course_list_favorite = course_list_favorite.json["response"] if status and course_list_favorite and course_list_favorite.json["status"]==200 else [] %}
+{% set list_courses_progress = list_courses_progress.json["response"] if status and list_courses_progress.json["status"]==200 else [] %}
+
+{% set list_fav=[] %}
+{% for x in course_list_favorite %}
+{% set l=list_fav.append(x.course_id) %}
+{% endfor %}
+
+{% block head %}
+<link href="/static/app-assets/css/courses.min.css?version={{app_version()}}" rel="stylesheet" />
+<style>
+    .card-menu {
+        background: #152a48;
+    }
+   
+   
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row m-0">
+    <div class="col-xs card card-menu p-0 text-center elevation-2 col-short-links-courses" style="">
+        <div class=" card-body text-center p-2">
+            <div class="short-links-courses d-flex justify-content-between">
+                <a href="{{url_for('CourseView:listCourseStudent')}}" class="  text-xs">
+                    <span class=" fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x text-black"></i><i class="fa fa-ew-book  fa-stack-1x fa-inverse"></i></span>
+                    <small class="text-uppercase d-block"> {{JR.courses_all}} </small>
+                </a>
+                <a href="{{url_for('CourseView:listBySubject_1')}}" class=" text-xs">
+                    <span class=" fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x text-black"></i><i class="fa fa-microscope text-red fa-stack-1x fa-inverse"></i></span>
+                    <small class="text-uppercase d-block"> {{JR.subjects_school}} </small>
+                </a>
+                <a href="{{url_for('CourseView:listCourseHistory')}}" class=" text-xs">
+                    <span class=" fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x text-black"></i><i class="fa fa-clock-rotate-left text-green  fa-stack-1x fa-inverse"></i></span>
+                    <small class="text-uppercase d-block"> {{JR.my_historical}} </small>
+                </a>
+                <a href="{{url_for('CourseView:listCourseFavorite')}}" class="  text-xs">
+                    <span class=" fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x text-black"></i><i class="fa fa-heart text-yellow  fa-stack-1x fa-inverse"></i></span>
+                    <small class="text-uppercase d-block"> {{JR.my_courses_fav}} </small>
+                </a>
+                <a href="{{url_for('CourseView:listCourseInstructor_1')}}" class="text-xs">
+                    <span class=" fa-stack fa-lg"><i class="fas fa-circle fa-stack-2x text-black"></i><i class="fa fa-chalkboard-teacher text-blue  fa-stack-1x fa-inverse"></i></span>
+                    <small class="text-uppercase d-block"> {{JR.my_profs}} </small>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg" ng-controller="CourseListCtrl">
+        <div class="text-uppercase text-center row border-bottom m-0 p-0 align-items-end">
+            <div class="col-xs  d-none d-sm-inline-block">
+                <a class="btn btn-default border-bottom-0 btn-flat rounded-top btn-sm " href="{{url_back}}">
+                    <small><i class="fa fa-chevron-left text-green mr-1"></i>{{JR.back}}</small>
+                </a>
+            </div>
+            <!--Filter-->
+            <div class="col p-0">
+                {% include 'commun/filters/course-filter-top.html' %}
+            </div>
+            <!--end filter-->
+            <div class="col-xs d-none d-sm-inline-block">
+                <a class="btn btn-default border-bottom-0 btn-flat rounded-top btn-sm">
+                    <small><i class=" mr-1 text-info  fas fa-microscope "></i> {{JR.total}} : <b class="text-sm">{{length}}</b> </small>
+                </a>
+            </div>
+        </div>
+        <div class="card bg-graph elevation-0 mb-0" style="min-height:100vh">
+            <div class="card-body p-1 pr-2">
+
+                <div id="content-course" class="row justify-content-start  p-2">
+                    {% if status %}
+                    {% for  subject,list_group in list_subject %}
+                    {% set ns = namespace(subject_progress=0) %}
+
+
+                    <div class="text-left text-uppercase text-bold card m-0  mt-1 elevation-0 border rounded-bottom-0  text-truncate bg-course-item"
+                         ng-class="header_subject['{{ subject }}'].hide ? 'col-md col-lg pl-2 pt-2 pb-2 pr-2':'col-12  p-2 mt-2  active'"
+                         role="button"
+                         ng-init="header_subject['{{ subject }}'].hide={{1 if list_subject|length > 1 else 0}}"
+                         ng-click="courseItemClick(header_subject['{{ subject }}'])"
+                         ng-show="search.length<2">
+                        <div class="d-inline-block text-truncate">
+                            <span class="ml-3 float-right "> <i class="fa " ng-class="header_subject['{{ subject }}'].hide ?'fa-square-caret-down text-red':'fa-square-caret-up text-dark'"></i> </span>
+                            <i class="fas mr-1 text-black" ng-class="header_subject['{{ subject }}'].hide ? 'fa-plus-circle text-info':' fa-minus-circle text-red'"></i><b class="title"> {{subject}}<span class="badge badge-light text-red border ml-1 text-sm">{{list_group|length}}</span></b>
+                        </div>
+                    </div>
+
+                    <div class="small-box-course border-left border-gray  rounded border-bottom border-right mr-1 "
+                         ng-class="header_subject['{{ subject }}'].hide ? 'd-none col-xs':'col-12 '"
+                         style="z-index:{{ loop.index }}">
+                        <div class="bg-dashed mt-2 p-1 text-xs rounded" ng-show="search.length>=2">
+                            <i class="fa fa-search ml-2 mr-2"></i><b class="text-uppercase">{{ subject }}</b>
+                        </div>
+                        <div class="row m-0 mt-2 pt-2 animate-opacity">
+                            {% for s in list_group |sort(attribute='date_start_course', reverse = True) %}
+                            <div id="course_{{s.id}}" class="small-box-course m-0 col-md-4 col-sm-6 col-12"
+                                 data-index="{{ loop.index }}"
+                                 ng-init='list_courses_grouped["{{ subject }}{{ loop.index }}"] = { subject:"{{ subject }}", data:"{{ (s.course_title+s.label_subject+s.language_name+s.last_name+s.first_name)|replace('\"', '')}}",show:true}'
+                                 ng-show='list_courses_grouped["{{ subject }}{{ loop.index }}"].show'>
+
+                                <!-- small box -->
+                                {% set course_progress_distinct = (list_courses_progress | selectattr('course_id', 'equalto', s.id) | first) if list_courses_progress | length > 0 else None %}
+                                {%  set course_progress = (course_progress_distinct['course_completion_percentage'] | int) if course_progress_distinct else 0 %}
+                                {% set ns.subject_progress = ns.subject_progress + course_progress %}
+
+                                {% include 'students/course/partial-view/include-course-sm-box.html' %}
+                                <!-- small box -->
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div ng-click="header_subject['{{ subject }}'].hide=!header_subject['{{ subject }}'].hide"
+                             title="{{JR.close}}: {{ subject }}" data-toggle="tooltip"
+                             class="text-left btn btn-white  text-truncate btn-block animate-opacity p-0 mb-0"
+                             style="font-size:0.7rem !important" ng-hide="search.length>=2">
+                            <i class="fa fa-square-caret-up text-dark mt-1 text-sm p-0"></i>
+                            <small class="float-right text-muted mt-1 mr-1">{{ subject }} ( <b class="text-black">{{list_group|length}}</b> )</small>
+                        </div>
+
+                    </div>
+
+                    {% set average_progress = (ns.subject_progress / list_group|length) if list_group|length > 0 else 0 %}
+                    <div ng-hide="search.length>=2" class="col-12 text-right text-xs text-uppercase text-dark p-0 mt-0 mb-2">
+                        <small class="border rounded-bottom d-inline-block text-center elevation-1 border-top-0"
+                               style="background: linear-gradient(to right, #e8fbdc {{ average_progress | round(0) }}%, #f8f9fa {{ average_progress | round(0) }}%); min-width: 140px; ">
+                            {{ JR.progression }} :
+                            <b class="text-sm text-black">{{ average_progress | round(0) | int }}</b> <i class="fa fa-percent"></i>
+                        </small>
+                    </div>
+
+                    {% endfor %}
+                    {% else %}
+                    <div class="col-12 text-center text-uppercase">
+                        <div class="alert alert-light">
+                            <i class="fa fa-exclamation-circle mr-1"></i> {{JR.courses_not_found}}.
+                        </div>
+
+                    </div>
+                    {% endif %}
+                </div>
+                <div ng-show="empty_list_search || search.length>=2" class="text-uppercase text-center footer-fix">
+                    <div class="p-1">
+                        <span role="button" class="btn btn-outline-warning btn-sm ml-3" ng-click="searchClear()"><small><i class="fa text-red fa-eraser mr-1"></i>{{JR.erase_search}}</small></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if status %}
+        <div class="text-center text-uppercase alert alert-light" ng-show="empty_list_search && search.length>=2">
+            <i class="fa fa-exclamation-circle mr-1"></i> {{JR.courses_not_found2}}.
+        </div>
+        <div class="text-center row text-uppercase m-0 p-0 mt-1 footer-fix" ng-hide="empty_list_search || search.length>=2">
+            <div class="col-6 text-right">
+                <a class="cursor-pointer ml-2  btn btn-primary" role="button" ng-click="devAll(false)">
+                    <small><i class="fa fa-plus mr-1"></i>{{JR.show_all}}</small>
+                </a>
+            </div>
+            <div class="col-6 text-left">
+                <a class="cursor-pointer mr-2 btn btn-primary" role="button" ng-click="devAll(true)">
+                    <small><i class="fa fa-minus mr-1"></i>{{JR.minimize_all}}</small>
+                </a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+</div>
+    {% endblock %}
+    {% block contentBottom %}{% endblock %}
+
+    {% block scripts %}
+<script src="/static/app-core/students/app.courses-list.min.js?version={{app_version()}}"></script>
+
+    {% endblock %}

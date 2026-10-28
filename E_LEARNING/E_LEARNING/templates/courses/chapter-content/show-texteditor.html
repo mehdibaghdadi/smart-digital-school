@@ -1,0 +1,47 @@
+{% block head %}
+{% endblock %}
+<!-- Modal -->
+<form class="modal fade p-0" id="writingModal" name="writingModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="writingModalLabel">
+    <div class="modal-dialog modal-fullscreen p-0" role="document">
+        <div class="modal-content">
+            <div class="modal-header p-1 bg-black  border-bottom border-dashed rounded-top">
+                <i class="fa float-left m-1" ng-class="content_type_uploaded.css"></i>
+                <h5 class="text-center  " style="width:100%">
+                    <span class="p-2 rounded">
+                        <span class="text-uppercase "> <b>{$ uploaded_content.content_brief $}</b></span>
+                    </span>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>           
+            <div class="modal-body writing-body p-0 overflow-auto">
+                <div class="text-xs text-muted text-uppercase text-center">
+                     <small class="">{{JR.chapter}}  <b>{$uploaded_content.chapter_sequence  | numberToLetter $} - {$uploaded_content.content_sequence$}</b> <span class="ml-2 mr-2">|</span> {{JR.duration}} : <b class="">{$ uploaded_content.time_required_in_sec | formatDuration $}</b></small>
+                </div>
+                <div class="d-block  writing-content-text pb-5 text-dark overflow-auto" 
+                      id="body_content_uploaded" ng-bind-html="uploaded_content.content_text | toHtml">
+                    {$$}
+                </div>
+                <div style="min-height:60px" class="text-center   border-top border-dashed">
+                    
+                </div>
+
+            </div>
+            <div class="modal-footer text-center bg-black d-block footer-fix p-0" >
+                {%if isStudent %}
+                <button ng-click="contentEndClik($event,uploaded_content)"
+                        type="button" class="btn btn-success btn-sm" data-dismiss="modal" aria-label="Close">
+                    <span class="text-uppercase" aria-hidden="true">{{JR.i_finish_this_section}}</span>
+                </button>
+                <button  type="button" class="btn btn-primary btn-sm" data-dismiss="modal" aria-label="Close">
+                    <span class="text-uppercase"  aria-hidden="true">{{JR.not_yet}}</span>
+                </button>
+                {% else %}
+                <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" aria-label="Close">
+                    <span class="text-uppercase" aria-hidden="true">{{JR.finish}}</span>
+                </button>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</form>

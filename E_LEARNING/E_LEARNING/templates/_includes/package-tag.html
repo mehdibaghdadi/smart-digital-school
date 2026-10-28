@@ -1,0 +1,20 @@
+{% set date_end_package_alert = format_date(current_user.renewal_date, format='dd-MM-YYYY') %}
+{% set title_pack_alert = "{} {}".format (JR.version,current_package.label)%}
+
+{% if show_package_alert %}
+<div class="package-tag" id="type_current_package"
+     role="button" onclick='showPackageAlert("{{ title_pack_alert }}","{{date_end_package_alert}}")'
+     data-toggle="tooltip" title="{{ title_pack_alert }}">
+    {% if is_demo %}
+    <small class="">
+        <i class="fa mr-1 {{ "{} {}".format(current_package.icon,current_package.color) }}"></i>{{ current_package.label }}
+    </small>
+    {% else %}
+    <small class="">
+        {{ date_end_package_alert }} <i class="far fa-fade fa-dot-circle text-red "></i>
+    </small>
+
+    {% endif %}
+
+</div>
+{% endif %}

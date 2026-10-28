@@ -1,0 +1,78 @@
+{% block head %}
+{% endblock %}
+<!-- Modal -->
+<form class="modal fade p-0" id="writingModalContent" name="writingModalContent" ng-submit="submitWritingContent()" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="writingModalContentLabel">
+    <div class="modal-dialog modal-fullscreen" role="document">
+        <div class="modal-content">
+            <div class="modal-header p-1 pt-0 pb-0 text-sm bg-primary">
+                <small class="text-uppercase ml-1 mt-1"><i class=" fa {$content_type.css$}  mr-1"></i><b class="modal-title" id="uploadModalLabel"> {$ editContent.id>0 ?"{{JR.edit}}":"{{JR.write}}" $} : <span class="text-warning">{$content_type.text$}</span></b></small>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body overflow-auto pt-0">
+                
+                <div class="row m-0 p-0 text-xs mb-3">
+                    <div class="col-md-12 text-uppercase text-sm p-2">
+                        <input ng-model="editContent.content_brief" required rows="2"
+                               type="text" class="form-control text-center rounded-0" placeholder="{{JR.content}} : {{JR.title}} ..." />
+                    </div>
+                    <div class="col-md-8"></div>
+                    <div class="col-md-4">
+                        <span class="text-uppercase text-xs"><i class="fas fa-stopwatch mr-2"></i>{{JR.duration}} ({{JR.minutes}})</span>
+                        <div class="input-group">
+                            <input id="time_limit" name="log" type="number" required
+                                   ng-model="editContent.time_required_in_min" min="0"
+                                   value="{$ editContent.time_required_in_min || 0 $}"
+                                   class="form-control  text-center text-bold text-info text-lg"
+                                   autocomplete="new-password" placeholder="{{JR.minutes}}">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <small class="text-red text-uppercase" ng-hide="editContent.time_required_in_min">{{JR.illimited}}</small>
+                                    <small class="text-black text-bold" ng-show="editContent.time_required_in_min">mn</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Important  Visibility -->
+                    <div class="p-0 pt-3 col-6 text-left">
+                        <div class="switch text-xs text-uppercase">
+                            <span class="ml-2 font-weight-bold">
+                                <span ng-class="editContent.is_important==1 ? 'text-red' : ''">{{JR.important}}</span>
+                                <label class="">
+                                    <input type="checkbox" ng-model="editContent.is_important" ng-true-value="1" ng-false-value="0" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <span class="lever"></span>
+                                </label>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="p-0 pt-3 col-6 text-right">
+                        <div class="switch text-xs text-uppercase">
+                            <span class="">
+                                <i class="fa"
+                                   ng-class="editContent.is_visible==1 ? 'fa-eye text-success' : 'fa-eye-slash text-muted'"></i>
+                            </span>
+                            <span class="ml-1 font-weight-bold">
+                                <span>{$ editContent.is_visible ? "{{JR.online}}":"{{JR.offline}}"$}</span>
+                                <label class="">
+                                    <input type="checkbox" ng-model="editContent.is_visible" ng-true-value="1" ng-false-value="0" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <span class="lever"></span>
+                                </label>
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+                <div style="text-transform: none !important; font-size: inherit !important" class="d-block bg-white text-dark p-0 m-0 text-edit-content">
+                    <div id="snEditorContent" placeholder="{{JR.content}} : {{JR.text}} ..."  ></div>
+                </div>
+                <div class="more-space-div-bottom"></div>
+            </div>
+            <div class="modal-footer bg-black footer-fix text-center justify-content-center" style="position:relative !important">
+                <div class="d-inline-block">
+                    <button hide-if-no-payment  type="submit" class="btn btn-primary mr-2">{{JR.save_all}}</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">{{JR.close}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

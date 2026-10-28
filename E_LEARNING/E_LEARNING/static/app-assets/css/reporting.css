@@ -1,0 +1,112 @@
+.formReport {
+    height: 100%;
+}
+
+.loading-spinner {
+    position: absolute;
+    top: 40%;
+    left: 46%;
+    z-index: 1000
+}
+
+table {
+    font-size: 12px;
+    width: 99.5% !important;
+}
+
+    table.dataTable  tr img {
+        width: 60px !important;
+        height: 60px !important;
+    }
+
+    table.dataTable tbody td {
+        vertical-align: middle;
+    }
+
+th, td {
+    min-width: 50px;
+    max-width: 500px;
+    text-align: center !important;
+}
+
+.text-clamp {
+    white-space: break-spaces;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    min-width: 200px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+
+th {
+    font-size: 10px;
+    padding: 0.3rem !important;
+}
+
+    th div div p { /*Group*/
+        margin-bottom: 0 !important;
+    }
+
+table.dataTable thead > tr > th.sorting {
+    padding-right: 0.9rem !important;
+}
+
+th:nth-child(odd) {
+    background-color: #0f3b61 !important;
+    color: #fffeee;
+}
+
+th:nth-child(even) {
+    background: #d9d9d9;
+    color: #000;
+}
+
+td:nth-child(odd) {
+    background: #fbfbfb;
+}
+
+
+
+table.dataTable tr.dtrg-start th {
+    background-color: #ffffff !important;
+}
+
+.main-footer {
+    display: none;
+}
+
+table.dataTable thead > tr > th.sorting_desc, table.dataTable thead > tr > th.sorting {
+    cursor: grab;
+}
+
+.group-column-header {
+    user-select: none;
+}
+
+.helper-group-move {
+    position: absolute !important;
+    z-index: 9999 !important;
+}
+
+.div-groupZone {
+    text-align: left
+}
+
+#groupZone {
+    border: 2px dashed #999;
+    min-height: 50px;
+    padding: 15px;
+    background: #f9f9f9;
+    text-align: center;
+}
+
+    #groupZone * {
+        pointer-events: none; /* evite que le contenu bloque le drop */
+    }
+
+.ui-draggable-dragging {
+    z-index: 9999 !important;
+    pointer-events: none;
+}

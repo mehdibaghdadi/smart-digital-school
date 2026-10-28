@@ -1,0 +1,106 @@
+{% extends "_layouts/layout.html" %}
+{% block head %}
+<link href="/static/app-assets/css/courses.min.css?version={{app_version()}}" rel="stylesheet" />
+<style>
+    .img-circle2 {
+        border: 2px solid #cccccc;
+        height: 2.8rem !important;
+        width: 2.8rem !important;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+{% set status = instructor_course_list.json["status"]==200 %}
+{% set length = (instructor_course_list.json["response"]|length) if status else 0 %}
+<div ng-controller="InstructorListCtrl">
+    <div class="text-uppercase text-center row m-0 p-0 border-bottom">
+        <div class="col-xs  d-none d-sm-inline-block">
+            <a title="{{JR.back}}" data-toggle="tooltip" class="btn btn-default border-bottom-0 btn-flat rounded-top btn-sm " onclick="goBack();">
+                <small><i class="fa fa-chevron-left mr-1 text-green"></i>{{JR.back}}</small>
+            </a>
+        </div>
+        <!--Filter-->
+        <div class="col p-0">
+            {% include 'commun/filters/course-filter-top.html' %}
+
+        </div>
+        <!--end filter-->
+        <div class="col-xs d-sm-inline-block d-none">
+            <a class="btn btn-default border-bottom-0 btn-flat rounded-top btn-sm">
+                <small><i class="ml-1 mr-1 text-info  fas fa-microscope "></i> {{JR.total}} : <b>{{length}}</b> </small>
+            </a>
+        </div>
+    </div>
+
+    <div class="card mb-0 elevation-0 bg-graph">
+
+        <div class="card-body">
+            <div id="content-instructor" class="row  justify-content-center">
+                {% if status %}
+                {% for s in instructor_course_list.json["response"] %}
+                <div class="col-md-6 col-12" ng-show='matches("{{s.last_name+s.first_name+ s.email|replace('\"', '')}}")'>
+                    <!-- small box -->
+
+
+                    <div class="card card-dark card-outline">
+                        <div class="card-body p-0">
+                            <div class="row m-0 p-0 text-uppercase text-truncate">
+                                <div class="col-md-4 pl-0 bg-black rounded-bottom border text-center"
+                                     ng-click="zoomImage('{{ s.image }}')" role="button"
+                                     style="background:url('{{ s.image}}');background-position:center center;background-size:cover;background-repeat:no-repeat">
+                                    <div style="min-height:180px;min-width:180px">&nbsp;</div>
+                                    
+                                </div>
+                                <div class="col-md">
+                                    <h4>{{ s.first_name }} {{ s.last_name }}</h4>
+                                    <p class="text-xs"><i class="fas fa-envelope mr-1"></i> {{ s.email }}</p>
+                                    <textarea readonly
+                                              class="p-2 text-left text-uppercase form-control bg-white"
+                                              style="font-size: 0.7rem !important; border-bottom: thin dashed #ccc; " 
+                                              rows="5">{{ s.introduction_brief if  s.introduction_brief else '...'}}</textarea>
+                                </div>
+                                
+                            </div>
+
+                            <div class=" p-1 bg-black  rounded ">   
+                                <div class="mt-1">
+                                    <div class=" btn btn-primary btn-block" role="button" ng-click="InstructorClik('{{course_list_url}}/{{s.id}}')">
+                                        {% if s.num_of_published_courses and  s.num_of_published_courses > 0%}
+                                        <i class="fa fa-ew-book mr-1"></i>
+                                        {{JR.show_courses}} : <b class="text-md"> {{ s.num_of_published_courses if s.num_of_published_courses else 0}}</b>
+
+                                        {% else %}
+                                        {{JR.courses_not_found}}  <i class="fas fa-exclamation-circle text-lg mr-2 ml-1 text-red"></i>
+                                        {% endif %}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- small box -->
+
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="col-12 text-center text-center text-uppercase"><div class="alert alert-light"> <i class="fa fa-exclamation-circle mr-1"></i> {{JR.courses_not_found3}}.</div></div>
+                {% endif %}
+                <div ng-show="empty_list_search" class="text-center text-uppercase"><div class="alert alert-light"> <i class="fa fa-exclamation-circle mr-1"></i> {{JR.empty_data}}.</div></div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}
+{% block contentBottom %}{% endblock %}
+
+{% block scripts %}
+<script src="/static/app-core/students/app.instructors.min.js?version={{app_version()}}"></script>
+{% endblock %}

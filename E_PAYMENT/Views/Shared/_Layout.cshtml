@@ -1,0 +1,99 @@
+﻿@{
+    var currentCulture = CultureInfo.CurrentUICulture.Name;
+}
+
+<!DOCTYPE html>
+<html lang="@currentCulture">
+<head>
+    <meta charset="utf-8" />
+    <title>@Resources.TitleApp - @ViewData["Title"]</title>
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="~/favicon.png" asp-append-version="true">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/E_PAYMENT.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <span class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <a href="@AppSettings.Value.ReturnUrl"><img style="height:2.5rem" src="~/logo-sds.png" alt="@Resources.SDS" /></a>
+                </span>
+                <div>
+                    <select id="languageSelect" class="form-select" asp-for="@currentCulture">
+                        <option value="fr">Français</option>
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                    </select>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted bg-dark ">
+        <small class="d-block container text-center text-xs">
+           
+            &copy; Copyright 2021 : Smart Digital School- @Resources.TitleApp
+
+        </small>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        var _global = {
+         captcha_url : '/api/captcha/generate'
+        };
+
+        document.getElementById('languageSelect').addEventListener('change', function () {
+            const selectedCulture = this.value;
+            const apiUrl = '/api/Language/SetLanguage';
+            const data = {
+                culture: selectedCulture
+            };
+
+            // Appeler l'API via fetch
+            fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+
+                        // Recharger la page avec la nouvelle culture
+                        const currentUrl = new URL(window.location.href);
+                        const currentPath = currentUrl.pathname.split('/');
+
+                        // Remplacez la culture dans l'URL (1ère partie après l'hôte)
+                        currentPath[1] = result.culture;
+
+                        // Reconstruire l'URL
+                        currentUrl.pathname = currentPath.join('/');
+
+                        // Recharger la page avec la nouvelle URL
+                       window.location.href = currentUrl.toString();
+                    } else {
+                        alert('Error setting language.');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

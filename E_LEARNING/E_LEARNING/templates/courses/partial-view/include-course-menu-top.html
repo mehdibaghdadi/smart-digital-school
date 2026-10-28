@@ -1,0 +1,68 @@
+
+<div class=" mb-4 text-center">
+    <h4 class="text-bold text-center text-uppercase text-truncate">
+        <i class="mr-1 fa fa-ew-book"></i><u class="">{{current_course.label_subject}}</u>
+    </h4>
+    {%if getDataStudent%}
+    <a title="{{JR.your_course_registration_date}}" data-toggle="tooltip"
+       class="text-capitalize border-bottom ml-3">
+        <small class="text-uppercase">
+            <i class=" fas fa-user-graduate mr-1 text-muted"></i>
+
+            <span class="text-muted">
+                {{JR.registered_on}}
+            </span> : {% if enroll %}{$ '{{enroll.enrollment_date[0:10]}}' | localeDate $}  {% endif %}
+              
+        </small>
+    </a>
+    {%endif%}
+</div>
+<div class="text-uppercase text-center row m-0 p-0 border-bottom">
+    <div class="col-xs p-0 text-left">
+        {%if isStudent%}
+
+        <a title="{{JR.show_courses}} : {{current_course.label_subject }}" data-toggle="tooltip" class="btn btn-default border-bottom-0 btn-flat rounded-top btn-sm " href="{{url_back}}">
+            <small><i class="fa fa-chevron-left mr-1 text-green"></i>{{JR.courses}}</small>
+        </a>
+        {%else%}
+        <a title="{{JR.back}}" data-toggle="tooltip" class="btn btn-default border-bottom-0 btn-flat rounded-top btn-sm " onclick="goBack();">
+            <small><i class="fa fa-chevron-left mr-1 text-green"></i>{{JR.back}}</small>
+        </a>
+        {%endif%}
+
+        {%if isInstructor %}
+        <a class="ml-1 text-xs btn btn-outline-danger  border border-bottom-0 btn-flat rounded-top btn-sm " ng-href="{{url_course_edit}}"
+           title="{{JR.edit}} : {{JR.course}}" data-toggle="tooltip" role="button">
+            <span> <i class="fa fa-pen mr-2  "></i>{{JR.edit}}</span>
+        </a>
+        {%endif%}
+    </div>
+    <div class="col p-0">
+    </div>
+    <!--action-->
+    <div class="col-xs p-0 text-right">
+        {%if getDataStudent%}
+        <div role="button" class="btn btn-default border-bottom-0 btn-flat rounded-top btn-sm p-1" data-toggle="dropdown" aria-expanded="false">
+            <div>
+                <small class="mr-1">
+                    <i class="fa mr-1 text-md"
+                       ng-class="isFavorite ? 'fa-heart-circle-check text-success' : 'fa-heart-circle-plus text-gray'"></i>{{JR.fav2}} <i class="ml-1 fa fa-ellipsis-v"></i>
+                </small>
+            </div>
+        </div>
+        <div class="dropdown-menu dropdown-menu-right  elevation-4" role="menu" style="">
+            {%if isStudent%}
+            <a ng-show="isFavorite" class="dropdown-item text-xs" ng-click="deleteFromFavoriteClick('{{course_delete_from_favorite_url}}')" role="button"><i class="fa fa-heart-circle-minus mr-1  text-md text-red"></i> {{JR.remove_course_fav}}</a>
+            <a ng-hide="isFavorite" class="dropdown-item text-xs" ng-click="addToFavoriteClick('{{course_add_to_favorite_url}}')" role="button"><i class="fa fa-heart-circle-plus text-md mr-1 text-success"></i> {{JR.add_course_fav}}</a>
+
+            {%else%}
+            <a class="dropdown-item text-xs"><i class="fa fa-heart text-md mr-1 text-success"></i> {{JR.my_courses_fav}} : <b>{$ isFavorite ? "{{JR.yes}}" : "{{JR.no}}" $}</b></a>
+
+            {%endif%}
+        </div>
+        {%endif%}
+        
+    </div>
+    <!--end-->
+
+</div>

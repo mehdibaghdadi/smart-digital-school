@@ -1,0 +1,203 @@
+{% extends "_layouts/layout-account.html" %}
+{% set title_header = config.JINJA2_RESOURCES.online_subscription %}
+
+{% block head %}
+{% include '_includes/x-links-css-country-select.html' %}
+<style>
+    .hack-top-login {
+        display: none;
+    }
+    .login-page, .register-page {
+        background-color: transparent !important;
+        height: inherit !important;
+    }
+    .user_phone_primary {
+        flex-wrap:inherit;
+    }
+    .login-box, .register-box {
+        width: 60% ;
+    }
+</style>
+{% endblock %}
+
+{% block toplogin %}
+<br />&nbsp;
+<p class="row align-items-end p-0 m-0 text-uppercase text-right">
+    <span class="col-xs">
+        <a data-toggle="tooltip" title="{{JR.login}} {{JR.administrator}}" href="{{url_for('AccountView:login_school')}}" target="_self"><i class="fa fa-lock text-light"></i></a>
+    </span>
+    <small class="col"></small>
+    <small class="col-xs">
+        <i class="ew ew-{{g.current_language}} mr-2"></i>
+        <select id="languageDropdown" class="form-control-sm text-uppercase bg-primary">
+            {% for k,v in config.BABEL_LANGUAGES.items() %}
+            <option value="{{ k }}" {{ 'selected' if k == g.current_language else '' }}>
+                {{ v }}
+            </option>
+            {% endfor %}
+        </select>
+    </small>
+</p>
+{% endblock %}
+{% block content %}
+<div class="card-body text-uppercase pr-0 pl-0" ng-controller="RegisterCtrl">
+    <h3 class="login-box-msg">{{JR.register_create_account}}</h3>
+
+    <form name="register-form" autocomplete="off" ng-submit="submitForm('{{register_url}}')" method="post" class="pl-3">
+
+
+        <div class="input-group mb-3">
+            <div class="form-control m-0 p-0 border-0 text-capitalize">
+                <select id="school-type-selector" required ng-model="user.school_type_id" class="js-example-basic-single form-control rounded-0 p-0 ddl-selector">
+                    {% for c in schoolTypes %}
+                    <option ng-value="{{c.id}}" class="ml-2"> &bull; {{c.label}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="input-group-append">
+                <div class="input-group-text bg-primary">
+                    <span class="fas fa-book"></span>
+                </div>
+            </div>
+            <i class="mr-2 far fa-question-circle text-danger" data-toggle="tooltip" title="{{JR.type1}} {{JR.administrator}}."></i>
+        </div>
+
+        <div class="input-group mb-3">
+            <input name="full_name" ng-model="user.full_name" class="form-control" type="text" required
+                   placeholder="{{JR.register_fullname_title}}" title="{{JR.full_name}} {{JR.administrator}}.">
+            <div class="input-group-append">
+                <div class="input-group-text bg-primary">
+                    <span class="fas fa-user"></span>
+
+                </div>
+            </div>
+            <i class="mr-2 far fa-question-circle text-danger" data-toggle="tooltip" title="{{JR.full_name}} {{JR.administrator}}."></i>
+        </div>
+        <div class="input-group mb-3">
+            <input name="email" ng-model="user.email" class="form-control" type="email" required autocomplete="new-password" value="" placeholder="{{JR.login_email2}}">
+            <div class="input-group-append">
+                <div class="input-group-text bg-primary">
+                    <span class="fas fa-envelope"></span>
+                </div>
+            </div>
+            <i class="mr-2 text-danger far fa-question-circle" data-toggle="tooltip" title="{{JR.account_creation_description1}}<br/><br/>{{JR.account_creation_help}}"></i>
+        </div>
+        <div class="input-group mb-3 user_phone_primary">
+            <input ng-model="user.phone_primary" type="tel" intl-tel-input required class="form-control " placeholder="{{JR.phone1}}">
+
+            <div class="input-group-append">
+                <div class="input-group-text bg-primary">
+                    <span class="fas fa-phone"></span>
+                </div>
+            </div>
+            <i class="mr-2 far fa-question-circle text-danger" data-toggle="tooltip" title="{{JR.phone1}} {{JR.administrator}}."></i>
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="form-control m-0 p-0 border-0 text-capitalize">
+                <select id="country-selector" required ng-model="user.country_id" class="js-example-basic-single form-control rounded-0 p-0 ddl-selector">
+                    {% for c in countries %}
+                    <option ng-value="{{c.id}}" class="ml-2"> &bull; {{c.country}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="input-group-append">
+                <div class="input-group-text bg-primary">
+                    <span class="fas fa-globe"></span>
+                </div>
+            </div>
+            <i class="mr-2 far fa-question-circle text-danger" data-toggle="tooltip" title="{{JR.country}} {{JR.administrator}}."></i>
+        </div>
+
+
+
+
+        <div class="input-group mb-3">
+            <input id="password" name="password" ng-model="user.password" type="password" data-type='password' class="form-control" required autocomplete="new-password" value="" placeholder="{{JR.password}}">
+            <div class="input-group-append">
+                <div class="input-group-text bg-primary">
+                    <span role="button" onclick="tooglePassword('#password','#toggle_eye1')" id="toggle_eye1" class="fas fa-eye text-warning"></span>
+                </div>
+            </div>
+            <i class="mr-2 far fa-question-circle text-warning" data-toggle="tooltip" title="{{JR.password}} {{JR.administrator}}."></i>
+        </div>
+        <div class="input-group mb-3">
+            <input id="password_confirm" name="password_confirm" ng-model="user.password_confirm" data-type='password' type="password" class="form-control" required autocomplete="new-password" value="" placeholder="{{JR.confirm_password}}">
+            <div class="input-group-append">
+                <div class="input-group-text bg-primary">
+                    <span role="button" onclick="tooglePassword('#password_confirm','#toggle_eye2')" id="toggle_eye2" class="fas fa-eye text-warning"></span>
+                </div>
+            </div>
+            <i class="mr-2 far fa-question-circle text-warning" data-toggle="tooltip" title="{{JR.confirm_password}} {{JR.administrator}}."></i>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="icheck-default">
+                    <input type="checkbox" ng-model="user.accept" id="agreeTerms" name="terms" value="agree">
+                    <label for="agreeTerms">
+                        {{JR.i_agree}} : <a href="{{url_for('AccountView:terms_conditions')}}" target="_blank">{{JR.terms_conditions}}</a>
+                    </label>
+                </div>
+            </div>
+
+        </div>
+        <div class="pl-0 pr-3 text-center">
+
+            <div class="justify-content-center d-flex ml-2" ng-init="init_captcha('{{captchaImgUrl}}')">
+                
+                <div class=" text-right m-0 p-0">
+                    <div class="text-center border bg-light" style="height:80px;min-width:218px">
+                        <div ng-hide="captchaImageUrl.length">
+                            <i class="fa fa-2x mt-3 fa-spinner fa-pulse"></i>
+                        </div>
+                        <img ng-show="captchaImageUrl.length" height="80" 
+                             style="height:80px"
+                             ng-src="{$ captchaImageUrl $}" id="img-captcha"
+                             class="border elevation-1" alt="CAPTCHA"><br />
+                    </div>
+                    <input data-mask data-inputmask='"mask": "*      *      *      *      *"'
+                           type="text" class=" rounded text-center text-uppercase form-control" required ng-model="user.captcha_answer" name="captcha_answer">
+
+                </div>
+                <div class="text-left m-0 p-0">
+                    <div class="text-left" style="height:80px;">
+                        <button ng-disabled="!captchaImageUrl.length" ng-click="reCaptchaClick('{{captchaImgUrl}}')"
+                                type="button" data-toggle="tooltip" title="{{JR.generate}}" class="rounded bg-dark">
+                            <i class="fa fa-arrows-rotate"></i>
+                        </button>
+                    </div>
+                   
+                    <i style="font-size:22px" class="fa fa-info-circle text-info mt-2 ml-1" data-toggle="tooltip" title="{{JR.type_word_above}}"></i>
+                </div>
+
+            </div>
+            <div class="social-auth-links text-center mt-2 mb-3 ">
+                <button ng-disabled="!user.accept" type="submit" class="p-2 btn btn-block btn-primary text-uppercase text-uppercase">
+                    <i class="fa fa-right-to-bracket mr-2"></i> {{JR.subscribe}}
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
+ {% block bottomlogin %}
+<p class="mt-1">
+    <small class="text-black">
+        <a href="{{url_for('AccountView:login_school')}}" target="_self" class="text-light text-uppercase">
+            <i class="fa fa-arrow-alt-circle-left mr-2"></i> {{JR.already_have_membership}} !
+        </a>
+    </small>
+</p>
+<br />&nbsp;
+
+{% endblock %}
+{% block contentBottom %}{% endblock %}
+{% block scripts %}
+
+{% include '_includes/x-links-scripts-country-select.html' %}
+
+<script src="/static/app-assets/js/password-manager.min.js?version={{app_version()}}"></script>
+<script src="/static/app-core/accounts/app.register.min.js?version={{app_version()}}"></script>
+
+{% endblock %}

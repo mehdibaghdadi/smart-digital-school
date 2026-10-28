@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>E_AI_SEARCH — UI de test</title>
+    <link rel="stylesheet" href="/static/css/search_ui.css" />
+</head>
+<body>
+    <div class="container">
+        <h1>E_AI_SEARCH — Interface de recherche</h1>
+
+        <div class="controls">
+            <label for="apiKey">X-API-KEY (optionnel)</label>
+            <input id="apiKey" placeholder="Entrez la clé si nécessaire" />
+
+            <label for="query">Requête</label>
+            <input id="query" placeholder="Ex: dérivée, intégrale, décorateur python..." />
+
+            <label for="k">Nombre de résultats (k)</label>
+            <input id="k" type="number" min="1" max="100" value="50" />
+
+            <button id="searchBtn">Rechercher</button>
+            <button id="clearBtn">Effacer</button>
+        </div>
+
+        <div id="status" class="status"></div>
+
+        <div id="results" class="results"></div>
+
+        <hr />
+        <div class="footer">
+            <p>Fichier exemple (upload) : <a href="/files/mnt/data/build_index.py" target="_blank">/mnt/data/build_index.py</a></p>
+            <p>Utilise ce formulaire pour tester rapidement la recherche sémantique.</p>
+        </div>
+    </div>
+
+    <!-- DOMPurify (CDN) pour sanitation côté client -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.4.0/purify.min.js"></script>
+
+    <!-- Ton script UI -->
+    <script src="/static/js/search_ui.js"></script>
+
+</body>
+</html>

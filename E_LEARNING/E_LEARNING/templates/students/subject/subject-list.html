@@ -1,0 +1,79 @@
+{% extends "_layouts/layout.html" %}
+{% block head %}
+<style>
+    .subject .badge {
+        font-size: 88%;
+        position: absolute;
+        right: 7px;
+        top: -5px;
+        z-index: 100;
+    }
+
+    .inner > h6 {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        min-height: 40px;
+        max-height: 40px;
+    }
+
+    @media (max-width: 767.98px) {
+        .small-box {
+            text-align: inherit;
+        }
+
+            .small-box .icon {
+                display: block;
+                opacity: 0.3;
+            }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+{% set colors_loop = cycler( 'bg-green','bg-blue', 'bg-pink','bg-purple','bg-red','bg-cyan','bg-orange') %}
+{% set color_id = namespace(value=0) %}
+{% set status = subject_list.json["status"]==200 %}
+<div ng-controller="SubjectCtrl" class="p-2">
+    <div class="row subject m-0 p-0">
+        {% if status %}
+        {% for s in subject_list.json["response"] %}
+        {% set bg_color = colors_loop.next()  %}
+        <div class="col-md-4">
+            <!-- small box -->
+            <div>  <span class="badge badge-dark float-right text-uppercase p-2">{{JR.course}} : <b class="text-yellow text-sm" ng-class="{{ s.total_course }}==0? 'text-gray':''">{{ s.total_course }}</b></span></div>
+            <div class="small-box {{bg_color}} overflow-hidden" role="button" ng-click="subjectClik('{{course_subject_url}}/{{s.school_subject_id}}','{{bg_color}}',{{ s.total_course }})">
+                <div class="inner" style="min-height:140px">
+                    <h6 class="text-uppercase mb-3 text-light">
+                        <small> {{JR.classs}} {{ s.label_qualification}}</small>
+                    </h6>
+                    <h5 class="m-0 p-0 text-uppercase text-center "><b>{{ s.label_subject}}</b></h5>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-ew-book mt-4"></i>
+                </div>
+                <div class="text-left text-uppercase"> <small class="text-dark ml-2"><b>{{JR.level}} {{ s.level}}</b></small></div>
+                <a class="small-box-footer text-right text-uppercase">{{JR.show_courses}} <i class="fas fa-arrow-circle-right mr-2 ml-1"></i></a>
+            </div>
+        </div>
+        {% set color_id.value  = color_id.value + 1 %}
+        {% endfor %}
+        {% else %}
+        <div class="content-justify-center">
+            <div class="alert alert-warning">
+                <i class="fa fa-exclamation-circle mr-1"></i> {{JR.empty_publish}}.
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock %}
+{% block contentBottom %}{% endblock %}
+
+{% block scripts %}
+<script src="/static/app-core/students/app.subjects.min.js?version={{app_version()}}"></script>
+{% endblock %}

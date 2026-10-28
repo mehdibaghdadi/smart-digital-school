@@ -1,0 +1,103 @@
+
+<br />
+<h4 class="text-bold text-left text-uppercase pb-2 mt-4" id="quizzes_course_list">
+    <i class="mr-1 fa fa-ew-quiz"></i><u class="">{{JR.quizzes}}</u>
+</h4>
+<div class="card elevation-0 bg-graph rounded-top mb-0 pl-1">
+
+    <div class="row p-0 m-0 mb-2 border bg-black shadow-sm rounded align-items-center" ng-if="quizzes && quizzes.length > 0">
+        <div class="col-md text-left  text-xs text-uppercase p-2">
+            <span class=" mr-1">
+                <b class=" text-md">{$ quizzes.length $}</b> {{JR.quizzes1}}
+            </span>
+        </div>        
+        <div class="col-md p-2">
+            <div class="progress rounded elevation-1 p-0 text-uppercase">
+                <div class="progress-bar bg-light" role="progressbar"
+                     style="width: 100%;"
+                     ng-style="{'background': 'linear-gradient(90deg, #fffe96 '+percent_progress_quiz + '%, #ffffff00 0%)'}"
+                     aria-valuenow="{$ quizCompletion(quizzes) $}"
+                     aria-valuemin="0" aria-valuemax="100">
+                    <small>
+                        {{JR.total}} {{JR.score}} :  <b class="text-xs">{$ percent_progress_quiz $}</b> <i class="fa fa-percent"></i> {{JR.correct}}
+                    </small>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="card-body p-1">
+        <!-- Supposons que ce bloc est visible après avoir sélectionné un cours -->
+        <div ng-if="quizzes && quizzes.length > 0">
+            <div class="row">
+                <div class="col-md-6 col-lg-4 mb-4" ng-repeat="quiz in quizzes | orderBy:'sequence'">
+                    <div class="card elevation-2 border-0">
+                        <div class="card-header text-uppercase" ng-class="{'bg-purple': $even,'bg-info': $odd}">
+                            <div class="row">
+                                <div class="col-6 text-bold">
+                                    <span>{{JR.quiz}}</span>
+                                    <span class="badge ml-2 bg-dark elevation-1 rounded-pill text-center p-0 pt-1 text-xs " style="width: 19px;height:19px;">
+                                        {$ quiz.sequence $}
+                                    </span>
+                                </div>
+                                <div class="col-6 text-right" ng-class="quiz.done ? 'text-light':'text-dark'">
+                                    <span class="text-light">{{JR.score}} :</span> <b class="text-md " ng-class="quiz.done ? 'text-warning':''">
+                                        <span ng-show="quiz.done">{$ quiz.correct_answers $}/{$ quiz.total_questions $}</span>
+                                        <span ng-hide="quiz.done">...</span>
+                                    </b>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="progress  elevation-1">
+                            <div class="progress-bar bg-primary text-uppercase" role="progressbar"
+                                 style="width: 100%;"
+                                 ng-style="{'background': 'linear-gradient(90deg, #28a745 '+quiz.score + '%, #ffffff00 0%)'}"
+                                 aria-valuenow="{$ quizCompletion(quizzes) $}"
+                                 aria-valuemin="0" aria-valuemax="100">
+                                <span ng-show="quiz.done">
+                                    <b>{$ quiz.score $} <i class="fa fa-percent"></i></b>
+                                </span>
+                                <span ng-hide="quiz.done"><small>{{JR.pending}} . . .</small></span>
+                            </div>
+                        </div>
+                        <div class="card-body bg-light">
+                            <div class="inner-div text-uppercase text-center text-sm">{$ quiz.quiz_name $}</div>
+                            <div class="row border-top pt-2 text-uppercase">
+                                <p class="card-text col">
+                                    <i class="fa fa-ew-stopwatch"></i>
+                                    <small ng-show="quiz.time_limit" class="text-muted"> <b class="text-sm text-red">{$ quiz.time_limit $} </b>{{JR.minutes}}</small>
+                                    <small ng-hide="quiz.time_limit" class="text-muted"> {{JR.illimited}}</small>
+                                </p>
+                                <div class="mb-3 col text-right text-uppercase">
+                                    <span class="badge"
+                                          ng-class="quiz.done ? 'bg-secondary':'bg-primary'">
+                                        {$ quiz.total_questions $}
+                                    </span> <small>{{JR.questions}}</small>
+                                </div>
+                            </div>
+
+                            <button class="btn  btn-block"
+                                    ng-disabled="quiz.total_questions==0"
+                                    ng-class="quiz.done ? 'btn-outline-dark':'btn-primary'"
+                                    ng-click="startQuiz(quiz,'{{quiz_form_url}}',{{student_id}})">
+                                <span ng-show="quiz.total_questions">  {$ quiz.done ? '{{JR.show}} {{JR.result}}' : '{{JR.begin1}}' $}</span>
+                                <small ng-hide="quiz.total_questions"> {{JR.no_question}} </small>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="alert alert-light  text-center text-uppercase" ng-hide="quizzes && quizzes.length > 0">
+            <div><b>{{JR.quizzes}}</b></div>
+            <i class="fa fa-exclamation-triangle mr-1"></i> {{JR.no_quiz}}
+        </div>
+       
+    </div>
+</div>

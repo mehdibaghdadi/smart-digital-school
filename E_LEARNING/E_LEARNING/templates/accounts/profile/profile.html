@@ -1,0 +1,114 @@
+{% extends "_layouts/layout.html" %}
+{% block head %}
+<link href="/static/plugins/dropzone/dropzone.min.css" rel="stylesheet" />
+{% include '_includes/x-links-css-country-select.html' %}
+<link href="/static/app-assets/css/profil.css?version={{app_version()}}" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+<form class="row profil-user" ng-submit="submitForm('{{profile_update_url}}')" method="post" 
+      ng-controller="ProfileCtrl" ng-init="init({{user.json}},'{{profile_update_url}}'); city_available='{{ config.COUNTRY_WITH_CITIES }}'">
+
+    <div class="col-md-4 card bg-dark" id="upload-profil">
+        <div id="actions">
+            <!-- general form elements -->
+            <div class="position-relative p-2" style="min-height:250px">
+                <div class="ribbon-wrapper ribbon-lg">
+                    <div class="ribbon bg-warning">
+                        {{JR.foto}}
+                    </div>
+                </div>
+                <div class="files" id="previews">
+                    <div id="template" class="row mt-1  text-center">
+                        <div class="col-12 p-0">
+                            <span class="preview">
+                            <img id="image-profile" src="data:," alt="" data-dz-thumbnail /></span>
+                        </div>
+                        <div class="col d-flex align-items-center">
+                            <p class="mb-0">
+                                <small data-dz-name></small>
+                                (<span data-dz-size></span>)
+                            </p>
+                            <strong class="error text-danger" data-dz-errormessage></strong>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.card-body -->
+            <!-- /.card -->
+            <div class="position-absolute text-center " style="bottom:0;width:95%;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="btn-group w-100">
+                            <span class="btn btn-success col fileinput-button">
+                                <i class="fas fa-upload"></i>
+                                &nbsp;<span> {{JR.add}}</span>
+                            </span>
+                            <button type="button" class="btn btn-warning col cancel">
+                                <i class="fas fa-times-circle"></i>
+                                &nbsp;<span> {{JR.cancel}}</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-12 d-flex align-items-center">
+                        <div class="fileupload-process w-100">
+                            <div id="total-progress" class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                                <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-8 card bg-gray-ligth">
+        <!-- general form elements -->
+        <div class="position-relative p-2">
+            <div class="ribbon-wrapper ribbon-lg">
+                <div class="ribbon bg-black">
+                    <a class="text-uppercase {{ current_package.color }} text-bold">
+                        <i class="fa mr-1 {{ current_package.icon }} {{ current_package.color }}"></i> {{ current_package.label }}
+                    </a>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <h4 class="text-center text-uppercase d-block"><u>{{current_user.school_type}}</u></h4>
+
+            <!-- /.switch form -->
+            {% if roles == ROLES.School.value %}
+            {% include 'accounts/profile/profile-form-school.html' %}
+            {% else %}
+            {% include 'accounts/profile/profile-form-user.html' %}
+            {% endif %}
+
+            <!-- /.switch form -->
+
+            <div class="footer-fix">
+                <button type="submit" class="btn btn-primary"><i class="fa fa-save mr-2"></i>{{JR.save_data}}</button>
+                <button type="button" class="btn  btn-danger m-1" onclick="goBack();">
+                    <i class="fa fa-reply mr-2"></i> {{JR.cancel}}
+                </button>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+
+    </div>
+
+</form>
+{% endblock %}
+{% block contentBottom %}{% endblock %}
+
+{% block scripts %}
+
+<script src="/static/plugins/dropzone/dropzone.min.js"></script>
+<script src="/static/plugins/select2/select2.min.js"></script>
+<script src="/static/app-assets/js/dropzone.profil.picture.min.js?version={{app_version()}}"></script>
+{% include '_includes/x-links-scripts-country-select.html' %}
+<script src="/static/app-core/accounts/app.profiles.min.js?version={{app_version()}}"></script>
+{% endblock %}

@@ -1,0 +1,14 @@
+SHOW STATUS LIKE 'Threads_connected';
+SHOW VARIABLES LIKE 'max_connections';
+SHOW STATUS LIKE 'Connections';
+SHOW VARIABLES LIKE 'innodb_thread_concurrency';
+SHOW VARIABLES LIKE 'wait_timeout';
+SHOW VARIABLES LIKE 'interactive_timeout';
+
+SELECT * FROM performance_schema.threads WHERE TYPE = 'FOREGROUND';
+
+SET GLOBAL wait_timeout = 600;      -- Connexions non-interactives fermées après 10 minutes.
+SET GLOBAL interactive_timeout = 1800;   -- Connexions interactives fermées après 30 minutes.
+
+SELECT * FROM performance_schema.threads where
+ PROCESSLIST_USER ='ExtraNetUser';

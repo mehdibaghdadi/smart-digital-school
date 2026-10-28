@@ -1,0 +1,422 @@
+{% extends "_layouts/layout.html" %}
+
+{% set sb = app_menu().get("subject_instructor")%}
+{% set url_subject= sb.endpoint%}
+{% set status_subject = subject.json["status"]==200 %}
+
+{% set current_course = course.json["response"] if course and course.json["status"]==200 and course_id >0 else None  %}
+
+{% block contentTitleHeader %}
+- {{current_course.course_title if current_course else JR.new }}
+{% endblock %}
+
+
+{% block head %}
+<style>
+</style>
+{% include '_includes/x-links-css-summernote.html' %}
+<link href="/static/plugins/draganddrop/draganddrop.css" rel="stylesheet" />
+<style>
+    .card {
+        margin-bottom: 0 !important;
+    }
+
+    .bg-graph *:not(textarea):not(input):not(.text-transform-none) {
+        text-transform: uppercase;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+{%if status_subject%}
+<div>
+    <h4 class="text-bold text-center  text-black  text-uppercase mb-4  text-truncate">
+        <i class="fa fa-ew-book"></i> <u>{{current_course.label_subject if current_course else JR.new+' '+JR.course}}</u>
+    </h4>
+</div>
+<div ng-controller="CourseEditCtrl" class=""
+     ng-init="{%if course_id >0 %}
+     init_edit({{course.json}},{{subject.json}},{{language.json}},{{chapter.json}},'{{course_update_url}}','{{course_chapter_edit_url}}','{{course_chapter_update_url}}','{{course_chapter_sequence_update_url}}','{{course_chapter_visibility_url}}','{{course_chapter_delete_url}}')
+     {% else %}
+     init_new({{subject.json}},{{language.json}},'{{course_update_url}}','{{course_edit_url}}','{{g.current_language}}')
+     {% endif %}">
+    <form id="editCourseId" name="editCourseId" ng-submit="submitForm(editCourse)" tabindex="-1">
+        <!------------ HEADER COURSE ACTIONS-----------------
+        ---------------------------------------------------->
+        {% if course_id > 0 %}
+        <div class="text-uppercase text-center row p-0 m-0 border-bottom">
+            <div class="col-xs text-left">
+                <a class="btn btn-danger border-bottom-0 btn-flat rounded-top  btn-sm" ng-click="showEditCourse=!showEditCourse">
+                    <small class="mt-2 text-bold">
+                        <i class="fas fa-pencil mr-1 text-warning "></i> {$ !showEditCourse ? "{{JR.modify}}" : "{{JR.cancel}}" $}
+                    </small>
+
+                </a>
+            </div>
+
+            <div class="col  text-right pr-1 pl-0">
+                <a title="{{JR.back}}" data-toggle="tooltip" class="btn btn-default border-bottom-0 btn-flat rounded-top btn-sm " onclick="goBack();">
+                    <small><i class="fa fa-chevron-left mr-1 text-green"></i>{{JR.back}}</small>
+                </a>
+            </div>
+
+
+
+            <div class="btn-group col-xs text-right">
+                <button type="button" class="btn btn-default border-bottom-0 btn-flat rounded-top btn-sm text-uppercase" data-toggle="dropdown" aria-expanded="false">
+                    <small>
+                        <i class="mr-1 fa fa-bolt"></i>{{JR.actions}}<i class="ml-1 fa fa-ellipsis-v"></i>
+                    </small>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" role="menu" style="">
+                    <a class="dropdown-item" ng-click="showEditCourse=!showEditCourse" role="button">
+                        <span ng-hide="showEditCourse"><i class="fa fa-pen-nib mr-2 text-info"></i>{{JR.modify}}</span>
+                        <span ng-show="showEditCourse"><i class="fa fa-minus mr-2 text-red"></i>{{JR.cancel}}</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{{course_instructor_view360_url}}">
+                        <i class="fas fa-street-view mr-1 text-info"></i> {{JR.view_360}}
+                    </a>
+
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item cursor-pointer" onclick="window.SmootScrollView('tb-chapters'); return false; ">
+                        <i class="fas fa-ew-notebook mr-1 text-red"></i> {{JR.chapters}}
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item cursor-pointer" onclick="window.SmootScrollView('tb-quizzes'); return false; ">
+                        <i class="fas fa-ew-quiz mr-1 text-yellow"></i> {{JR.quizzes}}
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{{course_create_url}}">
+                        <i class="fas fa-plus mr-1 text-orange"></i> {{JR.create_new}}
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{{course_list_url}}">
+                        <i class="fa fa-ew-book mr-1 text-green"></i> {{JR.courses_all}}
+                    </a>
+
+
+
+                </div>
+            </div>
+
+        </div>
+        {% endif %}
+
+        <!-------------- SUMMARY COURSE EDIT-----------------
+        ---------------------------------------------------->
+        {% if course_id > 0 %}
+        <div class="card">
+            <div class="card-body p-0 mb-0" ng-hide="showEditCourse">
+                <div class=" text-uppercase text-center p-0">
+
+                    <div class="p-1 mt-2">
+                        <b class="text-primary text-md">{$editCourse.course_title $}</b>
+
+                    </div>
+                    <div class="text-center p-0 pl-1 pr-1 pb-2 text-xs">
+                        <small class="text-muted">
+                            {$editCourse.level $}, {$editCourse.label_qualification $}
+                        </small>
+
+                    </div>
+                    <div class="text-underline small text-bold" role="button" ng-click="showEditCourse=!showEditCourse">
+                        <i class="fa" ng-class="editCourse.is_visible==1 ? 'fa-eye text-success' : 'fa-eye-slash text-red'"></i> <span>{$ editCourse.is_visible ? "{{JR.online}}":"{{JR.offline}}"$}</span>
+                    </div>
+
+                    <div class=" pl-1 pr-1 mt-2 text-uppercase text-xs">
+                        <div class="{{ "text-right" if language_id==1 else "text-justify"}}">
+                            <div style="letter-spacing: 1px;" class="p-1 border bg-light">
+                                <small class=" text-bold ">{{JR.objective_general}}</small> :
+                            </div>
+                            <div class="pt-3 p-2 text-dark text-sm text-transform-none"
+                                 ng-bind-html="editCourse.course_brief | toHtml"
+                                 style="line-height:1.3rem">
+                                {$$}
+                            </div>
+                        </div>
+                        <table class="table table-bordered border-light m-0 mt-3 mb-3 text-uppercase  text-wrap text-muted "
+                               style="width:100%;font-size:0.57rem"
+                               ng-hide="showEditCourse">
+
+                            <tr class="text-center">
+                                <td class="text-center pl-1 bg-light" style="width:60%">
+                                    {{JR.date_schedule}} {{JR.course}}
+                                </td>
+                                <td class="p-0 pb-1 pt-2" rowspan="2">
+                                    {{JR.creation}}
+                                    <div class="text-dark mt-2">
+                                        {$ editCourse.date_creation| date:'yyyy-MM-dd' |localeDate $} {$ editCourse.date_creation| date:'HH:mm' $}
+                                    </div>
+                                </td>
+                                <td class="p-0 pb-1 pt-2" rowspan="2">
+                                    {{JR.editing}}
+                                    <div class="text-dark mt-2">
+                                        {$ editCourse.date_update| date:'yyyy-MM-dd' |localeDate $} {$ editCourse.date_update| date:'HH:mm' $}
+                                    </div>
+                                </td>
+
+                            </tr>
+
+                            <tr class="text-center text-dark text-bold border-0">
+                                <td class="p-0 pt-1 pb-1 pl-1 text-center align-items-center  d-flex justify-content-center text-primary" style="gap:8px">
+                                    <u class="text-muted d-none d-md-inline-block">{{JR.date_start}} :</u>  {$ editCourse.date_start_course| date:'yyyy-MM-dd' |localeDate $} {$ editCourse.date_start_course| date:'HH:mm' $}
+                                    <i class="fa fa-arrow-right ml-2 mr-2 text-xs "></i>
+                                    <u class="text-muted d-none d-md-inline-block">{{JR.date_end}} :</u>  {$ editCourse.date_end_course| date:'yyyy-MM-dd' |localeDate $} {$ editCourse.date_end_course| date:'HH:mm' $}
+                                    <i ng-hide="editCourse.date_end_course" class="fa fa-infinity text-xs text-red"></i>
+                                </td>
+
+                            </tr>
+
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-uppercase text-right p-0 mb-2" ng-hide="showEditCourse">
+            <a title="{{JR.overall_view_course}}" data-toggle="tooltip" class="btn btn-dark  btn-flat rounded-bottom btn-sm " href="{{course_instructor_view360_url}}">
+                <span><i class="fas fa-street-view mr-1 text-yellow"></i> {{JR.view_360}}</span>
+            </a>
+
+        </div>
+
+        {%endif%}
+
+
+        <!----------------- COURSE FORM -------------------------->
+
+        <div class="card bg-graph elevation-0" ng-model="editCourse">
+            <!----------------- INFOS COURSE --------------------->
+
+            <div class="card-body p-2 mb-0 mt-2" ng-show="showEditCourse">
+                <div class="row">
+
+                    <div class="form-group col-md-12 ">
+                        <label class="small ">{{JR.titled}}</label>
+
+                        <textarea rows="2" ng-model="editCourse.course_title" type="text" required class="form-control"
+                                  placeholder="{{JR.course}} : {{JR.titled}} ..."></textarea>
+                    </div>
+                    <div class="form-group col-md-2 ">
+                        <select name="mySelect" id="mySelect" class="custom-select " required
+                                ng-options="option.language_name for option in language_list track by option.id"
+                                ng-model="editCourse.selectedLanguage">
+                            <option value="">--- {{JR.choose_lang_course}} ---</option>
+                        </select>
+                    </div>
+                    <div class="col-md-10 text-right pt-2 pb-2">
+                        <div class="switch text-xs text-uppercase">
+                            <span class="">
+                                <i class="fa" ng-class="editCourse.is_visible==1 ? 'fa-eye text-success' : 'fa-eye-slash text-muted'"></i>
+                            </span>
+                            <span class="ml-1 font-weight-bold">
+                                <span>{$ editCourse.is_visible ? "{{JR.online}}":"{{JR.offline}}"$}</span>
+                                <label class="">
+                                    <input type="checkbox" ng-model="editCourse.is_visible" ng-true-value="1" ng-false-value="0" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <span class="lever"></span>
+                                </label>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group text-xs col-md-12 smnoteDescription" style="text-transform: none !important; font-size: inherit !important">
+                        <label class="small ">{{JR.objective_general}}</label>
+                        <!--EDITOR SUMMERNOTE-->
+                        <div id="course_brief_id" class="text-xs" placeholder="<small class='text-xs'>{{JR.description}} : {{JR.objective_general}}  ...</small>"></div>
+                        <!--END EDITOR SUMMERNOTE-->
+
+                    </div>
+                    <div class="col-md-12 form-group ">
+                        <div class="form-group bg-light rounded-bottom border rounded d-flex flex-sm-row justify-content-between  flex-column p-2">
+                            <div class="">
+                                <label class="small">{{JR.date_start}} {{JR.course}}</label>
+                                <input ng-model="editCourse.date_start_course" type="datetime-local"
+                                       class="form-control "
+                                       min="{$ dateTodayLess  | date:'yyyy-MM-dd HH:mm' $}"
+                                       required
+                                       name="starttime" id="startTime">
+                            </div>
+                            <div class="">
+                                <label class="small">{{JR.date_end}} {{JR.course}}</label>
+
+                                <input ng-model="editCourse.date_end_course" type="datetime-local"
+                                       class="form-control "
+                                       min="{$ (editCourse.date_start_course || dateTodayLess)  | date:'yyyy-MM-dd' $}"
+                                       name="endtime" id="endTime">
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <!----------------- SUBJECTS ------------------------>
+
+            <div ng-show="showEditCourse">
+                <h6 class="text-bold mt-2 text-black  text-uppercase mb-1  text-truncate">
+                    <i class="fa fa-school text-red"></i> <u>{{JR.subjects_school}}</u>
+                </h6>
+            </div>
+            <div class="card-body p-2 mb-0" ng-show="showEditCourse" id="table_subjects_school">
+                <div class="m-0 p-0 mt-1 bg-light">
+                    <div class="table-responsive">
+                        <table class="table table-bordered  table-hover text-nowrap data-table bg-white " style="font-size:12px;min-width:600px;width:100%">
+                            <thead class="text-uppercase">
+                                <tr class="text-center ">
+                                    <td colspan="4" class="text-left bg-primary ">
+
+                                        <a style="min-width:70px" class="d-inline-block text-left" ng-hide="editCourse.isNew" role="button" ng-click="showAllSubject=!showAllSubject">
+                                            <span><i class="fa mr-2" ng-class="showAllSubject ?'fa-minus-circle' :'fa-plus-circle'"></i>{$ showAllSubject ? "{{JR.minimize_list}}":"{{JR.show_list}}"$}</span>
+                                        </a>
+                                        <div class="text-center" ng-if="editCourse.isNew">{{JR.choose_subject_level_school}}</div>
+                                    </td>
+
+                                </tr>
+                                <tr ng-show="showAllSubject" class="">
+                                    <th colspan="2">
+                                        <select style="width:100%" ng-model="selected_label_subject" class="form-control form-control-sm p-0 text-uppercase">
+                                            <option class="text-center" value="">-- {{JR.subject_list}} --</option>
+                                            <option ng-repeat="l in list_label_subject" value="{$l$}">{$l$}</option>
+                                        </select>
+                                    </th>
+                                    <th>
+                                        <select style="width:100%" ng-model="selected_level" class="form-control form-control-sm p-0 text-uppercase">
+                                            <option class="text-center" value="">-- {{JR.level_list}} --</option>
+                                            <option ng-repeat="l in list_level" value="{$l$}">{$l$}</option>
+                                        </select>
+                                    </th>
+                                    <th>
+                                        <select style="width:100%" ng-model="selected_label_qualification" class="form-control form-control-sm p-0 text-uppercase">
+                                            <option class="text-center" value="">-- {{JR.classs_list}} --</option>
+                                            <option ng-repeat="l in list_label_qualification" value="{$l$}">{$l$}</option>
+                                        </select>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="id_body">
+                                <tr class="p-0 cursor-pointer"
+                                    ng-repeat="q in sbj_list=(subject_list | filter:selected_label_subject | filter:selected_level | filter:selected_label_qualification  )"
+                                    ng-class="editCourse.isNew ?(q.selected ? 'text-bold bg-light text-primary':'') : (q.selected ? 'text-bold text-primary':(!showAllSubject?'hide-trans':'show-trans'))" ng-click="selectSubject(q)">
+                                    <td class="text-center form-group clearfix bg-light">
+                                        <div class="icheck-info d-inline ">
+                                            <input type="checkbox" name="select_{$ $index $}" id="select_{$ $index $}" ng-model="q.selected" ng-checked="q.selected" ng-change="selectSubject(q)">
+                                            <label for="select_{$ $index $}">
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center text-nowrap pl-2 text-uppercase">
+                                        <div class="text-clamp-div">{$q.label_subject  $}</div>
+                                    </td>
+                                    <td class="text-center d-none"><div class="text-clamp-div">{$q.education  $}</div></td>
+                                    <td class="text-center  text-uppercase"><div class="text-clamp-div">{$q.level  $}</div></td>
+                                    <td class="text-center  text-uppercase"><div class="text-clamp-div">{$q.label_qualification  $}</div></td>
+                                </tr>
+                                <tr class="text-center text-uppercase" ng-hide="sbj_list.length<=0">
+                                    <td colspan="3"></td>
+                                    <td class="bg-light font-weight-bold">
+                                        <a style="min-width:70px" class="d-block text-center" ng-disabled="editCourse.isNew" role="button" ng-click="showAllSubject=!showAllSubject">
+                                            <span class="text-dark"><i class="fa mr-2 text-red" ng-class="showAllSubject ?'fa-minus' :'fa-plus'"></i>{{JR.total}} : {$ sbj_list.length $}</span>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr class="text-center text-uppercase" ng-hide="sbj_list.length>0">
+
+                                    <td colspan="100" class="bg-warning"> - {{JR.empty_list}} -</td>
+                                </tr>
+                            </tbody>
+                            <tfoot ng-hide="sbj_list.length<=0 || editCourse.isNew">
+                                <tr class="text-center text-uppercase">
+                                    <td colspan="100" class="bg-light font-weight-bold">
+                                        <a style="min-width:70px" class="d-inline-block text-left" ng-hide="editCourse.isNew" role="button" ng-click="showAllSubject=!showAllSubject">
+                                            <span><i class="fa mr-2 text-sm" ng-class="showAllSubject ?'fa-chevron-up' :'fa-chevron-down'"></i></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-------------- SUBMIT BTN COURSE ---------------->
+
+        <div class="footer-fix" ng-show="showEditCourse">
+            {%if course_id >0 %}
+            <button type="submit" class="btn  btn-primary m-1" hide-if-no-payment>
+                <i class="fa fa-save mr-2"></i>{{JR.save_data}}
+            </button>
+
+            <button type="button" class="btn  btn-danger m-1" ng-click="showEditCourse=false">
+                <i class="fa fa-minus-circle mr-2"></i>{{JR.cancel}}
+            </button>
+
+            {% else %}
+            {% if not max_courses_per_prof_exceeded %}
+
+            <button type="submit" class="btn btn-primary" hide-if-no-payment>
+                <i class="fa fa-save mr-2"></i>{{JR.save_course}}
+            </button>
+            {% endif %}
+
+            <button type="button" class="btn  btn-danger m-1" onclick="goBack();">
+                <i class="fa fa-reply mr-2"></i>{{JR.cancel}}
+            </button>
+
+            {% endif %}
+
+        </div>
+
+        <div ng-init="max_courses={{ max_courses_per_prof_exceeded|lower }}">
+            <div ng-show="max_courses || chapter_list.length>={{max_courses_per_prof}}">
+                {% set alert_message_exceeding = "Max. {0} : <b class='text-md'>{1}</b> <br /> Max. {2} / {0} : <b class='text-md'>{3}</b>"
+                .format(JR.course,max_courses_per_prof, JR.chapter,max_courses_per_prof) | safe %}
+                {% include '_base/alerts/exceeding-alert.html' %}
+            </div>
+        </div>
+
+    </form>
+
+    <!----------------- Course Tree ------------------------
+     ---------------------------------------------------->
+    {%if course_id >0 %}
+
+    <!-------------- CHAPTERS ------------------>
+    {% include 'instructors/chapter/chapter-list.html' %}
+
+
+    <!-------------- QUIZZES ------------------>
+    {% include 'instructors/quiz/quiz-list.html' %}
+
+    {% endif%}
+</div>
+
+
+
+{%else%}
+<div class="content-justify-center">
+    <div class="alert alert-warning text-center">
+        <i class="fa fa-exclamation-circle mr-1"></i> {{JR.school_must_define_prof_subjects}}.
+    </div>
+</div>
+
+{%endif%}
+
+{% endblock %}
+{% block contentBottom %}{% endblock %}
+
+{% block scripts %}
+
+{% include '_includes/x-links-scripts-datatable.html' %}
+{% include '_includes/x-links-scripts-summernote.html' %}
+
+<script src="/static/plugins/draganddrop/draganddrop.js"></script>
+<script src="/static/plugins/moments/moment.min.js"></script>
+<script src="/static/app-core/instructors/app.courses.min.js?version={{app_version()}}"></script>
+<script src="/static/app-core/instructors/app.quizzes.min.js?version={{app_version()}}"></script>
+
+{% endblock %}

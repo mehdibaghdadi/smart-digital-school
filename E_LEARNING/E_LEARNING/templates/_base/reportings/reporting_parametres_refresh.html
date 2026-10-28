@@ -1,0 +1,20 @@
+
+<div class="footer-fix" ng-init="collapse_footer=false">
+    <div role="button"
+         ng-click="collapse_footer=!collapse_footer" class=" d-block p-0"
+         ng-class="collapse_footer ? 'text-center' : 'float-right pt-2 pr-2'">
+        <i class="fa  text-warning text-lg"
+           ng-class="collapse_footer ? 'fa-square-caret-up' : 'fa-square-caret-down'"></i>
+    </div>
+    <div class="p-0" ng-hide="collapse_footer">
+        <div class="row m-0 justify-content-center text-center text-xs text-uppercase bg-transparent rounded">
+            <div class="col d-sm-block d-none"></div>
+            <div class="col-sm p-2">
+                <button type="submit" class="btn btn-block btn-primary text-uppercase">
+                    {{JR.refresh}} <i ng-show="loading" class="ml-1 fa fa-spinner text-yellow fa-spin"></i>
+                </button>
+            </div>
+            <div class="col d-sm-block d-none"></div>
+        </div>
+    </div>
+</div>

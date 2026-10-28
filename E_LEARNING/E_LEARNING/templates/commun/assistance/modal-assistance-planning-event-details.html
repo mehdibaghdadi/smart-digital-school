@@ -1,0 +1,150 @@
+<div class="modal fade" id="listAssistanceRequestModal" name="listAssistanceRequestModal" tabindex="-1" role="dialog" aria-labelledby="listAssistanceRequestModal">
+    <div class="modal-dialog modal-fullscreen" role="document">
+        <div class="modal-content" style="overflow-y:auto;overflow-x:hidden">
+            <div class="modal-header align-items-center p-0 bg-dark text-xs">
+                <div>
+                    <i class="text-red fa fa-1x fa-info mr-2 ml-2"></i>
+                    <small class="timeline-header text-uppercase">
+                        <b>{{JR.planned_day_assist}} -  ( {$demands_list.length$} {{JR.assignments}} ) </b>
+                    </small>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times; </span></button>
+            </div>
+            <div class="modal-body p-0">
+                <div class="card bg-graph m-2 elevation-0">
+                    <div class="card-body p-0">
+
+
+                        <div class="text-center" ng-hide="list_demands_loaded"><i class="fas fa-3x fa-spinner fa-pulse"></i></div>
+
+                        <div class="table-responsive p-0" ng-show="list_demands_loaded">
+                            <table id="table-course" class="pr-0 table  table-bordered  table-hover text-nowrap data-table" style="font-size:11px;width:100%">
+                                <thead>
+
+                                    <tr class="text-center bg-primary">
+                                        <th class="text-left ml-0 pl-2 ">
+                                             {{JR.student}} - {{JR.demand_assist}} - {{JR.answer}}
+                                        </th>
+                                        <th width="50" class="bg-info m-0 p-1" title="{{JR.date_demand}}">{{JR.date_demand2}}</th>
+                                        <th class=" text-center pl-3">{{JR.course}} - {{JR.chapter}} - {{JR.section}}</th>
+                                        <th class=" text-center">{{JR.classs}}</th>
+
+                                        <th width="80" class="bg-info text-center p-1">{{JR.status}}</th>
+                                        <th width="80" class=" text-center p-1" title="{{JR.date_status}}">{{JR.date_status}}</th>
+
+
+                                    </tr>
+                                </thead>
+                                <tbody id="id_body">
+                                    <tr class="text-left" ng-repeat="q in demands_list track by $index" ng-show="q.id>0" id="tr{$ $index  $}">
+
+                                        <td style="min-width: 380px;" class="rounded-0 pl-2 pt-2">
+                                            <div class="text-uppercase text-wrap ml-0 p-1 callout callout-info bg-light">
+                                                <div class="text-truncate p-1 text-uppercase text-bold">
+                                                    {$q.student_last_name $} {$q.student_first_name $}.
+                                                </div>
+
+                                                <div class="text-dark  bg-white rounded-lg p-2">
+                                                    {$q.description_demand $}
+                                                </div>
+                                            </div>
+
+
+                                            <div ng-show="q.response_demand" class="text-uppercase text-wrap ml-0 p-1 callout callout-warning bg-light">
+                                                <div>
+                                                    <b class="text-dark mt-1 ml-1">Pr. {$q.instructor_last_name $} {$q.instructor_first_name $}.</b>
+                                                    <div class="response-demand-prof  text-dark  bg-white rounded-lg p-2" ng-bind-html="q.response_demand | toHtml"> {$ $}</div>
+                                                </div>
+                                            </div>
+                                            <!--ATTACHEMENT/LINK-->
+                                            <div class="row m-0 p-2" style="flex-direction: row-reverse">
+                                                <div ng-show="q.attachment_url" class="col-md-6 text-uppercase text-wrap  p-1 ">
+                                                    <div class="text-xs  btn-group d-block"
+                                                         style="font-size:11px"
+                                                         data-type-extension="{$ type_file = getTypeFromExtensionURL(q.attachment_url) $}">
+
+                                                        <div class="mr-2" role="button" data-toggle="dropdown" aria-expanded="false">
+                                                            <div class=" text-dark" ng-href="{$ q.attachment_url $}">
+                                                                <div><i class="fa fa-paperclip mr-2"></i><u>{{JR.attachment}}</u></div>
+                                                                <div ng-show="type_file.css" class="btn text-bold btn-xs ml-2 btn-outline-info d-block">
+                                                                    {$ type_file.text $}<i class="ml-1 mt-1 float-right fa fa-ellipsis-v"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="dropdown-menu dropdown-menu-right" role="menu" style="">
+                                                            <span class="dropdown-item cursor-pointer" role="button" ng-click="readUploadedContent($event,q.attachment_url,type_file)"> <span ng-show="type_file.css" class="text-dark"><i class="fa mr-1" ng-class="type_file.css +' '+ type_file.color"></i> {{JR.read_more2}} {$ type_file.text $}</span></span>
+                                                            <div class="dropdown-divider"></div>
+                                                            <span class="dropdown-item cursor-pointer" role="button" ng-click="deleteAttachmentFile($event,q,'{{url_update_file_attachement_assistance}}')"> <span ng-show="type_file.css" class="text-dark"><i class="fas fa-remove mr-1 text-red"></i> {{JR.delete}} {$ type_file.text $}</span></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div ng-show="q.response_demand_link" class="col-md-6 text-uppercase text-wrap  p-1 ">
+                                                    <a ng-href="{$ q.response_demand_link $}" class="text-xs d-block" target="_blank">
+                                                        <div class="text-dark"><i class="fa fa-globe mr-2"></i>{{JR.url_link}}</div>
+                                                        <small class="btn text-bold btn-xs ml-2 btn-outline-info d-block" ng-bind-html="q.response_demand_link | detectMeetingService">{$$}</small>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <!--END ATTACHEMENT/LINK-->
+
+
+                                        </td>
+
+
+
+                                        <td class="text-center text-bold">{$ q.date_demand | date:'dd/MM/yyyy' $}</td>
+                                        <td style="max-width:300px;font-size:10px;" class="text-capitalize rounded-0 p-0">
+                                            <div class="text-wrap text-uppercase pl-2 pt-2">
+                                                <span><u><i class="fa fa-ew-book text-dark icon-user mr-2"></i>{$q.course_title  $}</u></span>
+                                                <!--<hr class="m-0 mb-2 mt-2" />-->
+                                            </div>
+                                            <div class="m-0 border-gray border-left pt-2 pl-2 mb-4 ml-3 text-uppercase text-wrap">
+
+                                                <span><u><i class="fa fa-ew-notebook text-dark icon-user mr-1"></i></u>{$q.chapter_title $}</span>
+                                                <div class="text-lef mt-2">
+                                                    <i class="fab fa-dropbox text-info mr-1 "></i> {$q.content_brief $}
+
+                                                </div>
+
+                                            </div>
+
+
+                                        </td>
+                                        <td class="text-uppercase text-center">
+                                            <b>{$ q.label_subject $}</b><br />
+                                            {$ q.level $}<br />
+                                            {$ q.label_qualification $}<br />
+                                            {$ q.classroom $}
+                                        </td>
+
+                                        <td class="text-center text-uppercase">
+                                            <span ng-switch="q.accepted">
+                                                <b ng-switch-when="1" class="text-success">{{JR.accepted2}}</b>
+                                                <b ng-switch-when="0" class="text-red">{{JR.canceled2}}</b>
+                                                <b ng-switch-default class="text-info ">{{JR.to_treat}} ...</b>
+                                            </span>
+                                        </td>
+                                        <td class="text-center p-2" ng-class="q.accepted==1?'text-bold':''"><span>{$ q.acceptance_date ||  q.date_demand  | date:'dd/MM/yyyy' $}</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="pt-5 pb-5"></div>
+                        <div class="text-center footer-fix" ng-show="list_demands_loaded">
+                            {% if current_user.role == ROLES.Instructor.value %}
+                            <a class="mr-2 btn  btn-primary " ng-href="{$current_url_view_list_demands_ids$}">
+                               <i class="fa text-md fa-ew-sos"></i> {{JR.see_list}}
+                            </a>
+                            {% endif %}
+                            <button type="button" class="btn btn-danger " data-dismiss="modal">{{JR.close}}</button>
+                        </div>
+                        
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

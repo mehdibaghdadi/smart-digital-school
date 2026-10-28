@@ -1,0 +1,45 @@
+<!-- Modal -->
+<form class="modal fade" id="editModalChapter" name="editModalChapter" ng-submit="submitChapitre(newChapter)" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document" >
+        <div class="modal-content">
+            <div class="modal-header bg-primary">                
+                <small class="modal-title mt-1 ml-1" id="myModalLabel"><i class="fa fa-ew-notebook mr-1 text-green"></i><span class="text-uppercase">{{JR.new}} {{JR.chapter}} </span>: <b class="badge text-xs badge-primary">{$ newChapter.sequence | numberToLetter $}</b></small>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body"  ng-model="newChapter" >
+                <!-- beginform -->
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <textarea ng-model="newChapter.chapter_title"
+                                  rows="2" type="text" required class="form-control" placeholder="{{JR.chapter}} : {{JR.titled}} ..."></textarea>
+
+                        <textarea ng-model="newChapter.chapter_description" type="text"  class="form-control mt-2  "
+                                  placeholder="{{JR.summary}} ..." rows="4"></textarea>
+                    </div>
+                    <div class="col-12 text-right pt-2 pb-2">
+                        <div class="switch text-xs text-uppercase">
+                            <span class="">
+                                <i class="fa" ng-class="newChapter.is_visible==1 ? 'fa-eye text-success' : 'fa-eye-slash text-muted'"></i>
+                            </span>
+                            <span class="ml-1 font-weight-bold">
+                                <span>{$ newChapter.is_visible ? "{{JR.online}}":"{{JR.offline}}"$}</span>
+                                <label class="">
+                                    <input type="checkbox" ng-model="newChapter.is_visible" ng-true-value="1" ng-false-value="0" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <span class="lever"></span>
+                                </label>
+                            </span>
+                        </div>
+                    </div>
+                    
+
+                </div>
+                <!-- endform -->
+
+            </div>
+            <div class="modal-footer bg-gray-dark">
+                <button type="submit" class="btn btn-primary">{{JR.save_then_fill_lessons}} <i class="fa fa-angle-right"></i></button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{JR.close}}</button>
+            </div>
+        </div>
+    </div>
+</form>

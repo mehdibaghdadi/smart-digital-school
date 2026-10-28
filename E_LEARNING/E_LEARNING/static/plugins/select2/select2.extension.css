@@ -1,0 +1,36 @@
+.select2 {
+    width: 100% !important;
+}
+
+.select2-container .select2-selection--single {
+    height: calc(2.25rem + 2px) !important;
+    }
+.select2-container--default .select2-selection--single .select2-selection__rendered{
+
+    margin-top: -3px !important;
+}
+
+.select2-container--default .select2-results > .select2-results__options {
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.select2-container--default .select2-results__group:before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f142  ";
+    margin-left: 2px;
+    color: #ffc107
+}
+.select2-container--default .select2-results__group {
+    background-color: #26354a;
+    color: white;
+    border-bottom: 1px solid #ffffff;
+    cursor: pointer;
+    transition: all linear 0.2s;
+    padding:3px;
+}
+
+    .select2-container--default .select2-results__group:hover {
+        background-color: red;
+    }

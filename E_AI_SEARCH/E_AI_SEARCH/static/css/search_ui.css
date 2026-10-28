@@ -1,0 +1,93 @@
+/* static/css/search_ui.css */
+body {
+    font-family: system-ui, Arial, sans-serif;
+    background: #f6f7fb;
+    color: #222;
+}
+
+.container {
+    max-width: 900px;
+    margin: 24px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+.controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+    .controls label {
+        font-size: 12px;
+        color: #666;
+    }
+
+    .controls input {
+        padding: 8px;
+        border-radius: 6px;
+        border: 1px solid #ddd;
+    }
+
+    .controls button {
+        grid-column: span 2;
+        padding: 10px;
+        border-radius: 6px;
+        border: none;
+        background: #2563eb;
+        color: white;
+        cursor: pointer;
+    }
+
+.status {
+    margin: 8px 0;
+    color: #444;
+}
+
+.results .item {
+    padding: 12px;
+    border-radius: 6px;
+    background: #fbfcff;
+    margin-bottom: 8px;
+    border: 1px solid #eef2ff;
+}
+
+    .results .item .score {
+        font-weight: 600;
+        color: #0f172a;
+        margin-bottom: 6px;
+    }
+
+    .results .item .title {
+        font-weight: 700;
+        margin-bottom: 6px;
+    }
+
+    .results .item .snippet {
+        color: #334155;
+        margin-bottom: 6px;
+    }
+
+    .results .item .meta {
+        font-size: 12px;
+        color: #64748b;
+        margin-bottom: 6px;
+    }
+
+.openBtn {
+    display: inline-block;
+    padding: 6px 10px;
+    background: #10b981;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+.footer {
+    font-size: 13px;
+    color: #6b7280;
+    margin-top: 18px;
+}

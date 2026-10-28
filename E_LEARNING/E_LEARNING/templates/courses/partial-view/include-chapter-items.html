@@ -1,0 +1,183 @@
+{% set file_extension = c.content_url.split('.')[-1].split('?')[0].lower() if (c.content_url and '.' in c.content_url and '://' not in c.content_url )else (JR.text if c.content_type_id ==4 else JR.duration) %}
+
+
+{% set url_cover = (
+(config.E_FILE_MANAGER_API ~ config.CONTENT_GET_IMAGE_URL ~ "/" ~ c.content_cover_url)
+if c.content_type_id==1 and c.content_cover_url
+else (c.content_cover_url if c.content_cover_url else ('/static/app-assets/img/loading.png' if c.content_type_id in [1,5] else ''  ))
+) %}
+
+{% if c.content_type_id in [1,5] %}{% set title_content_tooltip = "<img class='rounded' width='100%' style='max-height:100%;max-width:100%' src='" ~ url_cover ~ "'>" %}
+{% elif c.content_type_id == 2 %}{% set title_content_tooltip = JR.listen  %}
+{% elif c.content_type_id == 3 %}{% set title_content_tooltip = JR.download %}
+{% elif c.content_type_id == 4 %}{% set title_content_tooltip = JR.read %}
+{% else %}{% set title_content_tooltip = JR.show_content %}
+{% endif %}
+{% if not c.content_type_id in [1,5] %}{% set title_content_tooltip = title_content_tooltip ~ " : " ~ file_extension %} {% endif %}
+
+
+<div class="timeline-item" ng-init="initContentData({{c.content_id}})" id="header_content_{{c.content_id}}">
+    <!--left header-->
+    <div class="timeline-header text-right bg-light text-uppercase shadow-sm p-0">
+        <div class="text-xs">
+            <div class="d-inline-block mt-1 ml-2 float-left">
+                <small>
+                    <b style="width:19px;height:19px" class="badge bg-white shadow-sm rounded-circle text-center p-1 text-xs ">
+                        <span class="">{$ ({{ list[loop.index0].chapter_sequence  }}) | numberToLetter $}</span>
+                    </b> - {{JR.part}}
+                </small>
+                <b style="width:19px;height:19px" class="badge ml-1 bg-white shadow-sm rounded-circle text-center p-0 pt-1 text-xs ">
+                    <span class="">{{c.content_sequence}}</span>
+                </b>
+            </div>
+
+            <small data-toggle="tooltip" title="{{JR.date}} {{JR.update2}}" class=" pb-2 pt-2 mr-2 d-inline-block text-gray ">{$ '{{c.date_update[0:10]}}' | localeDate $}</small>
+
+            <!--action-->
+            <div class="btn-group pr-0" ng-show="{{'true' if getDataStudent else 'false'}}">
+                <div role="button" class="btn btn-default border-bottom-0 btn-flat rounded-top btn-sm" data-toggle="dropdown" aria-expanded="false">
+                    <div class="d-flex align-items-center">
+                        <small><i style="font-size:1rem" class="text-red fas fa-question-circle"></i><i class="ml-1 fa fa-ellipsis-v"></i></small>
+                    </div>
+                </div>
+                <div class="dropdown-menu dropdown-menu-right" role="menu" style="">
+                    <a class="dropdown-item" ng-click="needProgressionInfoClick($event,'#progress-info{{ c.content_id  }}')" role="button">
+                        <i class="fa fa-bars-progress mr-1 text-info"></i> {{JR.show}} {{JR.progression}} ?
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item"
+                       ng-click="{% if isStudent %}needAssistanceClick($event, content_chapter[{{ c.content_id }}]){% else %}showNotAllowedMessage(){% endif %}"
+                       role="button">
+                        <i class="fa fa-ew-sos mr-1 text-red"></i> {{JR.requests_support_assist_section}} ?
+                    </a>
+                </div>
+            </div>
+            <!--end-->
+        </div>
+    </div>
+    <div class="timeline-body bg-light text-uppercase shadow-sm p-0 " id="timelineBody{{c.content_id}}">
+        <div class="row m-0 mb-n2 p-0 justify-content-center">
+
+            <div class="col-xs col-preview-course d-flex flex-column align-items-top justify-content-center m-0 p-0"
+                 role="button"
+                 ng-class="content_type_dict[{{c.content_type_id}}].bg"
+                 ng-click="contentBeginClik($event,content_chapter[{{c.content_id}}])"
+                 data-toggle="tooltip"
+                 title="{{title_content_tooltip | safe}}">
+
+                {% if c.content_type_id in [1,5] %}
+                <!-- Vidéo & Youtube -->
+                <div class="text-uppercase text-center bg-video-course"
+                     style="background-image:url('{{url_cover | safe}}')">
+                </div>
+
+                <div class="bg-light h-100 fill-cover-media"
+                     style="background-image:url('{{url_cover | safe}}')"></div>
+
+
+                <span class="d-block text-xs p-1 border-0  text-center"
+                      style="background:#000;width:100%">
+                    {% if c.content_type_id==1 %}
+                    <i class="fa fa-play text-warning mr-1 text-sm"></i> {{JR.watch}}
+                    {% else %}
+                    <i class="fab fa-youtube text-red mr-1 text-sm"></i> {$ content_type_dict[{{c.content_type_id}}].text $}
+                    {% endif %}
+                </span>
+
+                {% else %}
+                <!-- Autres formats -->
+                <div ng-switch="{{c.content_type_id}}"
+                     class="text-uppercase text-sm btn-lg btn-flat mt-3 mb-3 text-center">
+                    <span ng-switch-when="2">
+                        <i class="fa fa-headphones mb-2  text-xl d-block"></i>{{JR.listen}}
+                    </span>
+                    <span ng-switch-when="3">
+                        <i class="fa fa-download mb-2  text-xl d-block"></i>{{JR.download}}
+                    </span>
+                    <span ng-switch-when="4">
+                        <i class="fa fa-ew-open-book text-xl mb-2 d-block"></i>{{JR.read}}
+                    </span>
+                </div>
+                {% endif %}
+
+            </div>
+
+            <div class="col-md border m-0 bg-white d-flex flex-column text-xs">
+               
+
+                <div class="text-left p-0 flex-fill">
+                    <div class="p-1 pt-2 h-100 content_brief_text text-transform-none text-size-default text-black " style="white-space:pre-line">
+                        <!-- texte tronqué -->
+                        <span class="short  animate-opacity" ng-show="contents[{{c.content_id}}].minmize_content_brief">
+                            {{ (c.content_brief or '')|truncate(400, True, '…')|replace('\n\n', '<br/>')|replace('\n', '<br/>')|safe }}
+                        </span>
+                        <!-- texte complet -->
+                        <div class="full d-none animate-opacity" ng-class="contents[{{c.content_id}}].minmize_content_brief ? 'd-none': 'd-block'">
+                            {{ (c.content_brief or '')|replace('\n', '<br/>')|safe }}
+                        </div>
+                        {% if c.content_brief and c.content_brief|length > 400 %}
+                        <span class="d-block text-center p-1 text-uppercase">
+                            <a id="btnToggleText{{c.content_id}}" class="p-0 text-underline" role="button" ng-click="toggleText({{c.content_id}})">
+                                {$ contents[{{c.content_id}}].minmize_content_brief ? " {{JR.read_more}} &darr;" : "{{JR.minimize_all}} &minus;" | toHtml $}
+                            </a>
+                        </span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs m-0 ">
+                <div class=" p-0 m-0 mb-2 d-md-block d-none">
+                </div>
+            </div>
+            <!--begin learning_progress_course-->
+            <div class="col-12 m-0 p-0 text-riht d-flex justify-content-between align-items-baseline">
+                <div class="progress-info-item  text-truncate border-right mb-0 mt-0 " style="width:145px"
+                     data-toggle="tooltip"
+                     title="{{ JR.duration if c.content_type_id !=3 else JR.size
+                            }} {$ content_type_dict[{{c.content_type_id}}].text $} ( {{JR.type1}} : <b class='text-yellow'>{{file_extension}}</b> )">
+
+                    <small class="text-dark">
+
+                        {% if c.content_type_id !=3 %}
+
+                        <i class="fa fa-stopwatch"></i><b class="text-uppercase text-red ml-2">{{ file_extension }}</b> :
+                        <b>{$ {{c.time_required_in_sec}} | formatDuration $}</b>
+
+                        {% elif c.file_size_in_bytes %}
+
+                        <i class="fa fa-fire"></i>
+                        <b class="text-uppercase text-red ml-2 ">{{ file_extension }}</b> :
+                        <b class="text-capitalize">
+                            {$ {{ c.file_size_in_bytes }} | formatFileSize $}
+                        </b>
+                        {% else %}
+
+                        {% endif %}
+                    </small>
+
+                </div>
+                <span ng-repeat="a in learning_progress_course | filter:matchContentId({{ c.content_id }}) ">
+                    <span id="progress-info{{ c.content_id  }}" role="button"
+                          ng-click="showProgressionInfos($event,a)"
+                          class="progress-info-item text-xs  mb-0 mt-0  border-left"
+                          ng-class="a.status=='C'? 'bg-progress-bar-item-completion' : (a.status=='B'? 'bg-progress-bar-item-inprogress':'')"
+                          ng-switch="a.status">
+                        <small class="text-green text-bold " ng-switch-when="C">
+                            <i class="fa fa-check text-dark mr-1"></i>{{ JR.finished}}
+                        </small>
+                        <small class="text-red  text-bold " ng-switch-when="B">
+                            <i class="fa fa-bars-progress  text-dark mr-1"></i>{{ JR.inprogress}} . . .
+                        </small>
+                        <small class=" text-bold text-muted" ng-switch-when="N">
+                            <i class="far fa-clock mr-1"></i>{{ JR.status2}} : {{ JR.unread}}
+                        </small>
+                    </span>
+                </span>
+
+            </div>
+            <!--end learning_progress_course-->
+        </div>
+
+    </div>
+
+</div>

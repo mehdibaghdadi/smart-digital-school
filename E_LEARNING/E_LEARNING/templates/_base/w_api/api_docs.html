@@ -1,0 +1,10 @@
+﻿{% extends "/_layouts/layout.html" %}
+
+{% block content %}
+<pre>
+<b>Target:</b><span><a href="{{ api['url'] }}">{{ api['url'] }}</a></span>
+<b>Allow :</b> <span>{{ api['methods'] }}</span>
+<b>Usage :</b> <span>{{ api['doc'] }}</span>
+</pre>
+
+{% endblock %}

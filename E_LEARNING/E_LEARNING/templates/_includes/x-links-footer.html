@@ -1,0 +1,72 @@
+<!--************
+    PACKAGES JS
+*************-->
+<script src="{{'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'|src_fallback('/static/plugins/jquery/jquery.min.js')}}"></script>
+<script src="{{'https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.3/js/bootstrap.bundle.min.js'|src_fallback('/static/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<script>
+    var bootstrapTooltip = $.fn.tooltip.noConflict();
+</script>
+
+<script src="{{'https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.3/jquery-ui.min.js'|src_fallback('/static/plugins/jquery/jquery-ui.min.js')}}"></script>
+<script src="{{'https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js'|src_fallback('/static/plugins/jquery/jquery.ui.touch-punch.min.js')}}"></script>
+<script src="{{'https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js'|src_fallback('/static/plugins/jquery/jquery.inputmask.min.js')}}"></script>
+<script src="{{'https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.10.8/sweetalert2.all.min.js'|src_fallback('/static/plugins/sweetalert2/sweetalert2.all.min.js')}}"></script>
+<script src="{{'https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js'|src_fallback('/static/plugins/angular/angular.min.js')}}"></script>
+<script src="{{'https://cdnjs.cloudflare.com/ajax/libs/angular-datatables/0.6.4/angular-datatables.js'|src_fallback('/static/plugins/jquery/datatables/angular-datatables.min.js')}}"></script>
+<script src="{{'https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js'|src_fallback('/static/plugins/signalr/signalr.min.js')}}"></script>
+
+<script src="/static/plugins/jquery/datatables/dataTables.min.js"></script>
+
+<script src="/static/plugins/angular/angular-filter.min.js"></script>
+<script src="/static/plugins/angular/loading-bar/loading-bar.min.js"></script>
+<script src="/static/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script><!---->
+
+<script src="{{'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/21.2.4/js/intlTelInput.min.js'|src_fallback('/static/plugins/intl-tel-input/intlTelInput.min.js')}}"></script>
+
+<script src="{{'https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.2.0/js/adminlte.min.js'|src_fallback('/static/dist/js/adminlte.min.js')}}"></script>
+
+<script src="/static/app-assets/js/menu-app.min.js"></script>
+<script src="/static/app-assets/js/adminlte.extension.min.js?version={{app_version()}}"></script>
+<script src="/static/app-assets/js/form-validators.min.js?version={{app_version()}}"></script>
+<script src="/static/app-assets/js/look-and-feel.js"></script>
+<script src="/static/app-assets/js/detect.url.min.js?version={{app_version()}}"></script>
+
+<!--**********************
+    APPLICATION ANGULAR_JS
+***********************-->
+
+<script src="/static/app-core/_base/signalR/signalr.hub.min.js?version={{app_version()}}"></script>
+<script src="/static/app-core/_base/app.external.apis.min.js?version={{app_version()}}"></script>
+<script src="/static/app-core/_base/app.constants.min.js?version={{app_version()}}"></script>
+<script src="/static/app-core/_base/app-settings.min.js?version={{app_version()}}"></script>
+<script src="/static/app-core/_base/app-modules.min.js?version={{app_version()}}"></script>
+<script src="/static/app-core/_base/app.services.min.js?version={{app_version()}}"></script>
+
+
+<script>
+    $(document).ready(function () {
+        var debug = '{{1 if DEBUG else 0}}'
+        console.log('debug: ', debug);
+
+        if (debug=='1')
+            console.log('login: ', JSR.current_user_email);
+
+/*--****************
+    CHANGE LANGUAGES
+***************** --> */
+        initSelectChangeLanguague("{{ url_for('LanguageManager:setLang') }}");
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        if (document.querySelector('.footer-fix')) {
+            const styleElement = document.createElement('style');
+            styleElement.textContent = `
+            ::-webkit-scrollbar-button:increment {
+                height: 52px !important;
+            }
+        `;
+            document.head.appendChild(styleElement);
+        }
+    });
+</script>
+

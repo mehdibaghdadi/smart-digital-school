@@ -1,0 +1,79 @@
+
+
+
+.bg-gradient-video {
+    background:  linear-gradient(180deg,#032959,#007dc6) repeat-x !important;
+    color: #fff !important;
+}
+
+.bg-gradient-audio {
+    background: #03332a linear-gradient(180deg,#03332a,#09c059) repeat-x !important;
+    color: #fff !important;
+}
+
+.bg-gradient-file {
+    background: #423c02 linear-gradient(180deg,#423c02,#FF9800) repeat-x !important;
+    color: #fff !important;
+}
+
+.bg-gradient-text {
+    background: #2a0034 linear-gradient(180deg,#2a0034,#005ad0) repeat-x !important;
+    color: #fff !important;
+}
+
+.bg-gradient-youtube {
+    background: linear-gradient(180deg, #890909, #c60000) repeat-x !important;
+    color: #fff !important;
+}
+
+
+.bg-gradient-youtube:hover, .bg-gradient-video:hover, .bg-gradient-audio:hover, .bg-gradient-file:hover, .bg-gradient-text:hover {
+    background: #6e0303 linear-gradient(180deg,#6e0303,#dc0505) repeat-x !important;
+    color: #fff981 !important;
+}
+
+
+.clappr-watermark[data-watermark] img {
+    max-width: 30px !important;
+    opacity: 0.5;
+}
+
+.clappr-watermark[data-watermark-top-right] {
+    top: 1px !important;
+    right: -10px !important;
+    width: 50px !important;
+}
+
+
+[data-player] {
+    min-height: 400px !important;
+}
+.player-poster[data-poster] {
+    background-image: url(/static/app-assets/img/logo.png) !important;
+    background-position: right 10px top !important;
+    background-repeat: no-repeat !important;
+    background-size: 30px !important;
+    background-blend-mode: luminosity;
+    opacity: 0.7;
+}
+
+    .player-poster[data-poster] .play-wrapper[data-poster] {
+        opacity: 0.9 !important;
+    }
+
+        .player-poster[data-poster] .play-wrapper[data-poster] svg path {
+            fill: #FFC107 !important;
+            stroke: #454545;
+            stroke-width: 1px !important;
+            stroke-width: 0.05rem !important;
+        }
+
+.spinner-three-bounce[data-spinner] {
+    width: 200px !important;
+}
+
+    .spinner-three-bounce[data-spinner] > div {
+        background-color: var(--yellow) !important;
+        box-shadow: rgba(0,0,0,0.8) 1px 1px 5px !important;
+        margin: 5px !important;
+    }

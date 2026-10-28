@@ -1,0 +1,53 @@
+<aside class="control-sidebar control-sidebar-dark rounded-bottom elevation-4 " id="control-sidebar-master">
+    <!-- Control sidebar content goes here -->
+    <div class="p-3 control-sidebar-content">
+
+        {% for item in controls_menu.children recursive %}
+        {% if item.children %}
+        {% if item.is_visible() and item.has_visible_child() %}
+
+        <h6 class="text-white text-uppercase">
+            <span type="button" data-widget="control-sidebar" class="float-right text-red">
+                <i class="fa fa-xmark"></i>
+            </span>
+             {{ item.title }}
+        </h6>
+
+        <hr class="  bg-primary">
+        {{ loop(item.children) }}
+        {% endif %}
+        {% else %}
+        {% if  item.is_visible()%}
+        <a class="d-block mt-4 mb-4 text-uppercase" href="{% if item.endpoint %}{{ url_for(item.endpoint) }}{% else %}javascript:return false;{% endif %}">
+            <p class=" text-xs">
+                {% if item.icon %}<i class="{{ item.icon }} "></i>&nbsp;&nbsp; {% endif %} {{ item.title }}
+            </p>
+        </a>
+
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+        <hr class="  bg-primary">
+        <!--Languages-->
+        <h6 class="text-white text-uppercase">            
+            <i class="ew ew-{{g.current_language}} mr-2"></i>&nbsp;{{ JR.lang }}
+        </h6>
+        <div>
+            <span class="">
+                
+                <select id="languageDropdown" class="form-control text-light bg-primary text-uppercase">
+                    {% for k,v in config.BABEL_LANGUAGES.items() %}
+                    <option value="{{ k }}" {{ 'selected' if k == g.current_language else '' }}>
+                        {{ v }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </span>
+        </div>
+        <hr class="  bg-primary">
+        <h6 class="text-white text-uppercase">
+            <a href="{{ url_for('ThemeView:index') }}"><i class="fa fa-palette text-cyan"></i>&nbsp;&nbsp;  {{ JR.visual_theme }}</a>
+        </h6>
+        <hr class="  bg-primary">
+    </div>
+</aside>

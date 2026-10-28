@@ -1,0 +1,51 @@
+<!-- Modal -->
+<style>
+    #sortable li:hover {
+        cursor: pointer;
+    }
+</style>
+<form class="modal fade" id="editModalChapterList" name="editModalChapterList" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header pt-0 pb-0 bg-dark text-xs">
+                <small class="text-truncate  text-uppercase mt-1 ml-1" id="myModalLabel">
+
+                    <i class="fa fa-ew-book"></i> <span>{$current_course.course_title$}</span>
+                </small>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body mb-1 text-uppercase bg-light">
+                <!-- beginform -->
+                <div class="text-center" ng-hide="chapter_list.length > 0"><i class="fas fa-3x fa-spinner fa-pulse"></i></div>
+                <div style="overflow:hidden; overflow-y:auto">
+                    <div class="text-truncate text-center p-0 mb-4 text-bold">
+                        <i class="fa fa-ew-notebook mr-2 text-red"></i>{{JR.chapters}} : {$chapter_list.length$}
+                    </div>
+
+                    <ul id="sortable" class="sortable-list" ng-model="ch">
+                        <li id="{$ $index $}" ng-repeat="ch in chapter_list | orderBy:'sequence'"
+                            class="text-truncate  elevation-1 mb-4 btn-light rounded text-xs"
+                            ng-click="editChapterClick($event,ch)"
+                            title="{{JR.edit}} : {{JR.chapter}}">
+
+                            <div class="text-truncate pb-3 text-sm">
+                                <b class="ml-2 ">{$ch.sequence | numberToLetter$}-</b>  <small class="text-sm">{$ ch.chapter_title  $} </small>
+                            </div>
+                            <small class="text-right d-block bg-transparent border-0 mr-0 rounded-top text-muted">
+                                <b ng-class="ch.is_visible?'text-success':'text-danger'">{$ ch.is_visible?'{{JR.online}}':'{{JR.offline}}' $}</b> | <b>{$ ch.date_chapter_update |localeDate $}</b> | {{JR.contents}} : <b class="">{$ ch.num_of_contents  $} </b>
+                            </small>
+                        </li>
+                    </ul>
+                </div>
+                <!-- endform -->
+
+            </div>
+            <div class=" footer-fix text-center">
+
+                <div class="d-inline-block text-center">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{JR.close}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

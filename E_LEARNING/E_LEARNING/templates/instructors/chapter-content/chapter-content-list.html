@@ -1,0 +1,205 @@
+<!--contents chapter-->
+<div ng-hide="showEditChapter" class="p-0 m-0">
+    <div class="p-1">
+        <br />
+        <div class="text-bold mt-4 text-md text-black text-uppercase pt-0 text-truncate border-bottom border-gray">
+            <span class="d-block p-1">
+                <i class="fab fa-dropbox text-info mr-1"></i> {{JR.chapter_contents}} : <span class="text-lg">{$ {{current_chapter.sequence}}  | numberToLetter  $}</span>
+            </span>
+        </div>
+    </div>
+    <div class="text-uppercase text-left m-0 d-flex align-items-end justify-content-between" id="tb-content">
+
+        <a class="btn btn-outline-dark border-bottom-0 btn-flat rounded-top-right  btn-sm">
+            <span class="text-bold ">
+                {{JR.total}} : {$ content_list.length $}
+            </span>
+        </a>
+
+        <div class="mr-0 ">
+            <button type="button"
+                    ng-show="content_list.length<{{max_content_per_chapter}}" hide-if-no-payment
+                    class="btn btn-primary border-bottom-0 btn-flat rounded-top btn-sm text-uppercase"
+                    data-toggle="dropdown" aria-expanded="false" id="btnAddContent">
+                <small>
+                    <i class="text-xs mr-2 fas fa-plus text-warning"></i>{{JR.add}} <i class="ml-2 fa fa-ellipsis-v"></i>
+                </small>
+            </button>
+            <!--menu-->
+            {% include 'instructors/chapter-content/dropdown-menu-contents.html' %}
+
+            <button ng-show="content_list.length>=1"
+                    class="btn btn-primary border-bottom-0 btn-flat rounded-top btn-sm text-uppercase ml-1"
+                    ng-click="sortContent($event)" data-toggle="modal"
+                    data-target="{$ content_list.length>=2 ?'#editModalContentList' : '' $}">
+                <small>
+                    <i class="fa fa-grip-vertical text-xs mr-2 text-cyan"></i>{{JR.to_order}}
+                </small>
+            </button>
+        </div>
+
+    </div>
+    <div class="card p-0">
+        <div style="height:0.3rem" class="bg-primary border"></div>
+        <div class="card-body p-0 bg-graph">
+            <div class="table-responsive ">
+                <table class="table table-bordered  table-hover text-nowrap data-table bg-white mb-0" style="font-size:11px">
+                    <thead>
+                        <tr class="text-center bg-primary">
+                            <th width="145" style="min-width:145px !important;border:0" class="border-left text-center">{{JR.type1}}</th>
+                            <th class="text-center ">{{JR.title}}</th>
+                            <th class=" p-1" width="50">{{JR.sequence}}<i class="fas fa-sort-numeric-down ml-1 text-yellow"></i></th>
+                            <th width="80" class="text-center ">{{JR.duration}}<i class="ml-1 fa text-cyan fa-clock"></i></th>
+                            <th width="80" class="text-center ">{{JR.size}}<i class="ml-1 fa text-pink fa-fire"></i></th>
+                            <th width="80" style="max-width:100px !important" class="">{{JR.date_creation}}</th>
+                            <th width="80" style="max-width:100px !important" class="">{{JR.update2}}</th>
+                            <th width="60" class="text-center ">{{JR.important}}</th>
+                            <th width="60" class="text-center">{{JR.online}}</th>
+                            <th width="60" class="text-center bg-success">{{JR.edit}}</th>
+                            <th width="60" class="text-center bg-red">{{JR.delete}}</th>
+                        </tr>
+                    </thead>
+                    <tbody id="id_body">
+                        <tr class="p-0" ng-repeat="ch in content_list track by $index"
+                            ng-init="ch.ct=content_type_dict[ch.content_type_id]"
+                            ng-class="ch.is_visible ? '' : 'text-muted'">
+
+                            <td class="text-center text-uppercase align-middle cursor-pointer p-0"
+                                role="button" ng-click="readUploadedContent($event,ch)"
+                                ng-class="ch.ct.bg">
+                                <div ng-switch="ch.content_type_id">
+                                    <!--VIDEO FORMAT-->
+                                    <div ng-switch-when="1">
+
+                                        <div data-toggle="tooltip" role="button"
+                                             title="<img width='100%' style='max-height:100%;max-width:100%' src='{{ config.E_FILE_MANAGER_API}}{{ config.CONTENT_GET_IMAGE_URL}}/{$ch.content_cover_url $}'"
+                                             ng-style="{ 'background-image': 'url(' + (ch.content_cover_url ? '{{ config.E_FILE_MANAGER_API}}{{ config.CONTENT_GET_IMAGE_URL}}/'+ch.content_cover_url : '/static/app-assets/img/loading.png') +')' }"
+                                             class="text-uppercase text-center bg-video-course position-relative">
+                                            <span class="d-block text-xs p-1 border-0 position-absolute d-block"
+                                                  style="background: #000000; bottom:0;width:100%">
+                                                <i class="fa text-sm fa-play mr-2 text-warning"></i>{{JR.watch}}
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <!--YOUTUBE FORMAT-->
+                                    <div ng-switch-when="5">
+
+                                        <div data-toggle="tooltip" role="button"
+                                             title="<img width='100%' style='max-height:100%;max-width:100%' src='{$ch.content_cover_url $}'"
+                                             ng-style="{ 'background-image': 'url(' + (ch.content_cover_url ? ch.content_cover_url : '/static/app-assets/img/loading.png') +')' }"
+                                             class="text-uppercase text-center bg-video-course position-relative">
+                                            <span class="d-block text-xs p-1 border-0 position-absolute d-block"
+                                                  style="background: #000000; bottom:0;width:100%">
+                                                <i class="fab  text-sm fa-youtube text-red mr-2 "></i> {$ ch.ct.text $}
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <!--OTHERS FORMAT-->
+                                    <div ng-switch-when="2" class="p-3 text-sm">
+                                        <i class="fa text-xl fa-headphones"></i><br /><span class="d-block mt-2 mb-2">{{JR.listen}}</span>
+                                    </div>
+                                    <div ng-switch-when="3" class="p-3 text-sm">
+                                        <i class="fa text-xl  fa-download"></i><br /><span class="d-block mt-2 mb-2">{{JR.download}}</span>
+                                    </div>
+                                    <div ng-switch-when="4" class="p-3 text-sm">
+                                        <i class="fa text-xl  fa-ew-open-book"></i><br /><span class="d-block mt-2 mb-2">{{JR.read}}</span>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td class="text-left pl-2 " title="{{JR.edit}}"
+                                data-toggle="tooltip" ng-click="editContentClick($event,ch)" role="button" style="min-width:250px;max-width:260px;">
+                                <div class="text-clamp-div text-transform-none text-xs ">
+                                    <i class="fa fa-pen rounded border p-2 float-right text-red"></i>
+                                    <b>{$ ch.sequence | numberToLetter  $}</b> - {$ ch.content_brief $}
+                                </div>
+                            </td>
+                            <td class="text-center text-sm pt-4" ><b class="text-info">{$ ch.sequence  $}</b></td>
+                            <td class="text-center pt-4" >
+                                <b ng-show="ch.time_required_in_sec">{$ ch.time_required_in_sec | formatDuration $}</b>
+                                <b ng-hide="ch.time_required_in_sec"><i class=" text-muted fa fa-ellipsis-h" ng-hide="q.num_of_quizzes"></i></b>
+
+                            </td>
+                            <td class="text-center pt-4" >
+                                <b class=" text-capitalize" ng-show="ch.file_size_in_bytes">{$ ch.file_size_in_bytes | formatFileSize $}</b>
+                                <b ng-hide="ch.file_size_in_bytes"><i class=" text-muted fa fa-ellipsis-h" ng-hide="q.num_of_quizzes"></i></b>
+
+                            </td>
+                            <td class="pt-4 pl-1 pr-1 text-center" >
+                                {$ ch.date_creation| date:'yyyy-MM-dd' |localeDate $} {$ch.date_creation| date:'HH:mm' $}
+                            </td>
+                            <td class="pt-4 pl-1 pr-1 text-center" >
+                                {$ ch.date_update | date:'yyyy-MM-dd' |localeDate $} {$ch.date_update| date:'HH:mm' $}
+
+                            </td>
+                            <td class="text-center p-0 pt-4">
+                                <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success" title="{{JR.status}} : {$ ch.is_important==1 ? '{{JR.content}} {{JR.important}}' : '{{JR.content}} {{JR.normal}}' $}" data-toggle="tooltip">
+                                    <input type="checkbox" class="custom-control-input" name="chapter_is_important{$ $index $}" id="chapter_is_important{$ $index $}" ng-model="ch.is_important" ng-checked="ch.is_important==1" ng-click="importanceChangeContent($event,ch)" onclick="return false;">
+                                    <label class="custom-control-label" for="chapter_is_important{$ $index $}"></label>
+                                </div>
+                            </td>
+                            <td class="text-center p-0 pt-4">
+                                <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success" title="{{JR.status}} : {$ ch.is_visible==1 ? '{{JR.content}} {{JR.online}}' : '{{JR.content}} {{JR.offline}}' $}" data-toggle="tooltip">
+                                    <input type="checkbox" class="custom-control-input" name="chapter_is_visible{$ $index $}" id="chapter_is_visible{$ $index $}" ng-model="ch.is_visible" ng-checked="ch.is_visible==1" ng-click="statusChangeContent($event,ch)" onclick="return false;">
+                                    <label class="custom-control-label" for="chapter_is_visible{$ $index $}"></label>
+                                </div>
+                            </td>
+
+                            <td class="text-center p-0 pt-4">
+                                <button class="btn btn-default btn-xs" ng-click="editContentClick($event,ch)" type="button">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                            </td>
+                            <td class="text-center p-0 pt-4">
+                                <button class="btn btn-default btn-xs" ng-click="deleteContentClick($event,ch,$index)" type="button">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot class="bg-light">
+                        <tr ng-show="content_list.length<=0" hide-if-no-payment class="text-center text-default bg-light" style="font-size:12px">
+                            <td colspan="100" class="p-4 text-uppercase">
+                                <i class="fa fa-2x fa-exclamation-triangle text-red"></i><br />
+                                {{JR.add_at_least_content_chapter}}
+                                <br />
+                                <br />
+                                <button type="button" class="btn btn-primary" data-toggle="dropdown" aria-expanded="false">{{JR.add}} : {{JR.content}}</button>
+                                <!--menu-->
+                                {% include 'instructors/chapter-content/dropdown-menu-contents.html' %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="100">
+                                <div class="text-bold text-uppercase text-right p-2">{{JR.total}} : {$ content_list.length $} </div>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <div  ng-show="content_list.length<{{max_content_per_chapter}}" hide-if-no-payment>
+        <div>
+            <span class="float-right" ng-hide="showEditChapter || content_list.length==0" role="button" data-toggle="dropdown" aria-expanded="false">
+                <i title="{{JR.add}} : {{JR.new}} {{JR.content}}" data-toggle="tooltip"
+                   class="fa fa-plus-circle p-2 btn-info fa-2x  elevation-2 m-1 mt-2 rounded-pill" role="button"></i>
+            </span>
+            <!--menu-->
+            {% include 'instructors/chapter-content/dropdown-menu-contents.html' %}
+        </div>
+    </div>
+
+    {% include 'instructors/chapter-content/upload-content.html' %}
+    {% include 'instructors/chapter-content/write-content.html' %}
+    {% include 'instructors/chapter-content/social-media-content.html' %}
+
+    {% include 'instructors/chapter-content/content-sequence.html' %}
+    {% include 'courses/chapter-content/show-texteditor.html' %}
+    {% include 'courses/chapter-content/show-player.html' %}
+    {% include 'courses/chapter-content/show-social-media.html' %}
+
+</div>

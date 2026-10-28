@@ -1,0 +1,60 @@
+﻿@model E_PAYMENT.Models.SubscriptionRequest
+
+@{
+
+    var lang = @CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+    var email = @AppSettings.Value.Email;
+    var phone = @AppSettings.Value.Phone;
+}
+
+<body style="font-family: Arial, sans-serif; color: #333;">
+    @{
+        if (lang == "fr")
+        {
+            <p>Bonjour @Model.FirstName,</p>
+            <p>Merci d’avoir fait confiance à Smart Digital School.</p>
+            <p>
+                Nous avons bien reçu votre demande de souscription, associée à l'adresse email @Model.Email et au numéro de téléphone @Model.Phone.
+                Notre équipe est actuellement en train de valider votre dossier.
+                Une fois la validation terminée, vous recevrez un nouvel e-mail contenant toutes les instructions nécessaires
+                pour accéder à votre compte.
+            </p>
+            <p>
+                En attendant, n’hésitez pas à nous contacter si vous avez des questions :
+            </p>
+            <ul>
+                <li>E-mail : <a href="@email">@email</a></li>
+                <li>Téléphone : @phone</li>
+            </ul>
+            <p>
+                Merci encore pour votre confiance et à très bientôt,
+            </p>
+            <p>
+                L’équipe Smart Digital School
+            </p>
+        }else{
+            <p>Hello @Model.FirstName,</p>
+            <p>Thank you for trusting Smart Digital School.</p>
+            <p>
+                We have received your subscription request, associated with the email address @Model.Email and the phone number @Model.Phone.
+                Our team is currently validating your file.
+                Once the validation is complete, you will receive a new email containing all the instructions you need
+                to access your account.
+            </p>
+            <p>
+                In the meantime, feel free to contact us if you have any questions:
+            </p>
+            <ul>
+                <li>Email: <a href="@email">@email</a></li>
+                <li>Phone: @phone</li>
+            </ul>
+            <p>
+                Thank you once again for your trust, and we look forward to seeing you soon,
+            </p>
+            <p>
+                The Smart Digital School Team
+            </p>
+
+        }
+    }
+</body>

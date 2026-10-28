@@ -1,0 +1,23 @@
+{
+  "sProcessing": "Processing...",
+  "sSearch": "",
+  "sLengthMenu": "Show _MENU_ items",
+  "sInfo": "_START_ - _END_ / Total: <b>_TOTAL_</b>",
+
+  "sInfoEmpty": "...",
+  "sInfoFiltered": "(filtered by _MAX_ items in total)",
+  "sInfoPostFix": "",
+  "sLoadingRecords": "Loading...",
+  "sZeroRecords": "No items to display",
+  "sEmptyTable": "<div class='p-3 bg-light'>No data available to display</div>",
+  "oPaginate": {
+    "sFirst": "First",
+    "sPrevious": "<i class='fa fa-circle-chevron-left' style='font-size:1.2rem'></i>",
+    "sNext": "<i class='fa fa-circle-chevron-right' style='font-size:1.2rem'></i>",
+    "sLast": "Last"
+  },
+  "oAria": {
+    "sSortAscending": ": enable to sort the column in ascending order",
+    "sSortDescending": ": enable to sort the column in descending order"
+  }
+}

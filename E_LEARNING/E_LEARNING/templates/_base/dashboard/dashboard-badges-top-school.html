@@ -1,0 +1,110 @@
+<div class="row">
+    <!-- /.col online -->
+    <div class="col-md-3 col-sm-6 col-12">
+        <div>  <span class="badge badge-dark float-right"> <b class="isNumberBadge text-sm">{$course_online_count$}</b></span></div>
+        <div class="info-box elevation-2 mb-0" role="button" onclick="window.location='{{course_list_online_url}}'">
+            <div ng-hide="course_loaded" class="overlay"><i class="fas fa-2x fa-sync-alt fa-spin"></i></div>
+
+            <span class="info-box-icon bg-primary"><i class="fa fa-ew-book"></i></span>
+            <div class="info-box-content text-truncate">
+                <span class="info-box-text text-uppercase">{{JR.courses}} : {{JR.online}}</span>
+                <div class="text-right">
+                    <div class="dropdown-divider"></div>
+                    <span class="info-box-text text-xs"><!--Ajout le : <b>{$ course_online_max_date_creation | date:'dd.MM.yyyy' $}</b>--></span>
+                    <span class="info-box-text text-xs">{{JR.date}} : <b class="text-capitalize">[ {$ course_online_max_date_update| localeDate $} ]</b></span>
+                </div>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <div class="mb-2 text-center">
+            <a class="btn btn-default btn-block btn-xs" href='{{course_list_online_url}}'>
+                <span class="text-xs">
+                    <i class="fa fa-plus-circle pr-2"></i>{{JR.read_more2}}
+                </span>
+            </a>
+        </div>
+
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col enrollment_loaded -->
+    <div class="col-md-3 col-sm-6 col-12">
+        <div> <span class="badge badge-dark float-right"> <b class="isNumberBadge text-sm">{$enrollment_total$}</b></span></div>
+        <div class="info-box elevation-2 mb-0" role="button" onclick="window.location='{{enrollement_list_url}}'">
+            <div ng-hide="enrollment_loaded" class="overlay"><i class="fas fa-2x fa-sync-alt fa-spin"></i></div>
+
+            <span class="info-box-icon bg-primary"><i class="fa fa-ew-student"></i></span>
+            <div class="info-box-content text-truncate">
+                <span class="info-box-text text-uppercase">{{JR.progression}} : {{JR.student}}/{{JR.course}}</span>
+                <div class="text-right">
+                    <div class="dropdown-divider"></div>
+                    <span class="info-box-text text-xs">{{JR.date}} : <b class="text-capitalize">[ {$ max_enrollment_date |  localeDate $} ]</b></span>
+                </div>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <div class="mb-2 text-center">
+            <a class="btn btn-default btn-block btn-xs" href='{{enrollement_list_url}}'>
+                <span class="text-xs">
+                    <i class="fa fa-plus-circle pr-2"></i>{{JR.read_more2}}
+                </span>
+            </a>
+        </div>
+
+        <!-- /.info-box -->
+
+    </div>
+    <!-- /.col calendar assistance -->
+    <div class="col-md-3 col-sm-6 col-12">
+        <div>  <span class="badge badge-dark float-right"> <b class="isNumberBadge text-sm">{$calendar_assistance_total$}</b></span></div>
+        <div class="info-box elevation-2 mb-0" role="button" onclick="window.location='{{calendar_assistance_url}}'">
+            <div ng-hide="calendar_assistance_loaded" class="overlay"><i class="fas fa-2x fa-sync-alt fa-spin"></i></div>
+
+            <span class="info-box-icon bg-primary"><i class="fa fa-ew-sos"></i></span>
+            <div class="info-box-content text-truncate">
+                <span class="info-box-text text-uppercase">{{JR.demand_assist}}</span>
+                <div class="text-right">
+                    <div class="dropdown-divider"></div>
+                    <span class="info-box-text text-xs"><!--Ajout le : <b>{$ course_offline_max_date_creation | date:'dd.MM.yyyy' $}</b>--></span>
+                    <span class="info-box-text text-xs">{{JR.date}} : <b class="text-capitalize">[ {$ max_date_demand | localeDate $} ]</b></span>
+                </div>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <div class="mb-2 text-center">
+            <a class="btn btn-default btn-block btn-xs" href='{{calendar_assistance_url}}'>
+                <span class="text-xs">
+                    <i class="fa fa-plus-circle pr-2"></i>{{JR.read_more2}}
+                </span>
+            </a>
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col message box not read -->
+    <div class="col-md-3 col-sm-6 col-12">
+        <div>  <span class="badge badge-dark float-right"> <b class="isNumberBadge text-sm">{$messagebox_total$}</b></span></div>
+        <div class="info-box elevation-2 mb-0" role="button" onclick="window.location='{{message_box_list_url}}'">
+            <div ng-hide="messagebox_loaded" class="overlay"><i class="fas fa-2x fa-sync-alt fa-spin"></i></div>
+            <span class="info-box-icon bg-primary"><i class="fa fa-envelopes-bulk  "></i></span>
+            <div class="info-box-content text-truncate">
+                <span class="info-box-text text-uppercase">{{JR.message_inprogress}}</span>
+                <div class="text-right">
+                    <div class="dropdown-divider"></div>
+                    <span class="info-box-text text-xs"> {{JR.date}} : <b  class="text-capitalize">[ {$  max_messagebox_date  | localeDate $} ]</b></span>
+
+                </div>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <div class="mb-2 text-center">
+            <a class="btn btn-default btn-block btn-xs" href='{{message_box_list_url}}'>
+                <span class="text-xs">
+                    <i class="fa fa-plus-circle pr-2"></i>{{JR.read_more2}}
+                </span>
+            </a>
+        </div>
+
+        <!-- /.info-box -->
+    </div>
+
+
+</div>

@@ -1,0 +1,53 @@
+<div class="card-header p-0 border-bottom-0">
+    <div class="border-left border-right">
+
+        <div class="text-uppercase text-center p-0 font-weight-bolder bg-white rounded-bottom"
+             style="border-bottom:thin dashed #ccc ">
+            <div class="p-2 pt-4">
+                <div class="text-center p-1 text-md text-black" >
+                   {{current_course.course_title}}
+                </div>
+            </div>
+            <div class="mb-2 text-right p-0 text-xs">
+                <div class="mr-2 ml-2 text-gray">
+                    <small class="text-uppercase d-block">
+                        {{JR.prof[0:2]}} : <span class="text-dark">{{current_course.last_name}} {{current_course.first_name}}</span>
+                    </small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    {% if current_course.course_brief %}
+    <div class=" pt-3 p-1 text-uppercase text-xs  pt-3 rounded-bottom border border-top-0  p-1 text-uppercase bg-white text-xs">
+        <div class="{{ "text-right" if language_id==1 else "text-justify"}}">
+            <div>
+                <small class="ml-1" style="letter-spacing: 1px;"><u class="text-muted text-bold ">{{JR.objective_general}}</u> :</small>
+                <div class="bg-white  p-1 text-black " style="line-height:1.3rem">
+                    {{current_course.course_brief | safe}}
+                </div>
+            </div>
+        </div>
+    </div>
+    {%endif%}
+
+    <div class="d-flex justify-content-end align-items-center text-dark text-xs text-uppercase pr-2">
+        <small data-toggle="tooltip" title="{{JR.total}} {{JR.chapters1}} : {{current_course.num_of_chapters}}">
+            <b class="text-xs text-dark">{{current_course.num_of_chapters}}</b> {{JR.chapters1}}
+
+        </small>
+        <small class=" ml-3" data-toggle="tooltip" title="{{JR.date_start}} {{JR.course}}">
+            <i class="mr-1 fas fa-calendar-week text-dark"></i>{$ '{{current_course.date_start_course[0:10]}}' | localeDate $}
+        </small>
+        <small class="ml-3" data-toggle="tooltip" title="{{JR.lang}} : {{current_course.language_name}}">
+            <i class=" mr-1 fas fa-globe text-dark"></i><b>{{current_course.language_name[0:2]}}</b>
+        </small>
+        <small class="ml-2" data-toggle="tooltip" title="{{JR.course}} {{JR.fav}}" ng-show="isFavorite">
+            <i class="fa fa-star text-orange mr-1"></i>{{JR.fav}}
+        </small>
+    </div>
+</div>

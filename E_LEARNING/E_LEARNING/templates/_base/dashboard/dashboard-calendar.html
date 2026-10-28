@@ -1,0 +1,17 @@
+<div class="row text-uppercase">
+    <div class="col-md-12 col-sm-12 col-12">
+        <div class="text-left pt-2 text-black" style="text-decoration:underline">
+            <i class="fa fa-calendar-days text-red pr-2"></i><b>{{JR.calendar}}</b>
+        </div>
+        <br />
+        <div style="position:absolute;right:50%;top:145px" class="float-right" ng-hide="list_tasks_loaded"><i class="fas fa-2x fa-sync-alt fa-spin"></i></div>
+        <div class="text-xs elevation-1" id="calendar"></div>
+        <div class="mb-2 text-center">
+            <a class="btn btn-default btn-block btn-xs" href='{{url_calendar}}'>
+                <span class="text-xs">
+                    <i class="fa fa-plus-circle pr-2"></i>{{JR.read_more2}}
+                </span>
+            </a>
+        </div>
+    </div>
+</div>

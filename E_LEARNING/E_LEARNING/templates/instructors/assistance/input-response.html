@@ -1,0 +1,39 @@
+<!--EDITOR SUMMERNOTE-->
+<div style="text-transform: none !important; font-size: inherit !important">
+    <div id="{{summernote_editor_id}}" placeholder="{{JR.answer | upper}} : {{JR.text | upper}} ..."></div>
+</div>
+<!--END EDITOR SUMMERNOTE-->
+<!--Event link -->
+<div>
+
+    <div class="input-group">
+        <input class="text-sm bg-white form-control rounded-2"
+               placeholder="{{JR.url_link}} ({{JR.optional}}) - EX: https://zoom.us/j/5551112222"
+               ng-model="demand_ass.response_demand_link" />
+        <div class="input-group-append">
+            <div class="input-group-text bg-dark"
+                 title="{{JR.erase}}" data-toggle="tooltip"
+                 ng-click="demand_ass.response_demand_link=null;" role="button">
+                <span class="fas fa-close"></span>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<!--accepted or not-->
+<div class="container m-0 text-right p-1">
+    <span class="mt-2 mr-2"><i class="fa fa-share fa-flip-vertical text-bold text-red mr-1"></i>{{JR.status_request}} :</span>
+    <div class="text-right mt-2 mr-2 font-weight-bold d-inline-block">
+        <div class="switch" title="{{JR.status_request}}" data-toggle="tooltip">
+            <span class="text-danger">{{JR.canceled2}}</span>
+            <label class="">
+                <input type="checkbox" ng-model="demand_ass.accepted" ng-true-value="1" ng-false-value="0" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                <span class="lever ml-2 mr-2"></span> &nbsp;
+            </label><span class="text-success">{{JR.accepted2}}</span>
+        </div>
+    </div>
+</div>
+
+
+
+

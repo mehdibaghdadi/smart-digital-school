@@ -1,0 +1,130 @@
+# Docker Compose file for E-LEARNING
+services:
+
+  # e-learning application
+  e_learning:
+    image: ${DOCKER_REGISTRY-}elearning
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    build:
+      context: .
+      dockerfile: E_LEARNING/Dockerfile
+    container_name: e_learning
+    env_file:
+      - E_LEARNING/.env.production
+    restart: unless-stopped
+    networks:
+      - smart_network
+
+  # e_gateway
+  e_gateway:
+    image: ${DOCKER_REGISTRY-}egateway
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    build:
+      context: .
+      dockerfile: E_GATEWAY/Dockerfile
+    container_name: e_gateway
+    networks:
+      - smart_network
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_HTTP_PORTS=8080
+    expose:
+      - "8080"
+    restart: unless-stopped
+
+  # e_mediahub
+  e_mediahub:
+    image: ${DOCKER_REGISTRY-}emediahub
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    build:
+      context: .
+      dockerfile: E_MEDIAHUB/Dockerfile
+    container_name: e_mediahub
+    networks:
+      - smart_network
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_HTTP_PORTS=8080
+    expose:
+      - "8080"
+    restart: unless-stopped
+    volumes:
+      - /root/Projects/SMART_DIGITAL_SCHOOL/E_DBFILES:/var/www/SMART_DIGITAL_SCHOOL/E_DBFILES
+
+  # e_payment
+  e_payment:
+    image: ${DOCKER_REGISTRY-}epayment
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    build:
+      context: .
+      dockerfile: E_PAYMENT/Dockerfile
+    container_name: e_payment
+    networks:
+      - smart_network
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_HTTP_PORTS=8080
+    expose:
+      - "8080"
+    restart: unless-stopped
+
+  # e_signalr
+  e_signalr:
+    image: ${DOCKER_REGISTRY-}esignalr
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    build:
+      context: .
+      dockerfile: E_SIGNALR/Dockerfile
+    container_name: e_signalr
+    networks:
+      - smart_network
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_HTTP_PORTS=8080
+    expose:
+      - "8080"
+    restart: unless-stopped
+
+  # e_website_ui (Version React / Nginx)
+  e_website_ui:
+    image: ${DOCKER_REGISTRY-}ewebsiteui
+    build:
+      context: .
+      # Assurez-vous que le chemin vers votre nouveau Dockerfile est correct
+      dockerfile: E_WEBSITE_UI/Dockerfile 
+    container_name: e_website_ui
+    networks:
+      - smart_network
+    # Nginx dans l'image alpine écoute par défaut sur le port 80
+    expose:
+      - "80"
+    restart: unless-stopped
+    # extra_hosts reste utile si votre app React doit appeler 
+    # une API tournant sur l'hôte via host.docker.internal
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  # Application (IA API)
+  e_ai_course:
+    build:
+      context: .
+      dockerfile: E_AI_COURSE/Dockerfile
+    container_name: e_ai_course
+    env_file:
+      - E_AI_COURSE/.env.production
+    restart: unless-stopped
+    networks:
+      - smart_network
+# NETWORK
+networks:
+  smart_network:
+    external: true
+    name: smart_network
+# volumes
+volumes:
+  ollama_storage:

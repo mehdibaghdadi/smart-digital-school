@@ -1,0 +1,3048 @@
+# Spanish translations for PROJECT.
+# Copyright (C) 2024 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2025-12-23 22:30+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: es\n"
+"Language-Team: es <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.16.0\n"
+
+#: resources/api_resources.py:5
+msgid "La ressource demandée est introuvable !"
+msgstr "¡No se pudo encontrar el recurso solicitado!"
+
+#: resources/api_resources.py:6
+msgid "Enregistrement annulé"
+msgstr "Inscripción cancelada"
+
+#: resources/api_resources.py:7
+msgid "Suppression annulée"
+msgstr "Eliminación cancelada"
+
+#: resources/api_resources.py:8 resources/api_resources.py:9
+msgid "Le code est incorrect !"
+msgstr "¡El código es incorrecto!"
+
+#: resources/api_resources.py:10
+msgid "Enregistrement annulé, les données sont incorrectes."
+msgstr "Registro cancelado, los datos son incorrectos."
+
+#: resources/api_resources.py:11
+msgid "Trop de tentative, veuillez patienter"
+msgstr "Demasiados intentos, por favor espera."
+
+#: resources/api_resources.py:13
+msgid "login ou mot de passe incorrectes !"
+msgstr "¡nombre de usuario o contraseña incorrectos!"
+
+#: resources/api_resources.py:14
+msgid "Le login existe déjà, veuillez choisir un autre !"
+msgstr "El inicio de sesión ya existe, ¡elija otro!"
+
+#: resources/api_resources.py:15
+msgid "login ou téléphone incorrectes !"
+msgstr "¡Inicio de sesión o teléfono incorrecto!"
+
+#: resources/api_resources.py:16 resources/javascript_resources.py:198
+msgid "Les mots de passe ne sont pas identiques"
+msgstr "Las contraseñas no son idénticas"
+
+#: resources/api_resources.py:17
+msgid "Réinitialisation du mot de passe"
+msgstr "restablecer contraseña"
+
+#: resources/api_resources.py:18
+msgid "Compte {}, <br/>Voici votre code de récupération: <b> {} </b>"
+msgstr "Cuenta {}, <br/>Aquí está su código de recuperación: <b> {} </b>"
+
+#: resources/api_resources.py:19
+msgid "<br/>Si vous n'êtes pas à l'origine de cette demande, ne faîtes rien !"
+msgstr "<br/>Si no eres el autor de esta solicitud, ¡no hagas nada!"
+
+#: resources/api_resources.py:20
+msgid "La classe est obligatoire !"
+msgstr "¡La clase es obligatoria!"
+
+#: resources/api_resources.py:22
+msgid "Le contenu ne peut pas être supprimer pour le moment"
+msgstr "El contenido no se puede eliminar en este momento"
+
+#: resources/api_resources.py:23
+#, fuzzy
+msgid "Le module ne peut pas être supprimer pour le moment"
+msgstr "El Módulo no se puede eliminar por el momento."
+
+#: resources/api_resources.py:24
+#, fuzzy
+msgid ""
+"Pour des raisons de sécurité, le module ne peut pas être supprimer: "
+"veuillez vous assurez que toutes les Leçons du Module sont supprimées."
+msgstr ""
+"Por razones de seguridad, el Módulo no se puede eliminar: asegúrese de "
+"que se elimine todo el Lecciones del Módulo."
+
+#: resources/api_resources.py:25
+msgid "Le cours ne peut pas être supprimer pour le moment"
+msgstr "El curso no se puede eliminar en este momento"
+
+#: resources/api_resources.py:26
+#, fuzzy
+msgid ""
+"Pour des raisons de sécurité, le cours ne peut pas être supprimer: "
+"veuillez vous assurez que tous les modules du cours sont supprimés."
+msgstr ""
+"Por razones de seguridad, el curso no se puede eliminar: asegúrese de que"
+" se eliminen todos los Módulos del curso."
+
+#: resources/api_resources.py:28
+msgid ""
+"Le compte est bien enregistré, mais les classes ne sont pas insérées "
+"correctement, veuillez contacter l'administrateur."
+msgstr ""
+"La cuenta se registró exitosamente, pero las clases no se insertan "
+"correctamente, por favor contacte al administrador."
+
+#: resources/api_resources.py:29
+msgid ""
+"Le professeur ne peut pas être supprimer, il existe des données liées à "
+"son profil"
+msgstr "El profesor no se puede eliminar, hay datos vinculados a su perfil"
+
+#: resources/api_resources.py:30
+msgid "L'étudiant ne peut pas être supprimer, des données sont liées à son profil"
+msgstr "El alumno no se puede eliminar, los datos están vinculados a su perfil"
+
+#: resources/api_resources.py:31 resources/javascript_resources.py:68
+msgid ""
+"Vous ne pouvez pas supprimer certaines classes, elles sont en cours "
+"d'utilisation par les professeurs."
+msgstr "No puedes eliminar ciertas clases, están en uso por los profesores."
+
+#: resources/api_resources.py:32
+msgid ""
+"Vous ne pouvez pas supprimer certaines matières, elles sont en cours "
+"d'utilisation par les professeurs."
+msgstr "No puedes borrar ciertas materias, están en uso por los profesores."
+
+#: resources/javascript_resources.py:4 resources/jinja2_resources.py:35
+msgid "Ajouter"
+msgstr "Agregar"
+
+#: resources/javascript_resources.py:5 resources/jinja2_resources.py:45
+msgid "Annuler"
+msgstr "Cancelar"
+
+#: resources/javascript_resources.py:6 resources/jinja2_resources.py:227
+msgid "Annulé"
+msgstr "Cancelado"
+
+#: resources/javascript_resources.py:7 resources/jinja2_resources.py:55
+msgid "Fermer"
+msgstr "Cerrar"
+
+#: resources/javascript_resources.py:8 resources/jinja2_resources.py:59
+msgid "Supprimer"
+msgstr "eliminar"
+
+#: resources/javascript_resources.py:9
+msgid "Supprimé"
+msgstr "eliminado"
+
+#: resources/javascript_resources.py:10 resources/jinja2_resources.py:48
+msgid "Appliquer"
+msgstr "Aplicar"
+
+#: resources/javascript_resources.py:11
+msgid "Validé"
+msgstr "Validado"
+
+#: resources/javascript_resources.py:12 resources/jinja2_resources.py:57
+msgid "Terminé"
+msgstr "Completo"
+
+#: resources/javascript_resources.py:13 resources/jinja2_resources.py:116
+msgid "Sélectionner"
+msgstr "Seleccionar"
+
+#: resources/javascript_resources.py:14 resources/jinja2_resources.py:60
+msgid "Enregistrer"
+msgstr "Guardar"
+
+#: resources/javascript_resources.py:15 resources/jinja2_resources.py:125
+#, fuzzy
+msgid "Actualiser"
+msgstr "actualizar"
+
+#: resources/javascript_resources.py:16 resources/jinja2_resources.py:17
+#, fuzzy
+msgid "Non"
+msgstr "No"
+
+#: resources/javascript_resources.py:17 resources/jinja2_resources.py:18
+#, fuzzy
+msgid "Oui"
+msgstr "Sí"
+
+#: resources/javascript_resources.py:19 resources/jinja2_resources.py:9
+msgid "Étudiant"
+msgstr "Estudiante"
+
+#: resources/javascript_resources.py:20 resources/jinja2_resources.py:305
+msgid "Demande Assistance"
+msgstr "Solicitar asistencia"
+
+#: resources/javascript_resources.py:21
+msgid "Enregistrer le planning"
+msgstr "Guardar el horario"
+
+#: resources/javascript_resources.py:22
+msgid "Modifier l'évènement"
+msgstr "Modificar evento"
+
+#: resources/javascript_resources.py:23
+msgid "Édition"
+msgstr "Edición"
+
+#: resources/javascript_resources.py:24 resources/jinja2_resources.py:412
+msgid "Jour"
+msgstr "Día"
+
+#: resources/javascript_resources.py:25 resources/jinja2_resources.py:413
+#, fuzzy
+msgid "Jours"
+msgstr "Días"
+
+#: resources/javascript_resources.py:26 resources/jinja2_resources.py:414
+msgid "Semaine"
+msgstr "Semana"
+
+#: resources/javascript_resources.py:27 resources/jinja2_resources.py:415
+msgid "Mois"
+msgstr "Mes"
+
+#: resources/javascript_resources.py:28 resources/jinja2_resources.py:416
+msgid "Année"
+msgstr "Año"
+
+#: resources/javascript_resources.py:29 resources/jinja2_resources.py:92
+msgid "Date"
+msgstr "Fecha"
+
+#: resources/javascript_resources.py:30
+msgid "Choisir une date"
+msgstr "Elige una fecha"
+
+#: resources/javascript_resources.py:31
+msgid "Voir le planning"
+msgstr "Ver el horario"
+
+#: resources/javascript_resources.py:32
+msgid "Tout le groupe"
+msgstr "Todo el grupo"
+
+#: resources/javascript_resources.py:33 resources/jinja2_resources.py:105
+msgid "Cocher"
+msgstr "comprobar"
+
+#: resources/javascript_resources.py:34
+msgid "Décocher tout"
+msgstr "Desmarcar todo"
+
+#: resources/javascript_resources.py:35 resources/jinja2_resources.py:51
+msgid "Rechercher"
+msgstr "Buscar"
+
+#: resources/javascript_resources.py:36 resources/jinja2_resources.py:53
+msgid "Annuler la recherche"
+msgstr "Cancelar búsqueda"
+
+#: resources/javascript_resources.py:37 resources/jinja2_resources.py:54
+msgid "Lancer la recherche"
+msgstr "Iniciar búsqueda"
+
+#: resources/javascript_resources.py:38 resources/jinja2_resources.py:264
+msgid "Niveau"
+msgstr "Nivel"
+
+#: resources/javascript_resources.py:39 resources/jinja2_resources.py:162
+msgid "Statut"
+msgstr "Estado"
+
+#: resources/javascript_resources.py:40 resources/jinja2_resources.py:165
+msgid "En ligne"
+msgstr "en línea"
+
+#: resources/javascript_resources.py:41 resources/jinja2_resources.py:166
+msgid "Hors ligne"
+msgstr "sin conexión"
+
+#: resources/javascript_resources.py:42
+msgid "Activé"
+msgstr "Habilitado"
+
+#: resources/javascript_resources.py:43
+msgid "Désactivé"
+msgstr "Deshabilitado"
+
+#: resources/javascript_resources.py:44 resources/jinja2_resources.py:100
+msgid "Date début"
+msgstr "fecha de inicio"
+
+#: resources/javascript_resources.py:45 resources/jinja2_resources.py:101
+msgid "Date fin"
+msgstr "fecha fin"
+
+#: resources/javascript_resources.py:46 resources/jinja2_resources.py:86
+msgid "Progression"
+msgstr "Progresión"
+
+#: resources/javascript_resources.py:47 resources/jinja2_resources.py:130
+#, fuzzy
+msgid "Pas encore"
+msgstr "Aún no"
+
+#: resources/javascript_resources.py:48 resources/jinja2_resources.py:187
+msgid "Pas de modifications"
+msgstr "Sin cambios"
+
+#: resources/javascript_resources.py:49 resources/jinja2_resources.py:94
+msgid "Parcourir"
+msgstr "Navegar"
+
+#: resources/javascript_resources.py:50 resources/jinja2_resources.py:161
+msgid "Total"
+msgstr "Total"
+
+#: resources/javascript_resources.py:51 resources/jinja2_resources.py:179
+msgid "Afficher tout"
+msgstr "Mostrar todo"
+
+#: resources/javascript_resources.py:52 resources/jinja2_resources.py:188
+msgid "Masquer"
+msgstr "Ocultar"
+
+#: resources/javascript_resources.py:54 resources/jinja2_resources.py:268
+msgid "Classe"
+msgstr "Clase"
+
+#: resources/javascript_resources.py:55
+msgid "Erreur"
+msgstr "Error"
+
+#: resources/javascript_resources.py:56
+msgid "Sauvegarde"
+msgstr "Copia de seguridad"
+
+#: resources/javascript_resources.py:57
+msgid "Téléchargement"
+msgstr "Descargar"
+
+#: resources/javascript_resources.py:58 resources/jinja2_resources.py:175
+msgid "Aucune donnée à afficher"
+msgstr "No hay datos para mostrar"
+
+#: resources/javascript_resources.py:59
+msgid "Message vide"
+msgstr "mensaje en blanco"
+
+#: resources/javascript_resources.py:60 resources/jinja2_resources.py:91
+msgid "Contacts"
+msgstr "Contactos"
+
+#: resources/javascript_resources.py:61
+msgid "Une erreur est survenue !"
+msgstr "¡Ha ocurrido un error!"
+
+#: resources/javascript_resources.py:62
+msgid "Le texte est trop long. Veuillez raccourcir votre saisie !"
+msgstr ""
+
+#: resources/javascript_resources.py:63
+msgid "Erreur de connexion !!"
+msgstr "¡¡Error de conexión!!"
+
+#: resources/javascript_resources.py:64
+msgid "Erreur de suppression !"
+msgstr "¡Error de eliminación!"
+
+#: resources/javascript_resources.py:65
+msgid "Erreur d'enregistrement"
+msgstr "Error de registro"
+
+#: resources/javascript_resources.py:66
+msgid "Une erreur inconnue c'est produite lors du chargement."
+msgstr "Se produjo un error desconocido durante la carga."
+
+#: resources/javascript_resources.py:67
+msgid ""
+"Une erreur c'est produite veuillez recommencer, sinon contactez "
+"l'administrateur."
+msgstr ""
+"Se ha producido un error, inténtelo de nuevo; de lo contrario, "
+"comuníquese con el administrador."
+
+#: resources/javascript_resources.py:69
+msgid "Champ requis"
+msgstr "campo obligatorio"
+
+#: resources/javascript_resources.py:70 resources/jinja2_resources.py:69
+msgid "Filtrer"
+msgstr "Filtro"
+
+#: resources/javascript_resources.py:71
+msgid "Limite"
+msgstr "Límite"
+
+#: resources/javascript_resources.py:72
+msgid "Limite atteinte"
+msgstr "Límite alcanzado"
+
+#: resources/javascript_resources.py:73
+msgid "Conflit"
+msgstr "Conflicto"
+
+#: resources/javascript_resources.py:74
+msgid "Mise à jour avec succès !"
+msgstr "¡Actualizado exitosamente!"
+
+#: resources/javascript_resources.py:75
+msgid "Le contenu"
+msgstr "El contenido"
+
+#: resources/javascript_resources.py:76 resources/jinja2_resources.py:297
+msgid "Contenu"
+msgstr "Contenido"
+
+#: resources/javascript_resources.py:77
+msgid "Le contenu est enregistré !"
+msgstr "¡El contenido está guardado!"
+
+#: resources/javascript_resources.py:78
+msgid "Enregistrement effectué avec succès !"
+msgstr "¡Registro completado exitosamente!"
+
+#: resources/javascript_resources.py:79
+msgid "En cours ..."
+msgstr "En progreso..."
+
+#: resources/javascript_resources.py:80
+msgid "Envoyé."
+msgstr "Enviado."
+
+#: resources/javascript_resources.py:81
+msgid "Presque terminé."
+msgstr "Casi terminado."
+
+#: resources/javascript_resources.py:82 resources/jinja2_resources.py:316
+msgid "Sans planning"
+msgstr "Sin planificación"
+
+#: resources/javascript_resources.py:83
+msgid "Phase finale"
+msgstr "Fin del juego"
+
+#: resources/javascript_resources.py:84
+msgid "L'étudiant <b class='text-info'> {0} </b> est enregistré."
+msgstr "El estudiante <b class='text-info'> {0} </b> está registrado."
+
+#: resources/javascript_resources.py:85
+msgid "Le Professeur <b class='text-info'> {0} </b> est enregistré."
+msgstr "El profesor <b class='text-info'> {0} </b> está registrado."
+
+#: resources/javascript_resources.py:86
+msgid "Veuillez choisir"
+msgstr "Por favor elige"
+
+#: resources/javascript_resources.py:87
+msgid "Choisissez une matière pour un Niveau éducatif."
+msgstr "Elige una materia para un Nivel educativo."
+
+#: resources/javascript_resources.py:88
+msgid "Vous devez d'abord cocher au moins une demande pour le planning."
+msgstr "Primero debes verificar al menos una solicitud de horario."
+
+#: resources/javascript_resources.py:89
+msgid "Au moins 5 charactères pour la réponse."
+msgstr "Al menos 5 caracteres para la respuesta."
+
+#: resources/javascript_resources.py:90
+msgid "Au moins 5 charactères pour la demande."
+msgstr "Al menos 5 caracteres para la solicitud."
+
+#: resources/javascript_resources.py:91
+msgid "Changer la visibilité"
+msgstr "Cambiar visibilidad"
+
+#: resources/javascript_resources.py:92 resources/jinja2_resources.py:211
+msgid "Obligatoire"
+msgstr "Requerido"
+
+#: resources/javascript_resources.py:93 resources/jinja2_resources.py:212
+msgid "Le contenu est obligatoire"
+msgstr "El contenido es obligatorio"
+
+#: resources/javascript_resources.py:94 resources/jinja2_resources.py:239
+msgid "Important"
+msgstr "Importante"
+
+#: resources/javascript_resources.py:95 resources/jinja2_resources.py:213
+msgid "Optionnel"
+msgstr "Opcional"
+
+#: resources/javascript_resources.py:96 resources/jinja2_resources.py:214
+#, fuzzy
+msgid "Normal"
+msgstr "Nombre"
+
+#: resources/javascript_resources.py:97
+msgid "Il n'y a pas d'éléments à ordonner, car il n'y en a qu'un seul."
+msgstr "No hay elementos para ordenar, porque solo hay uno."
+
+#: resources/javascript_resources.py:98
+msgid ""
+"Changer le statut ?<br/>Le compte deviendra : <b class='text-red'>{0}</b>"
+" !"
+msgstr "¿Cambiar estado?<br/>La cuenta pasará a ser: <b class='text-red'>{0}</b>."
+
+#: resources/javascript_resources.py:99
+msgid "Mofifications effectuées avec succès"
+msgstr "Cambios completados exitosamente"
+
+#: resources/javascript_resources.py:100
+msgid "Image acceptable: {0}<br/>Taille maximum: {1} Mb"
+msgstr "Imagen aceptable: {0}<br/>Tamaño máximo: {1} Mb"
+
+#: resources/javascript_resources.py:101 resources/jinja2_resources.py:210
+msgid "En attachement"
+msgstr "En archivo adjunto"
+
+#: resources/javascript_resources.py:102 resources/jinja2_resources.py:217
+msgid "Description"
+msgstr "Descripción"
+
+#: resources/javascript_resources.py:105 resources/jinja2_resources.py:275
+msgid "Les Cours"
+msgstr "Los cursos"
+
+#: resources/javascript_resources.py:106 resources/jinja2_resources.py:272
+#: resources/menu_resources.py:19 resources/menu_resources.py:20
+msgid "Cours"
+msgstr "Curso"
+
+#: resources/javascript_resources.py:107 resources/jinja2_resources.py:291
+msgid "Module"
+msgstr "Módulo"
+
+#: resources/javascript_resources.py:108 resources/jinja2_resources.py:277
+#: resources/menu_resources.py:37
+msgid "Cours consultés"
+msgstr "Cursos consultados"
+
+#: resources/javascript_resources.py:109 resources/jinja2_resources.py:278
+msgid "Cours Disponibles"
+msgstr "Cursos disponibles"
+
+#: resources/javascript_resources.py:110 resources/jinja2_resources.py:132
+msgid "Vidéo"
+msgstr "Vídeo"
+
+#: resources/javascript_resources.py:111 resources/jinja2_resources.py:133
+msgid "Audio"
+msgstr ""
+
+#: resources/javascript_resources.py:112 resources/jinja2_resources.py:134
+msgid "Document"
+msgstr "Documento"
+
+#: resources/javascript_resources.py:113 resources/jinja2_resources.py:135
+msgid "Rédaction"
+msgstr "Escritura"
+
+#: resources/javascript_resources.py:114 resources/jinja2_resources.py:115
+msgid "Ecrire"
+msgstr "Escribir"
+
+#: resources/javascript_resources.py:115 resources/jinja2_resources.py:215
+msgid "Fichier"
+msgstr "Archivo"
+
+#: resources/javascript_resources.py:116
+msgid "Évènement"
+msgstr "Evento"
+
+#: resources/javascript_resources.py:117 resources/jinja2_resources.py:321
+#: resources/menu_resources.py:54
+msgid "Calendrier"
+msgstr "Calendario"
+
+#: resources/javascript_resources.py:118
+msgid "Aujourd'hui"
+msgstr "Hoy"
+
+#: resources/javascript_resources.py:119 resources/jinja2_resources.py:230
+msgid "Toute la journée"
+msgstr "Todo el día"
+
+#: resources/javascript_resources.py:120
+msgid "Choisissez un évènement dans la liste"
+msgstr "Elige un evento de la lista"
+
+#: resources/javascript_resources.py:121
+msgid "Il y a ( {0} ) demandes d'assistance - Cliquez pour plus d'infos"
+msgstr ""
+"Hay ( {0} ) solicitudes de soporte - Haga clic para obtener más "
+"información"
+
+#: resources/javascript_resources.py:122
+msgid "Il y a ( {0} ) demandes d'assistance"
+msgstr "Hay ( {0} ) solicitudes de soporte"
+
+#: resources/javascript_resources.py:123
+msgid "NB: Il y a <b>({0})</b> demandes d'assistance pour cet événement"
+msgstr "NB: Hay <b>({0})</b> solicitudes de soporte para este evento"
+
+#: resources/javascript_resources.py:124
+msgid "Pas de changement détecté sur le calendrier"
+msgstr "No se detectó ningún cambio en el calendario."
+
+#: resources/javascript_resources.py:125
+msgid "Les événements du calendrier sont enregistrés"
+msgstr "los eventos del calendario se guardan"
+
+#: resources/javascript_resources.py:126
+msgid "Suppression en cours : êtes-vous sûr de vouloir continuer ?"
+msgstr "Eliminación en progreso: ¿estás seguro de que deseas continuar?"
+
+#: resources/javascript_resources.py:127
+msgid "Voulez-vous continuer ?"
+msgstr "¿Quieres continuar?"
+
+#: resources/javascript_resources.py:128
+msgid "Supprimer la classe ?"
+msgstr "¿Eliminar clase?"
+
+#: resources/javascript_resources.py:129
+#, fuzzy
+msgid "Supprimer le nom de classe ?"
+msgstr "¿Eliminar nombre de clase ?"
+
+#: resources/javascript_resources.py:130 resources/jinja2_resources.py:193
+#, fuzzy
+msgid "Nom de classe"
+msgstr "Nombre de clase"
+
+#: resources/javascript_resources.py:131
+msgid "Le cours est supprimé des favoris !"
+msgstr "¡El curso ha sido eliminado de favoritos!"
+
+#: resources/javascript_resources.py:132
+msgid "Le cours est ajouté aux favoris !"
+msgstr "¡El curso se agrega a favoritos!"
+
+#: resources/javascript_resources.py:133
+msgid "existe déjà"
+msgstr "ya existe"
+
+#: resources/javascript_resources.py:134
+msgid "La classe est déjà enregistrée."
+msgstr "La clase ya está registrada."
+
+#: resources/javascript_resources.py:135
+msgid "Total par type disponible"
+msgstr "Total por tipo disponible"
+
+#: resources/javascript_resources.py:136
+msgid "<small><u>Période :</u> du <b>{0}</b> au <b>{1}</b></small>"
+msgstr "<small><u>Período:</u> de <b>{0}</b> a <b>{1}</b></small>"
+
+#: resources/javascript_resources.py:137
+msgid "Il existe déjà une plage horaire en interférence avec le nouveau planning."
+msgstr "Ya existe una franja horaria que interfiere con el nuevo horario"
+
+#: resources/javascript_resources.py:138
+#, fuzzy
+msgid "Total : {0} Leçons ajoutées - depuis le {1}"
+msgstr "Total: {0} Lecciones agregado - desde {1}"
+
+#: resources/javascript_resources.py:139
+msgid "Nombre par période"
+msgstr "Número por período"
+
+#: resources/javascript_resources.py:140
+msgid "Rapport des 12 derniers mois"
+msgstr "Informe de los últimos 12 meses"
+
+#: resources/javascript_resources.py:141 resources/jinja2_resources.py:151
+msgid "Message"
+msgstr "Mensaje"
+
+#: resources/javascript_resources.py:142
+msgid "Le Message est envoyé !"
+msgstr "¡El Mensaje ha sido enviado!"
+
+#: resources/javascript_resources.py:143
+msgid "Votre message a bien été envoyée !"
+msgstr "¡Tu mensaje ha sido enviado!"
+
+#: resources/javascript_resources.py:144
+msgid "Le Message est supprimé !"
+msgstr "¡El mensaje ha sido eliminado!"
+
+#: resources/javascript_resources.py:145
+msgid "Le Message est envoyé à la corbeille !"
+msgstr "¡Mensaje enviado a la papelera!"
+
+#: resources/javascript_resources.py:146
+msgid "Veuillez choisir au moins un destinataire."
+msgstr "Elija al menos un destinatario."
+
+#: resources/javascript_resources.py:147 resources/jinja2_resources.py:90
+msgid "Destinataires"
+msgstr "Destinatarios"
+
+#: resources/javascript_resources.py:148
+msgid "Veuillez remplir le message à envoyer."
+msgstr "Por favor complete el mensaje para enviar."
+
+#: resources/javascript_resources.py:149 resources/jinja2_resources.py:307
+msgid "Demande étudiant"
+msgstr "Solicitud de estudiante"
+
+#: resources/javascript_resources.py:150
+msgid "La date est inférieure à ce moment de la journée."
+msgstr "La fecha es menor que esta hora del día."
+
+#: resources/javascript_resources.py:152 resources/jinja2_resources.py:344
+msgid "E-Mail"
+msgstr "correo electrónico"
+
+#: resources/javascript_resources.py:153 resources/jinja2_resources.py:340
+#: resources/menu_resources.py:15
+msgid "Mot de passe"
+msgstr "Contraseña"
+
+#: resources/javascript_resources.py:154 resources/jinja2_resources.py:403
+msgid "Nouveau mot de passe"
+msgstr "Nueva contraseña"
+
+#: resources/javascript_resources.py:155
+msgid "Saisissez le nouveau mot de passe"
+msgstr "Ingrese la nueva contraseña"
+
+#: resources/javascript_resources.py:156 resources/jinja2_resources.py:377
+msgid "Générer un mot de passe"
+msgstr "Generar contraseña"
+
+#: resources/javascript_resources.py:158 resources/jinja2_resources.py:352
+msgid "Téléphone"
+msgstr "Teléfono"
+
+#: resources/javascript_resources.py:161 resources/jinja2_resources.py:255
+msgid "Texte"
+msgstr "Texto"
+
+#: resources/javascript_resources.py:162 resources/jinja2_resources.py:208
+msgid "Type"
+msgstr "Tipo"
+
+#: resources/javascript_resources.py:163
+#, fuzzy
+msgid "caractères"
+msgstr "10 caracteres"
+
+#: resources/javascript_resources.py:164
+msgid "10 caractères"
+msgstr "10 caracteres"
+
+#: resources/javascript_resources.py:165
+msgid "8 à 20 caractères"
+msgstr "8 a 20 caracteres"
+
+#: resources/javascript_resources.py:166
+msgid "Couleur"
+msgstr "Color"
+
+#: resources/javascript_resources.py:168
+msgid "Taille du fichier"
+msgstr "tamaño de archivo"
+
+#: resources/javascript_resources.py:169
+msgid "Taille Limite du fichier est dépassée"
+msgstr "Se excedió el límite de tamaño de archivo"
+
+#: resources/javascript_resources.py:170
+msgid "Le type [ <b>{0}</b> ] n'est pas permis."
+msgstr "El tipo [ <b>{0}</b> ] no está permitido."
+
+#: resources/javascript_resources.py:171
+msgid ""
+"Les extensions du type de fichier [ {0} ] permis par l'application "
+"sont:<div class='p-1' style='letter-spacing:2px'>{1}</div>"
+msgstr ""
+"Las extensiones de tipo de archivo [ {0} ] permitidas por la aplicación "
+"son: <div class='p-1' style='letter-spacing:2px'>{1}</div>"
+
+#: resources/javascript_resources.py:172
+msgid "La taille maximum est de [ <b>{0}</b> ] ."
+msgstr "El tamaño máximo es [ <b>{0}</b> ]."
+
+#: resources/javascript_resources.py:173
+msgid "N'oubliez pas d'enregister les modifications."
+msgstr "No olvides guardar los cambios."
+
+#: resources/javascript_resources.py:174
+msgid "Service indisponible, connexion interrompue!"
+msgstr "¡Servicio no disponible, conexión interrumpida!"
+
+#: resources/javascript_resources.py:175
+msgid ""
+"La connexion avec le serveur distant a été interrompue, veuillez "
+"recommencer votre opération dans quelques instants !"
+msgstr ""
+"La conexión con el servidor remoto fue interrumpida, ¡reinicie su "
+"operación en unos momentos!"
+
+#: resources/javascript_resources.py:176
+msgid ""
+"Les modifications que vous avez apportées ne seront peut-être pas "
+"enregistrées."
+msgstr "Es posible que los cambios que hayas realizado no se guarden."
+
+#: resources/javascript_resources.py:177
+msgid "Un petit commentaire svp, Merci"
+msgstr "Un pequeño comentario por favor, gracias."
+
+#: resources/javascript_resources.py:178
+msgid "Votre évaluation a été envoyée, Merci"
+msgstr "Tu reseña ha sido enviada, gracias."
+
+#: resources/javascript_resources.py:179
+msgid "*Attention cette action est irréversible*"
+msgstr "*Ten en cuenta que esta acción es irreversible*"
+
+#: resources/javascript_resources.py:180
+msgid ""
+"Votre demande d'assistance a été envoyée, bientôt vous aurez une réponse,"
+" Merci."
+msgstr ""
+"Su solicitud de soporte ha sido enviada, pronto tendrá una respuesta, "
+"gracias."
+
+#: resources/javascript_resources.py:181
+msgid ""
+"Il y a déjà une <u>demande en cours</u>, bientôt vous aurez une "
+"réponse.<br/>Par contre vous pouvez la modifier <i class='fa fa-"
+"pencil'></i> si vous le souhaitez."
+msgstr ""
+"Ya hay una <u>solicitud en progreso</u>, pronto tendrás "
+"unarespuesta.<br/>Sin embargo, puedes modificarlo <i class='fa fa-"
+"pencil'></i> si lo deseas."
+
+#: resources/javascript_resources.py:182
+msgid ""
+"Veuillez vérifier que chaque Niveau éducatif <b>activé</b> a au moins une"
+" <b>classe cochée</b> [<i class='fa fa-check'></i>]"
+msgstr ""
+"Por favor verifique que cada Nivel educativo <b>activado</b> tenga al "
+"menos una <b>clase marcada</b> [<i class='fa fa-check'></i>]"
+
+#: resources/javascript_resources.py:183
+msgid "Un Niveau éducatif sélectionné doit avoir au moins une classe cochée."
+msgstr "Un Nivel educativo seleccionado debe tener al menos una clase marcada."
+
+#: resources/javascript_resources.py:184
+msgid "Un Niveau éducatif sélectionné doit avoir au moins un nom de classe."
+msgstr "Un Nivel educativo seleccionado debe tener al menos un nombre de clase."
+
+#: resources/javascript_resources.py:186
+msgid "Aucun niveau de classe sélectionné dans la liste"
+msgstr "Ningún nivel de clase seleccionado en la lista"
+
+#: resources/javascript_resources.py:187
+msgid ""
+"Les niveaux de classe sélectionnés vont être ajoutés à votre profil avec "
+"la langue affichée en ce moment"
+msgstr ""
+
+#: resources/javascript_resources.py:189
+#, fuzzy
+msgid "Aucune matière sélectionnée dans la liste"
+msgstr "No hay materia seleccionado en la lista."
+
+#: resources/javascript_resources.py:190
+msgid ""
+"Les matières sélectionnées vont être ajoutées à votre profil avec la "
+"langue affichée en ce moment"
+msgstr ""
+"Los temas seleccionados se agregarán a su perfil con el idioma mostrado "
+"actualmente"
+
+#: resources/javascript_resources.py:192
+msgid "Vous avez changé votre mot de passe avec succès !"
+msgstr "¡Has cambiado exitosamente tu contraseña!"
+
+#: resources/javascript_resources.py:193
+msgid "Re-connexion dans : <b>{0}</b> seconde(s)"
+msgstr "Reconexión en: <b>{0}</b> segundo(s)"
+
+#: resources/javascript_resources.py:194
+msgid "Démarrez votre session"
+msgstr "Inicia tu sesión"
+
+#: resources/javascript_resources.py:195
+msgid "Le formulaire est activé !"
+msgstr "¡El formulario está activado!"
+
+#: resources/javascript_resources.py:196
+msgid "Activation du formulaire dans: <b>{0}</b>s."
+msgstr "Activación del formulario en: <b>{0}</b>s."
+
+#: resources/javascript_resources.py:197
+msgid "Veuillez vérifier votre login"
+msgstr "Por favor verifique su inicio de sesión"
+
+#: resources/javascript_resources.py:199
+msgid "Le mot de passe est modifié !"
+msgstr "¡La contraseña ha sido cambiada!"
+
+#: resources/javascript_resources.py:200
+msgid "Votre demande est traitée"
+msgstr "Su solicitud es procesada"
+
+#: resources/javascript_resources.py:201
+msgid "Informations modifiées"
+msgstr "información modificada"
+
+#: resources/javascript_resources.py:202
+msgid "Votre profil est à jour !"
+msgstr "¡Tu perfil está actualizado!"
+
+#: resources/javascript_resources.py:204 resources/jinja2_resources.py:430
+msgid "Nombre de mois"
+msgstr "Numero de meses"
+
+#: resources/javascript_resources.py:205
+msgid "Oui, Je confirme"
+msgstr "Si, lo confirmo"
+
+#: resources/javascript_resources.py:206
+msgid "J'accepte le montant et je procède au paiement"
+msgstr "Acepto el monto y procedo al pago"
+
+#: resources/javascript_resources.py:207 resources/jinja2_resources.py:437
+#, fuzzy
+msgid "En attente"
+msgstr "En espera"
+
+#: resources/javascript_resources.py:208 resources/jinja2_resources.py:438
+#, fuzzy
+msgid "Échoué"
+msgstr "Fallido"
+
+#: resources/javascript_resources.py:209 resources/jinja2_resources.py:444
+#, fuzzy
+msgid "Votre abonnement"
+msgstr "Su suscripción"
+
+#: resources/javascript_resources.py:210 resources/jinja2_resources.py:447
+#, fuzzy
+msgid "Restant"
+msgstr "Restante"
+
+#: resources/javascript_resources.py:211
+msgid ""
+"Actuellement, aucun paiement n'est requis. Vous pouvez désormais modifier"
+" vos données en toute simplicité."
+msgstr ""
+"Actualmente no se requiere ningún pago. Ahora puedes modificar tus datos "
+"con facilidad."
+
+#: resources/javascript_resources.py:212
+msgid ""
+"Votre abonnement est expiré, l'ajout et la modification de contenu seront"
+" désactivés"
+msgstr ""
+"Su suscripción ha caducado, agregar y editar contenido estará "
+"deshabilitado"
+
+#: resources/javascript_resources.py:214 resources/jinja2_resources.py:458
+#: resources/menu_resources.py:136
+msgid "Quiz"
+msgstr "Quiz"
+
+#: resources/javascript_resources.py:215 resources/jinja2_resources.py:461
+msgid "Les Quiz"
+msgstr "Los Quizzes"
+
+#: resources/javascript_resources.py:216
+#, fuzzy
+msgid "Veuillez ajouter au moins une question pour le quiz."
+msgstr "Por favor, agregue al menos una pregunta al cuestionario."
+
+#: resources/javascript_resources.py:217
+msgid "Veuillez répondre à toutes les questions avant de soumettre."
+msgstr "Por favor, responda a todas las preguntas antes de enviar."
+
+#: resources/javascript_resources.py:218
+msgid "vous avez terminé ce quiz ?"
+msgstr "¿Has terminado este quiz?"
+
+#: resources/javascript_resources.py:219 resources/jinja2_resources.py:244
+msgid "Score"
+msgstr "Puntuación"
+
+#: resources/javascript_resources.py:220 resources/jinja2_resources.py:474
+msgid "Correct"
+msgstr "Correcto"
+
+#: resources/javascript_resources.py:221
+#, fuzzy
+msgid "Quiz soumis avec succès."
+msgstr "Cuestionario enviado con éxito."
+
+#: resources/javascript_resources.py:223
+msgid "&#127775; Parfait ! Toutes les réponses sont correctes."
+msgstr "&#127775; ¡Perfecto! Todas las respuestas son correctas."
+
+#: resources/javascript_resources.py:224
+msgid "&#128077; Excellent travail ! Vous avez presque tout juste."
+msgstr "&#128077; ¡Buen trabajo! Casi todas las respuestas son correctas."
+
+#: resources/javascript_resources.py:225
+msgid "&#128079; Bon effort ! Vous êtes sur la bonne voie."
+msgstr "&#128079; ¡Buen esfuerzo! Vas por buen camino."
+
+#: resources/javascript_resources.py:226
+msgid "&#128269; Pas mal, mais vous pouvez faire mieux."
+msgstr "&#128269; No está mal, pero puedes hacerlo mejor."
+
+#: resources/javascript_resources.py:227
+msgid "&#128216; Continuez à réviser, vous y arriverez."
+msgstr "&#128216; Sigue estudiando, lo lograrás."
+
+#: resources/javascript_resources.py:228
+msgid "&#128517; Ne vous découragez pas, chaque erreur est une leçon."
+msgstr "&#128517; No te desanimes, cada error es una lección."
+
+#: resources/javascript_resources.py:230 resources/jinja2_resources.py:481
+msgid "Groupé par"
+msgstr "Agrupado por"
+
+#: resources/javascript_resources.py:231 resources/jinja2_resources.py:482
+msgid "Déposez une colonne ici"
+msgstr "Suelta una columna aquí"
+
+#: resources/javascript_resources.py:232 resources/jinja2_resources.py:483
+msgid "Glisser ici pour grouper"
+msgstr "Arrastra aquí para agrupar"
+
+#: resources/javascript_resources.py:233 resources/jinja2_resources.py:484
+msgid "Glissez une colonne pour grouper"
+msgstr "Arrastra una columna para agrupar"
+
+#: resources/jinja2_resources.py:4
+#, fuzzy
+msgid "Session"
+msgstr "Sesión"
+
+#: resources/jinja2_resources.py:5
+msgid "Utilisateur"
+msgstr "Usuario"
+
+#: resources/jinja2_resources.py:6
+msgid "Établissement"
+msgstr "Establecimiento"
+
+#: resources/jinja2_resources.py:7
+#, fuzzy
+msgid "Administrateur"
+msgstr "Administrador"
+
+#: resources/jinja2_resources.py:8 resources/menu_resources.py:111
+#, fuzzy
+msgid "Administration"
+msgstr "Administración"
+
+#: resources/jinja2_resources.py:10
+#, fuzzy
+msgid "Étudiants"
+msgstr "Estudiante"
+
+#: resources/jinja2_resources.py:11
+msgid "Enseignant"
+msgstr "Maestro"
+
+#: resources/jinja2_resources.py:12
+#, fuzzy
+msgid "Enseignants"
+msgstr "Maestros"
+
+#: resources/jinja2_resources.py:13
+msgid "Professeur"
+msgstr "Profesor"
+
+#: resources/jinja2_resources.py:14
+#, fuzzy
+msgid "Professeurs"
+msgstr "Profesores"
+
+#: resources/jinja2_resources.py:15
+msgid "Prof."
+msgstr ""
+
+#: resources/jinja2_resources.py:19
+msgid "Le"
+msgstr "El"
+
+#: resources/jinja2_resources.py:20 resources/jinja2_resources.py:22
+msgid "Au"
+msgstr "En"
+
+#: resources/jinja2_resources.py:21
+msgid "À"
+msgstr "A"
+
+#: resources/jinja2_resources.py:23
+msgid "De"
+msgstr "De"
+
+#: resources/jinja2_resources.py:24
+msgid "Tout"
+msgstr "Todo"
+
+#: resources/jinja2_resources.py:25
+msgid "Toute"
+msgstr "Todos"
+
+#: resources/jinja2_resources.py:26
+msgid "Tous"
+msgstr "Todos"
+
+#: resources/jinja2_resources.py:27
+msgid "Toutes"
+msgstr "Todos"
+
+#: resources/jinja2_resources.py:28
+msgid "Aucun"
+msgstr "Ninguno"
+
+#: resources/jinja2_resources.py:29
+msgid "Aucune"
+msgstr "Ninguno"
+
+#: resources/jinja2_resources.py:30
+msgid "Aucuns"
+msgstr "Ninguno"
+
+#: resources/jinja2_resources.py:31
+msgid "Aucunes"
+msgstr "Ninguno"
+
+#: resources/jinja2_resources.py:32
+msgid "Se connecter"
+msgstr "Iniciar sesión"
+
+#: resources/jinja2_resources.py:33
+msgid "Se souvenir"
+msgstr "Recuerda"
+
+#: resources/jinja2_resources.py:34
+msgid "Déconnexion"
+msgstr "Desconectar"
+
+#: resources/jinja2_resources.py:36
+msgid "Ajouter au"
+msgstr "Agregar a"
+
+#: resources/jinja2_resources.py:37
+msgid "Ajouter le"
+msgstr "Agregar"
+
+#: resources/jinja2_resources.py:38
+msgid "Nouveau"
+msgstr "Nuevo"
+
+#: resources/jinja2_resources.py:39
+msgid "Ajouter un nouveau"
+msgstr "Agregar nuevo"
+
+#: resources/jinja2_resources.py:40
+msgid "Ajouter une classe"
+msgstr "Agregar una clase"
+
+#: resources/jinja2_resources.py:41
+msgid "Ajouter un fichier"
+msgstr "Agregar archivo"
+
+#: resources/jinja2_resources.py:42
+msgid "Créer un nouveau"
+msgstr "Crear nuevo"
+
+#: resources/jinja2_resources.py:43
+msgid "Retirer"
+msgstr "Quitar"
+
+#: resources/jinja2_resources.py:44
+msgid "Retirer du"
+msgstr "Quitar de"
+
+#: resources/jinja2_resources.py:46
+msgid "Annuler tout"
+msgstr "Cancelar todo"
+
+#: resources/jinja2_resources.py:47
+msgid "Modifier"
+msgstr "Editar"
+
+#: resources/jinja2_resources.py:49
+msgid "Annuler toutes les modifications en cours"
+msgstr "Cancelar todas las modificaciones actuales"
+
+#: resources/jinja2_resources.py:50
+msgid "Retour"
+msgstr "Regreso"
+
+#: resources/jinja2_resources.py:52
+msgid "Rechercher un lien"
+msgstr "Buscar un enlace"
+
+#: resources/jinja2_resources.py:56
+msgid "Terminer"
+msgstr "Finalizar"
+
+#: resources/jinja2_resources.py:58
+msgid "Fin"
+msgstr ""
+
+#: resources/jinja2_resources.py:61
+msgid "Enregistrer tout"
+msgstr "guardar todo"
+
+#: resources/jinja2_resources.py:62
+msgid "Enregistrer les modifications"
+msgstr "guardar cambios"
+
+#: resources/jinja2_resources.py:63
+msgid "Enregistrer l'ordre"
+msgstr "Guardar orden"
+
+#: resources/jinja2_resources.py:64
+msgid "Enregistrer le cours"
+msgstr "Guardar el curso"
+
+#: resources/jinja2_resources.py:65
+msgid "Enregistrer les classes"
+msgstr "Guardar clases"
+
+#: resources/jinja2_resources.py:66
+msgid "Enregistrez puis remplissez le contenu"
+msgstr "Guardar y luego completar el contenido"
+
+#: resources/jinja2_resources.py:67
+#, fuzzy
+msgid "Enregistrez puis ajouter les leçons"
+msgstr "Guardar y luego agregar las lecciones"
+
+#: resources/jinja2_resources.py:68
+#, fuzzy
+msgid "Enregistrez puis ajouter les questions"
+msgstr "Guardar y luego agregar las preguntas"
+
+#: resources/jinja2_resources.py:70
+msgid "Inscrit le"
+msgstr "Registrado en"
+
+#: resources/jinja2_resources.py:71
+msgid "Lire"
+msgstr "Leer"
+
+#: resources/jinja2_resources.py:72
+msgid "Lecteurs"
+msgstr "Lectores"
+
+#: resources/jinja2_resources.py:73
+#, fuzzy
+msgid "Lire plus"
+msgstr "Leer más"
+
+#: resources/jinja2_resources.py:74
+msgid "Consulter"
+msgstr "Consultar"
+
+#: resources/jinja2_resources.py:75
+msgid "Lu le"
+msgstr "Leído el"
+
+#: resources/jinja2_resources.py:76
+msgid "Non lu"
+msgstr "no leído"
+
+#: resources/jinja2_resources.py:77
+msgid "Actif"
+msgstr "Activo"
+
+#: resources/jinja2_resources.py:78
+msgid "Activer"
+msgstr "Activar"
+
+#: resources/jinja2_resources.py:79
+msgid "Inactif"
+msgstr "Inactivo"
+
+#: resources/jinja2_resources.py:80
+msgid "Crée le"
+msgstr "crearlo"
+
+#: resources/jinja2_resources.py:81
+msgid "Dernier le"
+msgstr "Último"
+
+#: resources/jinja2_resources.py:82
+msgid "Dernière le"
+msgstr "Último"
+
+#: resources/jinja2_resources.py:83
+msgid "Dernier actif"
+msgstr "Último activo"
+
+#: resources/jinja2_resources.py:84
+msgid "Dernier lu"
+msgstr "Última lectura"
+
+#: resources/jinja2_resources.py:85
+msgid "En cours"
+msgstr "En progreso"
+
+#: resources/jinja2_resources.py:87
+msgid "En attente de validation"
+msgstr "Esperando validación"
+
+#: resources/jinja2_resources.py:88
+msgid "Envoyer ma réponse"
+msgstr "Enviar mi respuesta"
+
+#: resources/jinja2_resources.py:89
+msgid "Destinataire"
+msgstr "Destinatario"
+
+#: resources/jinja2_resources.py:93
+#, fuzzy
+msgid "Date de naissance"
+msgstr "fecha de nacimiento"
+
+#: resources/jinja2_resources.py:95
+msgid "Date de demande"
+msgstr "Fecha de solicitud"
+
+#: resources/jinja2_resources.py:96
+msgid "Date dmd"
+msgstr "fecha DMD"
+
+#: resources/jinja2_resources.py:97
+msgid "Date Planning"
+msgstr "Horario de fechas"
+
+#: resources/jinja2_resources.py:98
+msgid "Date création"
+msgstr "fecha de creación"
+
+#: resources/jinja2_resources.py:99
+msgid "Date st"
+msgstr "fecha st"
+
+#: resources/jinja2_resources.py:102
+msgid "Description de la demande"
+msgstr "descripción de la solicitud"
+
+#: resources/jinja2_resources.py:103
+msgid "Envoyer la demande"
+msgstr "Enviar solicitud"
+
+#: resources/jinja2_resources.py:104
+msgid "Création"
+msgstr "Creación"
+
+#: resources/jinja2_resources.py:106
+msgid "Editer"
+msgstr "Editar"
+
+#: resources/jinja2_resources.py:107
+msgid "Editer le"
+msgstr "Editar"
+
+#: resources/jinja2_resources.py:108
+msgid "Editer tout"
+msgstr "Editar todo"
+
+#: resources/jinja2_resources.py:109
+msgid "Editer plus"
+msgstr "Editar más"
+
+#: resources/jinja2_resources.py:110
+msgid "Edition"
+msgstr "Editar"
+
+#: resources/jinja2_resources.py:111
+msgid "Renommer"
+msgstr "Rebautizar"
+
+#: resources/jinja2_resources.py:112
+msgid "Changer Etat"
+msgstr "Cambiar estado"
+
+#: resources/jinja2_resources.py:113
+msgid "Non, merci"
+msgstr "No, gracias"
+
+#: resources/jinja2_resources.py:114
+msgid "Charger"
+msgstr "cargar"
+
+#: resources/jinja2_resources.py:117
+msgid "Sélection"
+msgstr "Selección"
+
+#: resources/jinja2_resources.py:118
+msgid "Effacer"
+msgstr "Borrar"
+
+#: resources/jinja2_resources.py:119
+msgid "Effacer tout"
+msgstr "Borrar todo"
+
+#: resources/jinja2_resources.py:120
+msgid "Effacer la recherche"
+msgstr "Borrar búsqueda"
+
+#: resources/jinja2_resources.py:121
+msgid "Cliquez ici"
+msgstr "haga clic aquí"
+
+#: resources/jinja2_resources.py:122
+msgid "Comment puis-je vous aider"
+msgstr "¿Cómo puedo ayudarte?"
+
+#: resources/jinja2_resources.py:123
+msgid "Votre date d'inscription au cours"
+msgstr "Fecha de inscripción a tu curso"
+
+#: resources/jinja2_resources.py:124
+msgid "Générer"
+msgstr "Generar"
+
+#: resources/jinja2_resources.py:126
+msgid "Lien URL"
+msgstr "enlace URL"
+
+#: resources/jinja2_resources.py:127
+msgid "Plein écran"
+msgstr "pantalla completa"
+
+#: resources/jinja2_resources.py:128 resources/menu_resources.py:74
+msgid "Paramétrage"
+msgstr "Configuración"
+
+#: resources/jinja2_resources.py:129
+msgid "J'ai terminé cette section"
+msgstr "Terminé esta sección"
+
+#: resources/jinja2_resources.py:137
+msgid "Visionner"
+msgstr "Ver"
+
+#: resources/jinja2_resources.py:138
+msgid "Écouter"
+msgstr "escucha"
+
+#: resources/jinja2_resources.py:139
+msgid "Download"
+msgstr "Descargar"
+
+#: resources/jinja2_resources.py:140
+msgid "Lecture"
+msgstr "Lectura"
+
+#: resources/jinja2_resources.py:141
+#, fuzzy
+msgid "Moi"
+msgstr "mío"
+
+#: resources/jinja2_resources.py:143
+msgid "Boite Réception"
+msgstr "bandeja de entrada"
+
+#: resources/jinja2_resources.py:144
+msgid "Mail En attente"
+msgstr "correo en espera"
+
+#: resources/jinja2_resources.py:145
+msgid "Reçus Non Lu"
+msgstr "Recibos no leídos"
+
+#: resources/jinja2_resources.py:146
+msgid "Envoyés Non Lu"
+msgstr "enviado sin leer"
+
+#: resources/jinja2_resources.py:147
+msgid "Les Mails Reçus"
+msgstr "correos recibidos"
+
+#: resources/jinja2_resources.py:148
+msgid "Les Mails Envoyés"
+msgstr "correos enviados"
+
+#: resources/jinja2_resources.py:149
+msgid "Corbeille"
+msgstr "basura"
+
+#: resources/jinja2_resources.py:152
+msgid "Nouveau message"
+msgstr "nuevo mensaje"
+
+#: resources/jinja2_resources.py:153
+msgid "Objet"
+msgstr "Objeto"
+
+#: resources/jinja2_resources.py:154
+msgid "Message en cours"
+msgstr "Mensaje en progreso"
+
+#: resources/jinja2_resources.py:155
+msgid "Message envoyé"
+msgstr "Mensaje enviado"
+
+#: resources/jinja2_resources.py:156
+msgid "Message lu"
+msgstr "mensaje leído"
+
+#: resources/jinja2_resources.py:157
+msgid "Message à lire"
+msgstr "Mensaje a leer"
+
+#: resources/jinja2_resources.py:158
+msgid "Envoyer le message"
+msgstr "Enviar mensaje"
+
+#: resources/jinja2_resources.py:159
+#, fuzzy
+msgid "Envoyer"
+msgstr "Enviado."
+
+#: resources/jinja2_resources.py:163
+msgid "Etat"
+msgstr "Estado"
+
+#: resources/jinja2_resources.py:164
+msgid "Etat de la demande"
+msgstr "Estado de la solicitud"
+
+#: resources/jinja2_resources.py:167
+msgid "Titre"
+msgstr "Título"
+
+#: resources/jinja2_resources.py:168
+msgid "Intitulé"
+msgstr "Titulado"
+
+#: resources/jinja2_resources.py:169
+msgid "Historique"
+msgstr "Historia"
+
+#: resources/jinja2_resources.py:170 resources/menu_resources.py:87
+msgid "Mon historique"
+msgstr "mi historia"
+
+#: resources/jinja2_resources.py:171 resources/menu_resources.py:89
+msgid "Mes cours favoris"
+msgstr "Mis clases favoritas"
+
+#: resources/jinja2_resources.py:172
+msgid "Voir la liste"
+msgstr "Ver lista"
+
+#: resources/jinja2_resources.py:173
+msgid "la liste est vide"
+msgstr "la lista está vacía"
+
+#: resources/jinja2_resources.py:174
+msgid "La liste est vide pour le moment"
+msgstr "La lista está vacía en este momento."
+
+#: resources/jinja2_resources.py:176
+msgid "Aucune publications pour le moment"
+msgstr "Aún no hay publicaciones"
+
+#: resources/jinja2_resources.py:177
+msgid "Aucun message disponible pour le moment"
+msgstr "No hay mensajes disponibles en este momento."
+
+#: resources/jinja2_resources.py:178
+msgid "Afficher"
+msgstr "Mostrar"
+
+#: resources/jinja2_resources.py:180
+msgid "Afficher le contenu"
+msgstr "Mostrar contenido"
+
+#: resources/jinja2_resources.py:181
+msgid "Afficher la liste"
+msgstr "Mostrar lista"
+
+#: resources/jinja2_resources.py:182
+msgid "Afficher par"
+msgstr "Mostrar por"
+
+#: resources/jinja2_resources.py:183
+msgid "Afficher Les derniers comptes saisies"
+msgstr "Mostrar las últimas cuentas ingresadas"
+
+#: resources/jinja2_resources.py:184
+msgid "Réduire"
+msgstr "Reducir"
+
+#: resources/jinja2_resources.py:185
+msgid "Réduire tout"
+msgstr "Contraer todo"
+
+#: resources/jinja2_resources.py:186
+msgid "Réduire la liste"
+msgstr "colapsar lista"
+
+#: resources/jinja2_resources.py:189
+msgid "Masquer la liste"
+msgstr "Ocultar lista"
+
+#: resources/jinja2_resources.py:190
+msgid "Derniers ajouts"
+msgstr "últimas incorporaciones"
+
+#: resources/jinja2_resources.py:191
+msgid "Enregister et Continuer"
+msgstr "Guardar y continuar"
+
+#: resources/jinja2_resources.py:192
+msgid "Enregister et Fermer"
+msgstr "Guardar y cerrar"
+
+#: resources/jinja2_resources.py:194
+msgid "Choisissez une classe"
+msgstr "Elige una clase"
+
+#: resources/jinja2_resources.py:195
+msgid "Choisissez une matière pour un Niveau éducatif"
+msgstr "Elige una materia para un Nivel educativo"
+
+#: resources/jinja2_resources.py:196
+msgid "Choisissez un niveau de classe"
+msgstr "Elige un nivel de clase"
+
+#: resources/jinja2_resources.py:197
+msgid "Choisissez le nom de la classe"
+msgstr "Elija el nombre de la clase"
+
+#: resources/jinja2_resources.py:198
+msgid "Choisissez un événement dans la liste"
+msgstr "Elija un evento de la lista"
+
+#: resources/jinja2_resources.py:199
+msgid "Choisir la langue du contenu"
+msgstr "Elija el idioma del contenido"
+
+#: resources/jinja2_resources.py:200
+msgid "Voir tout les niveaux activés"
+msgstr "Ver todos los niveles activados"
+
+#: resources/jinja2_resources.py:201
+msgid "Cachez les niveaux activés"
+msgstr "Ocultar niveles habilitados"
+
+#: resources/jinja2_resources.py:202
+#, fuzzy
+msgid "Accèder à la section du module du cours"
+msgstr "Ir a la sección de Módulos del curso"
+
+#: resources/jinja2_resources.py:203
+msgid "Voir moins de colonnes"
+msgstr "Ver menos columnas"
+
+#: resources/jinja2_resources.py:204
+msgid "Voir toutes les colonnes"
+msgstr "Ver todas las columnas"
+
+#: resources/jinja2_resources.py:205
+msgid "Vue global du cours en mode séquentiel"
+msgstr "Vista general del curso en modo secuencial"
+
+#: resources/jinja2_resources.py:206
+msgid "Mon message: Lu et verrouill&eacute;"
+msgstr "Mi mensaje: Leído y bloqueado"
+
+#: resources/jinja2_resources.py:207
+msgid "Type autorisé"
+msgstr "tipo autorizado"
+
+#: resources/jinja2_resources.py:209
+msgid "Taille"
+msgstr "Tamaño"
+
+#: resources/jinja2_resources.py:216
+msgid "Complet"
+msgstr "completo"
+
+#: resources/jinja2_resources.py:218
+#, fuzzy
+msgid "Objectif"
+msgstr "Objetivo"
+
+#: resources/jinja2_resources.py:219
+msgid "Objectif général"
+msgstr "Objetivo general"
+
+#: resources/jinja2_resources.py:220
+msgid "Remplacer"
+msgstr "Reemplazar"
+
+#: resources/jinja2_resources.py:221
+msgid "Ne pas remplacer"
+msgstr "No reemplazar"
+
+#: resources/jinja2_resources.py:222
+msgid "Cochez"
+msgstr "comprobar"
+
+#: resources/jinja2_resources.py:223
+msgid "Cochez tout"
+msgstr "comprobar todo"
+
+#: resources/jinja2_resources.py:224
+msgid "Décochez tout"
+msgstr "Desmarcar todo"
+
+#: resources/jinja2_resources.py:225
+msgid "Accepté"
+msgstr "Aceptado"
+
+#: resources/jinja2_resources.py:226
+msgid "Acceptée"
+msgstr "Aceptado"
+
+#: resources/jinja2_resources.py:228
+msgid "Annulée"
+msgstr "cancelado"
+
+#: resources/jinja2_resources.py:229
+msgid "À traiter"
+msgstr "Para ser procesado"
+
+#: resources/jinja2_resources.py:231
+msgid "Aperçu 360º"
+msgstr "Visión 360º"
+
+#: resources/jinja2_resources.py:232
+msgid "Actions"
+msgstr "Acciones"
+
+#: resources/jinja2_resources.py:233
+msgid "Séquence"
+msgstr "Secuencia"
+
+#: resources/jinja2_resources.py:234
+msgid "Partie"
+msgstr "Parte"
+
+#: resources/jinja2_resources.py:235
+msgid "Parties"
+msgstr "Partes"
+
+#: resources/jinja2_resources.py:236
+msgid "M.A.J"
+msgstr "P.A.D"
+
+#: resources/jinja2_resources.py:237
+msgid "Mise à jour"
+msgstr "Actualizado"
+
+#: resources/jinja2_resources.py:238
+msgid "Dernière mise à jour le"
+msgstr "Última actualización el"
+
+#: resources/jinja2_resources.py:240
+msgid "Favoris"
+msgstr "favoritos"
+
+#: resources/jinja2_resources.py:241
+msgid "Fav."
+msgstr "Favorito."
+
+#: resources/jinja2_resources.py:242
+msgid "Évaluation"
+msgstr "Valoración"
+
+#: resources/jinja2_resources.py:243
+#, fuzzy
+msgid "Achèvement du cours"
+msgstr "Finalización del curso"
+
+#: resources/jinja2_resources.py:245
+msgid "Commentaire"
+msgstr "Comentario"
+
+#: resources/jinja2_resources.py:246
+msgid "Étoiles"
+msgstr "Estrellas"
+
+#: resources/jinja2_resources.py:247
+msgid "Envoyer votre évaluation"
+msgstr "Envía tu reseña"
+
+#: resources/jinja2_resources.py:248
+msgid "Ajouter le cours aux Favoris"
+msgstr "Agregar curso a Favoritos"
+
+#: resources/jinja2_resources.py:249
+msgid "Retirer le cours des Favoris"
+msgstr "Eliminar curso de Favoritos"
+
+#: resources/jinja2_resources.py:250
+#, fuzzy
+msgid "Autre"
+msgstr "Otro"
+
+#: resources/jinja2_resources.py:251
+#, fuzzy
+msgid "Autres"
+msgstr "Otros"
+
+#: resources/jinja2_resources.py:252
+#, fuzzy
+msgid "Pré-sélectionné"
+msgstr "preseleccionado"
+
+#: resources/jinja2_resources.py:253
+#, fuzzy
+msgid "Pré-sélectionnés"
+msgstr "preseleccionados"
+
+#: resources/jinja2_resources.py:254 resources/menu_resources.py:4
+msgid "Thème visuel"
+msgstr "Tema visual"
+
+#: resources/jinja2_resources.py:257
+msgid "Enseignement"
+msgstr "Enseñanza"
+
+#: resources/jinja2_resources.py:258
+msgid "Langue"
+msgstr "Idioma"
+
+#: resources/jinja2_resources.py:259
+msgid "Lg."
+msgstr ""
+
+#: resources/jinja2_resources.py:260
+msgid "Matière"
+msgstr "materia"
+
+#: resources/jinja2_resources.py:261 resources/menu_resources.py:76
+msgid "Matières"
+msgstr "Materias "
+
+#: resources/jinja2_resources.py:262 resources/menu_resources.py:79
+msgid "Matières éducatives"
+msgstr "Asignaturas educativas"
+
+#: resources/jinja2_resources.py:263
+msgid "Liste des matières"
+msgstr "Lista de materias "
+
+#: resources/jinja2_resources.py:265
+#, fuzzy
+msgid "Niveaux"
+msgstr "Niveles"
+
+#: resources/jinja2_resources.py:266
+msgid "Liste des niveaux"
+msgstr "Lista de niveles"
+
+#: resources/jinja2_resources.py:267
+msgid "Niveau éducatif"
+msgstr "Nivel educativo"
+
+#: resources/jinja2_resources.py:269
+msgid "Mes classes"
+msgstr "Mis clases"
+
+#: resources/jinja2_resources.py:270
+msgid "Liste des classes"
+msgstr "Lista de clases"
+
+#: resources/jinja2_resources.py:271
+msgid "Composition des classes"
+msgstr "Composición de clases"
+
+#: resources/jinja2_resources.py:273
+#, fuzzy
+msgid "Le Cours"
+msgstr "Los cursos"
+
+#: resources/jinja2_resources.py:274
+msgid "Cours terminé"
+msgstr "Curso completado"
+
+#: resources/jinja2_resources.py:276
+msgid "Cours éducatif"
+msgstr "Curso educativo"
+
+#: resources/jinja2_resources.py:279 resources/menu_resources.py:85
+msgid "Tous les cours"
+msgstr "Todos los cursos"
+
+#: resources/jinja2_resources.py:281
+msgid "Voir les cours"
+msgstr "Ver cursos"
+
+#: resources/jinja2_resources.py:282
+msgid "Voir le cours"
+msgstr "Ver curso"
+
+#: resources/jinja2_resources.py:283
+#, fuzzy
+msgid "Voir les modules"
+msgstr "Ver Módulos"
+
+#: resources/jinja2_resources.py:284
+msgid "Démarrer le cours"
+msgstr "inicio del curso"
+
+#: resources/jinja2_resources.py:285
+msgid "Reprendre le cours"
+msgstr "Reanudar curso"
+
+#: resources/jinja2_resources.py:287
+msgid "Aucun cours pour le moment"
+msgstr "No hay clases por el momento"
+
+#: resources/jinja2_resources.py:288
+msgid "Pas de cours trouvé"
+msgstr "No se encontraron cursos"
+
+#: resources/jinja2_resources.py:289
+msgid "Aucun cours publié pour le moment"
+msgstr "Aún no hay cursos publicados"
+
+#: resources/jinja2_resources.py:290
+#, fuzzy
+msgid "Leçons des cours"
+msgstr "Lecciones del curso"
+
+#: resources/jinja2_resources.py:292
+msgid "Les Modules"
+msgstr "Los Módulos"
+
+#: resources/jinja2_resources.py:293
+#, fuzzy
+msgid "Modules"
+msgstr "Módulos"
+
+#: resources/jinja2_resources.py:294
+#, fuzzy
+msgid "Leçons du Module"
+msgstr "Lecciones del Módulo"
+
+#: resources/jinja2_resources.py:295
+msgid "Fin du Module"
+msgstr "Fin del Módulo"
+
+#: resources/jinja2_resources.py:296
+msgid "Ajouter au Module"
+msgstr "Añadir al Módulo"
+
+#: resources/jinja2_resources.py:298
+#, fuzzy
+msgid "Leçons"
+msgstr "Lecciones"
+
+#: resources/jinja2_resources.py:299
+msgid "Ordonner"
+msgstr "Orden"
+
+#: resources/jinja2_resources.py:300
+msgid "Ordonner les élements de la liste"
+msgstr "Ordenar los elementos de la lista."
+
+#: resources/jinja2_resources.py:301
+msgid "Leçon"
+msgstr "Lección"
+
+#: resources/jinja2_resources.py:302 resources/menu_resources.py:92
+msgid "Mes professeurs"
+msgstr "Mis maestros"
+
+#: resources/jinja2_resources.py:303
+msgid "Demande"
+msgstr "Solicitud"
+
+#: resources/jinja2_resources.py:304
+msgid "Demandé par"
+msgstr "Solicitado por"
+
+#: resources/jinja2_resources.py:306
+msgid "Demande d'assistance par groupe"
+msgstr "Solicitud de asistencia por grupo"
+
+#: resources/jinja2_resources.py:308
+msgid "Demande sélectionnée"
+msgstr "Solicitud seleccionada"
+
+#: resources/jinja2_resources.py:309 resources/jinja2_resources.py:311
+msgid "Réponse"
+msgstr "Respuesta"
+
+#: resources/jinja2_resources.py:310
+#, fuzzy
+msgid "Réponses"
+msgstr "Respuestas"
+
+#: resources/jinja2_resources.py:312
+msgid "Répondre"
+msgstr "Respuesta"
+
+#: resources/jinja2_resources.py:313
+msgid "Répondre uniquement"
+msgstr "solo respuesta"
+
+#: resources/jinja2_resources.py:314 resources/jinja2_resources.py:315
+msgid "Planning"
+msgstr "programación"
+
+#: resources/jinja2_resources.py:317
+msgid "Planifier"
+msgstr "planificar"
+
+#: resources/jinja2_resources.py:318
+msgid "Planifier la sélection"
+msgstr "Planificar la selección"
+
+#: resources/jinja2_resources.py:319
+msgid "Planifier l'assistance"
+msgstr "soporte de programación"
+
+#: resources/jinja2_resources.py:320
+msgid "Nouveau calendrier"
+msgstr "nuevo calendario"
+
+#: resources/jinja2_resources.py:322
+msgid "Affecter la sélection"
+msgstr "Asignar selección"
+
+#: resources/jinja2_resources.py:323
+msgid "Un Planning existant"
+msgstr "una planificación existente"
+
+#: resources/jinja2_resources.py:324
+msgid "Un nouveau planning"
+msgstr "Un nuevo horario"
+
+#: resources/jinja2_resources.py:325
+msgid "Veuillez sélectionner dans la liste au moins une demande"
+msgstr "seleccione al menos una solicitud de la lista"
+
+#: resources/jinja2_resources.py:326
+msgid ""
+"Veuillez ajouter au moins un Module pour le cours ( Introduction,Module "
+"I,II ...etc )"
+msgstr ""
+"Por favor agregue al menos un Módulo para el curso (Introducción, Módulo "
+"I, II...etc)"
+
+#: resources/jinja2_resources.py:327
+msgid ""
+"Veuillez ajouter au moins un contenu pour le Module ( Vidéos, audios, "
+"documents ou texte )"
+msgstr ""
+"Por favor agregue al menos un contenido para el Módulo (Videos, audios, "
+"documentos o texto)"
+
+#: resources/jinja2_resources.py:328
+msgid "Vous avez sélectionné"
+msgstr "Has seleccionado"
+
+#: resources/jinja2_resources.py:329
+msgid "Demandes d'assistance pour le planning"
+msgstr "Solicitudes de asistencia para la planificación."
+
+#: resources/jinja2_resources.py:330
+msgid "Demande d'assistance pour cette section"
+msgstr "Solicitud de asistencia para este tramo"
+
+#: resources/jinja2_resources.py:331
+msgid "Ce cours vous a-t-il été utile"
+msgstr "¿Te resultó útil este curso?"
+
+#: resources/jinja2_resources.py:332
+msgid "Assistance du jour planifiée"
+msgstr "Asistencia del día previsto"
+
+#: resources/jinja2_resources.py:333
+msgid "Affectations"
+msgstr "Asignaciones"
+
+#: resources/jinja2_resources.py:334
+#, fuzzy
+msgid "Réorganisez les éléments par <b>glisser-déposer</b>"
+msgstr "Reordenar los elementos mediante <b>arrastrar y soltar</b>"
+
+#: resources/jinja2_resources.py:336
+msgid "Authentification"
+msgstr "autenticación"
+
+#: resources/jinja2_resources.py:337
+msgid "Identifiants"
+msgstr "Identificadores"
+
+#: resources/jinja2_resources.py:338
+msgid "Etat du compte"
+msgstr "estado de la cuenta"
+
+#: resources/jinja2_resources.py:339
+msgid "Login"
+msgstr "Iniciar sesión"
+
+#: resources/jinja2_resources.py:341
+msgid "password"
+msgstr "contraseña"
+
+#: resources/jinja2_resources.py:342 resources/menu_resources.py:13
+msgid "Profil"
+msgstr "Perfil"
+
+#: resources/jinja2_resources.py:343
+msgid "Photo"
+msgstr "Foto"
+
+#: resources/jinja2_resources.py:345
+msgid "Login (E-Mail)"
+msgstr "Iniciar sesión (correo electrónico)"
+
+#: resources/jinja2_resources.py:346
+msgid "Votre Login (E-Mail)"
+msgstr "Su inicio de sesión (correo electrónico)"
+
+#: resources/jinja2_resources.py:347
+msgid "Date enregistrement"
+msgstr "fecha de grabación"
+
+#: resources/jinja2_resources.py:348
+msgid "Nom complet"
+msgstr "nombre completo"
+
+#: resources/jinja2_resources.py:349
+msgid "Prénom"
+msgstr "nombre"
+
+#: resources/jinja2_resources.py:350
+msgid "Nom"
+msgstr "Nombre"
+
+#: resources/jinja2_resources.py:351
+msgid "Nom établissement"
+msgstr "Nombre del establecimiento"
+
+#: resources/jinja2_resources.py:353
+msgid "Tél. principal"
+msgstr "tel. principal"
+
+#: resources/jinja2_resources.py:354
+msgid "Tél. secondaire"
+msgstr "Tel. secundario"
+
+#: resources/jinja2_resources.py:355
+msgid "ville"
+msgstr "ciudad"
+
+#: resources/jinja2_resources.py:356
+msgid "pays"
+msgstr "país"
+
+#: resources/jinja2_resources.py:357
+msgid "Adresse"
+msgstr "Dirección"
+
+#: resources/jinja2_resources.py:358
+#, fuzzy
+msgid "Résumé"
+msgstr "Resumen"
+
+#: resources/jinja2_resources.py:359
+msgid "Brève présentation"
+msgstr "Breve presentación"
+
+#: resources/jinja2_resources.py:360
+msgid "Code requis"
+msgstr "código requerido"
+
+#: resources/jinja2_resources.py:362
+msgid "Quelles sont les Niveaux éducatifs que vous cibler pour la formation"
+msgstr "¿Cuáles son los Niveles educativos a los que se dirige la formación?"
+
+#: resources/jinja2_resources.py:363
+msgid ""
+"Quelles sont les matières de l'enseignement que vous cibler pour la "
+"formation"
+msgstr "¿Cuáles son las materias docentes a las que se dirige la formación?"
+
+#: resources/jinja2_resources.py:364
+msgid "Avant de commencer vous devez définir Les classes de votre établissement"
+msgstr "Antes de comenzar debes definir las clases de tu establecimiento"
+
+#: resources/jinja2_resources.py:365
+msgid "Les classes ne sont pas enregistrées"
+msgstr "Las clases no se registran."
+
+#: resources/jinja2_resources.py:366
+msgid ""
+"Ensuite vous devez renseigner les matières que vous cibler pour la "
+"formation pour chaque Niveau éducatif"
+msgstr ""
+"Luego debes ingresar las materias que deseas capacitar para cada nivel "
+"escolar."
+
+#: resources/jinja2_resources.py:367
+msgid "Les Matières éducatives ne sont pas encore renseignées"
+msgstr "Las Asignaturas educativas aún no están especificadas"
+
+#: resources/jinja2_resources.py:368
+msgid ""
+"Les Matières éducatives ne sont pas encore disponible, Veuillez contacter"
+" votre établissement"
+msgstr ""
+"Las Asignaturas educativas aún no están disponibles, por favor contacte "
+"con su establecimiento"
+
+#: resources/jinja2_resources.py:370
+msgid "Quelles sont les matières et les classes du professeur"
+msgstr "Cuáles son las materias y clases del maestro"
+
+#: resources/jinja2_resources.py:371
+msgid ""
+"Concevez des cours comme un pro avec Smart Digital School,Votre outil de "
+"formation à distance, Établissements éducatifs, Professeurs et Etudiants"
+msgstr ""
+"Diseñe cursos como un profesional con Smart Digital School, su "
+"herramienta de aprendizaje a distancia, instituciones educativas, "
+"profesores y estudiantes"
+
+#: resources/jinja2_resources.py:372
+msgid ""
+"e-learning,formation à distance,cours en ligne,Établissements "
+"éducatifs,Professeurs,Etudiants"
+msgstr ""
+"e-learning, educación a distancia, cursos en línea, instituciones "
+"educativas, profesores, estudiantes"
+
+#: resources/jinja2_resources.py:373
+msgid "Votre outil de formation à distance"
+msgstr "Tu herramienta de formación a distancia"
+
+#: resources/jinja2_resources.py:374
+msgid ""
+"Il se peut que votre compte a été désactivé ou que vos autorisations de "
+"connexion soient insuffisantes"
+msgstr ""
+"Es posible que su cuenta haya sido desactivada o que sus permisos de "
+"conexión sean insuficientes"
+
+#: resources/jinja2_resources.py:375
+#, fuzzy
+msgid "login de type email: Gmail, Microsoft, Yahoo ... ou autres"
+msgstr "inicio de sesión tipo correo electrónico: Gmail, Hotmail, Yahoo... u otros"
+
+#: resources/jinja2_resources.py:376
+msgid ""
+"Vous pouvez saisir le mot de passe (entre 8 et 20 caractéres) ou cliquez "
+"sur 'Générer un mot de passe'"
+msgstr ""
+"Puedes introducir la contraseña (entre 8 y 20 caracteres) o hacer clic en"
+" 'Generar contraseña'"
+
+#: resources/jinja2_resources.py:378
+msgid ""
+"Vous avez oublié votre mot de passe? Ici, vous pouvez facilement "
+"récupérer un nouveau mot de passe"
+msgstr "¿Olvidaste tu contraseña? "
+
+#: resources/jinja2_resources.py:379
+msgid "Entrez le nouveau mot de passe et soumettez votre changement"
+msgstr "Ingrese la nueva contraseña y envíe su cambio"
+
+#: resources/jinja2_resources.py:380
+msgid ""
+"Si vous n'avez pas reçu l'e-mail de réinitialisation du mot de passe, "
+"consultez le dossier de spam de votre messagerie"
+msgstr ""
+"Si no ha recibido el correo electrónico para restablecer la contraseña, "
+"revise su carpeta de correo no deseado"
+
+#: resources/jinja2_resources.py:381
+msgid ""
+"Pour la création d'un compte valide, l'utilisateur doit fournir les "
+"éléments suivants"
+msgstr ""
+"Para la creación de una cuenta válida, el usuario debe proporcionar lo "
+"siguiente"
+
+#: resources/jinja2_resources.py:382
+msgid "Un email de messagerie joignable (Login)"
+msgstr "Un correo electrónico de mensajería contactable (Iniciar sesión)"
+
+#: resources/jinja2_resources.py:383
+#, fuzzy
+msgid ""
+"Le login de l'application est un email (Type: Gmail, Microsoft, Yahoo ..."
+" ou autres), néccessaire dans le cas du changement du mot de passe ou de "
+"l'envoie des notifications"
+msgstr ""
+"El login de la aplicación es un correo electrónico (Tipo: Gmail, Hotmail,"
+" Yahoo... u otros), necesario en el caso de cambiar la contraseña o "
+"enviar notificaciones"
+
+#: resources/jinja2_resources.py:384
+msgid "Le numéro de téléphone principale pour contact"
+msgstr "El número de teléfono principal de contacto."
+
+#: resources/jinja2_resources.py:386
+#, fuzzy
+msgid "Créer un compte"
+msgstr "Crear una cuenta"
+
+#: resources/jinja2_resources.py:387
+msgid "Bienvenue dans notre communauté d'apprentissage en ligne !"
+msgstr "¡Bienvenido a nuestra comunidad de aprendizaje en línea!"
+
+#: resources/jinja2_resources.py:388
+msgid "Ou inscrivez-vous par e-mail"
+msgstr "O regístrate por correo electrónico"
+
+#: resources/jinja2_resources.py:389
+msgid "Intitulé : Établissement, Centre de formation ..."
+msgstr "Título: Establecimiento, Centro de formación..."
+
+#: resources/jinja2_resources.py:390
+msgid "J'ai déjà un abonnement"
+msgstr "ya tengo una suscripción"
+
+#: resources/jinja2_resources.py:391
+#, fuzzy
+msgid "S'abonner"
+msgstr "Suscribir"
+
+#: resources/jinja2_resources.py:392
+#, fuzzy
+msgid "J'accepte"
+msgstr "Acepto"
+
+#: resources/jinja2_resources.py:393
+#, fuzzy
+msgid "Termes et Conditions"
+msgstr "Términos y Condiciones"
+
+#: resources/jinja2_resources.py:394
+msgid ""
+"Vous n'avez pas de compte ? <b class='text-register'>Inscription "
+"gratuite</b> !"
+msgstr "¿No tienes una cuenta? <b class='text-register'>Inscripción gratuita</b>!"
+
+#: resources/jinja2_resources.py:395
+#, fuzzy
+msgid "Abonnement en ligne"
+msgstr "Suscripción en línea"
+
+#: resources/jinja2_resources.py:396
+msgid "Tapez ici le code ci-dessus"
+msgstr "Escriba el código de arriba aquí"
+
+#: resources/jinja2_resources.py:398
+msgid "Entre 8 et 20 Caractères"
+msgstr "entre 8 y 20 personajes"
+
+#: resources/jinja2_resources.py:399
+msgid "Mot de passe oublié"
+msgstr "Contraseña olvidada"
+
+#: resources/jinja2_resources.py:400
+msgid "Demander un nouveau"
+msgstr "Solicitar uno nuevo"
+
+#: resources/jinja2_resources.py:401
+msgid "Changer le mot de passe"
+msgstr "Cambiar contraseña"
+
+#: resources/jinja2_resources.py:402
+msgid "Mot de passe actuel"
+msgstr "contraseña actual"
+
+#: resources/jinja2_resources.py:404
+msgid "Confirmez le mot de passe"
+msgstr "Confirmar contraseña"
+
+#: resources/jinja2_resources.py:405
+msgid "Veuillez contacter l'administrateur"
+msgstr "póngase en contacto con el administrador"
+
+#: resources/jinja2_resources.py:406
+msgid "Dernière étape"
+msgstr "último paso"
+
+#: resources/jinja2_resources.py:407
+msgid "Veuillez vérifier votre messagerie"
+msgstr "Por favor revisa tu correo electrónico"
+
+#: resources/jinja2_resources.py:409
+#, fuzzy
+msgid "secondes"
+msgstr "segundos"
+
+#: resources/jinja2_resources.py:410
+#, fuzzy
+msgid "minutes"
+msgstr "minutos"
+
+#: resources/jinja2_resources.py:417
+#, fuzzy
+msgid "Illimité"
+msgstr "Ilimitado"
+
+#: resources/jinja2_resources.py:418
+#, fuzzy
+msgid "Durée"
+msgstr "Duración"
+
+#: resources/jinja2_resources.py:419
+#, fuzzy
+msgid "Support"
+msgstr "Soporte"
+
+#: resources/jinja2_resources.py:420
+#, fuzzy
+msgid "Remise"
+msgstr "Descuento"
+
+#: resources/jinja2_resources.py:421
+msgid "Version d'essai"
+msgstr "Versión de prueba"
+
+#: resources/jinja2_resources.py:422
+#, fuzzy
+msgid "Version"
+msgstr "Versión"
+
+#: resources/jinja2_resources.py:423
+#, fuzzy
+msgid "Mise à niveau"
+msgstr "Mejorar"
+
+#: resources/jinja2_resources.py:424 resources/menu_resources.py:7
+msgid "Centre de Suivi"
+msgstr "Centro de Seguimiento"
+
+#: resources/jinja2_resources.py:427
+#, fuzzy
+msgid "Paquets"
+msgstr "Paquetes"
+
+#: resources/jinja2_resources.py:428
+#, fuzzy
+msgid "Paquet"
+msgstr "Paquete"
+
+#: resources/jinja2_resources.py:429
+#, fuzzy
+msgid "Nombre d'étudiants"
+msgstr "Numero de estudiantes"
+
+#: resources/jinja2_resources.py:431
+msgid "Méthode de paiement"
+msgstr "Método de pago"
+
+#: resources/jinja2_resources.py:433
+#, fuzzy
+msgid "Carte de crédit"
+msgstr "Tarjeta de credito"
+
+#: resources/jinja2_resources.py:434
+msgid "Virement bancaire"
+msgstr "Transferencia bancaria"
+
+#: resources/jinja2_resources.py:435
+msgid "Contacter le service commercial"
+msgstr "Contacto Ventas"
+
+#: resources/jinja2_resources.py:440
+#, fuzzy
+msgid "Prix total"
+msgstr "Precio total"
+
+#: resources/jinja2_resources.py:441
+#, fuzzy
+msgid "Prix"
+msgstr "Precio"
+
+#: resources/jinja2_resources.py:442
+#, fuzzy
+msgid "Calculer"
+msgstr "Calcular"
+
+#: resources/jinja2_resources.py:443
+#, fuzzy
+msgid "Maintenant"
+msgstr "Ahora"
+
+#: resources/jinja2_resources.py:445
+#, fuzzy
+msgid "Dernier paiement"
+msgstr "Último pago"
+
+#: resources/jinja2_resources.py:446
+msgid "Montant"
+msgstr "Cantidad"
+
+#: resources/jinja2_resources.py:448
+#, fuzzy
+msgid "Payé"
+msgstr "pagado"
+
+#: resources/jinja2_resources.py:449
+#, fuzzy
+msgid "Paiement"
+msgstr "Pago"
+
+#: resources/jinja2_resources.py:450
+#, fuzzy
+msgid "Facture"
+msgstr "Lectura"
+
+#: resources/jinja2_resources.py:451
+msgid "Remise valable pour abonnement d'une durée minimale de : {} mois"
+msgstr "Descuento válido para suscripción de una duración mínima de : {} meses."
+
+#: resources/jinja2_resources.py:453
+msgid ""
+"Parcourez la vidéo pour trouver l’image idéale, puis cliquez sur « "
+"Capturer » pour générer la couverture qui illustrera la vidéo dans le "
+"cours."
+msgstr ""
+"Explora el video para encontrar el fotograma perfecto, luego haz clic en "
+"“Capturar” para generar la portada que ilustrará el video en el curso."
+
+#: resources/jinja2_resources.py:454
+#, fuzzy
+msgid "Capturer l'image"
+msgstr "Captura la imagen"
+
+#: resources/jinja2_resources.py:455
+#, fuzzy
+msgid "Nouvelle capture d'image"
+msgstr "Nueva captura de imagen"
+
+#: resources/jinja2_resources.py:456
+#, fuzzy
+msgid "Image de couverture"
+msgstr "Imagen de portada"
+
+#: resources/jinja2_resources.py:459
+#, fuzzy
+msgid "Quiz du cours"
+msgstr "Cuestionario del curso"
+
+#: resources/jinja2_resources.py:460
+msgid "Le Quiz"
+msgstr "El Quiz"
+
+#: resources/jinja2_resources.py:462
+#, fuzzy
+msgid "Questionnaires"
+msgstr "Cuestionarios"
+
+#: resources/jinja2_resources.py:463
+#, fuzzy
+msgid "Aucun quiz pour ce cours."
+msgstr "No hay cuestionario para este curso."
+
+#: resources/jinja2_resources.py:464
+#, fuzzy
+msgid "Aucune question pour ce quiz."
+msgstr "No hay preguntas para este cuestionario."
+
+#: resources/jinja2_resources.py:465
+#, fuzzy
+msgid "Questions"
+msgstr "Preguntas"
+
+#: resources/jinja2_resources.py:466
+#, fuzzy
+msgid "Questions du quiz"
+msgstr "Preguntas del cuestionario"
+
+#: resources/jinja2_resources.py:467
+#, fuzzy
+msgid "Question"
+msgstr "Pregunta"
+
+#: resources/jinja2_resources.py:468
+#, fuzzy
+msgid "Limite de temps"
+msgstr "Límite de tiempo"
+
+#: resources/jinja2_resources.py:469
+msgid "Temps"
+msgstr "Tiempo"
+
+#: resources/jinja2_resources.py:470 resources/jinja2_resources.py:471
+msgid "Choix"
+msgstr "Opciones"
+
+#: resources/jinja2_resources.py:472
+#, fuzzy
+msgid "Choix possibles"
+msgstr "Opciones posibles"
+
+#: resources/jinja2_resources.py:473
+#, fuzzy
+msgid "J'ai terminé ce quiz"
+msgstr "He terminado este cuestionario"
+
+#: resources/jinja2_resources.py:475
+msgid "Incorrect"
+msgstr "Incorrecto"
+
+#: resources/jinja2_resources.py:476
+#, fuzzy
+msgid "Commencer"
+msgstr "Comenzar"
+
+#: resources/jinja2_resources.py:477
+#, fuzzy
+msgid "Résultat"
+msgstr "Resultado"
+
+#: resources/jinja2_resources.py:478
+msgid "Quiz soumis le"
+msgstr "Cuestionario enviado el"
+
+#: resources/jinja2_resources.py:479
+#, fuzzy
+msgid "Temps passé"
+msgstr "Tiempo"
+
+#: resources/jinja2_resources.py:486
+msgid "Cours suivis"
+msgstr "Cursos seguidos"
+
+#: resources/jinja2_resources.py:487
+#, fuzzy
+msgid "Date de suivis"
+msgstr "Fecha de seguimiento"
+
+#: resources/jinja2_resources.py:488
+msgid "Quiz effectués"
+msgstr "Cuestionarios completados"
+
+#: resources/jinja2_resources.py:489 resources/menu_resources.py:58
+msgid "Demandes d'aide"
+msgstr "Solicitudes de ayuda"
+
+#: resources/jinja2_resources.py:490
+msgid "Activités récentes"
+msgstr "Actividades recientes"
+
+#: resources/jinja2_resources.py:491
+#, fuzzy
+msgid "Dernière activité"
+msgstr "Última actividad"
+
+#: resources/jinja2_resources.py:492
+#, fuzzy
+msgid "Commencé le"
+msgstr "Comenzó el"
+
+#: resources/jinja2_resources.py:493
+#, fuzzy
+msgid "Terminé le"
+msgstr "Terminado el"
+
+#: resources/menu_resources.py:5
+msgid "Acceuil"
+msgstr "Inicio"
+
+#: resources/menu_resources.py:6
+msgid "outils de formation à distance"
+msgstr "herramientas de aprendizaje a distancia"
+
+#: resources/menu_resources.py:8
+msgid "Mon Centre de Suivi"
+msgstr "Mi Centro de Seguimiento"
+
+#: resources/menu_resources.py:9
+msgid "Assistance"
+msgstr "Asistencia"
+
+#: resources/menu_resources.py:10 resources/menu_resources.py:60
+msgid "Les nouvelles demandes d'assistance"
+msgstr "Nuevas solicitudes de asistencia"
+
+#: resources/menu_resources.py:11
+msgid "Messagerie"
+msgstr "mensajería"
+
+#: resources/menu_resources.py:12 resources/menu_resources.py:72
+msgid "Boite de Messagerie"
+msgstr "buzón"
+
+#: resources/menu_resources.py:14
+msgid "Votre Profil"
+msgstr "Tu perfil"
+
+#: resources/menu_resources.py:16
+msgid "M.D.P"
+msgstr "MDP"
+
+#: resources/menu_resources.py:17
+msgid "Modifications du Cours"
+msgstr "cambios de rumbo"
+
+#: resources/menu_resources.py:18
+msgid "Edition : Cours, Modules et Quiz"
+msgstr "Edición: Cursos, Módulos y Cuestionarios"
+
+#: resources/menu_resources.py:21
+msgid "Modifications du Module"
+msgstr "Cambios de Módulo"
+
+#: resources/menu_resources.py:22
+#, fuzzy
+msgid "Edition : Leçons du Module"
+msgstr "Edición: Lecciones del Módulo"
+
+#: resources/menu_resources.py:23
+msgid "les Demandes"
+msgstr "Solicitudes"
+
+#: resources/menu_resources.py:24
+msgid "Liste des demandes"
+msgstr "Lista de solicitudes"
+
+#: resources/menu_resources.py:25
+msgid "Controls"
+msgstr "controles"
+
+#: resources/menu_resources.py:26
+msgid "Informations"
+msgstr "Información"
+
+#: resources/menu_resources.py:27
+msgid "Mon Profil"
+msgstr "Mi perfil"
+
+#: resources/menu_resources.py:28
+msgid "Mes Contacts"
+msgstr "Mis contactos"
+
+#: resources/menu_resources.py:29
+msgid "Contactez-nous"
+msgstr "Contáctanos"
+
+#: resources/menu_resources.py:30 resources/menu_resources.py:31
+msgid "Tableau de bord"
+msgstr "Panel de control"
+
+#: resources/menu_resources.py:33
+msgid "Cours de formation"
+msgstr "curso de formación"
+
+#: resources/menu_resources.py:34
+msgid "Créer un Cours"
+msgstr "Crear un curso"
+
+#: resources/menu_resources.py:35
+#, fuzzy
+msgid "Créer un cours et ses modules"
+msgstr "Crear un curso y sus Módulos"
+
+#: resources/menu_resources.py:38
+msgid "Rapport: Cours consultés par étudiant"
+msgstr "Informe: Cursos vistos por estudiante"
+
+#: resources/menu_resources.py:40
+msgid "Progrès d'apprentissage"
+msgstr "Progreso del aprendizaje"
+
+#: resources/menu_resources.py:41
+msgid "Rapport: Progrès d'apprentissage des cours"
+msgstr "Informe: Progreso del aprendizaje del curso"
+
+#: resources/menu_resources.py:43
+#, fuzzy
+msgid "Résultat des Quiz"
+msgstr "Resultados del cuestionario"
+
+#: resources/menu_resources.py:44
+#, fuzzy
+msgid "Rapport: Score Quiz par étudiant"
+msgstr "Informe: Puntuación del cuestionario por estudiante"
+
+#: resources/menu_resources.py:47
+msgid "Liste des Cours"
+msgstr "Lista de cursos"
+
+#: resources/menu_resources.py:48
+msgid "Edition et modifications des Cours"
+msgstr "Edición y modificaciones de Cursos"
+
+#: resources/menu_resources.py:49
+msgid "Cours En ligne"
+msgstr "Curso en línea"
+
+#: resources/menu_resources.py:50
+msgid "Edition et modifications des Cours (En ligne)"
+msgstr "Edición y modificaciones de Cursos (Online)"
+
+#: resources/menu_resources.py:51
+msgid "Cours Hors ligne"
+msgstr "curso fuera de línea"
+
+#: resources/menu_resources.py:52
+msgid "Edition et modifications des Cours (Hors ligne)"
+msgstr "Edición y modificación de cursos (sin conexión)"
+
+#: resources/menu_resources.py:55
+msgid "Mon Calendrier"
+msgstr "Mi calendario"
+
+#: resources/menu_resources.py:56
+msgid "Calendrier des évenements"
+msgstr "Calendario de eventos"
+
+#: resources/menu_resources.py:59
+msgid "Nouvelles Demandes"
+msgstr "Nuevas solicitudes"
+
+#: resources/menu_resources.py:61
+msgid "Assistances acceptées"
+msgstr "Asistencia aceptada"
+
+#: resources/menu_resources.py:62
+msgid "Liste des demandes acceptées, planifiées"
+msgstr "Lista de solicitudes planificadas aceptadas"
+
+#: resources/menu_resources.py:63
+msgid "Assistances terminées"
+msgstr "Asistencia finalizada"
+
+#: resources/menu_resources.py:64
+msgid "Liste des demandes terminées"
+msgstr "Lista de solicitudes completadas"
+
+#: resources/menu_resources.py:65
+msgid "Demandes annulées"
+msgstr "Solicitudes canceladas"
+
+#: resources/menu_resources.py:66
+msgid "Liste des demandes annulées"
+msgstr "Lista de solicitudes canceladas"
+
+#: resources/menu_resources.py:67
+msgid "Toutes les Demandes"
+msgstr "todas las solicitudes"
+
+#: resources/menu_resources.py:68
+msgid "Liste de toutes les demandes"
+msgstr "Lista de todas las solicitudes"
+
+#: resources/menu_resources.py:69
+msgid "Demandes en attente"
+msgstr "Solicitudes pendientes"
+
+#: resources/menu_resources.py:70
+msgid "Mes demandes d'assistance en-cours"
+msgstr "Mis solicitudes de soporte actuales"
+
+#: resources/menu_resources.py:73
+msgid "Boite Mail"
+msgstr "buzón"
+
+#: resources/menu_resources.py:77
+msgid "Matières et Classes"
+msgstr "Materias y Clases"
+
+#: resources/menu_resources.py:78
+msgid "Liste des matières par classes"
+msgstr "Lista de materias por clases."
+
+#: resources/menu_resources.py:80
+msgid "Mes Matières éducatives"
+msgstr "Mis Asignaturas educativas"
+
+#: resources/menu_resources.py:81
+msgid "les matières à enseigner aux élèves"
+msgstr "materias para enseñar a los estudiantes"
+
+#: resources/menu_resources.py:84
+msgid "Mes Cours éducatifs"
+msgstr "Mis Cursos educativos"
+
+#: resources/menu_resources.py:86
+msgid "Liste des cours disponibles"
+msgstr "Lista de cursos disponibles"
+
+#: resources/menu_resources.py:88
+msgid "Liste des derniers cours consultés"
+msgstr "Lista de últimos cursos vistos"
+
+#: resources/menu_resources.py:90
+msgid "Liste des cours favoris"
+msgstr "Lista de cursos favoritos"
+
+#: resources/menu_resources.py:93
+msgid "Liste des cours par professeurs"
+msgstr "Lista de cursos por profesores."
+
+#: resources/menu_resources.py:95
+msgid "Edition du compte"
+msgstr "Editando la cuenta"
+
+#: resources/menu_resources.py:96
+msgid "Edition du compte Enseignant"
+msgstr "Editando la cuenta del Profesor"
+
+#: resources/menu_resources.py:98
+msgid "Ajouter un compte"
+msgstr "Agregar una cuenta"
+
+#: resources/menu_resources.py:100
+msgid "Les Enseignants"
+msgstr "Los Maestros"
+
+#: resources/menu_resources.py:101
+msgid "Ajouter un compte Enseignant"
+msgstr "Agregar una cuenta de profesor"
+
+#: resources/menu_resources.py:102
+msgid "Liste des Enseignants"
+msgstr "Lista de profesores"
+
+#: resources/menu_resources.py:103
+msgid "Editer la liste des Enseignants"
+msgstr "Editar la lista de Profesores"
+
+#: resources/menu_resources.py:105
+msgid "Les étudiants"
+msgstr "Los estudiantes"
+
+#: resources/menu_resources.py:106
+msgid "Ajouter un compte étudiant"
+msgstr "Agregar una cuenta de estudiante"
+
+#: resources/menu_resources.py:107
+msgid "Liste des Etudiants"
+msgstr "Lista de estudiantes"
+
+#: resources/menu_resources.py:108
+msgid "Editer la liste des Etudiants"
+msgstr "Editar la lista de Estudiantes"
+
+#: resources/menu_resources.py:109
+msgid "L'établissement"
+msgstr "El establecimiento"
+
+#: resources/menu_resources.py:112
+#, fuzzy
+msgid "Paramétrage Administration"
+msgstr "Configuración administración"
+
+#: resources/menu_resources.py:114
+msgid "Classes"
+msgstr "Clases"
+
+#: resources/menu_resources.py:115
+msgid "Les classes à cibler"
+msgstr "Clases al objetivo"
+
+#: resources/menu_resources.py:117
+msgid "Mes rapports"
+msgstr "Mis informes"
+
+#: resources/menu_resources.py:118
+#, fuzzy
+msgid "Rapports administratifs"
+msgstr "informes administrativos"
+
+#: resources/menu_resources.py:120
+msgid "Cours évalués"
+msgstr "Cursos evaluados"
+
+#: resources/menu_resources.py:121
+msgid "Rapport: Cours évalués par étudiant"
+msgstr "Informe: Cursos valorados por alumno"
+
+#: resources/menu_resources.py:123
+#, fuzzy
+msgid "Mes étudiants"
+msgstr "Mis estudiantes"
+
+#: resources/menu_resources.py:124
+#, fuzzy
+msgid "Rapport: Mes étudiants"
+msgstr "Informe: Mis estudiantes"
+
+#: resources/menu_resources.py:127
+msgid "Centre de Suivi des Étudiants"
+msgstr "Centro de Monitoreo de Estudiantes"
+
+#: resources/menu_resources.py:128
+#, fuzzy
+msgid "Rapport: Centre de Suivi des Étudiants"
+msgstr "Informe: Centro de Monitoreo de Estudiantes"
+
+#: resources/menu_resources.py:131
+#, fuzzy
+msgid "Options d'abonnement"
+msgstr "Opciones de suscripción"
+
+#: resources/menu_resources.py:132
+#, fuzzy
+msgid "Changer de forfait"
+msgstr "Cambiar de plan"
+
+#: resources/menu_resources.py:133
+msgid "Sélection du package : Forfaits et Abonnements"
+msgstr "Selección del paquete: Planes y Suscripciones"
+
+#: resources/menu_resources.py:134
+#, fuzzy
+msgid "Vos paiements"
+msgstr "Tus pagos"
+
+#: resources/menu_resources.py:137
+msgid "Quiz form"
+msgstr ""
+
+#: resources/menu_resources.py:138
+#, fuzzy
+msgid "Edition : questionnaire du Quiz"
+msgstr "Edición: Preguntas del Quiz"
+
+#~ msgid "Demandes d'assistance"
+#~ msgstr "solicitudes de soporte"
+

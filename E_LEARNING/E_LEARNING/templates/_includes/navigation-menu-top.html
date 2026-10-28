@@ -1,0 +1,143 @@
+{% set showUpgrade = True if current_user.role == ROLES.School.value and (PACKAGE.Demo.id==current_package.id or current_user.unused_days <= config.ALERT_PACKAGE_REMAINING_DAYS) else False %}
+
+<nav ng-controller="NavigationMenuCtrl" ng-init="init({{current_user.id}},'{{current_user.email}}')" class="main-header navbar navbar-expand navbar-dark">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav mr-auto text-uppercase">
+        <li class="nav-item">
+            <a class="nav-link sidebar-toggle " data-widget="pushmenu" href="#" role="button">
+            <i class="fa fa-bars text-white"></i></a>
+        </li>
+
+       
+        <li class="nav-item ">
+            <a href="{{url_for(url_calendar) }}" class="nav-link">
+                <i class="fa fa-calendar-days"></i>
+                <small class="d-none d-md-inline-block ml-1">&nbsp;{{title_calendar}}</small>
+            </a>
+
+        </li>
+        {% if assistance_menu %}
+        <li class="nav-item ">
+
+            <a href="{{url_for(url_assistance)}}" class="nav-link">
+                <i class="fa fa-ew-sos "></i>
+                <small class="d-none d-md-inline-block ml-1 mr-1">&nbsp;{{title_assistance}}</small>
+                <sup class=" mt-n1 badge navbar-badge " ng-class="nbr_assistance>0 ? 'badge-danger': 'bg-gray-dark'">{$ nbr_assistance $}</sup>
+            </a>
+
+        </li>
+        {% endif %}
+
+        <li class="nav-item ">
+            <a href="{{url_for(url_message)}}" class="nav-link">
+                <i class="fa fa-envelopes-bulk "></i>
+                <small class="d-none d-md-inline-block ml-1 mr-1">&nbsp;{{title_message}}</small>
+                <sup class=" mt-n1 badge navbar-badge " ng-class="nbr_msg>0 ? 'badge-danger': 'bg-gray-dark'">{$ nbr_msg $}</sup>
+            </a>
+        </li>
+
+        {% if showUpgrade %}
+        <li class="nav-item " data-toggle="tooltip" title="{{JR.remaining}} : {{current_user.unused_days}} {{JR.days}}">
+            <a role="button" class="nav-link text-yellow" href="{{url_for('PackageView:index')}}">
+                <i class="fa fa-arrow-up-from-ground-water"></i>
+                <small class="d-none d-md-inline-block ml-1 mr-1">
+                    &nbsp;{{JR.upgrade}}
+                </small>
+            </a>
+        </li>
+        {%endif%}
+
+
+        {% if current_user.role == ROLES.Any.value %}
+        <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="">
+                <i class="fa fa-search"></i>
+                <small class="d-none d-md-inline-block">&nbsp;{{JR.search}}</small>
+            </a>
+
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                <div class="dropdown-item bg-white">
+                    <form class=" form-inline ml-3">
+                        <div class="input-group input-group-md">
+                            <input class="form-control " type="search" placeholder="{{JR.search}}" aria-label="Search">
+                            <div class="input-group-append">
+                                <button class="btn btn-navbar" type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </li>
+        {% endif %}
+
+
+    </ul>
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+
+
+        <!--Full-screen-->
+        <li class="nav-item d-none d-md-inline-block">
+            <a class="nav-link" id="full-screen-link" data-widget="fullscreen" role="button" title="{{JR.full_screen}} ( F11 )" data-toggle="tooltip">
+                <span><i class="fas fa-expand-arrows-alt"></i></span>
+            </a>
+        </li>
+        <!--Themes-->
+        <li class="nav-item d-none d-md-inline-block">
+            <a class="nav-link" href="{{ url_for('ThemeView:index') }}" role="button" title="{{ JR.visual_theme }}" data-toggle="tooltip">
+                <span><i class="fa fa-palette"></i></span>
+            </a>
+        </li>
+
+        <!--parametre-->
+        <li class="nav-item ">
+            <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="" role="button" title="{{JR.params}}" data-toggle="tooltip">
+                <span><i style="font-size: 1.6em" class="fa fa-gears"></i></span>
+            </a>
+        </li>
+        <!-- session -->
+        <li class="nav-item dropdown user-menu">
+            <a href="#" class="nav-link dropdown-toggle pr-1" data-toggle="dropdown" aria-expanded="false">
+                <img id="user-image-nav1" src="{{user_image}}" class="user-image img-circle elevation-2 mr-0" alt="">
+                <sup class="package-tag-badge">
+                    <i class="fa {{ "{} {}".format(current_package.icon,current_package.color) }}"></i>
+
+                </sup>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right  rounded-lg" style="left: inherit; right: 0px;">
+                <!-- User image -->
+                <li class="user-header bg-red rounded-top">
+                    <sup data-toggle="tooltip" title="{{JR.version}} {{ current_package.label }}" class="package-tag-profile elevation-1">
+
+                        <a class="text-uppercase" href="{{url_for('PackageView:index') if current_user.role == ROLES.School.value else ''}}">
+                            <i class="fa mr-1 {{ "{} {}".format(current_package.icon,current_package.color) }}"></i>{{JR.version}} {{ current_package.label }}
+                        </a>
+                    </sup>
+                    <img id="user-image-nav2" src="{{user_image}}" class="img-circle elevation-2" alt="">
+
+                    <p>
+                        <small style="text-shadow:1px 1px 1px #000" class="text-yellow  text-bold text-uppercase">&bull; {{ {"School": JR.administrator, "Instructor": JR.instructor, "Student": JR.student }[current_user.role] | default("") }} &bull;</small>
+                        <div><b class="text-uppercase">{{ current_user.full_name}}</b></div>
+
+                    </p>
+
+                </li>
+
+                <!-- Menu Footer-->
+                <li class="user-footer  rounded-lg">
+                    <a href="{{url_for(url_profile)}}" class="btn btn-default text-black  ">
+                        <i class="{{ current_user.icon}} text-info"></i>&nbsp;&nbsp; {{ title_profile}}
+                    </a>
+                    <a href="{{url_for('AccountView:logout')}}" class="btn btn-default text-black  float-right">
+                        <i class="fas fa-arrow-right-from-bracket text-danger"></i>&nbsp; {{JR.disconnection}}
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+
+    </ul>
+</nav>

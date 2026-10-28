@@ -1,0 +1,23 @@
+{
+  "sProcessing": "Procesando...",
+  "sSearch": "",
+  "sLengthMenu": "Mostrar elementos _MENU_",
+  "sInfo": "_START_ - _END_ / Total: <b>_TOTAL_</b>",
+
+  "sInfoEmpty": "...",
+  "sInfoFiltered": "(filtrado por _MAX_ elementos en total)",
+  "sInfoPostFix": "",
+  "sLoadingRecords": "Cargando...",
+  "sZeroRecords": "No hay elementos para mostrar",
+  "sEmptyTable": "<div class='p-3 bg-light'>No hay datos disponibles para mostrar</div>",
+  "oPaginate": {
+    "sFirst": "Primero",
+    "sPrevious": "<i class='fa fa-circle-chevron-left' style='font-size:1.2rem'></i>",
+    "sNext": "<i class='fa fa-circle-chevron-right' style='font-size:1.2rem'></i>",
+    "sLast": "Último"
+  },
+  "oAria": {
+    "sSortAscending": ": habilita ordenar la columna en orden ascendente",
+    "sSortDescending": ": habilita ordenar la columna en orden descendente"
+  }
+}

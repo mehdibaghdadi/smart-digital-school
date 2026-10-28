@@ -1,0 +1,37 @@
+{% block head %}
+{% endblock %}
+<!-- Modal -->
+<form class="modal fade" ng-submit="sendAssistanceSubmit($event)" id="assistanceRequestModal" name="assistanceRequestModal" tabindex="-1" role="dialog" aria-labelledby="assistanceRequestModal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header p-1 pt-0 pb-0 bg-primary">
+                <small>
+                    <i class="text-red fa fa-1x fa-ew-sos mr-2 ml-2 text-uppercase"></i>
+                    <span class="timeline-header"><b>{{JR.demand_assist}}, {{JR.content}} : {$content_type_uploaded.text$}</b></span>
+                </small>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times; </span></button>
+            </div>
+            <div class="modal-body p-1">
+                <div class="text-center text-uppercase">
+                    <h4 class="text-black mt-2"><small class="fa mr-2 ml-2" ng-class="content_type_uploaded.css"></small><b>{{JR.chapter}} : {$  (uploaded_content.chapter_sequence) | numberToLetter $} - {{JR.section}} : {$uploaded_content.content_sequence$}  </b></h4>
+                    <hr />
+                </div>
+                <div class="form-group">
+
+                    <textarea minlength="5" title="{{JR.description_demand}}" required 
+                              ng-model="uploaded_content.demandAssistanceText" 
+                              rows="7" type="text" 
+                              class="form-control rounded-0" 
+                              placeholder="{{JR.description_demand}}, {{JR.how_to_help_you}} ? ..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer p-2 text-center bg-dark d-block">
+                <div>
+                    <button type="submit" class=" btn btn-primary btn-sm"><span aria-hidden="true"><i class="fa fa-1x fa-headset mr-2 ml-2"></i>{{JR.send_demand}}</span></button>
+                    <button type="button" class="ml-2 btn btn-danger btn-sm" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">{{JR.cancel}}</span></button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

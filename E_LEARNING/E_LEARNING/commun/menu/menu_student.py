@@ -1,0 +1,262 @@
+
+from ...utilities.flask.flask_menu import FlaskMenu, is_visible
+from flask import current_app as app
+
+c = app.config["MENU_RESOURCES"]  # from resources/menuConfig.py
+
+app_menu_student = FlaskMenu(
+    children=[  
+        # shortcut menu
+        dict(
+            menu_id="home",
+            title=c.title_dashboard,
+            title_header=c.title_dashboard_header,
+            icon="fa fa-ew-bars text-yellow",
+            endpoint="DashboardStudentView:index",
+            is_visible=lambda menu_instance: False,
+        ),
+        dict(
+            menu_id="calendar_event_top",
+            title=c.title_calendar_top,
+            title_header=c.title_calendar_header,
+            icon="fa fa-calendar-days text-purple",
+            endpoint="CalendarStudentView:index",
+            is_visible=lambda menu_instance: False,
+        ),
+        dict(
+            menu_id="calendar_assistance_new_top",
+            title=c.title_assist,
+            title_header=c.title_demands_accept_header,
+            icon="fa fa-ew-sos-new text-red",
+            endpoint="CalendarAssistanceStudentView_accepted",
+            is_visible=lambda menu_instance: False,
+        ),
+        dict(
+            menu_id="message",
+            title=c.title_mail,
+            title_header=c.title_mail_header,
+            icon="fa fa-envelopes-bulk text-green",
+            endpoint="MessagingView:index",
+            is_visible=lambda menu_instance: False,
+        ),
+        dict(
+            menu_id="profile",
+            title=c.title_profil,
+            title_header=c.title_profil_header,
+            endpoint="ProfileStudentView:index",
+            is_visible=lambda menu_instance: False,
+        ),
+        dict(
+            menu_id="password",
+            title=c.title_pwd,
+            title_header=c.title_pwd_header,
+            endpoint="AccountView:change_password",
+            is_visible=lambda menu_instance: False,
+        ),
+        dict(
+            menu_id="listBySubject_0",
+            title=c.title_subjects,
+            title_header="",
+            icon="fa fa-microscope text-red",
+            endpoint="CourseView:listBySubject_0",
+            is_visible=lambda menu_instance: False,
+        ),
+        dict(
+            menu_id="courseBySubject_0",
+            title=c.title_courses,
+            title_header="",
+            icon="fa fa-ew-book",
+            endpoint="CourseView:courseBySubject_0",
+            is_visible=lambda menu_instance: False,
+        ),
+        dict(
+            menu_id="courseBySubject_0",
+            title=c.title_my_prof,
+            title_header="",
+            icon="fa fa-chalkboard-teacher text-blue",
+            endpoint="CourseView:listCourseInstructor_0",
+            is_visible=lambda menu_instance: False,
+        ),
+        dict(
+            menu_id="quiz-form-1",
+            title=c.title_quiz_form,
+            title_header=c.title_quiz_form,
+            icon="fa fa-ew-quiz",
+            endpoint="QuizFormView:form_0",
+            is_visible=lambda menu_instance: False,
+        ),
+        dict(
+            menu_id="ThemeViewindex",
+            title=c.title_visual_theme,
+            title_header=c.title_visual_theme,
+            icon="fa fa-palette text-purple",
+            endpoint="ThemeView:index",
+            is_visible=lambda menu_instance: False,
+        ),
+        # Right Menu
+        dict(
+            menu_id="controls",
+            title=c.title_controls,
+            is_visible=lambda menu_instance: False,
+            children=[
+                dict(
+                    menu_id="params",
+                    title=c.title_info,
+                    icon="fa fa-info",
+                    endpoint=None,
+                    children=[
+                        dict(
+                            menu_id="profile2",
+                            title=c.title_my_profil,
+                            icon="fa fa-user text-success",
+                            endpoint="ProfileStudentView:index",
+                        ),
+                        dict(
+                            menu_id="password2",
+                            title=c.title_pwd,
+                            icon="fa fa-lock text-red",
+                            endpoint="AccountView:change_password",
+                        ),
+                        dict(
+                            menu_id="contact",
+                            title=c.title_contacts,
+                            title_header=c.title_contacts_header,
+                            icon="fa fa-phone-square  text-info",
+                            endpoint="IndexStudentView:contact",
+                            is_visible=lambda menu_instance: False,
+                        ),
+                        # Child controls
+                    ],
+                ),
+            ],
+        ),
+        # Left Menu
+        dict(
+            menu_id="home-index",
+            title=c.title_dashboard,
+            title_header=c.title_dashboard_header,
+            icon="fa fa-ew-bars text-yellow",
+            endpoint="DashboardStudentView:index",
+            is_visible=lambda menu_instance: True,
+        ),
+        dict(
+            menu_id="monitoring_id",
+            title=c.title_monitoring_center,
+            title_header=c.title_monitoring_center_header,
+            icon="fa fa-compass text-red",
+            endpoint="DashboardStudentView:monitoring_1",
+            is_visible=lambda menu_instance: True,
+        ),
+        dict(
+            menu_id="courses-all",
+            title=c.title_courses_all,
+            title_header=c.title_courses_all_header,
+            icon="fa fa-ew-book ",
+            endpoint="CourseView:listCourseStudent",
+            is_visible=lambda menu_instance: True,
+        ),
+        dict(
+            menu_id="subject",
+            title=c.title_subjects_school,
+            title_header=c.title_subjects_school_header,
+            icon="fa fa-microscope text-green",
+            endpoint="SubjectStudentView:index",
+            is_visible=lambda menu_instance: True,
+        ),
+        dict(
+            menu_id="instructor-list-id",
+            title=c.title_my_prof,
+            title_header=c.title_my_prof_header,
+            icon="fa fa-ew-instructor text-blue ",
+            endpoint="InstructorStudentView:list",
+            is_visible=lambda menu_instance: True,
+        ),
+        dict(
+            menu_id="calendar_event",
+            title=c.title_calendar,
+            title_header=c.title_calendar_header,
+            icon="fa fa-calendar-days text-purple",
+            endpoint="CalendarStudentView:index",
+            is_visible=lambda menu_instance: True,
+        ),
+        dict(
+            menu_id="calendar_assistance",
+            title=c.title_demands_assist,
+            icon="fa fa-ew-sos text-orange",
+            children=[
+                dict(
+                    menu_id="calendar_assistance_new",
+                    title=c.title_demands_inprogress,
+                    title_header=c.title_demands_inprogress_header,
+                    icon="fa fa-headset text-yellow",
+                    endpoint="CalendarAssistanceStudentView_ongoing",
+                    is_visible=lambda menu_instance: True,
+                ),
+                dict(
+                    menu_id="calendar_assistance_accepted",
+                    title=c.title_demands_accept,
+                    title_header=c.title_demands_accept_header,
+                    icon="fa fa-ew-sos-new text-green",
+                    endpoint="CalendarAssistanceStudentView_accepted",
+                    is_visible=lambda menu_instance: True,
+                ),
+                dict(
+                    menu_id="calendar_assistance_done",
+                    title=c.title_demands_ended,
+                    title_header=c.title_demands_ended_header,
+                    icon="far fa-calendar-check text-muted",
+                    endpoint="CalendarAssistanceStudentView_done",
+                    is_visible=lambda menu_instance: True,
+                ),
+                dict(
+                    menu_id="calendar_assistance_cancelled",
+                    title=c.title_demands_cancel,
+                    title_header=c.title_demands_cancel_header,
+                    icon="far fa-calendar-xmark text-red",
+                    endpoint="CalendarAssistanceStudentView_canceled",
+                    is_visible=lambda menu_instance: True,
+                ),
+                dict(
+                    menu_id="calendar_assistance_all",
+                    title=c.title_demands_all,
+                    title_header=c.title_demands_all_header,
+                    icon="fa fa-ew-sos text-info",
+                    endpoint="CalendarAssistanceStudentView_all",
+                    is_visible=lambda menu_instance: True,
+                ),
+            ],
+        ),
+        dict(
+            menu_id="message-2",
+            title=c.title_mail_2,
+            title_header=c.title_mail_2_header,
+            icon="fa fa-envelopes-bulk text-green",
+            endpoint="MessagingView:index",
+            is_visible=lambda menu_instance: True,
+        ),
+        dict(
+            menu_id="courses-laptop-id",
+            title=c.title_my_courses_school,
+            icon="fa fa-computer text-indigo",
+            children=[
+                dict(
+                    menu_id="courses-history",
+                    title=c.title_courses_historical,
+                    title_header=c.title_courses_historical_header,
+                    icon="fa fa-clock-rotate-left text-green ",
+                    endpoint="CourseView:listCourseHistory",
+                    is_visible=lambda menu_instance: True,
+                ),
+                dict(
+                    menu_id="courses-favorites",
+                    title=c.title_courses_fav,
+                    title_header=c.title_courses_fav_header,
+                    icon="fa fa-heart text-yellow ",
+                    endpoint="CourseView:listCourseFavorite",
+                    is_visible=lambda menu_instance: True,
+                ),
+            ],
+        ),
+        # End menu
+    ]
+)

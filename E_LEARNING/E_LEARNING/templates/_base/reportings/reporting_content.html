@@ -1,0 +1,22 @@
+<div class="card mt-1 mb-0 bg-graph">
+    <div class="card-body text-center p-0 mt-2" style="min-height:70vh" id="reporting-card-body">
+
+
+        <span ng-show="loading"
+              style=""
+              class="loading-spinner border rounded-pill bg-light p-2 elevation-2 ">
+            <i class=" fa fa-spinner fa-3x  text-red fa-spin"></i>
+        </span>
+
+        <div class="mb-2 pl-3 pr-3 text-uppercase div-groupZone">
+            <h7>🧲 {{JR.drag_column_to_group}} :</h7>
+            <div id="groupZone" class="border border-secondary rounded p-2 mb-2  text-xs" style="min-height:40px;">{{JR.drop_column_here}}</div>
+           
+        </div>
+        <div class="table-responsive p-0  mt-2 text-uppercase" ng-show="ready">
+
+            <table id="table-reporting-global" class="table-reporting-global table text-nowrap table-bordered  table-hover  data-table">
+            </table>
+        </div>
+    </div>
+</div>

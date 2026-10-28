@@ -1,0 +1,58 @@
+{% extends "_layouts/layout.html" %}
+{% block head %}
+
+<link href="/static/plugins/fullcalendar/main.min.css" rel="stylesheet" />
+<link href="/static/plugins/fullcalendar/main.extension.css" rel="stylesheet" />
+<style>
+    .spinner-grow {
+        animation-duration: 1.5s;
+    }
+
+    div.fa-info-assistance {
+        z-index: 1000;
+        position: relative;
+        float: right;
+        margin-top: 2px;
+    }
+
+        div.fa-info-assistance .fa {
+            background-color: #ffffff;
+            display: inline-block;
+            border-radius: 60px;
+            font-size: 16px;
+            box-shadow: 0 1px 2px #212121;
+            padding: 0.1em 0.1em;
+        }
+</style>
+{% endblock %}
+
+{% block content %}
+<input style="position: absolute; z-index: 100000;" type="hidden" id="picker" />
+<div ng-controller="CalendarEventCtrl" ng-init="init({{list_tasks.json}})">
+    <form id="calendarForm" class="mt-4" ng-submit="submitForm('{{url_save_update}}')" method="post">
+        <div class="text-center">
+            <div class="text-uppercase text-xs" id="calendar"></div>
+        </div>
+        <div class="footer-fix" ng-show="nbr_modification">
+            <button class=" btn btn-warning mr-2" aria-label="saveButton" type="submit" data-toggle="tooltip" title="{$nbr_modification ? '{{JR.save_data}} : {0} ...'.format(nbr_modification ) : '{{JR.no_modifications}}' $}">
+                <span class="fa fa-floppy-disk mr-2"></span>{{JR.save}} ( {$nbr_modification$} ) <i class="fa spinner-grow spinner-grow-sm ml-2 text-danger" ng-show="nbr_modification"></i>
+            </button>
+            <button class=" btn btn-danger mr-2" ng-click="AnnulerModification()" ng-show="nbr_modification" type="button" data-toggle="tooltip" title="{{JR.cancel_all_modifications}}.">
+                <span class="fa fa-reply mr-2"></span>{{JR.cancel_all}}
+            </button>
+        </div>
+    </form>
+
+
+</div>
+
+{% endblock %}
+{% block contentBottom %}{% endblock %}
+
+{% block scripts %}
+<script src="/static/plugins/moments/moment.min.js"></script>
+<script src="/static/plugins/moments/moment-with-locales.min.js"></script>
+{% include '_includes/x-links-scripts-fullcalendar.html' %}
+<script src="/static/app-core/_shared/jquery.calendar-events.min.js?version={{app_version()}}"></script>
+<script src="/static/app-core/schools/app.calendar-events.min.js?version={{app_version()}}"></script>
+{% endblock %}

@@ -1,0 +1,18 @@
+<div class="footer-fix" ng-init="collapse_footer=false">
+    <div role="button" 
+         ng-click="collapse_footer=!collapse_footer" class=" d-block p-0"
+         ng-class="collapse_footer ? 'text-center' : 'float-right pt-2 pr-2'">
+        <i class="fa  text-warning text-lg" 
+           ng-class="collapse_footer ? 'fa-square-caret-up' : 'fa-square-caret-down'"></i>
+    </div>
+    <div class="p-0" ng-hide="collapse_footer">
+        <div class="row m-0 p-0 justify-content-center text-center text-uppercase bg-transparent rounded text-xs" >
+            <div class="col d-sm-block d-none"></div>
+            <div class="col-xs p-1">{{JR.date_start}} <input id="dtStr" name="dtStr" ng-model="dateStr" max="{$ dateMax  | date:'yyyy-MM-dd' $}" class="btn btn-outline-warning btn-block  d-inline text-bold text-uppercase text-center text-md " required type="date" /></div>
+            <div class="col-xs p-1">{{JR.date_end}} <input id="name" name="dtEnd" ng-model="dateEnd"  class="btn btn-outline-warning btn-block  d-inline text-bold text-uppercase text-center text-md " required type="date" /></div>
+            <div class="col-sm p-1"><br />
+            <button ng-show="dateStr && dateEnd" type="submit" class="btn btn-block btn-primary text-uppercase"> {{JR.generate}} <i ng-show="loading" class="ml-1 fa fa-spinner text-yellow fa-spin"></i></button></div>
+            <div class="col d-sm-block d-none"></div>
+        </div>
+    </div>
+</div>

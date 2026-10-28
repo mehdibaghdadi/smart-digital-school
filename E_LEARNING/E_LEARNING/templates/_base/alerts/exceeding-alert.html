@@ -1,0 +1,34 @@
+
+<div class="alert alert-warning alert-dismissible text-center text-uppercase p-2"
+     style="position: fixed; left:0;bottom: -16px; width: 100%; z-index: 9999;">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <h5><i class="icon fas fa-exclamation-triangle"></i>{{JR.version}} : {{current_package.label}} </h5>
+
+    <div>
+        {% if g.current_language == 'fr'%}
+        Vous utilisez actuellement la version <b>{{current_package.label}}</b> de cette application.
+
+
+        {% elif g.current_language == 'en'%}
+        You are currently using the <b>{{current_package.label}}</b> version of this application.
+
+
+        {% elif g.current_language == 'es'%}
+        Actualmente estás usando la versión <b>{{current_package.label}}</b> de esta aplicación.
+        {%endif%}
+    </div>
+    <span class="mt-2 pl-4 pr-4 d-inline-block p-1 text-left rounded border blink-item  ">{{alert_message_exceeding}}</span>
+    <br />
+    <br />
+    <div class="p-2 pt-0">
+        {% if current_user.role == ROLES.School.value %}
+        <a role="button" class="btn btn-danger mr-3" href="{{url_for('PackageView:index')}}">
+            <span><i class="fa fa-arrow-up-from-ground-water mr-1"></i> {{JR.upgrade}}</span>
+        </a>
+        {%endif%}
+
+        <button type="button" class="btn btn-dark" data-dismiss="alert" aria-hidden="true">
+            {{JR.close}}
+        </button>
+    </div>
+</div>

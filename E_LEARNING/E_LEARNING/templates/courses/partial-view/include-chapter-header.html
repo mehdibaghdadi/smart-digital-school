@@ -1,0 +1,79 @@
+
+<div class="time-label text-uppercase"
+     ng-init="chapt['{{ list[loop.index0].chapter_sequence  }}'].hide=( (learning_progress_chapters[{{list[loop.index0].chapter_id}}] ||0)==0 || (learning_progress_chapters[{{list[loop.index0].chapter_id}}] ||0)==100)">
+
+    <div class="animate-opacity cursor-pointer " id="header_chapter_{{list[loop.index0].chapter_id}}"
+         ng-click="chapt['{{ list[loop.index0].chapter_sequence  }}'].hide=!chapt['{{ list[loop.index0].chapter_sequence  }}'].hide">
+
+        <div class=" bg-gradient-chapter rounded " role="button">
+            <div class="d-flex align-items-start p-3">
+
+                <div class="text-nowrap text-xs">
+                    <i class="fa fa-book-bookmark mr-1 text-red" ng-class="!chapt['{{ list[loop.index0].chapter_sequence  }}'].hide?'fa-flip-horizontal':''"></i>
+                    <u>{{JR.chapter}}</u><b class="text-warning text-sm ml-1">{$ ({{ list[loop.index0].chapter_sequence  }}) | numberToLetter $} </b>
+                </div>
+
+                <div class=" no-border text-uppercase text-light text-left p-0 m-0 ml-2 text-sm title-chapter-header ">
+                    : {{ list[loop.index0].chapter_title }}
+                    {%if isInstructor %}
+                    <div class="text-right">
+                        <a class="mt-2 border rounded p-1 d-inline-block text-xs text-warning" data-toggle="tooltip" title="{{JR.edit}} : {{JR.chapter}}"
+                           ng-href="{{url_for("ChapterInstructorView:edit_1")}}/{{list[loop.index0].chapter_id}}">
+                            <i class="fa fa-pen mr-1"></i>{{JR.edit}}
+                        </a>
+                    </div>
+                    {%endif%}
+                </div>
+            </div>
+
+            <!--begin learning progress-->
+
+            <div class="progress border-top border-secondary rounded-bottom elevation-1">
+                <div class="progress-bar bg-light" role="progressbar"
+                     style="width: 100%;"
+                     ng-style="{'background': 'linear-gradient(90deg, #e8fbdc '+( learning_progress_chapters[{{list[loop.index0].chapter_id}}] ||0 ) + '%, #ffffff00 0%)'}"
+                     aria-valuenow="{$ ( learning_progress_chapters[{{list[loop.index0].chapter_id}}] ||0 ) $}"
+                     aria-valuemin="0" aria-valuemax="100">
+                    <div class="text-uppercase text-center pr-1">
+                        <small class="">
+                            {$ ( learning_progress_chapters[{{list[loop.index0].chapter_id}}] ||0 )  ==100 ? "{{JR.finished}}" : "{{JR.progression}}" $}
+
+                        </small><b ng-show="( learning_progress_chapters[{{list[loop.index0].chapter_id}}] ||0 )<100"> : {$ ( learning_progress_chapters[{{list[loop.index0].chapter_id}}] ||0 )  | number:0 $} <i class="fa fa-percent"></i></b>
+                    </div>
+                </div>
+            </div>
+
+            <!--end learning progress-->
+        </div>
+        <div data-toggle="tooltip" title="{$ chapt['{{ list[loop.index0].chapter_sequence  }}'].hide ? '{{JR.show_content}}' : '{{JR.hide}} : {{JR.chapter}}'$}"
+             class="timeline-item d-flex text-uppercase justify-content-between align-items-start text-center rounded-0 elevation-0 bg-transparent">
+
+            <span class="section-total">
+                <i class="fab fa-dropbox text-info mr-1 text-sm"></i>
+                <b class="text-black" style="font-size:0.8rem">
+                    {{ list[loop.index0].num_of_contents  }}
+                </b> {{JR.contents}}.
+            </span>
+
+            <span class="text-uppercase pt-1 mr-1">
+                <span ng-show="chapt['{{ list[loop.index0].chapter_sequence  }}'].hide">
+                    <i class="fa fa-chevron-down text-md text-dark "></i>
+                </span>
+                <span class="" ng-hide="chapt['{{ list[loop.index0].chapter_sequence  }}'].hide">
+                    <i class="fa fa-chevron-up  text-gray "></i>
+                </span>
+            </span>
+
+        </div>
+    </div>
+    {% if list[loop.index0].chapter_description %}
+    <div class="text-xs timeline-item  mt-3 text-dark p-2 border rounded shadow-sm"
+         ng-show="!chapt['{{ list[loop.index0].chapter_sequence  }}'].hide">
+        <u class="text-bold">{{JR.summary}}</u>:<br />
+        <div class="pt-2">{{ list[loop.index0].chapter_description  }}</div>
+    </div>
+    {% endif %}
+
+
+</div>
+

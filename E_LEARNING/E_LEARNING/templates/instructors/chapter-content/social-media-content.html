@@ -1,0 +1,107 @@
+<!-- Modal YouTube -->
+<form class="modal fade p-0" id="socialMediaModalContent" name="socialMediaModalContent"
+      ng-submit="submitSocialMediaContent(editContent)" tabindex="-1"
+      role="dialog" data-backdrop="static" data-keyboard="false"
+      aria-labelledby="uploadYouTubeLabel">
+    <div class="modal-dialog modal-fullscreen" role="document">
+        <div class="modal-content">
+            <div class="modal-header p-1 pt-0 pb-0 bg-danger">
+                <small class="text-uppercase mt-1 ml-1">
+                    <i class="fa {$content_type.css$} mr-1"></i>
+                    <b class="modal-title" id="uploadYouTubeLabel">
+                        {$ editContent.id>0 ?"{{JR.edit}}":"{{JR.load}}" $} :
+                        <span class="text-warning">{$content_type.text$}</span>
+                    </b>
+                </small>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body  overflow-auto" ng-model="editContent">
+                <div class="row text-uppercase text-xs">
+
+                    <!-- Input URL YouTube -->
+                    <div class="form-group col-md-12">
+                        <small><i class="fa fa-link mr-1"></i>{{JR.url_link}}</small>
+                        <input type="url" class="form-control rounded-0"
+                               ng-change="fetchYouTubeInfo(editContent.content_url)"
+                               placeholder="https://www.youtube.com/watch?v=..."
+                               ng-model="editContent.content_url" required>
+                    </div>
+                    <i id="loaderSocialMediaSpinner"
+                       style="position: absolute; z-index: 999;top:25%;left:22%"
+                       class="fa fa-spinner fa-spin text-red shadow-text fa-5x d-none"></i>
+
+                    <!-- Aperçu embed -->
+                    <div class="form-group col-md-6 text-center" ng-if="editContent.content_url">
+                        <small>{{JR.video_preview}}</small>
+                        <iframe width="100%" height="250"
+                                ng-src="{$ editContent.content_url | youtubeEmbed $}"
+                                frameborder="0" allowfullscreen>
+                        </iframe>
+                    </div>
+                    <!-- Aperçu miniature -->
+                    <div class="form-group col-md-6 text-center position-relative" ng-if="editContent.content_url">
+
+                        <div style="position: absolute; top: 0; left: 0%; right:0%;"
+                             class="text-center mt-1">
+                            <span style="background: #cccccc75;" class="btn-sm text-xs">{{JR.cover_image}} : {$ editContent.videoId  $} <i class="ml-1 fa fa-camera"></i></span>
+                        </div>
+                        <div ng-click="zoomImage(editContent.content_cover_url)" ng-style="{ 'background-image': 'url(' + editContent.content_cover_url + ')',
+                                        'background-size': 'cover',
+                                        'background-position': 'center center',
+                                        'width': '100%',
+                                        'height': '250px',
+                                        'border': '1px solid #ddd' }"></div>
+
+                    </div>
+
+
+                    <!-- Description -->
+                    <div class="form-group col-md-12">
+                    <label class="small ">{{JR.description}}</label> 
+                        <textarea ng-model="editContent.content_brief" required rows="7"
+                                  class="form-control rounded-0"
+                                  placeholder="{{JR.summary}} {$content_type.text$} ..."></textarea>
+                    </div>
+
+                    <!-- Important  Visibility -->
+                    <div class="p-0 col-6 text-left">
+                        <div class="switch text-xs text-uppercase">
+                            <span class="ml-2 font-weight-bold">
+                                <span ng-class="editContent.is_important==1 ? 'text-red' : ''">{{JR.important}}</span>
+                                <label class="">
+                                    <input type="checkbox" ng-model="editContent.is_important" ng-true-value="1" ng-false-value="0" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <span class="lever"></span>
+                                </label>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="p-0 col-6 text-right">
+                        <div class="switch text-xs text-uppercase">
+                            <span class="">
+                                <i class="fa"
+                                   ng-class="editContent.is_visible==1 ? 'fa-eye text-success' : 'fa-eye-slash text-muted'"></i>
+                            </span>
+                            <span class="ml-1 font-weight-bold">
+                                <span>{$ editContent.is_visible ? "{{JR.online}}":"{{JR.offline}}"$}</span>
+                                <label class="">
+                                    <input type="checkbox" ng-model="editContent.is_visible" ng-true-value="1" ng-false-value="0" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <span class="lever"></span>
+                                </label>
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="modal-footer bg-black  justify-content-center position-relative">
+                <button type="submit" class="btn btn-danger">{{JR.save}}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{JR.close}}</button>
+            </div>
+        </div>
+    </div>
+</form>

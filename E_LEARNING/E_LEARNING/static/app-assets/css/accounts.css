@@ -1,0 +1,90 @@
+input, textarea {
+    scroll-margin-bottom: 500px; /* petit bonus de confort */
+}
+html {
+    background-color: #000;
+    filter: hue-rotate(var(--main-hue-rotate));
+    background-image: url(/static/app-assets/img/bg-account-md.jpg) !important;
+    background-position: center  top;
+    background-size: auto !important;
+    /*background-repeat: no-repeat;*/
+}
+
+.btn-danger, .bg-danger, .bg-red, .text-danger, .bg-gradient-chapter:hover, .timeline-header span b {
+    filter: hue-rotate(var(--hue-rotate2)) !important;
+}
+
+b.text-info, .bg-warning, .btn-warning, .badge-warning, .text-warning, .text-yellow {
+    filter: hue-rotate(var(--hue-rotate4)) !important;
+}
+
+body {
+    background-color: transparent !important;
+}
+
+.text-register {
+    color: #7dc6ff !important;
+}
+@keyframes animation-users {
+    0% {
+        color: #f43c09;
+        opacity: 0.2;
+    } 30% {
+       
+        opacity:1;
+        color: #f43c09;
+    }    
+    100% {
+        color: #000;
+
+    }
+}
+@keyframes animation-chekbox {
+    0% {
+        color: #ccc;
+    }
+    100% {
+        color: #000;
+    }
+}
+.icheck-info > input:first-child:checked + label {
+    transition:all ease-in-out 1s;
+}
+.animate-user {
+    color: #000;
+    --fa-animation-duration: 1s;
+    --fa-animation-iteration-count: 1;
+    -webkit-animation-name: fa-beat,animation-users;
+    animation-name: fa-flip,animation-users;
+}
+
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px white inset !important;
+}
+
+.bg-remember {
+    background-color: #e8f0ff;
+}
+.icheck-info > input:first-child:checked + label::before {
+    background-color: #34507d;
+    border: 2px solid #5878a9;
+}
+    .card {
+    box-shadow: 0px 0px 7px 2px rgba(0, 0, 0, 0.85);
+    background-color: #ffffff;
+    background: linear-gradient(180deg, #ffffff, #ffffff75, #ffffff, #ffffff, #ffffffad, #ffffff);
+}
+.login-page, .register-page {
+    background-color: transparent !important;
+}
+.login-box, .register-box {
+    width: 460px;
+}
+
+@media (max-width: 576px) {
+    .login-box, .register-box {
+        margin-top: .5rem;
+        width: 95% !important;
+    }
+}

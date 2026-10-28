@@ -1,0 +1,194 @@
+{% extends "_layouts/layout.html" %}
+{% block head %}
+{% include '_includes/x-links-css-datatable.html' %}
+{% include '_includes/x-links-css-country-select.html' %}
+<style>
+    th {
+        text-align: center !important;
+        padding: 0.2rem !important;
+    }
+
+    .filter-tr th {
+        border: 0px !important;
+    }
+
+    .filter-tr .filterhead {
+        width: inherit !important;
+        border: 1px solid #fff !important;
+    }
+
+        .filter-tr .filterhead select {
+            width: 100%;
+        }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row m-0 p-0" ng-controller="StudentListCtrl"
+     ng-init="init({{student_list.json}},'{{student_update_password_url}}','{{student_active_user_url}}','{{student_update_profile_url}}','{{student_delete_url}}');city_available='{{ config.COUNTRY_WITH_CITIES }}'">
+
+    <div class="col-md-12 m-0 p-0">
+
+        <div class="text-uppercase text-center row p-0 m-0 border-bottom">
+            <div class="col-xs text-left">
+                <div class="btn btn-default border-bottom-0 btn-flat rounded-top btn-sm">
+                    <b><i class="mr-2"></i>{{JR.total}} : <span><b class="text-red">{$ (student_list | filter:{removed:false}).length  $}</b> <span>.</span> </span></b>
+                </div>
+            </div>
+            <div style="font-size:11px" class="col text-center">
+                <div class=""></div>
+            </div>
+            <div class="col-xs text-right">
+                <div class="text-uppercase text-right">
+                    <!--Add new-->
+                    <a class="btn btn-default border-bottom-0 btn-flat rounded-top btn-sm mr-1" href="{{student_add_url}}">
+                        <small><i class="fa fa-user-plus mr-2 text-green"></i>{{JR.add}}</small>
+                    </a>
+                    <!--Group by-->
+                    <div class="btn-group">
+
+                        <button type="button" class="btn btn-default border-bottom-0 btn-flat rounded-top btn-sm text-uppercase" data-toggle="dropdown" aria-expanded="false">
+                            <small>
+                                <i class="mr-2 fa fa-layer-group text-red"></i>{{JR.show_by}} <i class="ml-2 fa fa-ellipsis-v text-success"></i>
+                            </small>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" role="menu" style="">
+                            <a class="dropdown-item cursor-pointer" role="button" ng-click="groupBy(7)"><i class="fas fa-clock mr-2 text-green"></i>{{JR.date_creation}}</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item cursor-pointer" role="button" ng-click="groupBy(4)"><i class="fas fa-people-roof mr-2 text-purple"></i>{{JR.level_school}}</a>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card bg-graph elevation-0">
+            <div class="card-body  table-responsive m-0 p-0">
+                <table id="table-student" class="table table-bordered  table-hover text-nowrap data-table"
+                       style="font-size:11px;width:100%">
+                    <thead>
+                        <tr class="filter-tr hide-print">
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th class="filterhead bg-dark "></th>
+                            <th class="filterhead bg-dark"></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th class="filterhead bg-warning"></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+
+                        </tr>
+                        <tr class="text-center">
+                            <th style="max-width:50px" class="bg-dark hide-print"></th>
+                            <th style="min-width:200px !important" class="bg-info">{{JR.full_name}}</th>
+                            <th class="bg-info">{{JR.login}}</th>
+                            <th style="min-width:170px !important" class="bg-danger">{{JR.password2}}</th>
+                            <th class="bg-dark filterhead">{{JR.level}}</th>
+                            <th class="bg-dark filterhead">{{JR.classs}}</th>
+                            <th class="bg-light">{{JR.phone}}</th>
+                            <th style="max-width:80px" class="bg-light">{{JR.date_birth}}</th>
+                            <th style="max-width:80px" class="bg-light">{{JR.create_at}}</th>
+                            <th style="max-width:80px" class="bg-warning filterhead">{{JR.account_status}}</th>
+                            <th style="max-width:80px" class="bg-warning hide-print ">{{JR.change_status}}</th>
+                            <th style="max-width:80px" class="bg-success hide-print">{{JR.edit_all}}</th>
+                            <th style="max-width:80px" class="bg-danger hide-print">{{JR.delete}}</th>
+                        </tr>
+                    </thead>
+                    <tbody id="id_body" class="d-none">
+                        <tr ng-repeat="q in student_list track by $index " ng-hide="q.removed" id="tr{$ $index  $}">
+                            <td>
+                                <div class="image" role="button" ng-click="zoomImage(q.image)">
+                                    <img id="user-image-menu" width="40" ng-src="{$ q.image $}" class="user-image img-circle elevation-2" alt="">
+                                </div>
+                            </td>
+                            <td class="text-uppercase text-truncate font-weight-bold" ng-click="edition($event,q)" role="button">
+                                <i class="fa fa-pen rounded border p-2 float-right text-red"></i>
+                                {$ q.last_name $} {$ q.first_name $}
+                            </td>
+                            <td>{$ q.email $}</td>
+                            
+
+                            <td class="text-center p-0 m-0" style="min-width:175px;max-width:195px !important">
+                                <div class="p-1 m-0 text-right d-flex justify-content-between mt-2 align-items-center">
+
+                                    <i id="eye{$ $index $}" ng-click="tooglePassword('#pass'+$index,'#eye'+$index)"
+                                       role="button" class="fa fa-eye mr-1 text-sm"></i>
+
+                                    <input type="password" readonly style="max-width:115px" class="form-control form-control-border d-inline-block bg-transparent" id="pass{$ $index $}" value="{$ q.password $}" />
+                                    <span role="button" data-toggle="tooltip" title="{{JR.change_password}} " ng-click="changePassword($event,q)"><b class="fa fa-edit text-md text-danger ml-1"></b></span>
+                                </div>
+                            </td>
+
+
+
+                            <td class="text-center text-uppercase">
+                                {$ q.level $} - {$ q.qualification $}
+
+                            </td>
+                            <td class="text-center font-weight-bold text-uppercase">
+
+                                {$ q.classroom $}
+                            </td>
+                            <td class="text-center">{$ q.phone_primary $}</td>
+                            <td class="text-center  text-uppercase">{$ q.date_birth |localeDate  $}</td>
+                            <td class="text-center  text-uppercase">{$ q.registration_date |localeDate $}</td>
+                            <td class="text-center text-uppercase font-weight-bold">
+                                {$q.active_account==1 ? '{{JR.active}}' : '{{JR.inactive}}'$}
+                            </td>
+                            <td class="text-center">
+                                <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success" title="{$q.active_account==1 ? '{{JR.active}}' : '{{JR.inactive}}'$}" data-toggle="tooltip">
+                                    <input type="checkbox" class="custom-control-input" id="active_account{$ q.id $}" ng-click="statusChange($event,q)" onclick="return false;" ng-checked="q.active_account==true">
+                                    <label role="button" class="custom-control-label" for="active_account{$ q.id $}"></label>
+                                </div>
+                            </td>
+
+                            <td class="text-center">
+                                <button class="btn btn-default btn-xs" ng-click="edition($event,q)" type="button"><i class="fas fa-user-edit"></i></button>
+                            </td>
+                            <td class="text-center">
+                                <button class="btn btn-default btn-xs" ng-click="deleteUser($event,q,$index)" type="button"><i class="fas fa-trash"></i></button>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+
+                <div class="text-uppercase text-center footer-fix">
+                    <a class="btn btn-primary btn-flat rounded " href="{{student_add_url}}">
+                        <span><i class="fa fa-user-plus mr-2 text-green"></i>{{JR.add}} : {{JR.student}}</span>
+                    </a>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+
+    {% include 'schools/students/modal-student-edit.html' %}
+</div>
+
+    {% endblock %}
+    {% block contentBottom %}
+    {% endblock %}
+    {% block scripts %}
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js"></script>
+{% include '_includes/x-links-scripts-datatable.html' %}
+{% include '_includes/x-links-scripts-country-select.html' %}
+<script src="/static/plugins/moments/moment.min.js"></script>
+<script src="/static/plugins/moments/moment-with-locales.min.js"></script>
+<script src="/static/app-assets/js/password-manager.min.js?version={{app_version()}}"></script>
+<script src="/static/app-core/schools/jquery.students.min.js?version={{app_version()}}"></script>
+<script src="/static/app-core/schools/app.students.min.js?version={{app_version()}}"></script>
+    {% endblock %}

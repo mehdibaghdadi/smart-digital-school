@@ -1,0 +1,55 @@
+{% extends "_layouts/layout.html" %}
+{% set url_calendar_url=url_for("CalendarEventInstructorView:index") %}
+
+{% block head %}
+<link href="/static/plugins/fullcalendar/main.min.css" rel="stylesheet" />
+<link href="/static/plugins/fullcalendar/main.extension.css" rel="stylesheet" />
+<link href="/static/app-assets/css/css-circular-prog-bar.min.css" rel="stylesheet" />
+<style>
+
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard bg-graph rounded  pb-5" ng-controller="DashboardCtrl" ng-init="init('{{courses_report_url}}','{{enrollments_report_url}}','{{message_box_report_url}}','{{calendar_assistance_report_url}}','{{course_chapter_contents_report_url}}','{{list_tasks_url}}')">
+    {%if not subjectExist%}
+    <div class=" alert alert-danger text-center text-bold text-uppercase m-0">
+        <i class="fa fa-exclamation-triangle text-yellow mr-1"></i> {{JR.school_must_define_prof_subjects}}.
+    </div>
+    {%endif%}
+
+    {% include '_base/dashboard/dashboard-badges-top-instructor.html' %}
+
+    <div class="dropdown-divider"></div>
+    <div class="row">
+        <div class="col-md-8">
+            <!--Calendar-->
+            {% with url_calendar=url_calendar_url %}
+            {% include '_base/dashboard/dashboard-calendar.html' %}
+            {% endwith %}
+        </div>
+        <div class="col-md-4">
+            <!--enrollment Chart-->
+            {% include '_base/dashboard/dashboard-enrollment-charts.html' %}
+        </div>
+    </div>
+
+    <div class="dropdown-divider mt-3 mb-4"></div>
+    <!--contents ChartJS-->
+    <div class="text-uppercase p-0">
+        {% include '_base/dashboard/dashboard-contents-charts.html' %}
+    </div>
+
+
+</div>
+{% endblock %}
+{% block contentBottom %}{% endblock %}
+{% block footerBottom %} {% include '_includes/footer.html' %}{% endblock %}
+
+{% block scripts %}
+
+<script src="/static/plugins/chart.js/Chart.min.js"></script>
+{% include '_includes/x-links-scripts-fullcalendar.html' %}
+<script src="/static/app-core/_base/dashboard/jquery.dashboard.js?version={{app_version()}}"></script>
+<script src="/static/app-core/instructors/app.dashboard.min.js?version={{app_version()}}"></script>
+{% endblock %}

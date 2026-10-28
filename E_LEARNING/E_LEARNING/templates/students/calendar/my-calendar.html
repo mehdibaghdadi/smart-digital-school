@@ -1,0 +1,55 @@
+{% extends "_layouts/layout.html" %}
+{% block head %}
+
+<link href="/static/plugins/fullcalendar/main.min.css" rel="stylesheet" />
+<link href="/static/plugins/fullcalendar/main.extension.css" rel="stylesheet" />
+<link href="/static/app-assets/css/media-player.css?version={{app_version()}}" rel="stylesheet" />
+<style>
+    .spinner-grow {
+        animation-duration: 1.5s;
+    }
+
+    div.fa-info-assistance {
+        z-index: 1000;
+        position: relative;
+        float: right;
+        margin-top: 2px;
+    }
+
+        div.fa-info-assistance .fa {
+            background-color: #ffffff;
+            display: inline-block;
+            border-radius: 60px;
+            font-size: 16px;
+            box-shadow: 0 1px 2px #212121;
+            padding: 0.1em 0.1em;
+        }
+</style>
+{% endblock %}
+
+{% block content %}
+<input style="position: absolute; z-index: 100000;" type="hidden" id="picker" />
+<div ng-controller="MyCalendarCtrl" ng-init="init('{{list_tasks_url}}','{{url_list_demands_ids}}')">
+    <!--Calendar-->
+    <form id="calendarForm">
+        <div class="text-center">
+            <div style="position:absolute;right:50%;top:145px" class="float-right" ng-hide="list_tasks_loaded"><i class="fas fa-2x fa-sync-alt fa-spin"></i></div>
+            <div class="text-uppercase text-xs" id="calendar"></div>
+        </div>
+    </form>
+    {% include 'commun/assistance/modal-assistance-planning-event-details.html' %}
+    {% include 'courses/chapter-content/show-player.html' %}
+
+</div>
+
+{% endblock %}
+{% block contentBottom %}{% endblock %}
+
+{% block scripts %}
+<script src="/static/plugins/moments/moment.min.js"></script>
+<script src="/static/plugins/moments/moment-with-locales.min.js"></script>
+{% include '_includes/x-links-scripts-fullcalendar.html' %}
+{% include '_includes/x-links-scripts-media-player.html' %}
+<script src="/static/app-core/_shared/jquery.calendar-events.min.js?version={{app_version()}}"></script>
+<script src="/static/app-core/students/app.my-calendar.min.js?version={{app_version()}}"></script>
+{% endblock %}

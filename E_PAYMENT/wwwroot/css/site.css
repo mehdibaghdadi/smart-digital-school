@@ -1,0 +1,65 @@
+html {
+  font-size: 14px;
+}
+body {
+    font-size: 0.95rem;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+   
+}
+@media screen and (max-width: 767px) {
+    .bg-subscribe {
+        opacity: 0;
+    }
+}
+.bg-subscribe {
+    background-image: url(/subscribe.png);
+    background-position: -140px 0;
+    background-size: 1050px;
+}
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+.form-control {
+    background-color: #fffbf1 !important;
+}
+.bg-bank {
+  background:  linear-gradient(44deg, #fffbf1, #f9e6b7, #fffbf1, #fef2d5, #fffbf1, #fee7ac);
+}
+.text-bold, label{
+    font-weight:bold;
+}
+.form-check-input {
+    width: 1.2em;
+    height: 1.2em;
+    margin-top:0.2rem;
+    margin-right:0.1rem
+}
+img#captcha-image, .div-captcha {
+    height: 80px;
+}
+
+input#captcha-input::placeholder {
+    font-size: 12px;
+ 
+}
+
+.btn-primary {
+    background-color: #4669ae;
+    border-color: #4669ae;
+}
+a{
+   color: #4669ae;
+}

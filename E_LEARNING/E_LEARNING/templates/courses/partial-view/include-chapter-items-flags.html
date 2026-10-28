@@ -1,0 +1,14 @@
+ <!--flag type content-->
+<i role="button" ng-click="contentBeginClik($event,content_chapter[{{c.content_id}}])"
+   title="{{JR.chapter}} {{ list[loop.index0].chapter_sequence  }} - {{JR.part}} {{ c.content_sequence  }} , {{JR.type1}} : {{c.content_type}}"
+   data-toggle="tooltip" class=""
+   ng-class="content_type_dict[{{c.content_type_id}}].css+ ' ' + content_type_dict[{{c.content_type_id}}].bg">
+</i>
+
+<!--flag important-->
+ {% if c.is_important %}
+<i role="button"
+   title="{{JR.chapter}} {{ list[loop.index0].chapter_sequence  }} - {{JR.part}} {{ c.content_sequence  }}, {{JR.content}} : {{JR.important}}"
+   data-toggle="tooltip" class="fa fa-1x mt-6 fa-exclamation-triangle fa-2x  bg-yellow">
+</i>
+{%endif%}

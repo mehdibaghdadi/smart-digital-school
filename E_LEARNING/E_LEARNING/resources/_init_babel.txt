@@ -1,0 +1,15 @@
+
+#--1) ----- text extraction -----------
+pybabel extract -F babel.cfg -k _l -o translations/messages.pot --input-dirs=.
+
+
+#--2) --------initialization lang (first time) ------------
+//pybabel init -i translations/messages.pot -d translations -l en
+//pybabel init -i translations/messages.pot -d translations -l es
+
+
+#--3) ----- update .po and change text manually -----------
+pybabel update -i translations/messages.pot -d translations
+
+#--4) ----- compile after change text -----------
+pybabel compile -f -d translations

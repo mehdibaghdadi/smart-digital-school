@@ -1,0 +1,43 @@
+
+-- create user app
+
+CREATE USER 'ExtraNetUser'@'%' IDENTIFIED BY 'CHANGE_ME';
+GRANT ALL PRIVILEGES ON *.* TO 'ExtraNetUser'@'%' WITH GRANT OPTION;
+
+-- init database
+
+SET FOREIGN_KEY_CHECKS = 0;  -- Désactive les clés étrangères
+
+TRUNCATE TABLE `questions`; 
+TRUNCATE TABLE `quizzes`; 
+TRUNCATE TABLE `course`; 
+TRUNCATE TABLE `course_chapter`; 
+TRUNCATE TABLE `course_chapter_content`; 
+TRUNCATE TABLE `course_favorite`; 
+TRUNCATE TABLE `enrollment`; 
+TRUNCATE TABLE `feedback`; 
+TRUNCATE TABLE `instructor`; 
+TRUNCATE TABLE `instructor_calendar`;
+TRUNCATE TABLE `instructor_calendar_assistance`;
+TRUNCATE TABLE `instructor_subject`;
+TRUNCATE TABLE `learning_progress`;
+TRUNCATE TABLE `messages_box`; 
+TRUNCATE TABLE `messages_box_recipients`;
+TRUNCATE TABLE `payment`; 
+TRUNCATE TABLE `qualification`; 
+TRUNCATE TABLE `school`; 
+TRUNCATE TABLE `school_calendar`; 
+TRUNCATE TABLE `school_qualification`;
+TRUNCATE TABLE `school_subject`;
+TRUNCATE TABLE `student`; 
+TRUNCATE TABLE `subject`; 
+TRUNCATE TABLE `subscription_client`;
+TRUNCATE TABLE `user_connection_log`;
+TRUNCATE TABLE `student_answers`;
+
+SET FOREIGN_KEY_CHECKS = 1; 
+
+
+
+
+

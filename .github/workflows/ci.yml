@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  dotnet:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Build gateway
+        run: dotnet build E_GATEWAY/E_GATEWAY.csproj
+      - name: Build payment
+        run: dotnet build E_PAYMENT/E_PAYMENT.csproj
+      - name: Build media hub
+        run: dotnet build E_MEDIAHUB/E_MEDIAHUB.csproj
+      - name: Build signalr
+        run: dotnet build E_SIGNALR/E_SIGNALR.csproj
+
+  ui:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: E_WEBSITE_UI
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm install
+      - run: npm run build

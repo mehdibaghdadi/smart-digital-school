@@ -1,0 +1,354 @@
+{% extends "_layouts/layout-account.html" %}
+{% set title_header = "Politique de Confidentialité" if g.current_language == "fr" else "Privacy Policy" %}
+
+{% block head %}
+
+<title>Politique de Confidentialité — Smart Digital School</title>
+<style>
+    .hack-top-login {
+        display: none;
+    }
+    .login-box, .register-box {
+        width: 960px;
+    }
+
+    .login-page {
+        height: 100%;
+    }
+
+    .content-tc {
+        line-height: 1.5rem;
+    }
+
+    .tab {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #efefef;
+    }
+
+        /* Style the buttons that are used to open the tab content */
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            background-color: #ddd;
+        }
+
+            /* Change background color of buttons on hover */
+            .tab button:hover {
+                background-color: #ccc;
+            }
+
+            /* Create an active/current tablink class */
+            .tab button.active {
+                background-color: #ffd800 !important;
+                text-decoration: underline;
+            }
+
+    /* Style the tab content */
+    .tabcontent:not(.active) {
+        display: none;
+    }
+
+    h5 {
+        text-transform: uppercase;
+    }
+</style>
+
+<style>
+    :root {
+        --bg: #ffffff;
+        --text: #0b2340;
+        --muted: #55677f;
+        --accent: #1e4db7;
+        --container: 100%;
+    }
+
+
+
+    .wrap {
+        max-width: var(--container);
+        margin: 16px auto;
+        padding: 28px;
+        box-shadow: 0 6px 24px rgba(11,35,64,.06);
+        border-radius: 12px;
+    }
+
+    h1 {
+        font-size: 28px;
+        margin: 0 0 8px;
+    }
+
+    p.lead {
+        color: var(--muted);
+        margin-top: 6px;
+    }
+
+    h2 {
+        margin-top: 28px;
+        color: var(--accent);
+        font-size: 18px;
+    }
+
+    ul {
+        margin: 8px 0 16px 20px;
+    }
+
+    .small {
+        font-size: 13px;
+        color: var(--muted);
+    }
+
+    footer {
+        margin-top: 28px;
+        border-top: 1px solid #eef3fb;
+        padding-top: 16px;
+        color: var(--muted);
+        font-size: 13px;
+    }
+
+    .meta {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap
+    }
+
+        .meta div {
+            background: #f6f9ff;
+            padding: 8px 10px;
+            border-radius: 8px
+        }
+
+    a {
+        color: var(--accent);
+    }
+</style>
+{% endblock %}
+{% block toplogin%}
+{% endblock%}
+
+{% block content%}
+{% endblock %}
+
+{% block bottomlogin %}
+
+
+<div class="mt-2 text-right">
+    <i class="ew ew-{{g.current_language}} mr-2"></i>
+    <select id="languageDropdown" class="form-control-sm text-uppercase bg-primary">
+        {% for k,v in config.BABEL_LANGUAGES.items() %}
+        {% if k in ["fr","en"] %}
+        <option value="{{ k }}" {{ 'selected' if k == g.current_language else '' }}>
+            {{ v }}
+        </option>
+        {% endif %}
+        {% endfor %}
+    </select>
+</div>
+
+{% if g.current_language == "fr" %}
+
+<main class="wrap bg-light text-sm" role="main">
+    <header>
+        <h1>Politique de Confidentialité</h1>
+        <p class="lead">Dernière mise à jour : <strong>19 octobre 2025</strong></p>
+        <p class="small">Cette politique décrit comment <strong>Smart Digital School</strong> (« nous », « notre ») collecte, utilise et protège les informations personnelles des utilisateurs de l’application mobile et du site web <a href="https://smartdigitalschool.com" target="_blank">smartdigitalschool.com</a>.</p>
+    </header>
+
+    <section>
+        <h2>1. Responsable du traitement</h2>
+        <p>
+            Organisation : <strong>Smart Digital School</strong><br />
+            Pays : Maroc<br />
+            Contact : <a href="mailto:support@smartdigitalschool.com">support@smartdigitalschool.com</a><br />
+            Site web : <a href="https://smartdigitalschool.com" target="_blank">https://smartdigitalschool.com</a>
+        </p>
+    </section>
+
+    <section>
+        <h2>2. Données collectées</h2>
+        <p>Nous collectons uniquement les données nécessaires au bon fonctionnement de nos services :</p>
+        <ul>
+            <li>Nom</li>
+            <li>Adresse e-mail</li>
+            <li>Adresse IP</li>
+            <li>Données de navigation (pages consultées, temps de connexion, interactions dans l’application)</li>
+        </ul>
+        <p>Aucune donnée sensible n’est collectée.</p>
+    </section>
+
+    <section>
+        <h2>3. Finalité du traitement</h2>
+        <p>Les données collectées servent uniquement à :</p>
+        <ul>
+            <li>Fournir le service éducatif et assurer son bon fonctionnement ;</li>
+            <li>Gérer les comptes utilisateurs et permettre la connexion sécurisée ;</li>
+            <li>Améliorer la qualité du service et l’expérience utilisateur.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>4. Partage avec des tiers</h2>
+        <p>Nous <strong>ne partageons pas</strong> les données personnelles avec des tiers.</p>
+        <p>Aucun transfert de données vers des prestataires externes ou vers d’autres pays n’est effectué.</p>
+    </section>
+
+    <section>
+        <h2>5. Sécurité</h2>
+        <p>Nous mettons en œuvre des mesures de sécurité techniques et organisationnelles pour protéger vos données contre tout accès non autorisé, perte ou divulgation. Toutes les communications avec nos serveurs sont chiffrées via HTTPS.</p>
+    </section>
+
+    <section>
+        <h2>6. Droits des utilisateurs</h2>
+        <p>Conformément aux lois en vigueur, vous disposez des droits suivants :</p>
+        <ul>
+            <li>Droit d’accès à vos données personnelles ;</li>
+            <li>Droit de rectification ou de suppression de vos données ;</li>
+            <li>Droit d’opposition à leur traitement.</li>
+        </ul>
+        <p>
+            Pour exercer vos droits, veuillez nous contacter à l’adresse suivante :
+            <strong><a href="mailto:support@smartdigitalschool.com">support@smartdigitalschool.com</a></strong>
+        </p>
+    </section>
+
+    <section>
+        <h2>7. Conservation des données</h2>
+        <p>Vos données sont conservées uniquement pendant la durée nécessaire à la fourniture du service éducatif, puis supprimées ou anonymisées.</p>
+    </section>
+
+    <section>
+        <h2>8. Enfants</h2>
+        <p>Le service peut être utilisé par des étudiants sous supervision d’un établissement éducatif. Nous ne collectons pas directement de données auprès d’enfants sans l’accord d’un parent ou tuteur légal lorsque la loi l’exige.</p>
+    </section>
+
+    <section>
+        <h2>9. Modifications</h2>
+        <p>Nous pouvons modifier cette politique afin de refléter les évolutions légales ou techniques. La version à jour est toujours disponible sur notre site officiel.</p>
+    </section>
+
+    <footer>
+        <div class="meta">
+            <div>Organisation : Smart Digital School</div>
+            <div>Pays : Maroc</div>
+            <div>Version : 1.0</div>
+        </div>
+        <p class="small">Cette politique de confidentialité est conforme aux principes de protection des données applicables au Maroc et à la réglementation internationale (RGPD). Elle ne remplace pas un avis juridique personnalisé.</p>
+    </footer>
+</main>
+
+{% else %}
+
+<main class="wrap bg-light text-sm" role="main">
+    <header>
+        <h1>Privacy Policy </h1>
+        <p class="lead">Last updated: <strong>October 19, 2025</strong></p>
+        <p class="small">
+            This Privacy Policy explains how <strong>Smart Digital School</strong> (“we”, “our”) collects, uses, and protects
+            personal information of users of our mobile application and the website
+            <a href="https://smartdigitalschool.com" target="_blank">smartdigitalschool.com</a>.
+        </p>
+    </header>
+
+    <section>
+        <h2>1. Data Controller</h2>
+        <p>
+            Organization: <strong>Smart Digital School</strong><br />
+            Country: Morocco<br />
+            Contact: <a href="mailto:support@smartdigitalschool.com">support@smartdigitalschool.com</a><br />
+            Website: <a href="https://smartdigitalschool.com" target="_blank">https://smartdigitalschool.com</a>
+        </p>
+    </section>
+
+    <section>
+        <h2>2. Data We Collect</h2>
+        <p>We collect only the information necessary for the proper operation of our services:</p>
+        <ul>
+            <li>Name</li>
+            <li>Email address</li>
+            <li>IP address</li>
+            <li>Browsing data (pages viewed, connection time, interactions within the app)</li>
+        </ul>
+        <p>No sensitive data is collected.</p>
+    </section>
+
+    <section>
+        <h2>3. Purpose of Processing</h2>
+        <p>The collected data is used solely to:</p>
+        <ul>
+            <li>Provide and maintain the educational service;</li>
+            <li>Manage user accounts and enable secure login;</li>
+            <li>Improve service quality and user experience.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>4. Data Sharing with Third Parties</h2>
+        <p>We <strong>do not share</strong> personal data with any third parties.</p>
+        <p>No data transfer to external providers or other countries is performed.</p>
+    </section>
+
+    <section>
+        <h2>5. Security</h2>
+        <p>
+            We implement appropriate technical and organizational measures to protect your data against unauthorized access,
+            loss, or disclosure. All communications with our servers are encrypted via HTTPS.
+        </p>
+    </section>
+
+    <section>
+        <h2>6. User Rights</h2>
+        <p>In accordance with applicable laws, users have the following rights:</p>
+        <ul>
+            <li>Right to access their personal data;</li>
+            <li>Right to correct or delete their data;</li>
+            <li>Right to object to processing.</li>
+        </ul>
+        <p>
+            To exercise these rights, please contact us at:
+            <strong><a href="mailto:support@smartdigitalschool.com">support@smartdigitalschool.com</a></strong>
+        </p>
+    </section>
+
+    <section>
+        <h2>7. Data Retention</h2>
+        <p>Your data is kept only for the time necessary to provide the educational service, then deleted or anonymized.</p>
+    </section>
+
+    <section>
+        <h2>8. Children</h2>
+        <p>
+            The service may be used by students under the supervision of a educational institution.
+            We do not knowingly collect personal data directly from children without the consent of a parent or legal guardian when required by law.
+        </p>
+    </section>
+
+    <section>
+        <h2>9. Changes to This Policy</h2>
+        <p>
+            We may update this Privacy Policy to reflect legal or technical changes.
+            The latest version is always available on our official website.
+        </p>
+    </section>
+
+    <footer>
+        <div class="meta">
+            <div>Organization: Smart Digital School</div>
+            <div>Country: Morocco</div>
+            <div>Version: 1.0</div>
+        </div>
+        <p class="small">
+            This privacy policy complies with Moroccan data protection principles and international regulations (such as the GDPR).
+            It does not replace a personalized legal opinion.
+        </p>
+    </footer>
+</main>
+        
+{% endif %}
+
+
+{% endblock %}

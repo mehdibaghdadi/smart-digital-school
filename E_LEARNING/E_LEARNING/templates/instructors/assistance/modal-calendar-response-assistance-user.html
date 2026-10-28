@@ -1,0 +1,72 @@
+{% block head %}
+<style>
+
+    .border-dash {
+        border: thin dotted #f3f3f3;
+    }
+</style>
+{% endblock %}
+<!-- Modal -->
+<form class="modal fade text-uppercase text-xs p-0" ng-submit="sendResponseDemandAssistanceSubmit($event,false)" id="assistanceRequestModal" name="assistanceRequestModal" tabindex="-1" role="dialog" aria-labelledby="assistanceRequestModal">
+    <div class="modal-dialog modal-fullscreen" role="document">
+        <div class="modal-content" style="overflow-y:auto;overflow-x:hidden">
+            <div class="modal-header p-1 pt-0 pb-0 bg-primary">
+                <small class="mt-1">
+                    <i class="text-warning fa fa-1x fa-info mr-2 ml-2"></i>
+                    <span class="timeline-header text-uppercase"><b>{{JR.content}} : {{JR.demand_assist}}</b></span>
+                </small>
+                <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times; </span></button>
+            </div>
+            <div class="modal-body p-2">
+                <div class="row form-group m-0 mt-3">
+                    <div class="col-md-12 col-lg-6">
+                        <b class="pr-2 d-block text-uppercase text-bold text-left text-gray-dark"><i class="fa fa-user-graduate mr-2 text-info"></i><u>{{JR.demand_by}}: {$demand_ass.student_last_name $} {$demand_ass.student_first_name $}</u></b>
+                        <small  style="font-size:13px !important" 
+                                  class="text-uppercase text-truncate border text-xs bg-transparent p-1 form-control rounded-2" rows="3" type="text"> {$demand_ass.description_demand $}</small>
+                        <!--planning-->
+                        <div class="mt-3">
+                            <div class="text-bold mb-1">
+                                <i class="fa fa-calendar-week text-info mr-2 "></i>{{JR.schedule_support}} <span class="text-red" ng-hide="demand_ass.accepted">( {{JR.canceled2}} )</span>
+                            </div>
+                            <select ng-disabled="!demand_ass.accepted" style="width:100%" class="form-control form-control-xs d-block text-uppercase" ng-model="demand_ass.instructor_calendar_id" convert-to-number>
+                                <option value="0" class="text-uppercase text-bold">🚫 {{JR.no_schedule}} ({{JR.reply_only}})</option>
+                                <option data-toggle="tooltip" title="{$l.event_description$}" ng-repeat="l in listTasksFromToday" value="{$l.id$}" ng-show="demand_ass.instructor_calendar_id == l.id || l.enableDate">
+                                    🕒 {$ l.start | date:'dd-MM-yyyy' $} | {$ l.plannedTitle  $} [ {$ l.title $} ]
+                                </option>
+                            </select>
+                        </div>
+                        <div class="mt-3 mb-3">
+                            <div class="mt-1"></div>
+                            <!--upload file-->
+                            {% include 'instructors/assistance/input-file-attachement.html' %}
+                            <!--end upload file-->
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-6">
+                        <!--response description-->
+                        {% with summernote_editor_id="snEditorContent" %}
+                        {% include 'instructors/assistance/input-response.html' %}
+                        {% endwith %}
+                        <!--end response description-->
+                    </div>
+
+                </div>
+
+                <div class="more-space-div-bottom"></div>
+            </div>
+
+            <div class="text-center bg-dark d-block footer-fix">
+                <div class=" p-2">
+                    <button hide-if-no-payment type="submit" class="mr-2 btn btn-primary"><span aria-hidden="true"><i class="fa fa-1x fa-paper-plane mr-2 ml-2"></i>{{JR.send_my_response}}</span></button>
+                    <button type="button" ng-hide="progressBar>0 &&  progressBar<95 " class="btn btn-danger " data-dismiss="modal">{{JR.close}}</button><br />
+                    <button id="btnCancelUpload" type="button" class="btn btn-warning btn-block mt-2"
+                            ng-click="reloadPage()" ng-hide="progressBar<=0 || progressBar>=95">
+                        {{JR.cancel}} : {$ progressBar | number:0 $}%
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+

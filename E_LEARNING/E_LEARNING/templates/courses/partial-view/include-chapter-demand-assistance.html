@@ -1,0 +1,128 @@
+<div class="mb-3"
+     ng-init="initAssistanceData('{{ c.content_id }}')" ng-show="assistance_course_filtred['{{ c.content_id  }}'].length">
+</div>
+
+<span style="float:left;"
+      ng-show="assistance_course_filtred['{{ c.content_id  }}'].length">
+    <i role="button" ng-click="dmd['{{ c.content_id  }}'].hide=!dmd['{{ c.content_id  }}'].hide"
+       style="border-radius: 50%; font-size: 16px; height: 30px; line-height: 30px;  text-align: center;  width: 30px;"
+       title="{{JR.demand_assist}}" data-toggle="tooltip" class="fa fa-ew-sos bg-dark ">
+    </i>
+</span>
+<div ng-repeat="a in  assistance_course_filtred['{{ c.content_id  }}']"
+     ng-init="dmd['{{ c.content_id  }}'].nbrAssist =assistance_course_filtred['{{ c.content_id  }}'].length;"
+     class="timeline-item elevation-0  text-left m-0 pt-0 bg-graph">
+
+    <div ng-show="$index==0" class="p-1 ml-0 bg-gradient-dm-assist-minus border rounded text-decoration-underline d-block text-left"
+         role="button"       
+         ng-click="dmd['{{ c.content_id  }}'].hide=!dmd['{{ c.content_id  }}'].hide">
+        <span>           
+            <b class="text-uppercase pl-1" style="font-size: 0.65rem;"
+               ng-class="dmd['{{ c.content_id  }}'].hide ? 'text-dark': 'text-dark'">
+                {{JR.help_requests}} ( <span class="" ng-class="dmd['{{ c.content_id  }}'].hide ? 'text-black': 'text-black'">{$ dmd['{{ c.content_id  }}'].nbrAssist  $}</span> )
+            </b>
+            <i class="fa float-right m-1" ng-class="dmd['{{ c.content_id  }}'].hide ? 'fa-chevron-down text-dark ' : 'fa-chevron-up text-gray '"></i>
+        </span>
+    </div>
+    
+    <div class="animate-opacity ml-1 pt-3 pb-1 pl-1 border-left rounded-left border-bottom" ng-hide="dmd['{{ c.content_id  }}'].hide">
+        <div class="p-0 m-0 d-flex justify-content-between align-items-end" >
+            <small class="ml-0 pb-3 pt-2 d-block text-uppercase">
+                <b style="width:19px;height:19px" class="badge mr-1 bg-white elevation-1 rounded-circle text-center p-0 pt-1 text-xs "><span class="">{$ $index+1 $}</span></b>
+                <b>{{JR.demand}} : <span class="text-black"><b>{$ ({{ list[loop.index0].chapter_sequence  }}) | numberToLetter $}-{{c.content_sequence}} </b></span></b>
+            </small>
+            <div ng-hide="dmd['{{ c.content_id  }}'].hide">
+                {% if isStudent %}
+                <span ng-show="a.accepted==undefined" class="mr-2">
+                    <span ng-click="updateAssistanceClick($event,content_chapter[{{c.content_id}}],a)" role="button" data-toggle="tooltip" title="{{JR.edit}} : {{JR.demand}}" class=" bg-info elevation-1 rounded-top  mr-1"><i class="fa fa-1x fa-edit mr-2 ml-3 text-white"></i> </span>
+                    <span ng-click="deleteAssistanceClick($event,content_chapter[{{c.content_id}}],a)" role="button" data-toggle="tooltip" title="{{JR.remove}} : {{JR.demand}}" class="bg-red elevation-1 rounded-top  mr-1"><i class="fa fa-1x fa-xmark mr-1 ml-1"></i> </span>
+                </span>
+                {%  endif %}
+            </div>
+        </div>
+
+
+        <div class=" ml-1 mt-0 p-0 pr-1">
+            <div class=" text-sm callout p-1 m-0 callout-info bg-light ">
+                <div class="bg-white rounded-lg p-1">
+                    <div class="mb-2 text-uppercase text-xs" ng-bind-html="a.description_demand | toHtml">
+                        {$ $}
+                    </div>
+                    <div class="text-right text-xs p-0 mt-2 text-gray ">
+                        <div class="text-uppercase d-inline" ng-hide="a.accepted==undefined">
+                            <small class="text-bold">{{JR.status2}}</small> : <small ng-switch="a.accepted">
+                                <b ng-switch-when="1" class="text-success">{{JR.accepted2}}</b>
+                                <b ng-switch-when="0" class="text-red">{{JR.canceled2}}</b>
+                            </small>
+                        </div> &nbsp;-&nbsp;
+                        <small><b class="text-uppercase">{$a.date_demand | date:'yyyy-MM-dd' | localeDate $} {$a.date_demand | date:'HH:mm' $}</b></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-3 d-block text-uppercase text-sm">
+            <i class="mr-0 ml-2 fas fa-reply-all fa-flip-horizontal fa-flip-vertical text-red"></i> <small><b>{{JR.answer}} </b></small>
+            <small ng-switch="a.accepted">
+                <b ng-switch-when="undefined|null" ng-switch-when-separator="|" class="text-info"> : <i class="ml-1 fa fa-clock mr-1"></i>{{JR.inprogress}} ...</b>
+            </small>
+        </div>
+        <div ng-show="a.response_demand" class="ml-3 mr-1 p-0  text-light">
+            <div class=" callout callout-success p-1 bg-light">
+                <div class="response-demand-prof  bg-white rounded-lg p-1">
+                    <div class="mb-2 text-uppercase text-xs" ng-bind-html="a.response_demand | toHtml">
+                        {$ $}
+                    </div>
+
+                    <!--ATTACHEMENT/LINK-->
+                    <div class="row m-0 p-0 mt-5" style="flex-direction: row-reverse">
+                        <div ng-show="a.attachment_url" class="col-md-6 text-uppercase text-wrap  p-1 ">
+                            <div class=" text-xs  btn-group d-block"
+                                 style="font-size:11px" data-type-extension="{$ type_file = getTypeFromExtensionURL(a.attachment_url) $}">
+
+                                <div class="mr-2" role="button" data-toggle="dropdown" aria-expanded="false">
+                                    <div class="" ng-href="{$ a.attachment_url $}">
+                                        <div class=""><i class="fa fa-paperclip mr-2"></i><u>{{JR.attachment}}</u></div>
+                                        <div ng-show="type_file.css" class="btn text-bold btn-xs ml-2 btn-outline-info d-block text-bold">
+                                            {$ type_file.text $}<i class="ml-1 mt-1 float-right fa fa-ellipsis-v"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="dropdown-menu dropdown-menu-right" role="menu" style="">
+                                    <span class="dropdown-item cursor-pointer" role="button" ng-click="readAttachmentFile($event,a.attachment_url,type_file,content_chapter[{{c.content_id}}])"> <span ng-show="type_file.css" class="text-dark"><i class="fa mr-1" ng-class="type_file.css +' '+ type_file.color"></i> {{JR.read_more2}} {$ type_file.text $}</span></span>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div ng-show="a.response_demand_link" class="col-md-6 text-uppercase text-wrap  p-1 ">
+                            <a ng-href="{$ a.response_demand_link $}" class="text-xs d-block" target="_blank">
+                                <div class=""><i class="fa fa-globe mr-2"></i>{{JR.url_link}}</div>
+                                <small class="btn text-bold btn-xs ml-2 btn-outline-info d-block" ng-bind-html="a.response_demand_link | detectMeetingService">{$$}</small>
+                            </a>
+                        </div>
+                    </div>
+                    <!--END ATTACHEMENT/LINK-->
+                    <div class="text-right text-xs p-0 mt-2 text-gray">
+                        <small class="d-block"><b class="text-uppercase">{$a.acceptance_date | date:'yyyy-MM-dd' | localeDate $} {$a.acceptance_date | date:'HH:mm' $}</b></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div ng-hide="dmd['{{ c.content_id  }}'].hide" ng-if="$last" class="text-right mt-2 p-2 pb-3">
+        {% if isStudent %}
+        <small class="btn btn-outline-dark btn-sm border btn-flat rounded elevation-1  text-uppercase"
+               role="button" ng-click="needAssistanceClick($event,content_chapter[{{c.content_id}}])">
+            <i class="fa fa-reply-all mr-1 text-success"></i> {{JR.reply}}
+        </small>
+        {% endif %}
+
+        <small class="btn btn-outline-dark btn-sm border btn-flat rounded elevation-1 text-uppercase ml-2" role="button"
+               ng-click="dmd['{{ c.content_id  }}'].hide=!dmd['{{ c.content_id  }}'].hide">
+            <i class="fa fa-close mr-1 text-red"></i> {{JR.close}}
+        </small>
+    </div>
+</div>

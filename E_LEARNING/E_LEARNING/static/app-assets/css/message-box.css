@@ -1,0 +1,199 @@
+
+/*text color*/
+.text-gray {
+    color: #727c81 !important;
+}
+
+.text-danger {
+    color: #cb2a2a !important;
+}
+
+.text-muted {
+    color: #98a6ad !important;
+}
+
+.text-primary {
+    color: #3bc0c3 !important;
+}
+
+.text-warning {
+    color: #ebc142 !important;
+}
+
+.text-success {
+    color: #33b86c !important;
+}
+
+.text-info {
+    color: #3c88a4 !important;
+}
+
+.text-inverse {
+    color: #14082d !important;
+}
+
+.text-pink {
+    color: #F13C6E !important;
+}
+
+.text-purple {
+    color: #615ca8 !important;
+}
+/* text-color */
+.text-dark {
+    color: #797979 !important;
+}
+
+
+.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
+    /*    background-color: #103b58;
+    color: #ffffff;*/
+    border-color: #d2d6d8;
+    background-color: #ebf1f7 !important;
+    color: #000000 !important;
+    z-index: 2;
+    font-size: 0.82rem
+}
+
+.list-group-item, .list-group-item:first-child, .list-group-item:last-child {
+    border-radius: 0px;
+    padding: 12px 20px;
+}
+
+.list-group-item-heading {
+    font-weight: 300;
+}
+
+.list-group-item.active > .badge, .nav-pills > .active > a > .badge {
+    color: #3bc0c3;
+}
+
+.list-group-item.active .list-group-item-text, .list-group-item.active:focus .list-group-item-text,
+.list-group-item.active:hover .list-group-item-text {
+    color: #3bc0c3;
+}
+
+.m-t-40 {
+    margin-top: 40px !important;
+}
+
+.panel {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin-bottom: 20px;
+    box-shadow: none;
+}
+
+    .panel a {
+        color: #337ab7;
+        text-transform: capitalize;
+    }
+
+
+
+    .panel .panel-body {
+        padding: 0px;
+        padding-top: 20px;
+    }
+
+    .panel .panel-body-menu {
+        font-size: 0.8rem;
+        font-weight: 600
+    }
+
+    .panel .panel-body p {
+        margin: 0px;
+    }
+
+        .panel .panel-body p + p {
+            margin-top: 15px;
+        }
+
+.panel-body label:before {
+    content: "";
+}
+
+.panel-default > .panel-heading {
+    background-color: #FFFFFF;
+    border-color: #DDDDDD;
+    color: #797979;
+}
+
+.panel-heading {
+    border-color: #eff2f7;
+    font-size: 16px;
+    padding: 0;
+    padding-bottom: 15px;
+}
+
+.panel-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.panel-footer {
+    margin: 0px -30px -30px;
+    background: #eee;
+    border-top: 0px;
+}
+
+.panel-group .panel .panel-heading {
+    padding-bottom: 0;
+    border-bottom: 0;
+}
+
+.panel-group .panel {
+    margin-bottom: 0;
+    border-radius: 0;
+}
+
+.m-t-20 {
+    margin-top: 20px;
+}
+
+.note-editable.card-block {
+    min-height: 350px;
+    cursor: text;
+}
+
+.note-editor {
+    background-image: none !important;
+}
+
+.text-sm {
+    font-size: 90%
+}
+
+.old-message .delete-smr {
+    display: none;
+}
+
+button[aria-expanded=true] .menu-expand {
+    display: none;
+}
+
+button[aria-expanded=false] .menu-collapse {
+    display: none;
+}
+
+.list-group-item sup {
+    font-size: 0.4rem;
+    color: #5edb7b;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    padding: 1px;
+}
+
+.header-list sup {
+    display: none;
+}
+
+.empty-list .header-list i.fa{
+    display:none;
+}
+ .header-list b.msg-nbr{
+    display: none;
+}

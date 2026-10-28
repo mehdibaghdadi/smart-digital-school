@@ -1,0 +1,147 @@
+{% extends "_layouts/layout-account.html" %}
+{% block head %}
+
+{% endblock %}
+{% block toplogin %}
+<p class="row align-items-end p-0 m-0 text-uppercase text-right">
+    <span class="col-xs d-sm-inline-block d-none">
+        <a title="{{JR.back}} : WEB SITE" data-toggle="tooltip" href="{{config.WEB_SITE}}" target="_self">
+        <i class="fa fa-globe text-light"></i></a>
+    </span>
+    <small class="col"></small>
+    <small class="col-xs">
+        <i class="ew ew-{{g.current_language}} mr-2"></i>
+        <select id="languageDropdown" class="form-control-sm text-uppercase bg-primary">
+            {% for k,v in config.BABEL_LANGUAGES.items() %}
+            <option value="{{ k }}" {{ 'selected' if k == g.current_language else '' }}>
+                {{ v }}
+            </option>
+            {% endfor %}
+        </select>
+    </small>
+</p>
+{% endblock %}
+{% block content %}
+<div class="card-body" ng-controller="LoginCtrl">
+    <!--<p class="login-box-msg">D&eacute;marrer votre session</p>-->
+    <div class="row text-center ">
+        <div class="col-12">
+            <!-- radio -->
+            <div class="form-group clearfix text-uppercase row" style="font-size:0.95rem">
+                {% if roles == ROLES.Any.value %}                
+                <div class="col-xs text-left text-xs">
+
+                    <div class="icheck-info d-inline-block mt-2">
+                        <input type="radio" name="rlogin" ng-model="user.type" id="radioSuccess1" value="{$ roles.student $}">
+                        <label for="radioSuccess1" ng-class="user.type == roles.student ? 'text-primary' : 'text-gray'">
+                            {{JR.student}}
+                        </label>
+                    </div>
+                </div>
+                <div class="col text-center">
+                    <span class="cursor-pointer" ng-click=" user.type = (user.type == roles.student ? roles.instructor : roles.student  )">
+                        <i ng-if="user.type == roles.student" class=" fa fa-ew-student fa-beat animate-user fa-4x"></i>
+                        <i ng-if="user.type == roles.instructor" class="fa fa-ew-instructor fa-beat animate-user fa-4x"></i>
+                    </span>               
+                </div>
+                <div class="col-xs text-right text-xs ">
+                    <div class="icheck-info d-inline-block mt-2 ">
+                        <input type="radio" name="rlogin" id="radioSuccess2" ng-model="user.type" value="{$ roles.instructor $}">
+                        <label for="radioSuccess2"  ng-class="user.type == roles.instructor ? 'text-primary' : 'text-gray'">
+                            {{JR.instructor}}
+                        </label>
+                    </div>
+                </div>
+                {% elif roles == ROLES.School.value %}
+                <div class="col-12 text-center">
+                    <i class="fa fa-ew-school fa-beat animate-user fa-4x"></i>
+                    <div class="mt-2"><b>{{JR.administrator}}</b></div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <form autocomplete="off" ng-submit="submitForm('{{sign_in_url}}')" method="post" ng-init="init('{{roles}}')" name="form_{{app_version()}}">
+        <div class="input-group mb-3">
+            <input autocomplete="new-password" title="{{JR.email}}" type="email" class="form-control bg-light"
+                   ng-class="user.remember=='1'?'bg-remember' : ''" required ng-model="user.email"
+                   placeholder="{{JR.login}} : {$ labelRole(user.type,'{{JR.student}}','{{JR.instructor}}','{{JR.administrator}}') $}">
+            <div class="input-group-append">
+                <div class="input-group-text bg-primary">
+                    <span class="fas fa-at"></span>
+                </div>
+            </div>
+        </div>
+        <div class="input-group mb-3">
+            <input autocomplete="new-password" id="password_login" data-type="password" type="password" class="form-control bg-light" required ng-model="user.password" placeholder="{{JR.password}}">
+            <div class="input-group-append">
+                <div class="input-group-text bg-primary">
+                    <span onclick="tooglePassword('#password_login','#toggle_eye')" id="toggle_eye" role="button" class="fas fa-eye text-warning"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="icheck-default">
+                    <input type="checkbox" id="remember_me" ng-model="user.remember" ng-true-value="'1'" ng-false-value="'0'">
+                    <label for="remember_me" class="text-uppercase">
+                        {{JR.remember}} ?
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="social-auth-links text-center mt-2 mb-3 d-none" id="request-area">
+            {% if roles == ROLES.Any.value %}
+            <button type="submit" class="p-2 btn btn-block btn-primary text-uppercase">
+                <i class="fas fa-arrow-right-to-bracket text-warning mr-2"></i>{{JR.log_in}}
+            </button>
+            {% elif roles == ROLES.School.value %}
+            <button type="submit" class="p-2 btn btn-block btn-primary text-uppercase">
+                <i class="fas fa-arrow-right-to-bracket text-red mr-2"></i>{{JR.log_in}}
+            </button>
+            {% endif %}
+            <small ng-bind-html="message | toHtml">{$$}</small>
+        </div>
+
+    </form>
+    <!-- /.social-auth-links -->
+
+    <hr />
+    <p class=" d-flex justify-content-between mb-1 pl-0 pr-0  text-uppercase">
+        <small class=" text-black">
+            <a role="button" ng-click="redirectUtl('{{url_for('AccountView:forgot_password')}}')">
+                <i class="fa fa-lock"></i> {{JR.forgot_password}}
+            </a>
+        </small>
+       
+        <small class=" text-right text-black">
+            {% if roles != ROLES.School.value %}
+            <a data-toggle="tooltip" title="{{JR.profil}} : {{JR.administrator}}" role="button" ng-click="redirectUtl('{{url_for('AccountView:login_school')}}')">
+                <i class="fa fa-gear "></i> {{JR.administrator}}
+            </a>
+            {% elif roles == ROLES.School.value %}
+            <a role="button" data-toggle="tooltip" title="{{JR.profil}} : {{JR.user}}" ng-click="redirectUtl('{{url_for('AccountView:login_user')}}')">
+                <i class="fa fa-user-tag "></i> {{JR.user}} ?
+            </a>
+            {% endif %}
+
+        </small>
+    </p>
+
+</div>
+{% endblock %}
+ {% block bottomlogin %}
+<p class="mt-1">
+    <small class="text-black text-xs">
+        <a href="{{url_for('AccountView:register_user')}}" class="text-light  text-uppercase" target="_self">
+            <i class="fa fa-arrow-alt-circle-right mr-0"></i> {{JR.dont_have_account_register}}
+        </a>
+    </small>
+</p>
+{% endblock %}
+{% block contentBottom %}{% endblock %}
+{% block scripts %}
+<script src="/static/app-assets/js/password-manager.min.js?version={{app_version()}}"></script>
+<script src="/static/app-core/accounts/app.account.min.js?version={{app_version()}}"></script>
+{% endblock %}

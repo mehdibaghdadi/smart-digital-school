@@ -1,0 +1,18 @@
+<div class="input-group p-0 mx-auto" style="max-width: 350px;">
+    <input id="search-filter"
+           type="text"
+           class="bg-light form-control form-control-sm m-0 border border-dark border-bottom-0 rounded-bottom-0"
+           placeholder="{{JR.search}} ..."
+           aria-controls="table-instructor"
+           autocomplet="off">
+    <div class="input-group-append">
+        <button ng-click="searchClear()" type="button" title="{{JR.search_cancel}}" class="btn btn-dark btn-xs border-0">
+            <i class="fas fa-1x fa-times-circle m-0 ml-1 mr-1"></i>
+        </button>
+    </div>
+    <div class="input-group-append">
+        <button ng-click="searchText()" type="button" title="{{JR.search_start}}" class="btn btn-danger btn-xs p-0 pl-3 pr-3">
+            OK
+        </button>
+    </div>
+</div>

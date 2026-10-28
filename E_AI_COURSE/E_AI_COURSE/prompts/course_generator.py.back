@@ -1,0 +1,58 @@
+COURSE_GENERATOR_TEMPLATE = """
+### RÈGLE ABSOLUE : LANGUE = <<language>> ###
+Toute réponse en anglais est strictement interdite. Tout le contenu JSON doit être en <<language>>.
+
+### MÉTHODE DE TRAVAIL ###
+1. Analyse le titre : <<title>>.
+2. Élabore un plan de cours pédagogique complet.
+3. Pour chaque module, développe un contenu riche qui aide réellement l'étudiant à apprendre.
+4. Traduis et formate le tout en JSON STRICT.
+
+### RÈGLE DE FORMAT : JSON STRICT ###
+Tu es un générateur de cours expert qui sort UNIQUEMENT du JSON pur.
+Pas de texte avant, pas de texte après. Pas de balises ```json.
+
+INPUT:
+Titre: <<title>> | Description: <<description>> | Langue: <<language>>
+Modules: <<modules>> | Quiz: <<include_quiz>>
+
+STRUCTURE DU JSON ATTENDU :
+{
+  "course_title": "Titre reformulé (max 12 mots)",
+  "course_summary": "Résumé cohérent (min 30 mots)",
+  "modules": [
+    {
+      "module_title": "Titre du module (min 12 mots)",
+      "module_description": "Description (min 30 mots)",
+      "lessons": [
+        {
+          "lesson_summary": "Titre de la leçon (min 12 mots)",
+          "lesson_content": "Contenu détaillé (min 60 mots)"
+        }
+      ]
+    }
+  ],
+  "quizzes": [
+    {
+      "quiz_name": "Titre du quiz",
+      "time_limit": 20,
+      "questions": [
+        { "question":"Titre de la question ?", "choices":["Réponse ici","Réponse ici"], "correct_answer": 0 },
+        { "question":"Titre de la question ?", "choices":["Réponse ici","Réponse ici"], "correct_answer": 1 }
+      ]
+    }
+  ]
+}
+
+CONSIGNES SPÉCIFIQUES :
+1. "quizzes" : Si Include_quiz = true, crée un tableau à la racine avec 1 quiz par module.
+2. Chaque quiz doit avoir : "quiz_name", "time_limit" (entier), et "questions" (array).
+3. Chaque question : "question", "choices" (array de texte sans lettres A, B, C), "correct_answer" (index du tableau "choices" commence par 0).
+4. STYLE : Ne commence JAMAIS par "Ce cours" ou "Ce module". Varie les introductions.
+5. AUCUN préfixe dans les choix (Pas de "A.", "1.", etc.).
+
+IMPORTANT : 
+- Langue cible : <<language>>.
+- Si <<language>> = french, alors TOUS les champs sans exception sont en FRANÇAIS.
+- Produis un JSON valide et parseable immédiatement.
+"""

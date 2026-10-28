@@ -1,0 +1,37 @@
+<div class="text-uppercase">
+    {% if g.current_language == 'fr'%}
+    <p>
+        La liste est vide, vous pouvez choisir votre type d'enseignement depuis notre pré-selection ou bien créer votre propre enseignement, dans tout les cas vous pouvez activer, désactiver, renommer ou ajouter un nouvel élément à tout monent.
+        <br />
+        <em class="mt-2 d-block">
+            Exemple : Écoles secondaires, Écoles primaires, Centres de formation professionnelle ... etc
+        </em>
+    </p>
+
+
+    {%endif%}
+    {% if g.current_language == 'en'%}
+
+
+    <p>
+        The list is empty, you can choose your type of teaching from our pre-selection or create your own teaching, in all cases you can activate, deactivate, rename or add a new element at any time.
+        <br />
+        <em class="mt-2 d-block">
+            Example: Secondary schools, Primary schools, Vocational training centers, etc.
+        </em>
+    </p>
+
+
+    {%endif%}
+    {% if g.current_language == 'es'%}
+
+    <p>
+        La lista está vacía, puedes elegir tu tipo de enseñanza entre nuestra preselección o crear tu propia enseñanza, en todos los casos puedes activar, desactivar, renombrar o agregar un nuevo elemento en cualquier momento.
+        <br />
+        <em class="mt-2 d-block">
+            Ejemplo: Centros de Secundaria, Colegios de Primaria, Centros de Formación Profesional, etc.
+        </em>
+    </p>
+
+    {%endif%}
+</div>

@@ -1,0 +1,9 @@
+/* IE10+ */
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    .fa {
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+    }
+}
+
+

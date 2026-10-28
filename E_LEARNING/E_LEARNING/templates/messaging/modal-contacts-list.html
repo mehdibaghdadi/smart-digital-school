@@ -1,0 +1,66 @@
+<div class="modal fade" id="listContactsMbxModal" name="listContactsMbxModal" tabindex="-1" role="dialog" aria-labelledby="listContactsMbxModal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header p-1 pt-0 pb-0 bg-primary">
+                <small class="text-uppercase mt-1 ml-1">
+                    <i class="fa fa fa-1x fa-users mr-1"></i>
+                    <span class="modal-title" id="uploadModalLabel">
+                        {{JR.total}} : {$ contacts_mbx_list_filtred.length$}
+                    </span>
+                </small>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+
+            <div class="modal-body p-1">
+                <div class="card m-0">
+                    <div class="card-body  p-0 mt-1">
+
+                        <div class="text-center">
+                            <input type="search" placeholder="{{JR.search}} : {{JR.last_name}}, {{JR.classs}}, {{JR.email}}..."
+                                   class="form-control d-inline form-control-sm" style="width:85%" ng-model="searchText"><span role="button" ng-click="searchText=''"><i class="fa fa-lg fa-xmark text-dark ml-2"></i></span>
+                        </div>
+                        <div class="text-right text-uppercase pr-2 mt-3" ng-show="contacts_mbx_list.length>0">
+                            <small> {{JR.select}} </small>:  <span class="ml-2 mr-2" role="button" ng-click="selectAllMailsClick(contacts_mbx_list_filtred,1)">
+                                <small class="text-uppercase"><i class="fa fa-circle-check text-dark mr-1"></i> <u>{{JR.alls1}}</u></small>
+                            </span> <span class="mr-2" role="button" ng-click="selectAllMailsClick(contacts_mbx_list_filtred,0)">
+                                <small class="text-uppercase"><i class="fa fa-circle-xmark text-dark mr-1"></i> <u>{{JR.none1}}</u></small>
+                            </span>
+                        </div>
+                        <hr class="mt-2 mb-2" />
+                        <div class="table-responsive p-0 m-0" ng-show="list_contacts_loaded" style="max-height:480px;font-size:13px">
+                            <div class="row m-0">
+                                <div class="col-12 m-0 p-0" ng-repeat="q in contacts_mbx_list_filtred = ( contacts_mbx_list | filter:searchText)">
+                                    <div class="icheck-default float-right mt-3 mr-2 d-inline-block ">
+                                        <input class="" type="checkbox" id="{$ q.email $}"
+                                               ng-model="q.selected" ng-true-value="1" ng-false-value="0">
+                                        <label for="{$ q.email $}"></label>
+                                    </div>
+
+                                    <div class="border m-1 p-1 text-uppercase rounded" ng-class="q.selected ? 'bg-light font-weight-bold':''" ng-bind-html="q.label | toHtml">{$$}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- /.card-body -->
+
+                </div>
+                <div class="more-space-div-bottom"></div>
+
+            </div>
+            <div class="modal-footer  bg-black footer-fix p-0 text-center justify-content-center">
+                <div class="text-center d-block" style="width:100%" ng-hide="list_contacts_loaded">
+                    <i class="fas fa-3x fa-spinner fa-pulse"></i>
+                </div>
+                <button ng-show="list_contacts_loaded" type="button" ng-click="inserContactsClick()"
+                        class="btn btn-primary font-weight-bold text-uppercase">
+                    Ins&eacute;rer : <span class="text-warning">( {$ (contacts_mbx_list | filter:{selected:1}).length $} )</span> Contacts
+                </button>
+                <button type="button"
+                        class="btn btn-danger ml-3" data-dismiss="modal">
+                    {{JR.close}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

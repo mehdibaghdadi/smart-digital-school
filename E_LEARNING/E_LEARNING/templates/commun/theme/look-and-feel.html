@@ -1,0 +1,59 @@
+{% extends "_layouts/layout.html" %}
+{% block head %}
+<style>
+    .centered-div {
+        width: 120px;
+        height: 120px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid black; /* Optionnel, juste pour visualiser le div */
+    }
+        .centered-div:hover {
+            filter: brightness(1.3);
+        }
+
+        .theme .col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    
+    
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div ng-controller="LookAndFeelCtrl" class="p-2 theme" ng-init="init('{{url_set_theme}}')">
+    <div class="text-uppercase text-center font-weight-bold">{{JR.select}} : {{JR.visual_theme}}</div>
+    <br />
+    <div class="row text-uppercase bg-white rounded-pill elevation-2 p-1">
+        {% for t in theme_list %}
+        <div class="col border rounded-pill " value="{{ t['id'] }}" ng-init="theme_loading[{{ t['id'] }}]=0" style="background-color:{{t['color']}}25">
+
+            <div  data-toggle="tooltip" 
+                 role="button" ng-click="submitForm({{t}},{{ t['id'] }})" 
+                 class="centered-div rounded-pill elevation-3 mt-2" 
+                 style="background: linear-gradient(to top,{{t['color']}},{{t['color']}}b0,{{t['color']}},{{t['color']}},{{t['color']}}b0,{{t['color']}})">
+                <span class="text-white">{{ t['def'] }}</span>
+
+            </div>
+            <div title="{{JR.apply}} : {{ t['def'] }}" data-toggle="tooltip" class="mt-1 mb-2 text-center" role="button" ng-click="submitForm({{t}},{{ t['id'] }})">
+                <i  ng-hide="theme_loading[{{ t['id'] }}]" class="far text-lg {{ 'fa-check-circle text-red'|safe if t['id'] == current_theme['id'] else 'fa-circle'|safe}}"></i>
+                <i   ng-show="theme_loading[{{ t['id'] }}]" class="fa fa-2x fa-spinner text-lg  fa-pulse"></i>
+            </div>            
+            
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}
+{% block contentBottom %}
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/app-core/_shared/app.look-and-feel.min.js?version={{app_version()}}"></script>
+{% endblock %}

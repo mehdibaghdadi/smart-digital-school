@@ -1,0 +1,103 @@
+{% block head %}
+<style>
+    .border-dash {
+        border: thin dotted #e5e5e5;
+    }
+</style>
+{% endblock %}
+<!-- Modal -->
+<form class="modal fade text-uppercase text-xs p-0" ng-submit="sendResponseDemandAssistanceSubmit($event,true)" id="assistanceRequestGroupModal" name="assistanceRequestGroupModal" tabindex="-1" role="dialog" aria-labelledby="assistanceRequestGroupModal">
+    <div class="modal-dialog modal-fullscreen" role="document">
+        <div class="modal-content" style="overflow-y:auto;overflow-x:hidden">
+            <div class="modal-header p-1 pt-0 pb-0 bg-primary">
+                <small class="mt-1">
+                    <i class="text-warning fa fa-1x fa-info mr-2 ml-2"></i>
+                    <span class="timeline-header text-uppercase">
+                    <b ng-hide="oneUser">{{JR.demand_assist_group}}</b>
+                    <b ng-show="oneUser">{{JR.demand_assist}}</b>
+                    </span>
+                </small>
+                <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times; </span></button>
+            </div>
+            <div class="modal-body p-2">
+                <div class="text-center text-justify p-0 text-wrap">
+                    <div ng-hide="oneUser">
+                        {{JR.you_selected}} <b class="text-red text-sm">( {$dataGroupIds.length$} )</b> {{JR.requests_support_schedule}}
+                    </div>
+                    <div ng-show="oneUser">
+                        
+                        <b class="pr-2 d-block text-uppercase text-bold text-center text-gray-dark"><i class="fa fa-user-graduate mr-2 text-info"></i><u>{{JR.demand_by}}: {$ fullnameStudent $}</u></b>
+
+                    </div>
+                </div>
+                <hr class="m-1 mb-3" />
+                <div class="row form-group m-0">
+                    <div class="col-md-12 col-lg-6">
+                        <!-- new planning-->
+                        <div class="text-center form-group" ng-show="isNewPlanning">
+                            <h6><b class="text-dark text-uppercase">{{JR.new_calendar}}</b></h6>
+
+                            <input type="date" ng-model="demand_ass.date" ng-change="onSelectChange()" style="width:200px"
+                                   ng-required="isNewPlanning"
+                                   class="btn btn-outline-warning d-inline text-bold text-center text-md text-blue" id="calendar-group" min="{$ dateTodayLess  | date:'yyyy-MM-dd' $}" />
+                            <div class="text-center mt-2 mb-3" style="letter-spacing:1px">
+                                {{JR.fromm}}&nbsp;<input id="slider-time-1" readonly class="slider-time text-bold" type="text" ng-model="demand_ass.start" /><span class="ml-1 mr-1">- {{JR.to}} -</span> <input id="slider-time-2" readonly class="slider-time text-bold " type="text" ng-model="demand_ass.end" /><i class="ml-1 text-gray fa fa-clock"></i>
+                            </div>
+                            <div id="time-range">
+                                <div class="sliders_step1">
+                                    <div id="slider-range"></div>
+                                </div>
+                            </div><br />
+                            <select name="event_calendar_id" ng-required="isNewPlanning" style="width:100%" ng-model="demand_ass.event_calendar_id" class="form-control form-control-xs text-uppercase d-block mb-2" ng-change="onSelectChange()">
+                                <option value="" class="text-uppercase text-bold ddl-selector">🔔 {{JR.choose_events_list}}</option>
+                                <option class="" ng-repeat="l in list_type_events"  value="{$l.id$}">
+                                    📌 {$ l.event_calendar  $}
+                                </option>
+                            </select>
+                        </div>
+                        <!--planning exist -->
+                        <div class="p-1" ng-show="!isNewPlanning">
+                            <div class="text-bold mb-1"><i class="fa fa-calendar-week text-green mr-1 "></i>{{JR.schedule_support}}</div>
+                            <select class="form-control form-control-xs d-block text-uppercase ddl-selector" style="width:100%" name="instructor_calendar_id" ng-model="demand_ass.instructor_calendar_id" convert-to-number>
+                                <option value="0" class="text-uppercase text-bold">🚫 {{JR.no_schedule}} ({{JR.reply_only}}) </option>
+                                <option data-toggle="tooltip"  title="{$l.event_description$}"  ng-repeat="l in listTasksFromToday" value="{$l.id$}"ng-show="l.enableDate">
+                                    🕒 {$ l.start | date:'dd-MM-yyyy' $} | {$ l.plannedTitle  $} [ {$ l.title $} ]
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="mt-2 mb-2">
+                            <div class="mt-1"></div>
+                            <!--upload file-->
+                            {% include 'instructors/assistance/input-file-attachement.html' %}
+                            <!--end upload file-->
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 col-lg-6">
+                        {% with summernote_editor_id="snEditorContentGroup" %}
+                        {% include 'instructors/assistance/input-response.html' %}
+                        {% endwith %}
+
+                    </div>
+                </div>
+                <div class="more-space-div-bottom"></div>
+            </div>
+
+            <div class="text-center bg-dark d-block footer-fix">
+                <div class="p-2">
+                    <button hide-if-no-payment type="submit" class="mr-2 btn btn-primary "><span aria-hidden="true"><i class="fa fa-1x fa-paper-plane mr-2 ml-2"></i>{{JR.send_my_response}}</span></button>
+                    <button type="button" class="btn btn-danger " data-dismiss="modal" aria-label="Close"><span aria-hidden="true">{{JR.cancel}}</span></button>
+                    <br />
+                    <button id="btnCancelUpload" type="button" class="btn btn-warning btn-block mt-2" ng-click="reloadPage()"
+                            ng-hide="progressBar<=0 || progressBar>=95">
+                        {{JR.cancel}} : {$ progressBar | number:0 $}%
+                    </button>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+

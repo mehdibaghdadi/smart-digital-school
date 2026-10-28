@@ -1,0 +1,20 @@
+<div ng-hide="chapt['{{ list[loop.index0].chapter_sequence  }}'].hide"
+     class="animate-opacity">
+
+    <i class="fa pl-1 pr-1 d-inline-block text-xs fa-arrow-up  text-warning  bg-ch-primary"
+       data-toggle="tooltip" title="{{JR.back}} : {{JR.chapter}} {$ ({{ list[loop.index0].chapter_sequence  }}) | numberToLetter $}" 
+       onclick='window.SmootScrollView("header_chapter_{{list[loop.index0].chapter_id}}"); return false;'
+       role="button"></i>
+    <div class="timeline-item bg-transparent elevation-0  p-0 pl-2 text-center  ">
+
+        <u class="p-0 d-inline-block text-center text-uppercase text-xs mb-2">
+            <small class="font-weight-bold ">
+                {{JR.end_chapter}} :
+                <span class="text-info text-xs"> {$ ({{ list[loop.index0].chapter_sequence  }}) | numberToLetter $}</span> - {{JR.remaining}} : <span class="text-xs text-red">{$ 100-(learning_progress_chapters[{{list[loop.index0].chapter_id}}] ||0 ) | number:0 $} <i class="fa fa-percent  "></i></span>
+            </small>
+        </u>
+        <span class="float-right rounded bg-gray pl-1 pr-1" role="button" data-toggle="tooltip" title="{{JR.end_chapter}} : {{JR.hide_list}}" 
+        ng-click="toggleChapter('header_chapter_{{list[loop.index0].chapter_id}}',chapt['{{ list[loop.index0].chapter_sequence  }}'])">
+        <i class="fa fa-close fa-1x"></i></span>
+    </div>
+</div>

@@ -1,0 +1,196 @@
+{% extends "_layouts/layout-account.html" %}
+{% set title_header = "Politique de Confidentialité" if g.current_language == "fr" else "Privacy Policy" %}
+
+{% block head %}
+
+<title>Politique de Confidentialité — Smart Digital School</title>
+<style>
+    .hack-top-login {
+        display: none;
+    }
+    .login-box, .register-box {
+        width: 960px;
+    }
+
+    .login-page {
+        height: 100%;
+    }
+
+    .content-tc {
+        line-height: 1.5rem;
+    }
+
+    .tab {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #efefef;
+    }
+
+        /* Style the buttons that are used to open the tab content */
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            background-color: #ddd;
+        }
+
+            /* Change background color of buttons on hover */
+            .tab button:hover {
+                background-color: #ccc;
+            }
+
+            /* Create an active/current tablink class */
+            .tab button.active {
+                background-color: #ffd800 !important;
+                text-decoration: underline;
+            }
+
+    /* Style the tab content */
+    .tabcontent:not(.active) {
+        display: none;
+    }
+
+    h5 {
+        text-transform: uppercase;
+    }
+</style>
+
+<style>
+    :root {
+        --bg: #ffffff;
+        --text: #0b2340;
+        --muted: #55677f;
+        --accent: #1e4db7;
+        --container: 100%;
+    }
+
+
+
+    .wrap {
+        max-width: var(--container);
+        margin: 16px auto;
+        padding: 28px;
+        box-shadow: 0 6px 24px rgba(11,35,64,.06);
+        border-radius: 12px;
+    }
+
+    h1 {
+        font-size: 28px;
+        margin: 0 0 8px;
+    }
+
+    p.lead {
+        color: var(--muted);
+        margin-top: 6px;
+    }
+
+    h2 {
+        margin-top: 28px;
+        color: var(--accent);
+        font-size: 18px;
+    }
+
+    ul {
+        margin: 8px 0 16px 20px;
+    }
+
+    .small {
+        font-size: 13px;
+        color: var(--muted);
+    }
+
+    footer {
+        margin-top: 28px;
+        border-top: 1px solid #eef3fb;
+        padding-top: 16px;
+        color: var(--muted);
+        font-size: 13px;
+    }
+
+    .meta {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap
+    }
+
+        .meta div {
+            background: #f6f9ff;
+            padding: 8px 10px;
+            border-radius: 8px
+        }
+
+    a {
+        color: var(--accent);
+    }
+</style>
+{% endblock %}
+{% block toplogin%}
+{% endblock%}
+
+{% block content%}
+{% endblock %}
+
+{% block bottomlogin %}
+
+
+<div class="mt-2 text-right">
+    <i class="ew ew-{{g.current_language}} mr-2"></i>
+    <select id="languageDropdown" class="form-control-sm text-uppercase bg-primary">
+        {% for k,v in config.BABEL_LANGUAGES.items() %}
+        {% if k in ["fr","en"] %}
+        <option value="{{ k }}" {{ 'selected' if k == g.current_language else '' }}>
+            {{ v }}
+        </option>
+        {% endif %}
+        {% endfor %}
+    </select>
+</div>
+
+{% if g.current_language == "fr" %}
+
+<main class="wrap bg-light text-sm" role="main">
+
+    <h1>Demande de Suppression de Compte Smart Digital School</h1>
+
+    <p>Nous respectons votre droit à la suppression de vos données. Si vous souhaitez supprimer votre compte utilisateur de Smart Digital School et toutes les données personnelles qui y sont associées, veuillez suivre la procédure ci-dessous :</p>
+
+    <ol>
+        <li>Envoyez un email à notre équipe de support.</li>
+        <li>Dans l'objet de l'email, indiquez clairement : **"Demande de Suppression de Compte"**.</li>
+        <li>Dans le corps de l'email, fournissez le **Nom complet**, le **Numéro de téléphone principale** et l'**Adresse Email** associés au compte à supprimer pour vérification.</li>
+    </ol>
+
+    <p>Notre équipe confirmera la suppression dans les [Nombre de jours, ex: 14 jours] jours ouvrables.</p>
+
+    <p class="contact-link">
+        <a href="mailto:support@smartdigitalschool.com?subject=Demande%20de%20Suppression%20de%20Compte">Cliquez ici pour envoyer votre demande de suppression</a>
+    </p>
+
+</main>
+{% else %}
+<main class="wrap bg-light text-sm" role="main">
+
+    <h1>Smart Digital School Account Deletion Request</h1>
+
+    <p>We respect your right to have your data deleted. If you wish to delete your Smart Digital School user account and all associated personal data, please follow the procedure below:</p>
+
+    <ol>
+        <li>Send an email to our support team.</li>
+        <li>In the subject line of the email, clearly state: **"Account Deletion Request"**.</li>
+        <li>In the body of the email, provide the **Full Name**, the **Main Phone Number** and **Email Address** associated with the account to be deleted for verification.</li>
+    </ol>
+
+    <p>Our team will confirm the deletion within [Number of days, e.g., 14 days] business days.</p>
+
+    <p class="contact-link">
+        <a href="mailto:support@smartdigitalschool.com?subject=Request%20for%20Account%20Deletion">Click here to send your deletion request</a>
+    </p>
+
+</main>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,42 @@
+<!-- Modal -->
+<style>
+    
+</style>
+<form class="modal fade" id="editModalContentList" name="editModalContentList" ng-submit="submitContentSequence(content_sequence_list)" tabindex="-1" role="dialog" aria-labelledby="myModalContentSequenceLabel">
+    <div class="modal-dialog modal-fullscreen" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <small class="text-truncate  text-uppercase mt-1 ml-1" id="myModalLabel">
+                    <i class="fas fa-sort-numeric-down mr-2 text-warning"></i>{{JR.order_items_list}}
+                </small>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body mb-1 bg-light" style="overflow:scroll; overflow-y:auto">
+                <div class="mb-4 text-uppercase text-center text-xs">{{JR.drag_drop_help}} :</div>
+                <!-- beginform -->
+                <div class="text-uppercase">
+                    <ul id="sortable"  class="sortable-list" ng-model="ch">
+                        <li id="{$ $index $}" ng-repeat="ch in content_sequence_list track by $index"
+                            class="ui-state-default text-truncate elevation-1">
+                            <div class="text-truncate text-md">
+                                <i class="fa-solid fa-grip-vertical align-self-start handle ui-sortable-handle" style="cursor:grab"></i><b class="ml-2">{$ch.sequence $}-</b> <small>{$ ch.content_brief $}</small>
+                            </div>
+                            <small class="float-right rounded-top elevation-3 " ng-class="ch.is_visible?'bg-success':'bg-danger'" >
+                                <b>{$ ch.is_visible?'{{JR.online}}':'{{JR.offline}}' $}</b>
+                            </small>
+                        </li>
+                    </ul>
+                    <div class="pt-5 pb-5"></div>
+                </div>
+                <!-- endform -->
+
+            </div>
+            <div class="footer-fix text-center">
+                <div class="d-inline-block text-center">
+                    <button type="submit" class="btn btn-danger mr-2">{{JR.save_sequence}}</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{JR.close}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

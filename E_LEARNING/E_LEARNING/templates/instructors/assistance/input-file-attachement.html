@@ -1,0 +1,38 @@
+ <!--upload file-->
+<div class="form-group">
+    <div class="text-truncate">
+        <b class="fa fa-paperclip mr-2"></b>
+        <b ng-show="content_file_info.file==null">{{JR.attachment}} (<span class="text-gray">{{JR.optional}}</span>)</b>
+        <b ng-show="content_file_info.file!=null">{{JR.file}} : <small class="text-xs text-gray">{$ content_file_info.file.name $}</small></b>
+    </div>
+    <div class="input-group mb-0">
+        <div class="custom-file">
+            <input class="custom-file-input" id="filesUpload" type="file" name="filesUpload" accept="{$ content_type.allowed_ext $}" onchange="angular.element(this).scope().fileNameChanged(this)" />
+            <div class="custom-file-label text-truncate p-2" for="filesUpload">
+                <span class="m-0 p-0" ng-show="content_file_info.file==null">
+                    <i class="fa fa-ellipsis-v ml-2 mr-1"></i> {{JR.add_file}} {$content_type.text$} ...
+                </span>
+                <span class="m-0 mt-1 p-0 text-red" ng-show="content_file_info.file!=null">
+                    <b class="text-dark">{{JR.type1}} : </b>
+                    <span class="text-truncate text-uppercase">{$ content_file_info.ext $}</span> , <b class="text-dark">{{JR.size}} : </b> {$ content_file_info.size $}
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="ml-1 mr-1 progress progress-sm active" ng-hide="progressBar<=0">
+        <div class="progress-bar bg-success progress-bar-striped" role="progressbar" aria-valuenow="{$ progressBar $}" aria-valuemin="0" aria-valuemax="100" style="width:{$progressBar$}%">
+            <span class="sr-only">{$ progressBar | number:0 $}% {{JR.complete}}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-7">
+            <small class="text-dark text-bold ml-1" ng-class="progressBar<90?'text-dark':'text-green'" ng-hide="progressBar<=0">{$progressInfo$}</small>
+        </div>
+        <div class="col-5 text-xs text-right">
+            <abbr class="text-dark" data-toggle="tooltip" data-html="true" title="{$msg_content_authorized$}">
+                <small>{{JR.authorized_type}} <i class="fa fa-question-circle"></i></small>
+            </abbr>
+        </div>
+    </div>
+</div>
+<!--end upload file-->

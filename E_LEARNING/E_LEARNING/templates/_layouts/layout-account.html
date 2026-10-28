@@ -1,0 +1,69 @@
+<!--# RESOURCES JINJA2 #-->
+{% set JR = config.JINJA2_RESOURCES %}
+
+<!DOCTYPE html>
+<html lang="{{g.current_language}}" dir="auto" ng-app="appSDS" ng-cloak>
+<head>
+    {% block inithead %}{% endblock %}
+    <base href="/" />
+    <link href="/static/app-assets/img/favicon.png" rel="icon">
+    <title>{{config.APP_TITLE}} | {{title_header | default(JR.authentication)}}</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{JR.layout_account_meta_description}}" />
+    <meta name="keywords" content="{{JR.layout_account_meta_keywords}}">
+    {% include '_includes/x-links-header.html' %}    
+    <link href="/static/app-assets/css/accounts.css?version={{app_version()}}" rel="stylesheet" />
+
+    {% block head %}{% endblock %}
+   
+</head>
+<body class="hold-transition login-page">
+    <div class="pb-5 pt-5 hack-top-login">
+        &nbsp;
+        <div class="pb-5 pt-5">&nbsp;</div>
+    </div>
+    <div class="login-box" name="app_{{app_version()}}">
+        {% block toplogin %}{% endblock %}
+        <!-- /.card .login-logo -->
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center bg-light">
+                <div>
+                    <a href="{{config.WEB_SITE}}">
+                        <img style="height:60px;" src="/static/app-assets/img/logo-sds.png" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="card-header text-center text-sm bg-black rounded-0 text-uppercase">
+                <small>{{JR.login_message_presentation_header}}</small>
+            </div>
+            {% block content %}{% endblock %}
+            <!-- /.form-box -->
+        </div><!-- /.card -->
+        {% block bottomlogin %}{% endblock %}
+
+    </div>
+    <div class="pb-5 pt-5">
+        &nbsp;
+        <div class="pb-5 pt-5">&nbsp;</div>
+    </div>
+    {% block contentBottom %}{% endblock %}
+    <input id="__X_RVT" name="__X_RVT" type="hidden" value="{{TOKEN_API}}" />
+
+    <!--********************************
+        IMPORTANT : GLOBAL SCRIPT
+    ************************************-->
+    {% include '_includes/x-global-resourses-js.html'%}
+    {% include '_includes/x-links-footer.html' %}
+
+    {% block scripts %}
+    {% endblock %}
+
+    <script>
+        $(function () {
+            $("#__X_RVT")[0].defaultValue = "";
+        });
+       
+    </script>
+</body>
+</html>

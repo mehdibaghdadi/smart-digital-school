@@ -1,0 +1,704 @@
+[
+  {
+    "outputFileName": "E_LEARNING/static/app-core/instructors/app.chapters.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/instructors/app.chapters.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/instructors/app.courses.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/instructors/app.courses.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/instructors/app.subjects.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/instructors/app.subjects.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/instructors/jquery.courses.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/instructors/jquery.courses.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/_base/app-settings.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/_base/app-settings.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/_base/app.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/_base/app.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-assets/js/adminlte.extension.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-assets/js/adminlte.extension.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-assets/js/dropzone.profil.picture.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-assets/js/dropzone.profil.picture.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-assets/js/form-validators.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-assets/js/form-validators.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-assets/js/password-manager.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-assets/js/password-manager.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/plugins/summernote/summernote-bs4.override.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/plugins/summernote/summernote-bs4.override.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/accounts/app.account.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/accounts/app.account.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/accounts/app.profiles.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/accounts/app.profiles.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/schools/app.instructors.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/schools/app.instructors.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/schools/app.qualifications.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/schools/app.qualifications.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/schools/app.subjects.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/schools/app.subjects.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/schools/jquery.instructors.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/schools/jquery.instructors.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/instructors/app.calendar-events.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/instructors/app.calendar-events.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/schools/app.students.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/schools/app.students.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/schools/jquery.students.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/schools/jquery.students.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-assets/js/city-selector.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-assets/js/city-selector.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/students/app.subjects.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/students/app.subjects.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-assets/js/menu-app.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-assets/js/menu-app.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/students/app.instructors.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/students/app.instructors.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/instructors/jquery.calendar-events.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/instructors/jquery.calendar-events.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/instructors/app.dashboard.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/instructors/app.dashboard.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/instructors/jquery.dashboard.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/instructors/jquery.dashboard.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/students/app.dashboard.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/students/app.dashboard.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/students/jquery.dashboard.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/students/jquery.dashboard.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/instructors/app.demand-assistance.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/instructors/app.demand-assistance.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/instructors/jquery.demand-assistance.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/instructors/jquery.demand-assistance.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/students/app.demand-assistance.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/students/app.demand-assistance.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/students/jquery.demand-assistance.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/students/jquery.demand-assistance.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/instructors/reporting/app.enrollment-courses.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/instructors/reporting/app.enrollment-courses.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/instructors/reporting/jquery.enrollment-courses.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/instructors/reporting/jquery.enrollment-courses.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/schools/app.dashboard.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/schools/app.dashboard.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/schools/jquery.dashboard.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/schools/jquery.dashboard.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/instructors/reporting/app.rpt-feedback-courses.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/instructors/reporting/app.rpt-feedback-courses.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/instructors/reporting/jquery.reporting.viewer.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/instructors/reporting/jquery.reporting.viewer.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/instructors/jquery.subjects.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/instructors/jquery.subjects.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/schools/app.instructor.subject.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/schools/app.instructor.subject.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/messaging/app.messages-box.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/messaging/app.messages-box.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/messaging/jquery.messages-box.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/messaging/jquery.messages-box.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/_base/app-reporting-setting.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/_base/app-reporting-setting.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/reportings/instructor/app.enrollment-courses.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/reportings/instructor/app.enrollment-courses.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/reportings/instructor/app.rpt-feedback-courses.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/reportings/instructor/app.rpt-feedback-courses.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/reportings/instructor/jquery.enrollment-courses.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/reportings/instructor/jquery.enrollment-courses.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/reportings/instructor/jquery.reporting.viewer.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/reportings/instructor/jquery.reporting.viewer.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/_base/reporting/jquery.generate.reporting.viewer.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/_base/reporting/jquery.generate.reporting.viewer.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/_base/reporting/jquery.reporting-setting.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/_base/reporting/jquery.reporting-setting.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/plugins/jquery/datatables/datatables.ext.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/plugins/jquery/datatables/datatables.ext.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/_base/dashboard/jquery.dashboard.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/_base/dashboard/jquery.dashboard.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/plugins/summernote/ext/summernote-bs4.override.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/plugins/summernote/ext/summernote-bs4.override.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/students/jquery.courses.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/students/jquery.courses.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/accounts/app.register.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/accounts/app.register.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/_base/reports/jquery.generate.reporting.viewer.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/_base/reports/jquery.generate.reporting.viewer.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/_base/reports/jquery.reporting-setting.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/_base/reports/jquery.reporting-setting.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-assets/js/country-city-selector.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-assets/js/country-city-selector.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/schools/jquery.subjects.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/schools/jquery.subjects.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/reportings/instructor/app.rpt-my-students.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/reportings/instructor/app.rpt-my-students.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/_base/app-modules.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/_base/app-modules.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/messaging/hub.messages-box.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/messaging/hub.messages-box.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/_shared/app.navigation.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/_shared/app.navigation.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/_base/signalR/signalr.hub.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/_base/signalR/signalr.hub.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/plugins/fullcalendar/main.min.css",
+    "inputFiles": [
+      "E_LEARNING/static/plugins/fullcalendar/main.css"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/plugins/fullcalendar/main.extension.min.css",
+    "inputFiles": [
+      "E_LEARNING/static/plugins/fullcalendar/main.extension.css"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-assets/css/commun.min.css",
+    "inputFiles": [
+      "E_LEARNING/static/app-assets/css/commun.css"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-assets/css/site.min.css",
+    "inputFiles": [
+      "E_LEARNING/static/app-assets/css/site.css"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/plugins/angular/loading-bar/loading-bar.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/plugins/angular/loading-bar/loading-bar.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/plugins/angular/loading-bar/loading-bar.min.css",
+    "inputFiles": [
+      "E_LEARNING/static/plugins/angular/loading-bar/loading-bar.css"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/plugins/summernote/lang/summernote-en.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/plugins/summernote/lang/summernote-en.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/plugins/summernote/lang/summernote-es.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/plugins/summernote/lang/summernote-es.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/plugins/summernote/lang/summernote-fr.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/plugins/summernote/lang/summernote-fr.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/plugins/summernote/ext/summernote-file.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/plugins/summernote/ext/summernote-file.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/plugins/summernote/ext/summernote-ext-print.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/plugins/summernote/ext/summernote-ext-print.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/plugins/jquery/datatables/dataTables.ext.min.css",
+    "inputFiles": [
+      "E_LEARNING/static/plugins/jquery/datatables/dataTables.ext.css"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/students/app.my-calendar.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/students/app.my-calendar.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/students/jquery.my-calendar.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/students/jquery.my-calendar.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/_shared/app.look-and-feel.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/_shared/app.look-and-feel.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/instructors/jquery.enrollment-courses.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/instructors/jquery.enrollment-courses.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/schools/app.calendar-events.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/schools/app.calendar-events.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/_shared/jquery.calendar-events.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/_shared/jquery.calendar-events.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/reportings/school/app.rpt-instructor-courses.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/reportings/school/app.rpt-instructor-courses.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/reportings/school/app.rpt-instructor-enrollment-courses.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/reportings/school/app.rpt-instructor-enrollment-courses.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/reportings/school/app.rpt-feedback-instructor-courses.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/reportings/school/app.rpt-feedback-instructor-courses.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/reportings/school/app.rpt-my-students.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/reportings/school/app.rpt-my-students.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/reportings/school/app.rpt-my-instructors.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/reportings/school/app.rpt-my-instructors.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/_base/app.external.apis.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/_base/app.external.apis.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/_base/app.constants.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/_base/app.constants.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/reportings/school/app.rpt-school-subjects.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/reportings/school/app.rpt-school-subjects.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/reportings/school/app.rpt-school-qualifications.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/reportings/school/app.rpt-school-qualifications.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/reportings/school/app.rpt-courses-assistance.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/reportings/school/app.rpt-courses-assistance.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/students/app.courses-list.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/students/app.courses-list.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/reportings/instructor/app.rpt-enrollment-courses.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/reportings/instructor/app.rpt-enrollment-courses.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/_base/app.services.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/_base/app.services.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/packages/package-subscription.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/packages/package-subscription.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/packages/jquery.packages.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/packages/jquery.packages.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/packages/packages-list.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/packages/packages-list.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/_shared/jquery.pack-validation.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/_shared/jquery.pack-validation.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/packages/payments-list.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/packages/payments-list.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/packages/jquery.payments-list.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/packages/jquery.payments-list.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/packages/payment-process.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/packages/payment-process.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/instructors/jquery.chapters.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/instructors/jquery.chapters.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/_base/mediaPlayer/media-player.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/_base/mediaPlayer/media-player.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-assets/js/detect.url.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-assets/js/detect.url.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/instructors/app.quizzes.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/instructors/app.quizzes.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/reportings/instructor/app.rpt-quiz-courses.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/reportings/instructor/app.rpt-quiz-courses.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-assets/css/courses.min.css",
+    "inputFiles": [
+      "E_LEARNING/static/app-assets/css/courses.css"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/plugins/pica/pica.ext.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/plugins/pica/pica.ext.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-assets/css/css-circular-prog-bar.min.css",
+    "inputFiles": [
+      "E_LEARNING/static/app-assets/css/css-circular-prog-bar.css"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-assets/css/icons.min.css",
+    "inputFiles": [
+      "E_LEARNING/static/app-assets/css/icons.css"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/instructors/course-ai-wizard.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/instructors/course-ai-wizard.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/instructors/app.course-ai-wizard.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/instructors/app.course-ai-wizard.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-assets/css/course-ai.min.css",
+    "inputFiles": [
+      "E_LEARNING/static/app-assets/css/course-ai.css"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/course-learning/app.courses.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/course-learning/app.courses.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/course-learning/jquery.courses.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/course-learning/jquery.courses.js"
+    ]
+  },
+  {
+    "outputFileName": "E_LEARNING/static/app-core/course-learning/app.quiz-form.min.js",
+    "inputFiles": [
+      "E_LEARNING/static/app-core/course-learning/app.quiz-form.js"
+    ]
+  }
+]

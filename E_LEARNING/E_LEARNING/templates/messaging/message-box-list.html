@@ -1,0 +1,165 @@
+{% extends "_layouts/layout.html" %}
+{% block head %}
+{% include '_includes/x-links-css-summernote.html' %}
+{% include '_includes/x-links-css-datatable.html' %}
+<link href="/static/app-assets/css/message-box.css" rel="stylesheet" />
+<link href="/static/plugins/email.multiple/email.multiple.css" rel="stylesheet" />
+<link href="/static/plugins/jquery/autocomplete.css" rel="stylesheet" />
+
+{% endblock %}
+
+{% block content %}
+<div class="p-0" ng-controller="MessagesBoxController"
+     ng-init="init({{listeMessagesBox.json if listeMessagesBox else {} }},{{listUsers.json if listUsers else {} }},{{user_id}},'{{user_email}}','{{role}}','{{message_get_url}}','{{message_get_inbox_user_messageid_url}}','{{message_mark_read_url}}','{{message_delete_url}}','{{message_delete_totrash_url}}','{{message_save_url}}','{{contact_list_url}}');">
+    <div class="row  bg-graph rounded">
+        <!-- Left sidebar -->
+        <div class="animate-opacity p-0" ng-class="showMenu() ? 'col-lg-2 col-md-3' : 'col-xs'" id="collapseMenuMain">
+            <div style="width:100%" class="mb-2">
+                <button class="btn btn-flat btn-block  p-1 pt-1 pb-1 text-left text-light rounded-top d-none d-sm-block" type="button"
+                        ng-click="showMenuClick()" style="background-color: #103b58">
+                    <span class="mr-1 ml-1">
+                        <span class=""><i class="pull-right" ng-class="showMenu() ? 'fas fa-angle-left' : 'fas fa-angle-right'"></i> <span class="ml-2">Menu</span> </span>
+                    </span>
+                </button>
+                <button ng-click="composeClick()" title="Nouveau Message"
+                        class="btn btn-danger btn-flat rounded-0 p-1 pt-2 pb-2 mt-0 text-truncate btn-block font-weight-bold text-center">
+                    <span class="mr-1 ml-1">
+                        <i class="fa fa-pencil"></i><span class="ml-2" ng-show="showMenu()">{{JR.new_message}}</span>
+                    </span>
+                </button>
+                <div class="panel panel-default p-0 bg-light  elevation-2 rounded-bottom collapse show mb-0 mt-0 " id="collapseMenu">
+                    <div class="panel-body panel-body-menu p-0 mt-0 rounded-bottom">
+                        <div class="list-group no-border mail-list text-truncate p-0 mt-0 rounded ">
+                            <a href="" id="lg-msg_all" ng-click="selectListGroup($event)" ng-class="selected_list_group=='lg-msg_all' ? 'active':' bg-light bg-white'" class="  list-group-item  text-uppercase" title="{{JR.inbox}}"><i class="fa fa-envelopes-bulk  text-info "></i><span class="ml-1" ng-show="showMenu()">{{JR.inbox}}</span>&nbsp; <sup ng-show="msg_not_read_me || 0"><i class="position-absolute fa fa-bell text-red text-xs fa-2x"></i></sup></a>
+                            <a href="" id="lg-msg_not_read_me" ng-click="selectListGroup($event)" ng-class="selected_list_group=='lg-msg_not_read_me' ? 'active':'bg-light bg-white'" class="  list-group-item   text-uppercase" title="{{JR.mail_pending}}"><i class="fa fa-envelope text-danger "></i><span class="ml-1" ng-show="showMenu()">{{JR.unread_receipts}}</span> <b ng-show="(msg_not_read_me || 0) && showMenu()" class="mr-1 msg-nbr">({$ msg_not_read_me || 0 $})</b>&nbsp;<sup ng-show="(msg_not_read_me || 0) && !showMenu()"><i class="fa fa-circle text-red"></i></sup></a>
+                            <a href="" id="lg-msg_not_read_user" ng-click="selectListGroup($event)" ng-class="selected_list_group=='lg-msg_not_read_user' ? 'active':'bg-light bg-white'" class="  list-group-item  text-uppercase" title="{{JR.send_unread}}"><i class="fa fa-clock text-info"></i><span class="ml-1" ng-show="showMenu()">{{JR.send_unread}}</span> <b ng-show="(msg_not_read_user || 0) && showMenu()" class="mr-1 msg-nbr">({$ msg_not_read_user || 0  $})</b>&nbsp;<sup ng-show="(msg_not_read_user || 0) && !showMenu()"><i class="fa fa-circle"></i></sup></a>
+                            <a href="" id="lg-msg_receipt" ng-click="selectListGroup($event)" ng-class="selected_list_group=='lg-msg_receipt' ? 'active':'bg-light bg-white'" class="  list-group-item  text-uppercase" title="{{JR.received_emails}}"><i class="fa  fa-download text-danger  "></i><span class="ml-1" ng-show="showMenu()">{{JR.received_emails}}</span> </a>
+                            <a href="" id="lg-msg_sended" ng-click="selectListGroup($event)" ng-class="selected_list_group=='lg-msg_sended' ? 'active':'bg-light bg-white'" class="  list-group-item  text-uppercase" title="{{JR.sent_emails}}"><i class="fa fa-paper-plane text-info"></i><span class="ml-1" ng-show="showMenu()">{{JR.sent_emails}}</span> </a>
+                            <a href="" id="lg-msg_trash" ng-click="selectListGroup($event)" ng-class="selected_list_group=='lg-msg_trash' ? 'active':' bg-light bg-white'" class="  list-group-item text-uppercase" title="{{JR.trash}}"><i class="fa fa-trash text-dark"></i><span class="ml-1" ng-show="showMenu()">{{JR.trash}}</span> <b ng-show="(msg_trash || 0) && showMenu()" class="mr-1 msg-nbr">({$ msg_trash || 0  $})</b></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- End Left sidebar -->
+        <!-- Right Sidebar -->
+
+        <div class="col m-0  p-0" style="min-height:565px" id="main-div-messages">
+            <div class="d-block animate-opacity text-right border-bottom p-1 pt-2 shadow-sm pr-2">
+                <small ng-hide="showFormComposingMessage" class="mt-1 text-black  text-uppercase header-list" ng-bind-html="selected_list_group_text | toHtml">{$  $}</small>
+                <div class="d-flex justify-content-between" ng-show="showFormComposingMessage">
+                    <span style="font-size:85%" role="button" ng-click="closeClick()" class="mt-1 font-weight-bold ml-2 text-uppercase">
+                        <i class="fa fa-angle-left mr-1"></i>{{JR.back}}
+                    </span>
+                    <small class="mt-1 text-black  text-uppercase"><i class="fa fa-pen-nib text-danger mr-2"></i>{{JR.editing}} : {{JR.inprogress}} ...</small>
+                </div>
+            </div>
+            <div class="panel panel-default border-0  p-0 pl-2 pr-2">
+                <div id="panel-form-message" class="panel-body d-none animate-opacity  ">
+                    <!--COMPOSING MSG BOX-->
+                    {% include "/messaging/composing-message.html" %}
+                    {% include "/messaging/modal-contacts-list.html" %}
+                    <!--COMPOSING MSG BOX-->
+                </div>
+                <div ng-hide="listeMessageBox.length>0 || showFormComposingMessage" class="p-2 animate-opacity">
+                    <div class="alert alert-white bg-white elevation-1 text-center text-uppercase empty-list">
+                        <div class="mb-1 text-black font-weight-bold  text-uppercase header-list" ng-bind-html="selected_list_group_text | toHtml">{$  $}</div>
+
+                        <i class="fa fa-exclamation-triangle mr-2"></i>{{JR.empty_message}}
+                    </div>
+                </div>
+                <div id="panel-table-messages" class="panel-body pt-2 pb-2  animate-opacity  table-responsive" ng-show="listeMessageBox.length">
+                    <table datatable="ng" dt-options="dataTableOptions" class="table table-hover mails rounded  " style="width:100%"
+                           id="table-mbx" >
+                        <thead>
+                            <tr style="display:none">
+                                <td style="width:70px"></td>
+                                <td style="width:50px"></td>
+                                <td></td>
+                                <td style="width:70px"></td>
+                                <td></td>
+                                <td style="width:50px"></td>
+                                <td style="width:50px"></td>
+                                <td style="width:0px"></td>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white">
+                            <tr id="tr_{$ $index $}" ng-repeat="q in listeMessageBox  | orderBy : '-date_update'"  ng-hide="q.is_deleting" >
+
+                                <td ng-click="editionClick($event,q);" style="width:50px" class="mail-select  p-2 border-left border-right" 
+                                    data-toggle="tooltip" title="{$ !q.my_message ? (q.is_read ? '{{JR.message_read}}' : '{{JR.message_to_read}}') : '{{JR.message_sent}}' $}">
+
+                                    <i ng-class="!q.my_message ? 'fa  ' + (q.is_read ? 'text-muted fa-envelope-open-text' : 'fa-envelope text-danger-2') : 'fa text-muted text-xs fa-paper-plane'"></i>
+                                </td>
+
+                                <td ng-click="editionClick($event,q);" class="p-0 pl-1 pt-2 border-left  " 
+                                    data-toggle="tooltip" title='{$ q.is_read ? "{{JR.message_read}}":"{{JR.unread}}"$}'>
+                                    <i style="opacity:0.5" class="ml-1 mr-1 text-gray text-xs" ng-class="q.is_read ? 'fa  fa-check-double' : 'fa fa-stopwatch '"></i>
+                                </td>
+
+                                <td ng-click="editionClick($event,q);" role="button" ng-class="!q.is_read && !q.my_message ? 'text-underline' :''"
+                                    class="pl-1 pr-1" style="font-size: 90%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; max-width: 250px;">
+
+                                    <span ng-class="!q.is_read ? 'text-info' : 'text-black'" class=" text-capitalize">{$  q.my_message ? '{{JR.my_self}}': q.user_sender_full_name $}:</span> <span class="text-black text-capitalize">{$ q.users_recipient_full_name $}</span>
+                                </td>
+
+                                <td class="pl-1 pr-1 border-left border-right bg-light text-center" data-toggle="tooltip" title="{$ q.nbr_users_recipient $} {$ q.nbr_users_recipient>1 ? '{{JR.recipients}}' : '{{JR.recipient}}' $} .">
+                                    <span class="" ng-class="!q.is_read ? 'badge badge-light elevation-1' : 'text-xs'"> {$  q.nbr_users_recipient $}</span>
+                                </td>
+
+                                <td ng-click="editionClick($event,q);" role="button" class="pr-0 text-xs text-uppercase" ng-class="q.is_read ? 'text-gray' : 'text-dark'"
+                                    style="width: 100%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; max-width: 80px;">
+
+                                    {$ q.subject$}
+
+                                </td>
+                                <td class="text-right text-capitalize" style="min-width: 80px; font-size: 0.7rem !important;" data-toggle="tooltip" title="{$ toLocaleFullDateString(q.date_update) $}">
+                                    {$ q.date_update_card $}
+                                </td>
+
+                                <td class="border-right p-2 text-center" data-toggle="tooltip">
+                                    <label ng-show="!q.my_message" class="cr-styled d-block" title="{{JR.fromm}}: {$  q.user_sender_full_name $}">
+                                        <i class="fa" ng-class="!q.is_read ?' fa-user text-danger-2':' fa-user-check text-dark'"></i>
+
+                                    </label>
+                                    <label role="button" ng-click="Delete(q)" ng-show="q.my_message && q.can_delete" class="cr-styled d-block" title="{{JR.delete}}">
+                                        <i class="fa fa-trash text-black"></i>
+                                    </label>
+
+                                    <label ng-show="q.my_message && !q.can_delete" class="cr-styled d-block" role="button" title="{{JR.my_message_read_locked}}">
+                                        <i class="fa fa-lock text-gray"></i>
+                                    </label>
+                                </td>
+                                <td class="" style="width: 0px; font-size: 0rem !important;" title="{$ toLocaleFullDateString(q.date_update) $}">
+                                    {$ q.date_update_group $}
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div> <!-- panel body -->
+
+            </div> <!-- panel -->
+        </div> <!-- end Col-9 -->
+
+    </div>
+    <!-- End row -->
+    <!--CHAT MSG BOX-->
+
+</div>
+{% endblock %}
+{% block contentBottom %}{% endblock %}
+
+{% block scripts %}
+
+{% include '_includes/x-links-scripts-summernote.html' %}
+<script src="/static/plugins/moments/moment.min.js"></script>
+<script src="/static/plugins/moments/moment-with-locales.min.js"></script>
+{% include '_includes/x-links-scripts-datatable.html' %}
+<script src="/static/plugins/email.multiple/MultiMailPlugin.js"></script>
+<script src="/static/app-core/messaging/jquery.messages-box.min.js?version={{app_version()}}"></script>
+<script src="/static/app-core/messaging/app.messages-box.min.js?version={{app_version()}}"></script>
+
+{% endblock %}

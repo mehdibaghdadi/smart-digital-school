@@ -1,0 +1,163 @@
+{% extends "_layouts/layout-account.html" %}
+{% set title_header = config.JINJA2_RESOURCES.terms_conditions %}
+
+{% block head %}
+
+<style>
+    .hack-top-login {
+        display: none;
+    }
+
+    .login-box, .register-box {
+        width: 960px;
+    }
+
+    .login-page {
+        height: 100%;
+    }
+
+    .content-tc {
+        line-height: 1.5rem;
+    }
+
+    .tab {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #efefef;
+    }
+
+        /* Style the buttons that are used to open the tab content */
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            background-color: #ddd;
+        }
+
+            /* Change background color of buttons on hover */
+            .tab button:hover {
+                background-color: #ccc;
+            }
+
+            /* Create an active/current tablink class */
+            .tab button.active {
+                background-color: #ffd800 !important;
+                text-decoration: underline;
+            }
+
+    /* Style the tab content */
+    .tabcontent:not(.active) {
+        display: none;
+    }
+
+    h5 {
+        text-transform: uppercase;
+    }
+</style>
+{% endblock %}
+{% block toplogin%}
+
+{% endblock%}
+{% block content%}
+<div class="card-body text-uppercase p-0">
+    <div class="p-2"><h5>{{JR.terms_conditions}} {{config.APP_TITLE}}</h5></div>
+    <div class="tab ">
+        <button class="tablinks active" onclick="openTab(event, 'fr')">FRANÇAIS</button>
+        <button class="tablinks" onclick="openTab(event, 'en')">ENGLISH</button>
+    </div>
+</div>
+{% endblock %}
+{% block bottomlogin %}
+<div class="content-tc">
+    <div id="fr" class="tabcontent active p-3 text-left text-sm bg-light">
+        <p>Bienvenue sur l'application eLearning (ci-après dénommée "{{config.APP_TITLE}}"). Avant d'utiliser cette Application, veuillez lire attentivement les conditions générales d'utilisation suivantes ("Conditions d'Utilisation"). En utilisant cette Application, vous acceptez d'être lié par ces Conditions d'Utilisation. Si vous n'acceptez pas ces Conditions d'Utilisation, veuillez ne pas utiliser cette Application.</p>
+        <h5>1. Acceptation des Conditions d'Utilisation</h5>
+        <p>En utilisant cette Application, vous acceptez d'être lié par ces Conditions d'Utilisation, y compris toutes les politiques et directives qui peuvent être publiées de temps à autre. Si vous ne consentez pas à ces Conditions d'Utilisation, veuillez ne pas utiliser cette Application.</p>
+        <h5>2. Utilisation de l'Application</h5>
+        <p>Vous acceptez d'utiliser cette Application uniquement à des fins légales et conformément à ces Conditions d'Utilisation. Vous vous engagez à ne pas utiliser cette Application de manière qui pourrait porter atteinte aux droits d'autrui ou nuire à son fonctionnement.</p>
+        <h5>3. Contenu de l'Utilisateur</h5>
+        <p>L'Application peut permettre aux utilisateurs de soumettre, télécharger ou publier du contenu, y compris mais sans s'y limiter, des textes, des images, des vidéos, et des commentaires (ci-après dénommés "Contenu de l'Utilisateur"). En soumettant, téléchargeant ou publiant du Contenu de l'Utilisateur sur cette Application, vous déclarez et garantissez que vous avez le droit de le faire et que ce contenu ne viole pas les droits d'autrui.</p>
+        <h5>4. Propriété Intellectuelle</h5>
+        <p>Cette Application et tout son contenu, y compris mais sans s'y limiter, les textes, les graphiques, les logos, les icônes et les images, sont la propriété de [{{config.APP_TITLE}}] ou de ses concédants de licence et sont protégés par les lois sur le droit d'auteur et les autres lois applicables en matière de propriété intellectuelle.</p>
+        <h5>5. Confidentialité</h5>
+        <p>Nous respectons votre vie privée et nous nous engageons à protéger vos informations personnelles. Veuillez consulter notre Politique de Confidentialité pour en savoir plus sur la manière dont nous collectons, utilisons et protégeons vos informations.</p>
+        <h5>6. Modifications des Conditions d'Utilisation</h5>
+        <p>Nous nous réservons le droit de modifier ces Conditions d'Utilisation à tout moment et sans préavis. Toutes les modifications apportées à ces Conditions d'Utilisation entreront en vigueur dès leur publication sur cette Application. En continuant à utiliser cette Application après la publication de modifications, vous acceptez d'être lié par les Conditions d'Utilisation modifiées.</p>
+        <h5>7. Contact</h5>
+        <p>Si vous avez des questions concernant ces Conditions d'Utilisation, veuillez nous contacter à l'adresse suivante : <b><a href="mailto:{{config.MAIL_USERNAME}}">{{config.MAIL_USERNAME}}</a></b>.</p>
+        <p>En utilisant cette Application, vous acceptez ces Conditions d'Utilisation. Merci de votre confiance et de votre compréhension.</p>
+
+        <p class="mt-1">
+            <button onclick="iUnderstand()" class="p-2 btn btn-block btn-primary text-uppercase text-uppercasee">
+
+                <i class="fa fa-check mr-2"></i> J'ai compris
+            </button>
+        </p>
+
+    </div>
+    <div id="en" class="tabcontent  p-3 text-left text-sm bg-light">
+        <p>Welcome to the eLearning application (hereinafter referred to as "{{config.APP_TITLE}}"). Before using this Application, please carefully read the following terms of use (“Terms of Use”). By using this Application, you agree to be bound by these Terms of Use. If you do not agree to these Terms of Use, please do not use this Application.</p>
+        <h5>1. Acceptance of the Terms of Use</h5>
+        <p>By using this Application, you agree to be bound by these Terms of Use, including all policies and guidelines that may be published from time to time. If you do not agree to these Terms of Use, please do not use this Application.</p>
+        <h5>2. Use of the Application</h5>
+        <p>You agree to use this Application only for lawful purposes and in accordance with these Terms of Use. You agree not to use this Application in any way that could infringe the rights of others or harm its operation.</p>
+        <h5>3. User Content</h5>
+        <p>The Application may allow users to submit, upload or post content, including but not limited to text, images, videos, and comments (hereinafter referred to as "Application Content"). User"). By submitting, uploading or posting User Content to this Application, you represent and warrant that you have the right to do so and that such content does not violate the rights of others.</p>
+        <h5>4. Intellectual Property</h5>
+        <p>This Application and all its content, including but not limited to text, graphics, logos, icons and images, are the property of [{{config.APP_TITLE}}] or its licensors and are protected by copyright and other applicable intellectual property laws.</p>
+        <h5>5. Privacy</h5>
+        <p>We respect your privacy and are committed to protecting your personal information. Please review our Privacy Policy to learn more about how we collect, use and protect your information.</p>
+        <h5>6. Changes to the Terms of Use</h5>
+        <p>We reserve the right to modify these Terms of Use at any time and without notice. Any changes to these Terms of Use will be effective upon posting on this Application. By continuing to use this Application after changes are posted, you agree to be bound by the modified Terms of Use.</p>
+        <h5>7. Contact</h5>
+        <p>If you have any questions about these Terms of Use, please contact us at: <b><a href="mailto:{{config.MAIL_USERNAME}}">{{config.MAIL_USERNAME}} </a></b>.</p>
+        <p>By using this Application, you agree to these Terms of Use. Thank you for your trust and understanding.</p>
+        <p class="mt-1">
+            <button onclick="iUnderstand()" class="p-2 btn btn-block btn-primary text-uppercase text-uppercasee">
+
+                <i class="fa fa-check mr-2"></i> I undestand
+            </button>
+        </p>
+
+
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+
+    function iUnderstand() {
+        if (window.jsBridge && window.jsBridge.postMessage)
+            history.back();
+        else
+            window.close();
+
+    }
+
+    function openTab(evt, cityName) {
+        // Declare all variables
+        var i, tabcontent, tablinks;
+
+        // Get all elements with class="tabcontent" and hide them
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        // Show the current tab, and add an "active" class to the button that opened the tab
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+</script>
+{% endblock %}

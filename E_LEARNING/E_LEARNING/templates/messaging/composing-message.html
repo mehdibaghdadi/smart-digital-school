@@ -1,0 +1,117 @@
+
+<div id="myModal-msg" class="rounded p-2 mt-n4 mb-0">
+    <form name="formEdition" ng-model="objEdition" autocomplete="off">
+        <div class=" bg-modal-pop ">
+           
+            <div class="pt-2 pb-1 mb-1 mt-2">
+                <div class="row justify-content-center">
+                    <div class=" col-md-12 pb-3 ">
+                        <small data-toggle="tooltip" title="{$ objEdition.user_sender_email $}" class="ml-1 text-truncate d-block text-uppercase" id="cc" placeholder="" tabindex="-1">
+                            <span for="cc" class=" control-label">{{JR.fromm}} :</span> <b class="text-info">{$ objEdition.user_sender_full_name $} </b> <span class="text-black">( {$ objEdition.user_sender_email $} )</span>
+                        </small>
+                        <div style="vertical-align:middle;font-size:0.8rem" class="text-uppercase text-right">
+                            <b>
+                                <i ng-class="currentMenuCss"></i><span ng-hide="status==0" class="text-white">{{JR.at}} : <small class="text-dark text-bold text-uppercase">{$ toLocaleFullDateString(objEdition.date_update) $}</small></span>
+                                <span ng-show="status == 0" style="font-size:12px">{{JR.inprogress}}. . . <i class="fa fa-1x fa-spinner fa-spin"></i></span>
+                            </b>
+                        </div>
+                        <hr class="m-0 mt-3 mb-1" style="border:0;border-bottom:thin dashed #ccc" />
+                    </div>
+                    <div class="col-md-12 pb-3">
+                        <div class="ui-front p-0">
+                            <small for="user_app" class="text-uppercase">{{JR.recipients}} : <b class="text-info text-sm">{$ listMails.length $}</b></small>
+                            <div>
+                                <div class="mmOuter">
+                                    
+                                    <!-- Email Input -->
+                                    <input ng-show="objEdition.isnew"  type="search" id="data_emails" value="" 
+                                           autocomplete="off" class="multiMail mr-1 form-control form-control-sm d-inline" />
+
+                                    <div class="text-right">
+                                        <button ng-show="objEdition.isnew" type="button" ng-click="showListContactsClick()"
+                                                title="{{JR.select}} : {{JR.contacts}}" data-toggle="tooltip"
+                                                class="btn  btn-sm ">
+                                            <small class="font-weight-bold text-underline"><i class="fa fa-list-check text-info mr-1"></i> {{JR.see_list}}</small>
+                                        </button>
+                                    </div>
+
+                                    <i ng-show="status_contact == 0" class="ml-2 fa fa-1x fa-spinner fa-spin"></i>
+                                    <input id="mails" name="mails" class="multiMailResult" />
+                                    <!-- Email Addresses Will Be Listed Here -->
+                                    <div id="boxes" class="mmBoxes mt-3 rounded" ng-class="listMails.length>0 ? 'bg-white' : 'bg-light '">
+                                    </div>
+                                    <!--erase all-->
+                                    <div class="text-right">
+                                        <span ng-show="listMails.length>0 && (objEdition.is_composing || objEdition.isnew)" role="button" ng-click="eraseAllMailsClick()">
+                                            <small class="text-uppercase text-underline"><i class="fa fa-trash text-red mr-1"></i> {{JR.erase_all}}</small>
+                                        </span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 pb-3">
+                        <small for="to" class="text-uppercase ">{{JR.message_object}}:</small>
+
+                        <input ng-model="objEdition.subject" type="text" autocomplete="off" aria-autocomplete="none" required
+                               ng-readonly="!objEdition.updateSubject" class="form-control text-dark" id="to" placeholder="{{JR.title}} {{JR.message}} ..." tabindex="-1">
+
+
+                    </div>
+
+                    <div class="col-12">
+                        <small class="text-uppercase text-truncate d-block">{{JR.message}}: </small>
+                        <div class="form-group text-black p-0 m-0  editor-text ">
+                            <textarea readonly id="compose-textarea" class="form-control" style="background-image:none !important">            
+                         </textarea>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+
+            <div class="text-center row justify-content-center footer-fix" style="margin:0">
+                <div class="col">
+                    <div ng-show="status==0 || stepSend == 1" class="text-center text-warning d-inline-block mr-2">
+                        <br />
+                        <i class="fa fa-2x fa-spinner fa-spin"></i>
+                    </div>
+
+                    <!--send message-->
+                    <button hide-if-no-payment ng-hide="(!objEdition.isnew || status==0 || stepSend == 1|| stepSend == 2) && !objEdition.is_composing"
+                            type="submit" ng-click="formEdition.$valid  && stepSend == 0 && SendMessageBox(objEdition)"
+                            class="btn btn-lg  " ng-class="stepSend==0 ||stepSend==2 ? 'btn-success' : 'btn-dark'">
+                        <span ng-show="stepSend == 0" style="font-size:12px"><i class="fa fa-1x fa-paper-plane"></i> &nbsp;{{JR.send_message}}</span>
+                        <span ng-show="stepSend == 1" style="font-size:12px">{{JR.inprogress}} . . . <i class="fa fa-1x fa-spinner fa-spin"></i></span>
+                    </button>
+
+                    <!--//response message -->
+                    <button hide-if-no-payment ng-show="status != 0" ng-if="(objEdition.can_response || !objEdition.isnew ) && !objEdition.is_composing " type="submit"
+                            ng-click="responseClick(objEdition)"
+                            class="btn btn-lg btn-info ">
+                        <span style="font-size:12px"><i class="fa fa-1x fa-reply-all"></i> &nbsp;  {$ objEdition.to_trash || (!objEdition.is_read && objEdition.my_message) ? '{{JR.edit}}' : '{{JR.reply}}' $}  </span>
+                    </button>
+
+
+                    <!--close-->
+                    <button type="button" ng-click="closeClick()"
+                            class="btn btn-lg btn-danger ml-2">
+                        <span style="font-size:12px"><i class="fa fa-1x fa-close"></i> &nbsp;{{JR.cancel}}</span>
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+    </form>
+</div>
+
+

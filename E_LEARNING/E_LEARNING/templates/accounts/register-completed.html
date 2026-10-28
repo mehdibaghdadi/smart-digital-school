@@ -1,0 +1,77 @@
+{% extends "_layouts/layout-account.html" %}
+{% set title_header = config.JINJA2_RESOURCES.welcome_to_sds_title %}
+
+{% block head %}
+<style>
+    .hack-top-login {
+        display: none;
+    }
+    .login-page, .register-page {
+        
+        height: inherit !important;
+    }
+    .login-box, .register-box {
+        width: 60%;
+        margin-top: 1rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="card-body  text-uppercase p-0 pt-1">
+    <h3 class="login-box-msg">{{JR.welcome_to_sds_title}}</h3>
+    <div class="p-2 text-sm text-justify  ">
+        {% if g.current_language == 'fr'%}
+        <div>
+            Votre inscription à notre produit e-learning a été confirmée avec succès ! Vous êtes maintenant membre de notre communauté éducative en ligne.
+            <br />
+            <br />
+            Grâce à notre plateforme, vous pourrez gérer facilement vos classes, vos étudiants et vos professeurs de manière intuitive et simple.
+            <br />
+            <br />
+            Explorez dès maintenant toutes les fonctionnalités que nous offrons pour simplifier la gestion éducative et enrichir l'expérience d'apprentissage de vos élèves. Notre équipe est là pour vous accompagner à chaque étape.
+            <br />
+            <br />
+            Nous sommes ravis de vous avoir parmi nous !
+        </div>
+        {% endif %}
+        {% if g.current_language == 'en'%}
+        <div>
+            Your registration for our e-learning product has been successfully confirmed! You are now a member of our online educational community.
+            <br />
+            <br />
+            Thanks to our platform, you will be able to easily manage your classes, your students and your teachers in an intuitive and simple way.
+            <br />
+            <br />
+            Explore now all the features we offer to simplify educational management and enrich your students' learning experience. Our team is here to support you every step of the way.
+            <br />
+            <br />
+            We are delighted to have you among us!
+        </div>
+        {% endif %}
+        {% if g.current_language == 'es'%}
+        <div>
+            ¡Su registro para nuestro producto de e-learning ha sido confirmado exitosamente! Ahora eres miembro de nuestra comunidad educativa en línea.
+            <br />
+            <br />
+            Gracias a nuestra plataforma podrás gestionar fácilmente tus clases, tus alumnos y tus profesores de una forma intuitiva y sencilla.
+            <br />
+            <br />
+            Explore ahora todas las funciones que ofrecemos para simplificar la gestión escolar y enriquecer la experiencia de aprendizaje de sus estudiantes. Nuestro equipo está aquí para apoyarlo en cada paso del camino.
+            <br />
+            <br />
+            ¡Estamos encantados de tenerte entre nosotros!
+
+        </div>
+        {% endif %}
+    </div>
+    <div class="social-auth-links text-center p-2">
+        <a href="{{url_login}}" class="p-2 btn btn-block btn-danger text-uppercase text-uppercase">
+            <i class="fa fa-right-to-bracket mr-2"></i> {{JR.login}}
+        </a>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+
+{% endblock %}

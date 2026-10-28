@@ -1,0 +1,19 @@
+<div class="footer-fix-course-progress text-center border">
+    <small class=" d-inline-block text-light text-uppercase"
+           style="letter-spacing:0.03em"
+           ng-switch="percent_progress_course">
+        <i class="fa fa-arrow-trend-up mr-1"></i>
+        <span ng-switch-when="100"> <small class="">{{JR.course_ended}}</small> : <span class="text-teal font-weight-bold">{$ percent_progress_course $} <i class="fa fa-percent"></i></span></span>
+        <span ng-switch-default> <small class="">{{JR.course}} </small> : <span class="text-warning font-weight-bold">{$ percent_progress_course $} <i class="fa fa-percent mr-1"></i></span> <small>{{JR.finished}}</small></span>
+
+    </small>
+
+    <small ng-if="quizzes.length" class="ml-2 d-inline-block text-light text-uppercase"
+           style="letter-spacing:0.03em">
+        <i class="fa fa-ellipsis-vertical mr-1"></i>
+        <span> <small class="">{{JR.quizzes}} </small> : <span class=" text-warning font-weight-bold">{$ percent_progress_quiz $} <i class="fa fa-percent  mr-1"></i></span> <small>{{JR.correct}}</small></span>
+
+    </small>
+
+
+</div>

@@ -1,0 +1,173 @@
+<!-- Modal -->
+<form class="modal fade p-0" id="uploadModalContent" name="uploadModalContent"
+      ng-submit="submitContent(editContent)" tabindex="-1"
+      role="dialog" data-backdrop="static" data-keyboard="false"
+      aria-labelledby="uploadModalLabel">
+    <div class="modal-dialog modal-fullscreen" role="document">
+        <div class="modal-content">
+            <div class="modal-header p-1 pt-0 pb-0 bg-primary">
+                <small class="text-uppercase mt-1 ml-1"><i class="fa {$content_type.css$} mr-1"></i><b class="modal-title" id="uploadModalLabel">{$ editContent.id>0 ?"{{JR.edit}}":"{{JR.load}}" $} : <span class="text-warning">{$content_type.text$}</span></b></small>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body overflow-auto pt-1" ng-model="editContent">
+                <!-- beginform -->
+                <div class="text-center" ng-show="editContent.id>0">
+                    <button type="button" class="btn btn-outline-danger text-uppercase text-xs"
+                            ng-click="editContent.new_blob_file =!editContent.new_blob_file">
+                        <i class="fa {$content_type.css$} mr-1"></i>{$content_type.text$} : {$ !editContent.new_blob_file ?"{{JR.replace}}":"{{JR.dont_replace}}" $}
+                    </button>
+                    <hr class="mt-2 mb-2" />
+                </div>
+                <div class="row text-uppercase text-xs">
+                    <div class="form-group col-md-12" ng-show="editContent.new_blob_file">
+                        <small class="text-truncate">
+                            <i class="fa {$content_type.css$} mr-1"></i><span ng-show="content_file_info.file==null">{{JR.attachment}}</span><span ng-show="content_file_info.file!=null">{{JR.file}} : <span>{$ content_file_info.file.name $}</span></span>
+                        </small>
+
+                        <!--input file-->
+                        <div class="input-group mb-0">
+                            <div class="custom-file">
+                                <input class="custom-file-input" id="filesUpload" ng-required="editContent.new_blob_file" ng-show="editContent.new_blob_file" type="file"
+                                       name="filesUpload" accept="{$ content_type.allowed_ext $}" />
+                                <div class="custom-file-label text-truncate p-2" for="filesUpload">
+                                    <span class="m-0 p-0" ng-show="content_file_info.file==null">
+                                        <i class="fa fa-ellipsis-v ml-2 mr-1"></i> {{JR.add}} : {$content_type.text$} ...
+                                    </span>
+                                    <span class="m-0 p-0 text-red" ng-show="content_file_info.file!=null">
+                                        <b class="text-dark">{{JR.type1}} : </b> <span class="text-truncate text-uppercase">{$ content_file_info.ext $}</span> , <b class="text-dark">{{JR.size}} : </b> {$ content_file_info.size $}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-xs text-right">
+                            <abbr class="text-dark text-uppercase" data-toggle="tooltip" data-html="true" title="{$msg_content_authorized$}"><small>{{JR.authorized_type}} <i class="fa fa-question-circle"></i></small></abbr>
+                        </div>
+
+
+
+                    </div>
+
+                    <!--thumbnail Video Preview-->
+                    <div class="form-group col-md-12">
+                        <i id="loaderVideoSpinner"
+                           style="position: absolute; z-index: 999"
+                           ng-style="{ 'left' : (modalForVideo) ? '22%' : '45%' , 'top' : (modalForVideo) ? '25%' : '0%' }"
+                           class="fa fa-spinner fa-spin text-white shadow-text fa-5x d-none"></i>
+
+                        <div class="row m-0 p-0" ng-show="modalForVideo">
+                            <!--MEDIA FILE -->
+                            <div class="col-md-6 border p-0 text-center bg-black">
+
+                                <video class="bg-black" preload="metadata" crossOrigin="anonymous" id="videoPlayer"
+                                       style="width: 100%; height: 215px;" controls></video>
+
+                                <div ng-show="editContent.new_blob_file || editContent.update_cover ">
+                                    <button id="captureBtn" class="btn btn-sm btn-block btn-warning rounded-0 " type="button">
+                                        <i class="mr-1 fa fa-hand-point-up"></i> {{JR.capture_image_video}}
+                                        <span class="position-absolute" style="right:5px" data-toggle="tooltip" title="{{JR.capture_image_video_helper}}">
+                                            <i class="ml-1 fa text-lg fa-question-circle"></i>
+                                        </span>
+                                    </button>
+
+
+                                </div>
+                                <div ng-hide="editContent.update_cover || editContent.new_blob_file">
+                                    <button id="newCaptureBtn"
+                                            ng-click="editContent.update_cover =!editContent.update_cover"
+                                            class="btn btn-sm btn-block btn-danger rounded-0" type="button">
+                                        {{JR.new_capture_image_video}} <i class="ml-1 fa fa-edit"></i>
+                                    </button>
+                                </div>
+
+                            </div>
+                            <!-- THUMBNAIL-->
+                            <div class="col-md-6 p-0 border text-center  bg-black">
+                                <div id="thumbnailPreview" style="max-width: 100%;height:220px; "></div>
+
+                                <div style="bottom:0"
+                                     class=" position-absolute btn-sm btn-flat btnThumbnailPreview text-xs btn-block bg-black border-top rounded-0">
+                                    <span class="text-muted">
+                                        {{JR.cover_image}}
+                                        <i class="ml-1 fa fa-camera"></i>
+                                    </span>
+                                    <b id="timeDisplay" class="text-light ml-2"></b>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group " ng-show="modalForAudio">
+                            <audio preload="metadata" crossOrigin="anonymous" id="audioPlayer" style="width: 100%;" controls></audio>
+                        </div>
+                    </div>
+
+                    <!--description-->
+                    <label class="small ">{{JR.description}}</label> 
+
+                    <div class="form-group col-md-12">
+                        <textarea ng-model="editContent.content_brief" required rows="7" 
+                                  type="text" class="form-control rounded-0" 
+                                  placeholder="{{JR.summary}} {$content_type.text$} ..."></textarea>
+                    </div>
+
+
+                    <div class="p-0 col-6 text-left">
+                        <div class="switch text-xs text-uppercase">
+                            <span class="ml-2 font-weight-bold">
+                                <span ng-class="editContent.is_important==1 ? 'text-red' : ''">{{JR.important}}</span>
+                                <label class="">
+                                    <input type="checkbox" ng-model="editContent.is_important" ng-true-value="1" ng-false-value="0" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <span class="lever"></span>
+                                </label>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="p-0 col-6 text-right">
+                        <div class="switch text-xs text-uppercase">
+                            <span class="">
+                                <i class="fa"
+                                   ng-class="editContent.is_visible==1 ? 'fa-eye text-success' : 'fa-eye-slash text-muted'"></i>
+                            </span>
+                            <span class="ml-1 font-weight-bold">
+                                <span>{$ editContent.is_visible ? "{{JR.online}}":"{{JR.offline}}"$}</span>
+                                <label class="">
+                                    <input type="checkbox" ng-model="editContent.is_visible" ng-true-value="1" ng-false-value="0" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <span class="lever"></span>
+                                </label>
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- endform -->
+                <div class="more-space-div-bottom"></div>
+            </div>
+            <div class="modal-footer bg-black footer-fix text-center justify-content-center position-relative" style="padding-top:0 !important">
+                <!--progress infos-->
+                <div class="progress-bar m-0 bg-black text-xs border border-top-0 border-gray  text-uppercase  rounded w-100" role="progressbar"
+                     style="width: 100%;"
+                     ng-style="{'background': 'linear-gradient(90deg, #28a745 '+progressBar + '%, #ffffff00 0%)'}"
+                     aria-valuenow="{$ progressBar $}"
+                     aria-valuemin="0" aria-valuemax="100">
+                    <small ng-show="progressBar>0">
+                        {$ progressInfo $}
+                    </small>
+                    <small ng-hide="progressBar>0">{{JR.pending}} . . .</small>
+                </div>                
+                <!--end progress infos-->
+                <div class="w-100 pt-2">
+                    <button hide-if-no-payment type="submit" class="btn btn-primary">{{JR.save}}</button>
+                    <button type="button" ng-hide="progressBar>0 &&  progressBar<95 "
+                            class="btn btn-danger ml-3" data-dismiss="modal">
+                        {{JR.close}}
+                    </button>
+                    <button id="btnCancelUpload" type="button" class="btn btn-danger ml-3"
+                            ng-click="reloadPage()" ng-hide="progressBar<=0 || progressBar>=95">
+                        {{JR.cancel}} : {$ progressBar | number:0 $}%
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

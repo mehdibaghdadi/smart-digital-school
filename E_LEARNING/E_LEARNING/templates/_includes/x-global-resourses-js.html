@@ -1,0 +1,34 @@
+<!--************************************
+    IMPORTANT : GLOBAL RESOURSES SCRIPT
+************************************-->
+{% set JSR = config.JAVASCRIPT_RESOURCES %}
+
+<script type="text/javascript">
+    window.JSR = {};
+
+     {% for key, value in JSR.__dict__.items() %}
+        {% if not key.startswith('__') %}
+            JSR["{{ key }}"] = "{{ value }}";
+        {% endif %}
+    {% endfor %}
+
+    window.JSR["e_fm_api"] = "{{ config.E_FILE_MANAGER_API|safe }}";
+    window.JSR["e_signalr_api"] = "{{ config.E_SIGNALR_API|safe  }}";
+    window.JSR["e_rpt_api"] = "{{ config.E_GATEWAY_API|safe  }}";
+    
+    window.JSR["content_upload_file_url"] = "{{ config.CONTENT_UPLOAD_FILE_URL|safe }}";
+    window.JSR["content_delete_file_url"] = "{{ config.CONTENT_DELETE_FILE_URL|safe }}";
+    window.JSR["content_update_upload_file_url"] = "{{ config.CONTENT_UPDATE_UPLOAD_FILE_URL|safe }}";
+    window.JSR["content_download_media_url"] = "{{ config.CONTENT_DOWNLOAD_MEDIA_URL|safe }}";
+    window.JSR["content_download_file_url"] = "{{ config.CONTENT_DOWNLOAD_FILE_URL|safe }}";
+    window.JSR["content_get_image_url"] = "{{ config.CONTENT_GET_IMAGE_URL|safe }}";
+    
+    window.JSR["current_user_email"] = '{{ current_user.email if current_user else "" }}';
+    window.JSR["current_role"] = '{{ current_user.role if current_user.is_authenticated else ROLES.Any.value}}';
+    window.JSR["current_language"] = '{{ g.current_language }}';
+    window.JSR["unused_days"] = parseInt('{{current_user.unused_days}}');
+    window.JSR["current_language_ext"] = '{{ { "fr": "fr-FR", "en": "en-US", "es": "es-ES" } [g.current_language] | default ("en-US") }}';
+    window.JSR["datatable_language"] = "/static/plugins/jquery/i18n/data-table-{{ g.current_language }}.json";
+
+
+</script>

@@ -1,0 +1,21 @@
+{% extends "_layouts/layout-account.html" %}
+{% block head %}
+{% endblock %}
+{% block content %}
+<div class="card-body" >
+    <div class="mb-0 text-center">
+        <h1><i class="fa fa-exclamation-triangle"></i></h1>
+        <h5>{{JR.login_unauthorized_header}}</h5>
+        <dfn class="p2">{{JR.contact_admin_plz}}</dfn><br />
+        <hr/>
+        <small>
+            <a type="" href="{{url_for('AccountView:login')}}" class="text-center">{{JR.log_in}}</a>
+        </small>
+    </div>
+</div>
+{% endblock %}
+{% block contentBottom %}{% endblock %}
+{% block scripts %}
+<script src="/static/app-assets/js/password-manager.min.js?version={{app_version()}}"></script>
+<script src="/static/app-core/accounts/app.account.min.js?version={{app_version()}}"></script>
+{% endblock %}

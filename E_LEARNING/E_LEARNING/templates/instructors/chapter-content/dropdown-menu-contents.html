@@ -1,0 +1,26 @@
+<div class="dropdown-menu dropdown-menu-right p-0 text-uppercase" role="menu" style="">
+    <div class="p-2 pl-3 bg-primary border-bottom">
+        <div class="text-xs"> <i class="fas fa-plus mr-2 text-warning"></i><b>{{JR.add_to_chapter}} :</b></div>
+    </div>
+    <div class="pt-2 pl-1 pb-2" style="min-width:200px">
+        <a class="dropdown-item " ng-click="addContent(settings.content_type.video)" role="button">
+            <i class=" mr-2" ng-class="content_type_dict[1].css+' '+ content_type_dict[1].color"></i>1. {{JR.video}}
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" ng-click="addContent(settings.content_type.audio)" role="button">
+            <i class=" mr-2" ng-class="content_type_dict[2].css+' '+ content_type_dict[2].color"></i>2. {{JR.audio}}
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" ng-click="addContent(settings.content_type.document)" role="button">
+            <i class=" mr-2" ng-class="content_type_dict[3].css+' '+ content_type_dict[3].color"></i>3. {{JR.document}}
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" ng-click="addContent(settings.content_type.text)" role="button">
+            <i class=" mr-2" ng-class="content_type_dict[4].css+' '+ content_type_dict[4].color"></i>4. {{JR.writing}}
+        </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" ng-click="addContent(settings.content_type.youtube)" role="button">
+            <i class=" mr-2" ng-class="content_type_dict[5].css+' '+ content_type_dict[5].color"></i>5. {$ content_type_dict[5].text $}
+        </a>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+
+<small class="text-bold text-left text-uppercase text-truncate">
+    <i class="mr-1 fa fa-book-reader text-info"></i> <u class="">{{JR.student}}/{{JR.course}} ({{JR.view_360}}) </u>
+</small>
+<div class="header-fix-student-profile mb-3 text-left rounded">
+    <div class="row text-uppercase">
+        <div class="col-md-2 text-center">
+            <img ng-click="zoomImage('{{ student_profile.image }}')"
+                 src="{{ student_profile.image}}"
+                 class="img-circle mb-2 border elevation-1" alt="Profile">
+        </div>
+        <div class="col-md-5 text-xs">
+            <h3>{{ student_profile.first_name }} {{ student_profile.last_name }}</h3>
+            <p><i class="fas fa-envelope text-muted mr-1"></i> {{ student_profile.email }}</p>
+            <p>
+                <i class="fas fa-school text-muted mr-1"></i> <span>{{ student_profile.level }}</span>
+                | <span>{{ student_profile.qualification }} </span>
+            </p>
+
+        </div>
+        <div class="col-md-5 text-xs">
+            <p><i class="fa fa-graduation-cap text-muted mr-1"></i> {{JR.classs}} : <b class="text-black">{{ student_profile.classroom }}</b> </p>
+            <p><i class="fa fa-clock text-muted mr-1"></i> {{JR.date_subscribed}} : <b>{$ '{{ student_profile.registration_date.strftime('%d/%m/%Y') }}'| localeDate $}</b></p>
+            <p><i class="fa fa-user text-muted mr-1"></i> {{JR.active}}  : <b class="{{ 'text-success' if student_profile.active_account else 'text-danger' }}">{{ JR.yes if student_profile.active_account else JR.no  }}</b></p>
+
+        </div>
+    </div>
+</div>

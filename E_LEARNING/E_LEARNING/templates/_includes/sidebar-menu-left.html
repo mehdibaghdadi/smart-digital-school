@@ -1,0 +1,90 @@
+<aside class="main-sidebar sidebar-dark-red elevation-4 bg-black ">
+    <!-- Brand Logo -->
+    
+    <a href="{{current_user.url_index}}" class="brand-link border border-dark rounded-top border-left-0 navbar-red" style="">
+        <img src="/static/app-assets/img/logo.png" style="height:60px;" alt="" class="brand-image img-circle elevation-4" />
+
+        <div class="brand-text mt-n1 mb-1" style="line-height: 0.9rem;color: #000;height:30px;">
+            <div class="d-block text-x" style="color: #d0d0d0; letter-spacing: 0.1rem; font-size: 9px;">
+            SMART DIGITAL</div>
+            <div class=" font-weight-bold" style="color: #d9d9da; letter-spacing: 0.17rem; padding-right: 1rem; font-size: 18px;">
+            SCHOOL</div>
+        </div>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex align-items-center ">
+            <div class="image">
+
+                <a href="{{url_for(url_icon_school)}}"><img id="user-image-menu-school" src="{{school_image}}" class="img-circle elevation-2" alt="" /></a>
+            </div>
+            <div class="info text-xs">
+                <a href="{{url_for(url_icon_school)}}" title="{{current_user.name_school}}" class="d-block text-uppercase text-truncate">{{current_user.name_school}}</a>
+            </div>
+        </div>
+        <!-- SidebarSearch Form -->
+        <div class="form-inline">
+            <div class="input-group input-group-sm" data-widget="sidebar-search">
+                <input class="form-control form-control-sidebar" type="search" placeholder="{{JR.search_link}} ..." aria-label="Search">
+                <div class="input-group-append">
+                    <button class="btn btn-sidebar">
+                        <i class="fas fa-search fa-fw"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Sidebar Menu -->
+        <nav class="mt-2 mb-5 text-uppercase" style="font-size:0.72rem !important;overflow-x:hidden">
+
+            <ul class="nav nav-pills nav-sidebar flex-column nav-flat " data-widget="treeview" role="menu" data-accordion="false">
+                <!-- MENU LOOP -->
+                {% for item in menuJJ.children recursive %}
+                <li class="nav-item   {% if item.is_active() or item.has_active_child() %} has_active_child {% endif %}" id="{{item.menu_id}}">
+                    {% if item.children %}
+                    {% if item.is_visible() and item.has_visible_child() %}
+                    <a href="{% if item.endpoint %}{{ url_for(item.endpoint) }}{% else %}javascript:return false;{% endif %}" class="nav-link ">
+                        {% if item.icon %}
+                        <span class=" mr-1 ml-2">
+                            <span class=" text-md bg-black rounded-pill d-flex align-items-center justify-content-center" style="width:2rem;height:2rem">
+                                <i class="{{ item.icon }}"></i>
+                            </span>
+                        </span>
+                        {% endif %}
+                        <p>
+                            {% if item.active %}*{% endif %}  {{ item.title }}
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview" style="display:none">
+                        {{ loop(item.children) }}
+                    </ul>
+                    {% endif %}
+                    {% else %}
+                    {% if item.is_visible() %}
+                    <a href="{% if item.endpoint %}{{ url_for(item.endpoint) }}{% else %}javascript:return false;{% endif %}" class="nav-link ">
+                        {% if item.icon %}
+                        <span class=" mr-1 ml-2">
+                            <span class="text-md bg-black rounded-pill d-flex align-items-center justify-content-center" style="width:2rem;height:2rem">
+                                <i class="{{ item.icon }}"></i>
+                            </span>
+                        </span>
+                        {% endif %}
+                        <p>
+                            {{ item.title }}
+                        </p>
+                    </a>
+                    {% endif %}
+                    {% endif %}
+                </li>
+                {% endfor %}
+                
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+
+        <div>&nbsp;</div>
+    </div>
+    <!-- /.sidebar -->
+</aside>

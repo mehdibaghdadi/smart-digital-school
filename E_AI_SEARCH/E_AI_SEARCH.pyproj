@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{cac06d78-be6b-434c-9ea9-d716ef8abd8e}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile>runserver.py</StartupFile>
+    <SearchPath>..\E_AI_SEARCH</SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <LaunchProvider>Web launcher</LaunchProvider>
+    <InterpreterId>MSBuild|env|$(MSBuildProjectFullPath)</InterpreterId>
+    <WebBrowserUrl>http://localhost</WebBrowserUrl>
+    <WebBrowserPort>8005</WebBrowserPort>
+    <PythonRunWebServerCommand>
+    </PythonRunWebServerCommand>
+    <PythonRunWebServerCommandArguments>
+    </PythonRunWebServerCommandArguments>
+    <PythonRunWebServerCommandEnvironment>
+    </PythonRunWebServerCommandEnvironment>
+    <PythonRunWebServerCommandType>
+    </PythonRunWebServerCommandType>
+    <IsWindowsApplication>False</IsWindowsApplication>
+    <PythonDebugWebServerCommand>D:\SMART_DIGITAL_SCHOOL\E_LEARNING\E_AI_SEARCH\env\Scripts\uvicorn.exe</PythonDebugWebServerCommand>
+    <PythonDebugWebServerCommandArguments>main:app --reload --port 8005</PythonDebugWebServerCommandArguments>
+    <PythonDebugWebServerCommandEnvironment>./.env</PythonDebugWebServerCommandEnvironment>
+    <PythonDebugWebServerCommandType>script</PythonDebugWebServerCommandType>
+    <SuppressConfigureTestFrameworkPrompt>true</SuppressConfigureTestFrameworkPrompt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include=".env" />
+    <Content Include="E_AI_SEARCH\index\rebuild_all.cmd" />
+    <Content Include="E_AI_SEARCH\index\reset\reset.cmd" />
+    <Content Include="launcher.bat" />
+    <Content Include="requirements.txt" />
+    <Content Include="run.cmd" />
+    <Content Include="E_AI_SEARCH\static\css\search_ui.css" />
+    <Content Include="E_AI_SEARCH\static\js\search_ui.js" />
+    <Content Include="E_AI_SEARCH\templates\search_ui.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="E_AI_SEARCH\index\reset\build_index.py" />
+    <Compile Include="E_AI_SEARCH\index\build_and_ingest.py" />
+    <Compile Include="E_AI_SEARCH\preprocess\clean_snippets.py" />
+    <Compile Include="E_AI_SEARCH\embeddings\embeddings.py" />
+    <Compile Include="E_AI_SEARCH\ingest\ingest.py" />
+    <Compile Include="E_AI_SEARCH\search\__init__.py" />
+    <Compile Include="E_AI_SEARCH\utility\db.py" />
+    <Compile Include="E_AI_SEARCH\__init__.py" />
+    <Compile Include="E_AI_SEARCH\index\reset\export_vectors.py" />
+    <Compile Include="E_AI_SEARCH\search\search_router.py" />
+    <Compile Include="runserver.py" />
+    <Compile Include="settings.py" />
+    <Compile Include="E_AI_SEARCH\tests\test_faiss.py" />
+    <Compile Include="E_AI_SEARCH\tests\test_faiss_debug.py" />
+    <Compile Include="E_AI_SEARCH\utility\utils.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Interpreter Include="env\">
+      <Id>env</Id>
+      <Version>3.11</Version>
+      <Description>env (Python 3.11 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="E_AI_SEARCH\index\reset\" />
+    <Folder Include="E_AI_SEARCH\ingest\" />
+    <Folder Include="E_AI_SEARCH\index\" />
+    <Folder Include="E_AI_SEARCH\embeddings\" />
+    <Folder Include="E_AI_SEARCH\" />
+    <Folder Include="E_AI_SEARCH\utility\" />
+    <Folder Include="E_AI_SEARCH\tests\" />
+    <Folder Include="E_AI_SEARCH\search\" />
+    <Folder Include="E_AI_SEARCH\preprocess\" />
+    <Folder Include="E_AI_SEARCH\static\" />
+    <Folder Include="E_AI_SEARCH\static\js\" />
+    <Folder Include="E_AI_SEARCH\static\css\" />
+    <Folder Include="E_AI_SEARCH\templates\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+</Project>

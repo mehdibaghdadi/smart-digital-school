@@ -1,0 +1,296 @@
+{% extends "_layouts/layout.html" %}
+
+{% set current_quiz= quiz.json["response"] if quiz and quiz.json["status"]==200 and course_id >0 else None  %}
+{% set cc=  course %}
+
+{% block head %}
+<link href="/static/app-assets/css/courses.min.css?version={{app_version()}}" rel="stylesheet" />
+<!-- style pour l’élément fantôme drag -->
+<style>
+    .sortable_placeholder {
+        height: 80px; /* même hauteur qu’une .card */
+        background: #f8f9fa;
+        border: 2px dashed #ced4da;
+        margin-bottom: .75rem;
+    }
+</style>
+
+{% endblock %}
+
+{% block contentTitleHeader %}
+- {{current_quiz.quiz_name if current_quiz else '' }}
+{% endblock %}
+{% block content %}
+
+<div class="" ng-controller="EditCourseQuizCtrl as qc" data-course-id="{{ course_id }}" ng-init="qc.init({{current_quiz}},'{{url_for("QuizInstructorView:edit_1")}}')">
+
+    <div class="text-uppercase text-center d-flex justify-content-between align-items-end p-0 m-0 border-bottom">
+        <div class=" text-left">
+            <a class="btn btn-default border-bottom-0 btn-flat rounded-top btn-sm  float-left" ng-href="{{course_edit_url}}">
+                <small class=""><i class="fas fa-chevron-left mr-1 text-blue"></i>{{JR.the_course}}</small>
+            </a>
+        </div>
+        <div class=" text-center">
+            <div class="btn-group  text-left">
+                <a class="btn btn-dark border-bottom-0 btn-flat rounded-top btn-sm" data-toggle="dropdown" aria-expanded="false">
+                    <small class="text-bold">
+                        <i class="fa fa-list-ol text-warning mr-1"></i>{{JR.quizzes}}<i class="ml-1 fa fa-ellipsis-v "></i>
+                    </small>
+                </a>
+                {% include 'instructors/quiz/dropdown-menu-quizzes-list.html' %}
+            </div>
+
+        </div>
+        <div class="btn-group  text-right">
+            <button type="button" class="btn btn-default border-bottom-0 btn-flat rounded-top btn-sm text-uppercase" data-toggle="dropdown" aria-expanded="false">
+                <small>
+                    <i class="mr-1 fa fa-bolt"></i>{{JR.actions}}<i class="ml-1 fa fa-ellipsis-v text-success"></i>
+                </small>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right" role="menu" style="">
+                <a class="dropdown-item cursor-pointer" onclick="window.SmootScrollView('tb-questions'); return false;"> <i class="fas fa-list mr-1 text-red"></i> {{JR.questions}}</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{{quiz_instructor_view360_url}}#quizzes_course_list" role="button">
+                    <i class="fas fa-street-view mr-1 text-info"></i> {{JR.quiz}} {{JR.view_360}}
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" data-toggle="modal" data-target="#editModalQuiz"
+                   ng-click="createQuiz($event)" role="button">
+                    <i class="fas fa-plus text-xs mr-2 text-success"></i>{{JR.add}} {{JR.quiz}}
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row p-0 bg-graph mb-1 text-uppercase elevation-0 ">
+        <div class="col-md-12 p-2 text-left pl-3 bg-light">
+            <div class=" text-clamp-div text-xs">
+                <span>
+                    <i class="fa fa-ew-book mr-1"></i><u class="text-bold">{{cc.label_subject }}</u> :
+                </span>
+                <small class="d-block mt-2 pl-2">{{cc.course_title }}</small>
+            </div>
+
+        </div>
+        <div class=" col-md-12 text-right p-1 pr-2">
+            <div class="p-1">
+                <h2 class="d-flex justify-content-center align-items-center text-bold text-right  text-black  text-uppercase  text-bold text-right">
+                    <u>{{JR.quiz}} Nº</u> <b class="badge bg-primary rounded-pill ml-2 ng-binding">{{current_quiz.sequence}}</b>
+                </h2>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- EDITION QUIZ --------------------------------------------->
+    <div class="">
+        <div class="card mb-4 bg-graph elevation-0">
+            <div class="p-2">
+                <form class="row p-0 m-0" ng-submit="qc.addQuiz()">
+
+                    <!-- ­­­­­­­­­­­­­­ Champs quiz --------------------------->
+                    <div class="col-12 p-0 ">
+                        <label class="small ">{{JR.titled}}</label>
+                        <div class="row p-1 m-0 bg-primary elevation-1 rounded">
+                            <div class=" col-md-9 pl-0 pr-1">
+                                <textarea rows="3" class="form-control" placeholder="{{JR.quiz}} : {{JR.title}} ..."
+                                          ng-model="qc.editQuiz.quiz_name" required></textarea>
+                            </div>
+
+                            <div class="col-md-3 d-flex flex-column justify-content-end pt-2 pl-0 pr-1">
+
+                                <small class="text-uppercase text-xs"><i class="fas fa-stopwatch mr-2"></i>{{JR.time_limit}} ({{JR.minutes}})</small>
+
+                                <div class="input-group">
+                                    <input id="time_limit" name="log" type="number" required ng-model="qc.editQuiz.time_limit" min="0"
+                                           class="form-control  text-center text-bold text-info text-lg"
+                                           autocomplete="new-password" placeholder="{{JR.minutes}}">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <small class="text-red text-uppercase" ng-hide="qc.editQuiz.time_limit">{{JR.illimited}}</small>
+                                            <small class="text-black text-bold" ng-show="qc.editQuiz.time_limit">mn</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                        <div class="mt-2 pr-1 small text-right text-muted  text-uppercase">
+                            <b>{{JR.total}}</b> : <b class="text-xs text-dark ">{$ qc.editQuiz.questions.length $}</b> <span class="text-muted">{{JR.questions}} </span>
+
+                        </div>
+                        <div class="mt-2 pt-3 pb-3 text-uppercase text-xs">
+                            <div class="text-underline text-md mb-2 text-bold">
+                                <i class="fa fa-list-ol text-red mr-1"></i>{{JR.questions_quiz}} :
+                            </div>
+                            <div class="pl-3">
+                                {{JR.drag_drop_help}} ( <i class="text-muted mr-1 ml-1 fa fa-grip-vertical"></i> )
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                    <!-- ­­­­­­­ Aperçu / édition des questions ---------------->
+                    <div id="tb-questions" class="col-12" ng-show="qc.editQuiz.questions.length">
+
+                        <div id="quizQuestionsAcc" class="accordion mt-3 sortable">
+
+                            <!-- Carte question -->
+                            <div class="card bg-transparent"
+                                 ng-attr-data-id="{$ q.id || $index $}"
+                                 ng-repeat="q in qc.editQuiz.questions | orderBy:'idx' track by q.id">
+
+                                <!-- Header -->
+                                <div class="card-header p-1 bg-white elevation-1">
+                                    <div class="float-right text-right">
+                                        <button type="button" class="btn btn-sm p-1 border-0 btn-outline-dark"
+                                                ng-click="qc.removeQuestion($event,q.id)"
+                                                title="{{JR.delete}} : {{JR.question}}">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                        <div class=" mt-2 text-right">
+                                            <small class="bg-white d-inline-block border pl-2 pr-2 rounded shadow-sm text-sm ">
+                                                <b>{$ q.choices.length || 0 $}</b>
+                                                <small class="ml-1 text-uppercase">{{JR.choice}}</small>
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <h5 class="mb-0 d-flex align-items-center">
+
+                                        <i class="fa fa-grip-vertical m-2 align-self-start handle"
+                                           style="cursor:grab"></i>
+
+                                        <button type="button"
+                                                class="btn btn-link flex-grow-1 text-left p-1"
+                                                data-toggle="collapse"
+                                                data-target="#c{$ q.idx $}"
+                                                aria-expanded="false">
+                                            <strong class="mr-2  text-md">
+                                                <span class="text-info text-underline">{{JR.question}}</span>
+                                                <span class="badge ml-1 bg-dark elevation-1 rounded-pill text-center p-0 pt-1 text-xs " style="width: 19px;height:19px;"> {$ q.idx $} </span>
+
+                                            </strong>
+                                            <br />
+                                            <span class=" d-block mt-2 ml-1 text-question-quiz text-transform-none text-md">{$ q.question_text $}</span>
+
+                                        </button>
+                                    </h5>
+
+                                </div>
+                                <!-- Body -->
+                                <div id="c{$ q.idx $}" class="collapse"
+                                     data-parent="#quizQuestionsAcc">
+                                    <div class="card-body  border-left-dashed">
+
+                                        <!-- Intitulé -->
+                                        <div class="form-group">
+                                            <textarea placeholder="{{JR.question}} {{JR.titled}} ..." rows="3" type="text" required class="form-control form-control-sm"
+                                                      ng-model="q.question_text"></textarea>
+                                        </div>
+
+                                        <!-- Choix -->
+                                        <div class="mb-3 text-uppercase"><label class="font-weight-bold text-xs">{{JR.possible_choices}}</label>:</div>
+
+                                        <div class="form-row align-items-center mb-3"
+                                             ng-repeat="(cIdx,choice) in q.choices track by cIdx">
+
+                                            <div class="col-auto pr-0 font-weight-bold">
+                                                {$ 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[cIdx] $}.
+                                            </div>
+                                            <div class="col-auto">
+
+                                                <div class="icheck-info d-inline">
+                                                    <input type="checkbox"
+                                                           id="correct{$ q.id + '_' + cIdx $}"
+                                                           name="correct{$ q.id + '_' + cIdx $}"
+                                                           ng-checked="q.correct_answer === cIdx"
+                                                           ng-click="q.correct_answer = (q.correct_answer === cIdx ? null : cIdx)">
+                                                    <label for="correct{$ q.id + '_' + cIdx $}">{{JR.valid}}</label>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <input type="text" class="form-control form-control-sm"
+                                                       ng-model="q.choices[cIdx]"
+                                                       placeholder="{{JR.choice}} {$ cIdx+1 $}"
+                                                       ng-class="q.correct_answer == cIdx ? 'text-bold border-warning' : ''"
+                                                       required>
+                                            </div>
+
+
+
+                                            <div class="col-auto pl-0">
+                                                <button type="button" ng-disabled="q.choices.length<=2 || q.correct_answer === cIdx"
+                                                        class="btn btn-sm btn-outline-danger"
+                                                        ng-click="qc.removeChoice(q.choices,cIdx,q)"
+                                                        ng-class="q.choices.length<=2 ||q.correct_answer === cIdx ? 'btn-outline-light' : 'btn-outline-danger'"
+                                                        title="Supprimer ce choix">
+                                                    <i class="fa " ng-class="q.correct_answer === cIdx ? 'fa-minus' : 'fa-trash'"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div class="text-center">
+                                            <button type="button" ng-disabled="q.choices.length>=26"
+                                                    class="btn btn-xs btn-add-choice text-red text-bold btn-sm border-left-dashed border-bottom mb-3 ml-2"
+                                                    ng-click="q.choices.push('')">
+                                                <i class="text-info fa-solid fa-arrow-up mr-1"></i> {{JR.add}} {{JR.choice}}
+                                            </button>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div> <!-- /card -->
+                        </div>   <!-- /accordion -->
+
+                    </div>
+                    <div class="col-12 text-center m-2 border rounded bg-dashed p-2 text-uppercase" ng-show="qc.editQuiz.questions.length<=0">
+                        <i class="fa fa-2x fa-exclamation-triangle"></i><br />
+                        {{JR.no_question}}
+
+                    </div>
+
+                    <!-- ­­­­­­­Ajouter question Bouton  -------------------->
+                    <div class="col-12 text-right">
+                        <button type="button" class="btn btn-primary btn-lg"
+                                ng-click="qc.addQuestion()">
+                            <i class="fa fa-plus mr-2 text-warning"></i>{{JR.add}} {{JR.question}}
+                        </button>
+                    </div>
+
+                    <!-- ­­­­­­­ Boutons SUBMIT formulaire -------------------->
+
+                    <div class="col-12 footer-fix">
+                        <button type="submit" class="btn btn-success mr-2">
+                            <i class="fa fa-save mr-2"></i>{{JR.save}} {{JR.quiz}}
+                        </button>
+                        <button type="button" class="btn  btn-danger m-1" onclick="goBack();">
+                            <i class="fa fa-reply mr-2"></i>{{JR.back}}
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        <div style="height:100px"></div>
+
+    </div>
+
+
+    {% include 'instructors/quiz/quiz-new.html' %}
+
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+
+<script src="/static/app-core/instructors/app.quizzes.min.js?version={{app_version()}}"></script>
+
+{% endblock %}

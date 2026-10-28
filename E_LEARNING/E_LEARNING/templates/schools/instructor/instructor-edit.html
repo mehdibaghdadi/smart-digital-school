@@ -1,0 +1,270 @@
+{% extends "_layouts/layout.html"  %}
+
+{% block head %}
+<link href="/static/app-assets/css/profil.css?version={{app_version()}}" rel="stylesheet" />
+{% include '_includes/x-links-css-country-select.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="text-uppercase text-center row p-0 m-0">
+    <div class="col-xs text-left">
+        <a class="btn btn-default border-bottom-0 btn-flat rounded-top btn-sm" href="{{instructor_list_url}}">
+            <small><i class="fa fa-chevron-left mr-2 text-green"></i>{{JR.see_list}}</small>
+        </a>
+
+    </div>
+    <div style="font-size:11px" class="col text-center">
+        <div class=""></div>
+    </div>
+    <div class="btn-group col-xs text-right">
+        <a class="btn btn-default border-bottom-0 btn-flat rounded-top btn-sm" href="{{instructor_add_new_url}}">
+            <small><i class="fa fa-user-plus mr-2 text-green"></i>{{JR.add_new}}</small>
+        </a>
+
+    </div>
+
+</div>
+<!--list of subject with levels and classes-->
+<div>  {% include 'schools/instructor/instructor-subject.html' %}</div>
+
+<!--form instructor-->
+<form class="profil-user" ng-submit="submitForm($event,'{{instructor_add_url}}','{{instructor_list_url}}')" method="post"
+      ng-controller="InstructorCtrl"
+      ng-init="hidePanel=false;init({{max_teachers}},{{instructor_list.json}},{{instructor.json}},{{mode_edit}});city_available='{{ config.COUNTRY_WITH_CITIES }}'">
+
+    <div class="row">
+        <div class="col-md card elevation-0 border m-2 bg-graph ">
+            <div class="position-relative p-2">
+                <div class="mr-n2 ribbon-wrapper ribbon-lg d-sm-inline-block d-none">
+                    <div class="ribbon bg-info">
+                        {{JR.identifiers}}
+                    </div>
+                </div>
+                <div class="text-justify">
+                    {{JR.account_creation_header}} :
+                    <br />
+                    <ol class="pl-3">
+                        <li>{{JR.account_creation_description1}}&nbsp;<abbr class="text-dark fa fa-question-circle" data-toggle="tooltip" title="{{JR.account_creation_help}}."></abbr></li>
+                        <li>{{JR.account_creation_description2}}</li>
+                    </ol>
+                </div>
+                <div class="card-body row m-0 p-0">
+                    <div class="col-md-6">
+                        <label>{{JR.login}} &nbsp;<abbr class="text-dark fa fa-question-circle" data-toggle="tooltip" title="{{JR.login_tooltip}}."></abbr> </label>
+                        <input ng-model="user.email" title="{{JR.login_email}}" type="email" required class="form-control " placeholder="">
+                        <div>&nbsp;</div>
+                    </div>
+                    <div class=" col-md-3">
+                        <label>{{JR.password}}&nbsp;<abbr class="text-dark fa fa-question-circle" data-toggle="tooltip" title="{{JR.password_tooltip}}"></abbr></label>
+                        <input data-type="password" ng-model="user.password" type="text" required class="form-control" placeholder="">
+
+                    </div>
+                    <div class=" col-md-3  d-flex align-items-center justify-content-center">
+                        <div class=" w-100 ">
+                            <button type="button" ng-click="generatePassword()" class="btn btn-danger btn-lg m-0 p-2 mt-1 ">
+                                <i class="fa fa-key mr-2"></i><small class="text-uppercase">{{JR.password_generate}}</small>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-12 p-0 m-0">
+                        <hr />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label>{{JR.last_name}} *</label>
+                        <input ng-model="user.last_name" type="text" required class="form-control text-capitalize  " placeholder="">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>{{JR.first_name}} *</label>
+                        <input ng-model="user.first_name" type="text" required class="form-control text-capitalize " placeholder="">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label class="text-truncate">{{JR.date_birth}} </label>
+                        <input ng-model="user.date_birth" max="{$ dateBirthMax $}" type="date" class="form-control " placeholder="">
+                    </div>
+                    <div class="col-md-12 p-0 m-0"><hr></div>
+                    <div class="form-group col-md-3">
+                        <label>{{JR.phone1}} *</label>
+                        <input ng-model="user.phone_primary" intl-tel-input type="tel" required class="form-control " placeholder="">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>{{JR.phone2}}</label>
+                        <input ng-model="user.phone_secondary" intl-tel-input type="tel" class="form-control " placeholder="">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label>{{JR.country}}</label>
+                        <select id="country-selector" ng-model="user.country_id" class="js-example-basic-single form-control rounded-0 p-0 ddl-selector">
+                            {% for c in countries %}
+                            <option ng-value="{{c.id}}" class="ml-2"> &bull; {{c.country}}</option>
+                            {% endfor %}
+                        </select>
+
+                    </div>
+                    <div class="form-group col-md-3" ng-hide="city_available.indexOf(user.country_id)<0">
+                        <label>{{JR.city}}</label>
+                        <select id="city-selector" ng-model="user.country_city_id" class="js-example-basic-single form-control rounded-0 p-0">
+                            {% for r, list_group in cities|groupby('region') %}
+                            {% for region, list in list_group|groupby('region') %}
+                            <optgroup label="{{ region }} ">
+                                {% for c in list %}
+                                <option ng-value="{{c.id}}" class="ml-2"> &bull; {{c.city}}</option>
+                                {% endfor %}
+                            </optgroup>
+                            {% endfor %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label>{{JR.address}}</label>
+                        <textarea ng-model="user.address" rows="3" type="text" class="form-control rounded-0" placeholder=""></textarea>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label>{{JR.my_description}}</label>
+                        <textarea ng-model="user.introduction_brief" type="text" rows="3" class="form-control rounded-0" placeholder=""></textarea>
+                    </div>
+                    <div class="col-12 pt-2 pb-2">
+                        <label class="">{{JR.account_status}} :&nbsp;</label>
+                        <div class="ml-2 switch text-xs text-uppercase d-inline-block">
+                            <span class="">
+                                <i class="fa" ng-class="user.active_account==1 ? 'fa-eye text-success' : 'fa-eye-slash text-muted'"></i>
+                            </span>
+                            <span class="ml-1 font-weight-bold">
+                                <span>{$ user.active_account ? "{{JR.active}}":"{{JR.inactive}}"$}</span>
+                                <label class="">
+                                    <input type="checkbox" ng-model="user.active_account" ng-true-value="1" ng-false-value="0" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <span class="lever"></span>
+                                </label>
+
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-right text-xs ">
+                        {% if mode_edit %}
+                        <small class="text-right p-0 text-uppercase">
+                            {{JR.date_creation}} : <b class="text-red  text-xs ">{$ user.registration_date $}</b></small>
+                        </div>
+                        {% endif%}
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+        <div class="bg-gray-ligth  " ng-class="hidePanel ? 'col-12':'col-lg-12'">
+            <div class="text-right p-0 mb-2 ">
+                <small role="button" ng-click="hidePanel=!hidePanel" class="font-weight-bold  text-uppercase">
+                    <span ng-show="hidePanel"><i class="fa fa-angle-left mr-2"></i>{{JR.show_last_accounts}}</span>
+                    <span ng-hide="hidePanel"><i class="fa fa-angle-right mr-2"></i>{{JR.hide_list}}</span>
+                </small>
+            </div>
+            <!-- general form elements -->
+            <div class="position-relative elevation-0  p-2 card border border-gray animate-opacity" ng-hide="hidePanel">
+                <div class="ribbon-wrapper ribbon-lg">
+                    <div class="ribbon bg-danger">
+                        {{JR.historical}}
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body p-0 m-0">
+                    <small class="text-uppercase font-weight-bold d-block p-2">
+                        <i class="fas fa-list mr-2"></i><b class="text-danger">{{top_list}}</b> {{JR.last_added}}
+                    </small>
+
+                    <p ng-hide="instructor_list.length>0" class="p-1 mt-3 border text-info text-center"><i class="icon fas fa-ban mr-2"></i>{{JR.emty_list}}</p>
+
+                    <div ng-hide="instructor_list.length<=0" class="card-body p-1">
+                        <div class="row text-nowrap" style="font-size:11px">
+
+
+                            <div class="col-md-4 border bg-white shadow-sm rounded m-1" ng-repeat="q in instructor_list track by $index">
+                                <table class=" table" cellpadding="2">
+                                    <tr class="border-0">
+                                        <td style="width:40px" class="p-1">
+                                            <div class="image">
+                                                <img id="user-image-menu" width="40" role="button" ng-src="{$ q.image $}" ng-click="zoomImage(q.image)" class="user-image img-circle elevation-2" alt="">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <b class="text-uppercase">{$ q.email $}</b><br />
+                                                <i class="fa fa-user mr-2 "></i><span class="text-capitalize">{$ q.first_name $} {$ q.last_name $}</span>  <br />
+                                                <i class="fa fa-clock mr-2 "></i>{{JR.at}} : {$ q.registration_date $}
+                                                <br />
+                                                <div class="text-right">
+                                                    <a class=" text-info" title="{{JR.edit}}" data-toggle="tooltip" role="button" href="{{instructor_edit_url}}/{$q.id$}"><i class="fa fa-pen rounded border p-2 text-red"></i></a>
+                                                </div>
+                                            </div>
+                                           
+                                        </td>
+
+                                    </tr>
+                                </table>
+
+                            </div>
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+        </div>
+    </div>
+    <div class="pt-5 pb-5"></div>
+    {% if not max_teachers_exceed %}
+    <div class="footer-fix ">
+        <div class="d-inline-block" hide-if-no-payment>
+            <div class="input-group text-center p-2">
+                <button id="btn-save-continue" type="submit" class="btn btn-primary   ">
+                    <i class="fa fa-save mr-2"></i>
+                    {{ JR.save_data if mode_edit else JR.save_and_continue |safe }}
+                    {% if not mode_edit%}
+                    <i class="fa fa-angle-right ml-1"></i>
+                    {%endif%}
+                </button>
+                <div class="input-group-append">
+                    <span class="input-group-text rounded-right" role="button" data-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-ellipsis-v text-red"></i>
+                    </span>
+                    <div class="dropdown-menu dropdown-menu-right bg-light elevation-2" role="menu" style="">
+                        <div class="dropdown-item bg-light">
+                            <button id="btn-save-exit" type="submit" class=" btn btn-warning  btn-sm"><i class="fa fa-plus mr-2"></i>{{JR.save_and_close}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div>
+        {% set alert_message_exceeding = "Max. {} : <b class='text-md'>{}</b>".format(JR.instructor,max_teachers) | safe %}
+        {% include '_base/alerts/exceeding-alert.html' %}
+    </div>
+    {% endif %}
+
+</form>
+
+
+    {% endblock %}
+    {% block contentBottom %}
+
+    {% endblock %}
+
+    {% block scripts %}
+
+{% include '_includes/x-links-scripts-country-select.html' %}
+<script src="/static/plugins/moments/moment.min.js"></script>
+<script src="/static/plugins/moments/moment-with-locales.min.js"></script>
+<script src="/static/app-assets/js/password-manager.min.js?version={{app_version()}}"></script>
+<script src="/static/app-core/schools/app.instructors.min.js?version={{app_version()}}"></script>
+<script src="/static/app-core/schools/app.instructor.subject.min.js?version={{app_version()}}"></script>
+<script src="/static/app-core/instructors/jquery.subjects.min.js"></script>
+    {% endblock %}
+

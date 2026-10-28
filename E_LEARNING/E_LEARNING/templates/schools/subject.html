@@ -1,0 +1,263 @@
+{% extends "_layouts/layout.html" %}
+{% block head %}
+{% endblock %}
+
+{% block content %}
+{% if status_subject %}
+<form class="row" ng-submit="submitForm('{{url_save_update}}')" method="post" ng-controller="SubjectCtrl" ng-init="init({{current_user.id}},{{subject.json}},{{subject_db.json}},{{qualification.json}},{{subject_qualifications_db.json}})">
+    <div class="col-md-12 d-none" id="body-q">
+        <div class="text-uppercase text-center row p-0 m-0">
+            <div class="col text-left">
+
+            </div>
+            <div class="col-xs text-right">
+                <button class="btn btn-default border-bottom-0 btn-flat rounded-top btn-sm mr-2"
+                        id="btnAddClass"
+                        ng-click="updateSubjectClick($event,null,null,'{{url_add_subject}}','{{JR.new}}','{{JR.subject}}')"
+                        type="button">
+                    <i class="fa fa-plus-circle mr-2"></i>{{JR.add}} : {{JR.subject}}
+                </button>
+            </div>
+            <div class="col-xs text-right" ng-show="subjects.length">
+                <a class="btn btn-default border-bottom-0 btn-flat rounded-top btn-sm accordion-expand-all "
+                   title="{{JR.show_all_actived_levels}}" data-toggle="tooltip">
+                    <i style="font-size:14px" class="fa fa-list-check text-dark"></i>
+                </a>
+                <a class="btn btn-default border-bottom-0 btn-flat rounded-top btn-sm accordion-collapse-all "
+                   title="{{JR.hide_all_actived_levels}}" data-toggle="tooltip">
+                    <i style="font-size:14px" class="fa fa-caret-up text-dark"></i>
+                </a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title" ng-show="subjects.length">
+                    {{JR.school_what_subjects_target}} ?
+                </h3>
+                <div ng-hide="subjects.length" class="card-title">
+                    {% include 'helps/school/subject-if-empty.html' %}
+                    <div class="text-center">
+                        <button class="btn btn-sm btn-warning mr-2 mt-2"
+                                ng-click="reloadPage()"
+                                id="btnAddLevelList"
+                                type="button">
+                            <i class="fa fa-list mr-2"></i>{{JR.education}} : {{JR.subject_list}}
+                        </button>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-fix" ng-if="qualifications.length==0">
+                <div class=" alert alert-danger text-center text-bold text-uppercase">
+                    <i class="fa fa-exclamation-circle mr-1"></i> {{JR.school_must_define_classes2}}
+                    <br />
+                    <a style="text-decoration:none" class="bg-dark rounded d-inline-block  p-1 mt-2  pl-2 pr-2"href="{{url_for('QualificationSchoolView:index')}}"> {{JR.click_here}} </a>
+                </div>
+            </div>
+
+            <div class="card-body p-2 text-uppercase ">
+               
+                <div class="text-xs" id="accordion">
+                    <div class="collapsed accordion-header text-truncate " ng-repeat-start="s in subjects track by $index"
+                         init-sync="{$ s.nbrQT=(s.qualifications|filter:{selected:true}).length $}" id="accordion-header{$ s.id $}">
+                        <span class="float-right" style="z-index:1500">
+                            <abbr class=" badge text-xs border-white elevation-1 "
+                                  ng-class="s.nbrQT > 0?'badge-info':'badge-warning'">
+                                {$ (s.qualifications|filter:{selected:true}).length $}
+                            </abbr>
+                            <button class="ml-3 border-0 btn-default elevation-1 rounded ui-header-button" type="button" data-toggle="tooltip" title="{{JR.rename_text}} : {$ s.label $}"
+                                    ng-click="updateSubjectClick($event,s.id,s.label,'{{url_edit_subject}}','{{JR.edit}}','{{JR.subject}}')">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                            <button class="ml-3 border-0 btn-default elevation-1 rounded ui-header-button" type="button" data-toggle="tooltip" title="{{JR.delete}} : {$ s.label $}"
+                                    ng-click="deleteSubjectClick($event,s.id,'{{url_delete_subject}}')">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </span>
+                        <span class="">
+                            {$ s.label $} <i class="fa fa-check" ng-show="s.nbrQT"></i>
+                        </span>
+                    </div>
+                    <div ng-repeat-end class="card-body table-responsive p-0 " ng-class="s.nbrQT>0?'accordion-content-active':''">
+                        <div class="table-responsive"
+                             ng-repeat="(education,groupedEducationList) in s.qualifications | toArray:true | orderBy:'education' | groupBy:'education'">
+                            <table class="table table-bordered text-uppercase table-hover text-nowrap " style="font-size:0.7rem">
+                                <thead>
+                                    <tr class="bg-light elevation-1">
+                                        <th style="width:25px" class="p-1 text-center bg-light"><i class="fa fa-graduation-cap mb-1"></i></th>
+                                        <th class="text-left p-2 text-truncate" style="width: 200px;max-width: 350px;">{$education$}</th>
+                                        <th class="text-left p-2 text-truncate">{{JR.classs}}</th>
+                                        <th style="width: 20px" class="text-center p-1">
+                                            <button type="button" ng-click="checkQualification(groupedEducationList,true)" class="btn btn-outline-success btn-xs"><small>{{JR.alls2}}</small></button> _ <button type="button" ng-click="checkQualification(groupedEducationList,false)"
+                                                                                                                                                                                                                 class="btn btn-outline-danger btn-xs">
+                                                <small>{{JR.nones2}}</small>
+                                            </button>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="q in groupedEducationList track by $index" ng-class="q.selected ? 'text-bold ':''">
+                                        <td class="p-1 pt-2 text-center" ng-class="q.selected ?'bg-green':''">{$ $index+1 $}</td>
+                                        <td class=" p-2" ng-class="q.selected ?'text-info':''">{$ q.level $}</td>
+                                        <td class="text-left p-2">
+                                            <div class="icheck-default  m-0">
+                                                <input type="checkbox" ng-model="q.selected" ng-checked="q.selected" id="ichk{$ s.id $}_{$ q.id $}">
+                                                <label for="ichk{$ s.id $}_{$ q.id $}">{$ q.label $}</label>
+                                            </div>
+
+                                        </td>
+                                        <td class="text-center p-0">
+
+                                            <div class="mt-1 custom-control custom-switch custom-switch-off-danger custom-switch-on-success " title="{{JR.status}} : {$q.selected==1 ? '{{JR.active}}' : '{{JR.inactive}}'$}" data-toggle="tooltip">
+                                                <input type="checkbox" class="custom-control-input" id="chk{$ s.id $}_{$ q.id $}" ng-model="q.selected" ng-checked="q.selected">
+                                                <label class="custom-control-label" for="chk{$ s.id $}_{$ q.id $}"></label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot ng-hide="s.qualifications.length">
+                                    <tr>
+                                        <td colspan="5" class="text-center">
+                                            {{JR.school_must_define_classes2}}
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-fix text-center" ng-show="qualifications.length>0">
+                    <button type="submit" class="btn btn-sm btn-danger">
+                        <i class="fa fa-save mr-2"></i>{{JR.save_data}}
+                    </button>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>
+{%else %}
+{% set filtered_equalto = listSchoolTypeSubject | selectattr("school_type_id", "equalto", current_user.school_type_id) %}
+{% set filtered_my_items = filtered_equalto | groupby("school_type_id")  %}
+
+
+{% set  filtered_ne =  listSchoolTypeSubject | selectattr("school_type_id", "ne", current_user.school_type_id) %}
+{% set filtered_other_items = filtered_ne | groupby("school_type_id")  %}
+
+<!--School Must init subjects -->
+<div class="card" ng-controller="SubjectCtrl">
+    <div class="card-body p-1">
+        {% include 'helps/school/subject-preselected.html' %}
+        <hr />
+        <div class="row m-0">
+            <div class="col-md-12 m-0" id="div-preselected">
+                <h5 class="text-uppercase text-info">
+                    <i class="fa fa-school-circle-check text-dark mr-2"></i> {{JR.pre_selecteds}}
+                </h5>
+            </div>
+            {% for school_type, items in filtered_my_items %}
+            {%  set my_type =  current_user.school_type_id==items[0].school_type_id %}
+            <div class="col-md-12 m-0 elevation-2 rounded">
+
+                <table id="table-course" class="pr-0 table  table-bordered  table-hover " style="width:100%">
+                    <thead>
+                        <tr class="bg-light elevation-1">
+                            <td class="p-2 text-left text-red text-uppercase ">
+                                <h7>
+                                    <i class="fas fa-user-graduate  mr-2 d-sm-inline-block text-info"></i>
+                                    <b>{{items[0].school_type}}</b>
+                                </h7>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody id="id_body" class="text-uppercase text-black ">
+                        <tr class="text-left row-stq bg-light">
+                            <td class="text-left p-1 bg-white">
+                                <div class="row m-0 justify-content-start align-items-start bg-white">
+                                    {% for q in items |sort(attribute='label') %}
+                                    <div class="col-sm-6 col-md-4 m-0 p-2" ng-init='initTypeSubject({{q}},"{{items[0].school_type}}",false)'>
+                                        <div class="icheck-success d-inline">
+                                            <input type="checkbox" name="radio-stq-{{q.id}}" id="radio-stq-{{q.id}}" ng-model="subjectsLevels[{{q.id}}].selected">
+                                            <label for="radio-stq-{{q.id}}">
+                                                {{q.label}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="text-center mb-2">
+                    <span class="btn btn-dark btn-xs text-sm" role="button"
+                          ng-click="seeOtherslevels(showOthersLevels)">[ {$ !showOthersLevels ? '{{JR.others}} : {{JR.show_all}}' : '{{JR.minimize_list}}' $}  ]</span>
+                </div>
+            </div>
+
+
+            {% endfor %}
+            <div class="col-md-12 m-0" id="div-others">
+                <br /><h5 class="text-uppercase text-info" ng-show="showOthersLevels">
+                    <i class="fa fa-list-ul text-dark mr-2"></i> {{JR.others}} {{JR.subject_list}} <span class="text-sm">({{JR.optional}})</span>
+                </h5>
+            </div>
+
+            {% for school_type, items in filtered_other_items  %}
+            {%  set my_type =  current_user.school_type_id==items[0].school_type_id %}
+
+            <div class="col-md-12 m-0 elevation-2 rounded" ng-show="showOthersLevels">
+
+                <table id="table-course" class="pr-0 table  table-bordered  table-hover " style="width:100%">
+                    <thead>
+                        <tr class="bg-light elevation-1">
+                            <td class="p-2 text-left text-uppercase text-red">
+                                <h7>
+                                    <i class="fas fa-user-graduate  mr-2 d-sm-inline-block text-info"></i>
+                                    <b>{{items[0].school_type}}</b>
+                                </h7>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody id="id_body" class="text-uppercase text-black ">
+
+                        <tr class="text-left row-stq bg-light">
+                            <td class="text-left p-1 bg-white">
+                                <div class="row m-0  justify-content-start align-items-start  bg-white">
+                                    {% for q in items |sort(attribute='label') %}
+                                    <div class="col-sm-6 col-md-4 m-0 p-2" ng-init='initTypeSubject({{q}},"{{items[0].school_type}}",false)'>
+                                        <div class="icheck-success d-inline">
+                                            <input type="checkbox" name="radio-stq-{{q.id}}" id="radio-stq-{{q.id}}" ng-model="subjectsLevels[{{q.id}}].selected">
+                                            <label for="radio-stq-{{q.id}}">
+                                                {{q.label}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+    <div class="footer-fix text-center">
+        <button type="button" ng-click="saveSubjectsLevels('{{url_init_type_subject}}')" class="btn btn-lg btn-danger"><i class="fa fa-save mr-2"></i> {{JR.save_and_continue}} </button>
+    </div>
+</div>
+{%endif%}
+<div style="height:200px"></div>
+{% endblock %}
+{% block contentBottom %}{% endblock %}
+
+{% block scripts %}
+<script src="/static/app-core/schools/jquery.subjects.min.js?version={{app_version()}}"></script>
+<script src="/static/app-core/schools/app.subjects.min.js?version={{app_version()}}"></script>
+
+{% endblock %}

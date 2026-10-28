@@ -1,0 +1,34 @@
+<div class="text-uppercase">
+    {% if g.current_language == 'fr'%}
+    <p>
+        La liste est vide, vous pouvez choisir vos matières d'enseignement depuis notre pré-selection ou bien créer votre propre matières , dans tout les cas vous pouvez activer, désactiver, renommer ou ajouter un nouvel élément à tout monent.       <br />
+        <em class="mt-2 d-block">
+            Exemple : mathématique, littérature, science ...etc
+        </em>
+    </p>
+
+
+    {%endif%}
+    {% if g.current_language == 'en'%}
+
+
+    <p>
+        The list is empty, you can choose your teaching subjects from our pre-selection or create your own subjects, in any case you can activate, deactivate, rename or add a new element at any time.        <br />
+        <em class="mt-2 d-block">
+            Example: mathematics, literature, science, etc.
+        </em>
+    </p>
+
+
+    {%endif%}
+    {% if g.current_language == 'es'%}
+
+    <p>
+        La lista está vacía, puedes elegir tus materias de docencia entre nuestra preselección o crear tus propias materias, en cualquier caso puedes activar, desactivar, renombrar o agregar un nuevo elemento en cualquier momento.        <br />
+        <em class="mt-2 d-block">
+            Ejemplo: matemáticas, literatura, ciencias, etc.
+        </em>
+    </p>
+
+    {%endif%}
+</div>

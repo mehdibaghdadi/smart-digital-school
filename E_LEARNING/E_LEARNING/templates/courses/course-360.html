@@ -1,0 +1,136 @@
+{% extends "_layouts/layout.html" %}
+
+{% set content_exist = list_chapter_content.json["status"]==200 %}
+{% set enroll = course_enrollment.json["response"] if course_enrollment and course_enrollment.json["status"]==200 else None  %}
+{% set list_content = list_chapter_content.json["response"]|groupby('chapter_sequence')|sort(attribute='0',reverse=False) if content_exist else [] %}
+{% set language_id = current_course.language_id %}
+
+{% block contentTitleHeader %}
+- {{current_course.course_title}}
+{% endblock %}
+
+{% block head %}
+{% include '_includes/x-links-css-summernote.html' %}
+<link href="/static/app-assets/css/media-player.css?version={{app_version()}}" rel="stylesheet" />
+<link href="/static/app-assets/css/courses.min.css?version={{app_version()}}" rel="stylesheet" />
+<link href="/static/plugins/starrr/starrr.css" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+<div ng-controller="CourseCtrl"
+     ng-init="init({{'true' if isStudent else 'false'}},{{'true' if getDataStudent else 'false'}},{{'true' if is_favorite else 'false'}},'{{current_course.id}}','{{enroll.id}}',{{feedback.json if getDataStudent else []}},{{assistance_course.json if getDataStudent else []}},'{{instructor_assistance_url}}','{{delete_instructor_assistance_url}}','{{learning_progress_begin_url}}','{{learning_progress_end_url}}',{{learning_progress_course.json if getDataStudent else []}},'{{list_quizzes_url}}')">
+
+    {% if student_profile %}
+    {% include 'courses/partial-view/include-student-profil.html' %}
+    {% endif %}
+
+    <!--MENU TOP-->
+    {% include 'courses/partial-view/include-course-menu-top.html' %}
+
+    <div class="card elevation-0 bg-graph mb-0">
+        <!--COURSE DETAILS-->
+        {% include 'courses/partial-view/include-course-details.html' %}
+        <h4 class="text-bold text-left text-uppercase pb-2 mt-4">
+        <i class="mr-1 fa fa-ew-notebook"></i><u class="">{{JR.chapters}}</u></h4>
+        <div class="card-body p-0 pl-1 mt-0 ">
+            <div class="mt-1"></div>
+            <div class="row ">
+                <div class="col-12 ">
+                    {% if content_exist %}
+                    <div class="timeline mb-1">
+
+                        {% for r, list_group in list_content %}
+                        {% for chapter,list in list_group|groupby('chapter_sequence') %}
+
+                        <!--CHAPTER HEADER-->
+                        {% include 'courses/partial-view/include-chapter-header.html' %}
+
+                        {% for c in list %}
+                        <input type="hidden" ng-init="content_chapter[{{c.content_id}}]={{c}}" />
+                        <div ng-hide="chapt['{{ list[loop.index0].chapter_sequence  }}'].hide"
+                             class="animate-opacity">
+                            <!--CHAPTER ITEM FLAGS (LEFT)-->
+                            {% include 'courses/partial-view/include-chapter-items-flags.html' %}
+
+                            <!--CHAPTER ITEMS (CENTER)-->
+                            {% include 'courses/partial-view/include-chapter-items.html' %}
+
+                            <!--DEMANDE ASSISTANCE (BOTTOM)-->
+                            {% include 'courses/partial-view/include-chapter-demand-assistance.html' %}
+
+                        </div>
+
+                        {% endfor %}
+
+                        <!--CHAPTER FOOTER-->
+                        {% include 'courses/partial-view/include-chapter-footer.html' %}
+
+                        {% endfor %}
+                        {% endfor %}
+
+                        <!--course progession-->
+
+                        <div>
+                            <i class="mt-1 fa fa-bars-progress  bg-dark text-dark"></i>
+                            <div class="timeline-item mt-1 p-0 d-inline-block" style="background: linear-gradient(90deg, #e8fbdc {$ percent_progress_course $}%, rgba(255, 255, 255, 0) 0%); ">
+                                <div class="p-0 pb-1 text-center  text-uppercase mt-1  pl-2 pr-2">
+                                    <small class="d-inline-block" ng-switch="percent_progress_course">
+                                        {%if getDataStudent %}
+                                        <span ng-switch-when="100"> {{JR.course_ended}} : <b class=" text-green">{$ percent_progress_course $} <i class="fa fa-percent "></i></b></span>
+                                        <span ng-switch-default> {{JR.course}} : <b class="t text-info ">{$ percent_progress_course $} <i class="fa fa-percent  mr-1"></i></b> {{JR.finished}} , <b class=" text-red ">{$ 100-percent_progress_course $} <i class="fa fa-percent  mr-1"></i></b> {{JR.remaining}}</span>
+                                        {% else %}
+                                        <span ng-switch-default> {{JR.course_ended}}.</span>
+                                        {% endif %}
+                                    </small>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!--end course progession-->
+                    </div>
+
+                    {% else %}
+                    <div>
+                        <div class="alert alert-light  text-center text-uppercase">
+                            <div><b>{{JR.chapters1}}</b></div>
+                            <i class="fa fa-exclamation-triangle mr-1"></i>{{JR.empty_data}}.
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <!--Quiz-->
+    {% include 'courses/quizzes/include-quiz-list.html' %}
+
+    <!--Feed back-->
+    {% if content_exist and getDataStudent %}
+
+    {% include 'courses/partial-view/include-course-feedback.html' %}
+    {% include 'courses/partial-view/include-course-progress.html' %}
+
+
+    {% endif %}
+
+    {% include 'courses/chapter-content/show-player.html' %}
+    {% include 'courses/chapter-content/show-texteditor.html' %}
+    {% include 'courses/chapter-content/show-social-media.html' %}
+    {% include 'courses/chapter-content/show-assistance-request.html' %}
+</div>
+
+
+{% endblock %}
+{% block contentBottom %}{% endblock %}
+
+{% block scripts %}
+{% include '_includes/x-links-scripts-media-player.html' %}
+{% include '_includes/x-links-scripts-summernote.html' %}
+<script src="/static/plugins/starrr/starrr.js"></script>
+<script src="/static/app-core/course-learning/app.courses.min.js?version={{app_version()}}"></script>
+<script src="/static/app-core/course-learning/jquery.courses.min.js?version={{app_version()}}"></script>
+
+{% endblock %}

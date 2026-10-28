@@ -1,0 +1,60 @@
+{% block head %}
+{% endblock %}
+<!-- Modal -->
+<form ng-model="editContent" class="modal fade" id="socialMediaModal" name="mediaModal" tabindex="-1" role="dialog" aria-labelledby="mediaModalLabel" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header pt-0 pb-0 bg-primary text-xs">
+                <small class="text-uppercase mt-1 ml-1" style="color: #81a0d0">
+                    <i class=" fa fa-1x mr-2" ng-class="content_type_uploaded.css"></i>
+
+                    <b>{$content_type_uploaded.text$}</b><span ng-show="uploaded_content.chapter_sequence"> : {{JR.chapter}}  {$ uploaded_content.chapter_sequence  | numberToLetter  $} - {$uploaded_content.content_sequence$}</span>
+
+                </small>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+
+
+            <div class="modal-body d-flex flex-column p-0 bg-black">  
+                <!--youtube player-->
+                <iframe ng-if="uploaded_content.content_url" class="bg-dark"
+                        ng-style="{ 'background-image': 'url(' + (uploaded_content.content_cover_url ? uploaded_content.content_cover_url : '/static/app-assets/img/loading.png') +')' }"
+                        
+                        width="100%" height="400" style="width: 100%; height: 400px; background-size: cover; background-position: center center"
+                        ng-src="{$ uploaded_content.content_url | youtubeEmbed $}"
+                        frameborder="0" allowfullscreen>                   
+                </iframe>
+
+            </div>
+
+            <div class="modal-footer p-0 text-center bg-black d-block border-0">
+                <div class="row text-center p-2 border-top border-dark  m-0 mt-3 ">
+
+                    {%if isStudent %}
+
+                    <div class="col text-right">
+                        <button ng-click="contentEndClik($event,uploaded_content)"
+                                type="button" class="btn btn-success btn-sm" data-dismiss="modal" aria-label="Close">
+                            <span class="text-uppercase" aria-hidden="true">{{JR.i_finish_this_section}}</span>
+                        </button>
+                    </div>
+                   
+                    <div class="col-xs">
+                        <button 
+                                type="button" class="btn btn-primary btn-sm" data-dismiss="modal" aria-label="Close">
+                            <span class="text-uppercase" aria-hidden="true">{{JR.not_yet}}</span>
+                        </button>
+                    </div>
+
+                    {% else %}
+                    <div class="col">
+                        <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" aria-label="Close">
+                            <span class="text-uppercase" aria-hidden="true">{{JR.finish}}</span>
+                        </button>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

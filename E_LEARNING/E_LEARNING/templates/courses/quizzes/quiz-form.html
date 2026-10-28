@@ -1,0 +1,285 @@
+{% extends "_layouts/layout.html" %}
+
+{% set current_quiz= quiz.json["response"] if quiz and quiz.json["status"]==200 and course_id >0 else None  %}
+{% set cc=  course %}
+
+{% block head %}
+<link href="/static/app-assets/css/courses.min.css?version={{app_version()}}" rel="stylesheet" />
+<!-- style pour l’élément fantôme drag -->
+<style>
+    .sortable_placeholder {
+        height: 80px; /* même hauteur qu’une .card */
+        background: #f8f9fa;
+        border: 2px dashed #ced4da;
+        margin-bottom: .75rem;
+    }
+
+    .btn-add-choice:hover {
+        background-color: #ced4da;
+    }
+
+    .border-left-dashed {
+        border-left: 1px dashed #105b88;
+    }
+
+    [class*=icheck-] > input:first-child:disabled + label {
+        opacity: 1 !important;
+    }
+</style>
+
+{% endblock %}
+
+{% block contentTitleHeader %}
+- {{current_quiz.quiz_name if current_quiz else '' }} ({{cc.label_subject}})
+{% endblock %}
+{% block content %}
+
+ {% if student_profile %}
+ {% include 'courses/partial-view/include-student-profil.html' %}
+ {% endif %}
+
+<div ng-controller="QuizFormCtrl as qc" data-course-id="{{ course_id }}" ng-init="qc.init({{current_quiz}},'{{get_quiz_result_url}}')">
+    
+    <div class="text-uppercase text-center row p-0 m-0 align-items-end ">
+        <div class="col-xs text-left p-0">
+            <a class="btn btn-default border-bottom-0 btn-flat rounded-top btn-sm  float-left" ng-href="{{course_view360_url}}">
+                <small class=""><i class="fas fa-chevron-left mr-1 text-blue"></i>{{JR.show_course}}</small>
+            </a>
+        </div>
+        <div class="col p-0 text-right">
+            {%if isInstructor %}
+            <a class="text-xs btn btn-danger  border border-bottom-0 btn-flat rounded-top btn-sm " ng-href="{{edit_quiz_url}}"
+               title="{{JR.edit}} : {{JR.quiz}}" data-toggle="tooltip" role="button">
+                <span> <i class="fa fa-pen mr-2  "></i>{{JR.edit}}</span>
+            </a>
+            {%endif%}
+        </div>
+
+    </div>
+
+    <!--  QUIZ FORM--------------------------------------------->
+
+    <div>
+        <div class="p-2 pb-0 text-uppercase text-xs text-center bg-white border-left-dashed border border-bottom-0">
+            <small class="text-dark d-block" style="line-height:1.4rem"><i class="mr-1 fa fa-ew-book"></i><u class="text-bold">{{cc.label_subject}}</u> : <br />{{cc.course_title}}</small>
+        </div>
+        <div class="border border-bottom-0 ">
+            <div class="text-uppercase text-center p-0"
+                 style="border-bottom:thin dashed #ccc ">
+                <div class="pt-3 pb-0 text-center text-uppercase">
+                    <h2 class="d-flex justify-content-center align-items-center text-bold text-right  text-black  text-uppercase  text-bold text-right">
+                        <i class="fa fa-ew-quiz ml-n4 mr-1"></i><u>{{JR.quiz}} Nº</u> <b class="badge bg-primary rounded-pill ml-2 ng-binding">{$ qc.quiz.sequence $}</b>
+                    </h2>
+                   
+                </div>
+                <div class="mt-1 p-1">
+                    <div class="text-center text-md  mt-2 p-2" style="color:#3a707b;letter-spacing:1px">                        
+                        <span class="text-black">{$ qc.quiz.quiz_name $}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Affichage du quiz -->
+
+
+        <div class="row m-0 p-0 mt-2  mb-2 text-xs text-uppercase align-items-center">
+            <div class="col text-left">
+                <i class="fa fa-ew-stopwatch "></i> {{JR.time1}} :&nbsp;
+                <span ng-show="qc.quiz.time_limit">
+                    <span class="text-md text-red text-bold">{$ qc.quiz.time_limit $}</span> <span class="text-muted ">{{JR.minutes}}</span>
+                </span>
+                <span ng-hide="qc.quiz.time_limit" class="text-black text-bold">{{JR.illimited}}</span>
+            </div>
+            <div class="col text-right">
+                <b class="text-md text-black">{$ qc.quiz.questions.length $}</b> <span class="text-muted">{{JR.questions}}</span>
+
+            </div>
+        </div>
+        <!--loading-->
+        <div class="p-2 bg-primary border border-dark text-md mt-1 font-weight-bold  rounded-top p-0 mb-0 text-center text-uppercase">
+            <div ng-show="loading" class=" text-center ">
+                <i class="fa fa-spinner fa-spin fa-1x mr-2"></i> {{JR.inprogress}} ...
+            </div>
+            <div ng-hide="loading" class=" text-center ">
+                <span class="text-warning" ng-hide="qc.quiz.submitted">{{JR.begin1}} {{JR.quiz1}}<i class="fa d-block mt-2 fa-chevron-down"></i></span>
+                <span class="text-warning" ng-show="qc.quiz.submitted">{{JR.result}} {{JR.quiz}} </span>
+
+            </div>
+        </div>
+
+        <div ng-show="qc.quiz.submitted" class="card-body border rounded-bottom-0 p-0 text-center text-uppercase  bg-light">
+            <div class="row p-0 m-0">
+                <div class="col-12 p-2">
+
+                    <div class="p-1 text-center">
+                        <b class="text-lg">{{JR.score}} </b>: <span class="text-info text-bold text-lg">
+                            {$ qc.quiz.correct_answers $}/{$ qc.quiz.total_questions $}
+                        </span>
+                    </div>
+                    <div class="pb-3 mt-3 text-center" ng-bind-html="qc.getFeedbackMessage(qc.quiz) | toHtml">{$$}</div>
+                </div>
+
+            </div>
+        </div>
+        <div class="card elevation-0 bg-graph rounded-top-0 mb-5">
+            <div class="row m-0 text-xs p-2 mt-3 text-uppercase" ng-show="qc.quiz.submitted">
+                <div class=" col-4 text-left">
+                    <span class=" text-bold mb-2 d-block  text-dark"><i class="fa fa-stopwatch mr-1"></i><u>{{JR.started_on}} </u></span>
+                    <div class="pl-2" ng-show="qc.quiz.begin_timestamp">
+                        {$ qc.quiz.begin_timestamp | localeDate $}  {$ qc.quiz.begin_timestamp | date:'HH:mm:ss' $}
+                    </div>
+
+                </div>
+                <div class=" col-4 text-center">
+                    <span class=" text-bold mb-2 d-block text-dark"><i class="fa fa-stopwatch mr-1"></i><u>{{JR.finished_on}} </u></span>
+
+                    <div class="pl-2" ng-show="qc.quiz.end_timestamp">
+                        {$ qc.quiz.end_timestamp | localeDate $}  {$ qc.quiz.end_timestamp | date:'HH:mm:ss' $}
+                    </div>
+                </div>
+
+                <div class=" col-4 text-right">
+                    <span class=" text-bold mb-2 d-block text-dark"><i class="fa fa-hourglass-end mr-1"></i><u>{{JR.time_spent}}</u></span>
+                    <div class="text-success text-capitalize text-lg text-bold " ng-if="qc.quiz.begin_timestamp && qc.quiz.end_timestamp">
+                        {$ qc.getDuration( qc.quiz.begin_timestamp, qc.quiz.end_timestamp) $}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card" ng-show="qc.quiz.submitted">
+            <div class="p-2 bg-primary border border-dark text-lg mt-1font-weight-bold  rounded-top p-0 mb-0 text-center text-uppercase">
+                <h6>{{JR.questions}} &amp; {{JR.answers}}</h6>
+            </div>
+            <!-- Barre de progression globale -->
+            <div class="progress rounded-bottom elevation-1">
+                <div class="progress-bar bg-light text-uppercase" role="progressbar"
+                     style="width: 100%;"
+                     ng-style="{'background': 'linear-gradient(90deg, #e8fbdc '+ (qc.quiz.score ||0) + '%, #ffffff00 0%)'}"
+                     aria-valuenow="{$ quizCompletion(quizzes) $}"
+                     aria-valuemin="0" aria-valuemax="100">
+                    <span>
+                        <b>{$ (qc.quiz.score ||0)$} <i class="fa fa-percent"></i>  <small class="ml-1">{{JR.correct}}</small></b>
+                    </span>
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="p-0 ">
+            <!-- Liste des questions -->
+            <div class=" p-0 mt-3" ng-show="qc.quiz.questions.length">
+                <div class="accordion row m-0 p-0">
+                    <div class="card col-md-6 m-0 p-1 elevation-0" ng-repeat="q in qc.quiz.questions | orderBy:'idx' track by q.id">
+                        <div class="card-header pl-2 pb-1 pr-0 bg-light elevation-2 text-uppercase">
+
+                            <div class="float-right text-right">
+
+                                <small class="bg-white d-inline-block border pl-2 pr-2 rounded shadow-sm text-sm ">
+                                    <b>{$ q.choices.length || 0 $}</b>
+                                    <small class="ml-1 text-uppercase">{{JR.choice}}</small>
+                                </small>
+
+                            </div>
+
+                            <div class="mb-0">
+                                <div>
+                                    <label class="text-info text-md  text-bold border-bottom border-info">
+                                        {{JR.question}}
+                                    </label>
+                                    <span class="badge ml-1 bg-dark elevation-1 rounded-pill text-center p-0 pt-1 text-xs ng-binding" style="width: 19px;height:19px;"> {$ q.idx $} </span>
+                                </div>
+
+                                <div class="p-2 mt-1 pl-3 text-sm d-block text-black text-transform-none text-md">{$ q.question_text $}</div>
+                                <div ng-show="q.hasAnswer" class="text-xs text-right">
+                                    <span class="rounded-top elevation-1 p-2 " ng-class="q.is_correct ? 'bg-success' : 'bg-red'">
+                                        <b ng-show="q.is_correct"><i class="fa fa-check"></i> {{JR.correct}}</b>
+                                        <b ng-show="!q.is_correct"><i class="fa fa-close"></i> {{JR.incorrect}}</b>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body elevation-1 rounded-bottom border-left-dashed">
+                            <div class="form-group">
+                                <div class="mb-3"><u class="font-weight-bold text-uppercase">{{JR.choices}}</u> :</div>
+
+                                <!-- Affichage des choix sous forme de boutons radio -->
+                                <div class="ml-2 pl-1">
+                                    <div ng-repeat="(cIdx, choice) in q.choices track by cIdx">
+                                        <div class=" d-block mb-3"
+                                             ng-class="q.hasAnswer ? (q.is_correct ? 'icheck-success' :'icheck-danger') : 'icheck-info'">
+                                            <input type="radio" ng-disabled="q.hasAnswer"
+                                                   name="question_{$q.id$}"
+                                                   id="q{$q.id$}_c{$cIdx$}"
+                                                   ng-model="q.selected"
+                                                   ng-value="cIdx" />
+                                            <label class="form-check-label text-uppercase text-md" for="q{$q.id$}_c{$cIdx$}">
+                                                <span class="row">
+                                                    <span class="col-xs pl-2 pr-1 text-bold"> {$ 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[cIdx] $} .</span>
+                                                    <span class="col p-0 text-md">
+                                                        <small class="text-black text-transform-none text-size-default" ng-class="q.hasAnswer && (q.correct_answer_index==cIdx) ? 'text-bold':''">
+                                                            {$ choice $}
+                                                        </small>
+                                                        {%if isStudent %}
+                                                        <!-- Student -->
+                                                        <small ng-if="q.hasAnswer">
+                                                            <i ng-show="q.correct_answer_index==cIdx"
+                                                               ng-class="q.is_correct ? 'text-success fa-thumbs-up' : 'text-red fa-hand-point-left'"
+                                                               class="far text-lg ml-2"></i>
+                                                        </small>
+                                                        {% else  %}
+                                                        <!-- Prof/admin -->
+                                                        <small>
+                                                            <i ng-show="q.correct_answer==cIdx" class="far text-lg ml-2 text-success fa-thumbs-up"></i>
+                                                        </small>
+                                                        {% endif %}
+
+                                                    </span>
+
+
+
+                                                </span>
+                                            </label>
+
+                                        </div>
+                                        <hr ng-hide="$last" />
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- /card -->
+                </div> <!-- /accordion -->
+            </div>
+
+            <!-- Soumission -->
+
+            <div class="col-12 mt-4 text-center text-uppercase" ng-show="qc.enableSubmit && qc.quiz.questions.length">
+                <u class="text-muted text-bold">{{JR.end}} {{JR.quiz}} </u> :
+                <br />
+                <button ng-disabled="{{ 0 if isStudent else 1 }} || loading"
+                        type="button" class="btn btn-success btn-lg p-3 pl-4 pr-4 mt-2 text-bold"
+                        ng-click="qc.submitAnswers('{{submit_quiz_url}}')">
+                    <i class="fa fa-paper-plane mr-2"></i>{{JR.i_finish_this_quiz}} : {{JR.send1}}
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+
+<script src="/static/plugins/moments/moment.min.js"></script>
+<script src="/static/plugins/moments/moment-with-locales.min.js"></script>
+<script src="/static/app-core/course-learning/app.quiz-form.min.js?version={{app_version()}}"></script>
+
+{% endblock %}

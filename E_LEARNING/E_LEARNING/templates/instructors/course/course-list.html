@@ -1,0 +1,184 @@
+{% extends "_layouts/layout.html" %}
+{% block head %}
+{% include '_includes/x-links-css-datatable.html' %}
+
+{% endblock %}
+
+{% block content %}
+
+<div class="row" ng-controller="CourseListCtrl"
+     ng-init="init({{course_list.json}},'{{course_edit_url}}','{{course_create_url}}','{{course_visibility_url}}','{{course_delete_url}}','{{course_chapter_list_url}}','{{course_chapter_edit_url}}','{{course_quiz_list_url}}','{{course_quiz_edit_url}}')">
+
+    <div class="col-md-12">
+
+        <div class="text-uppercase text-center row p-0 m-0 border-bottom">
+            <div class="col-xs text-left">
+                <div class="btn btn-default border-bottom-0 btn-flat rounded-top btn-sm">
+                    <small class="text-bold"><i class="mr-2"></i>{{JR.total}} : <span><span class="text-red">{$ course_list.length $}</span> </span></small>
+                </div>
+            </div>
+            <div style="font-size:11px" class="col text-center">
+                <div class="btn-group text-center">
+                    <button type="button" class="btn btn-default border-bottom-0 btn-flat rounded-top btn-sm text-uppercase" data-toggle="dropdown" aria-expanded="false">
+                        <small>
+                            <i class="mr-2 fa fa-filter text-red"></i>{{JR.filter1}} <i class="ml-2 fa fa-ellipsis-v text-success"></i>
+                        </small>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" role="menu" style="">
+                        <a class="dropdown-item cursor-pointer" href="{{url_for('CourseInstructorView:visibility_2')}}"> <i class="fas fa-eye text-green"></i> {{JR.course}} {{JR.online}}</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{url_for('CourseInstructorView:visibility_1')}}" role="button"><i class="fas fa-eye-slash text-gray"></i> {{JR.course}} {{JR.offline}}</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{{url_for('CourseInstructorView:index')}}" role="button"><i class="fa fa-ew-book"></i> {{JR.courses_all}}</a>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-xs text-right">
+                <div class="text-uppercase text-right">
+                    <a class="btn btn-default border-bottom-0 btn-flat rounded-top btn-sm" ng-click="create()">
+                        <small><i class="fa fa-plus-circle mr-2 text-green"></i>{{JR.add}}</small>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="card bg-graph elevation-0 ">
+
+            <div class="card-bodyp-0 mt-1">
+                <div class="table-responsive p-0">
+                    <table id="table-course" class="pr-0 table  table-bordered  table-hover text-nowrap data-table" style="font-size:11px;width:100%">
+                        <thead>
+
+                            <tr class="text-center bg-primary">
+                                <th class="bg-dark text-center p-1" style="max-width:14px">#</th>
+                                <th class=" text-left pl-3">{{JR.title}}</th>
+                                <th width="120" class="bg-warning text-center">{{JR.chapters}}</th>
+                                <th width="120" class="bg-info text-center">{{JR.quizzes}}</th>
+                                <th class="text-center ">{{JR.subject}}</th>
+                                <th class="text-center ">{{JR.level}} - {{JR.classs}}</th>
+                                <th class="text-center" width="80">{{JR.lang}}</th>
+                                <th class="text-center" width="80">{{JR.date_start}}</th>
+                                <th width="80" class=" text-center p-1 hide-print">{{JR.online}}</th>
+                                <th width="80" class="bg-success  text-center p-1 hide-print">{{JR.edit}}</th>
+                                <th width="80" class="bg-danger text-center p-1 hide-print">{{JR.delete}}</th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="id_body" class="d-none text-uppercase text-black">
+                            <tr class="text-right" ng-repeat="q in course_list track by $index" 
+                                ng-show="q.id>0" id="tr{$ $index  $}"
+                                ng-class="q.is_visible ? '' : 'text-muted'">
+                                <td role="button" class="p-1 bg-dark" ng-click="edition($event,q)">
+                                    {$ $index+1  $}.
+                                </td>
+                                <td style="min-width:350px" class="text-capitalize rounded-0 p-2  text-xs">
+                                    <div class="text-left text-uppercase row p-0 m-0 ">
+                                        <div class="col-md-9 p-0 m-0 mb-3">
+                                            <div class="text-clamp-div pt-2 h-100" title="{{JR.edit}} : {{JR.course}}"
+                                                 data-toggle="tooltip" role="button" ng-click="edition($event,q)">
+
+                                                {$q.course_title  $}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 p-0 m-0 border-left">
+                                            <div class="row m-0 justify-content-center" style="max-width:200px">
+                                                <div class="col text-center mb-2">
+                                                    <a class="rounded border p-1 pr-2 btn-block btn-outline-dark" target="_blank" title="{{JR.overall_view_course}}" data-toggle="tooltip"
+                                                       ng-href="{{url_for("CourseInstructorView:courseBySubjectView360_1")}}/{$ q.school_subject_id $}/{$ q.id $}">
+                                                        <i class="fas fa-street-view text-info "></i> 360
+                                                    </a>
+                                                </div>
+                                                <div class="col  text-center mb-2">
+                                                    <span class="rounded border p-1 btn-block btn-outline-danger" title="{{JR.edit}} : {{JR.course}}"
+                                                          data-toggle="tooltip" role="button" ng-click="edition($event,q)">
+                                                        <i class="fa fa-pen "></i> {{JR.edit}}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td class="text-center rounded-0 p-1" title="{{JR.show_chapters}}"
+                                    ng-click="showChapters($event,q)" role="button" data-toggle="tooltip">
+                                    <div  ng-if="q.num_of_chapters"  class="p-0 pt-3">
+                                        <b class="text-md">{$ q.num_of_chapters  $}</b>
+                                        <i class="fas fa-up-right-from-square ml-2 text-gray text-xs "></i>
+                                    </div>
+                                    <i class="mt-4 text-muted fa fa-ellipsis-h" ng-hide="q.num_of_chapters"></i> 
+                                </td>
+
+                                <td class="text-center rounded-0 p-1" title="{{JR.show}} {{JR.quizzes}}"
+                                    ng-click="showQuizzes($event,q)" role="button" data-toggle="tooltip">
+                                    <div ng-if="q.num_of_quizzes" class="p-0 pt-3">
+                                        <b class="text-md">{$ q.num_of_quizzes  $}</b>
+                                        <i class="fas fa-up-right-from-square ml-2 text-gray text-xs "></i>
+                                    </div>
+                                    <i class="mt-4 text-muted fa fa-ellipsis-h" ng-hide="q.num_of_quizzes"></i>
+                                </td>
+
+
+                                <td class="text-center text-bold text-dark text-wrap  pt-4">{$q.label_subject  $}</td>
+
+                                <td class=" text-center text-wrap  pt-4">
+                                    {$q.level  $}, 
+                                    {$q.label_qualification  $}
+                                </td>
+                                <td class="text-center  pt-4">{$q.language_name  $}</td>
+
+                                <td class="text-center  pt-4" data-order="{$ q.date_start_course | date:'yyyy-MM-dd' $}">
+                                    <!--{$ q.date_update | date:'dd/MM/yyyy' $}-->
+                                    {$ q.date_start_course | date:'yyyy-MM-dd' |localeDate $}
+                                </td>
+                                <td class="text-center  pt-4">
+                                    <div role="button" class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success" title="{{JR.status}} : {$ q.is_visible==1 ? '{{JR.course}} {{JR.online}}' : '{{JR.course}} {{JR.offline}}' $}" data-toggle="tooltip">
+                                        <input type="checkbox" class="custom-control-input" id="is_visible{$ q.id $}" ng-click="statusChange($event,q)" onclick="return false;" ng-checked="q.is_visible==1">
+                                        <label class="custom-control-label" role="button" for="is_visible{$ q.id $}"></label>
+                                    </div>
+                                </td>
+                                <td class="text-center  pt-4 ">
+                                    <button class="btn btn-default btn-xs " ng-click="edition($event,q)" type="button" title="{{JR.edit}} : {{JR.course}}" data-toggle="tooltip"><i class="fas fa-edit"></i></button>
+                                </td>
+                                <td class="text-center  pt-4">
+                                    <button class="btn btn-default btn-xs " ng-click="deleteClick($event,q)" type="button" title="{{JR.delete}} : {{JR.course}}" data-toggle="tooltip"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="text-uppercase text-right footer-fix">
+                        <div class="text-uppercase text-center">
+                            <a class="btn btn-danger btn-flat rounded " ng-click="create()">
+                                <span><i class="fa fa-plus-circle mr-2 text-yellow"></i>{{JR.add}} {{JR.course}}</span>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+
+    {% include 'instructors/chapter/modal-chapter-list.html' %}
+    {% include 'instructors/quiz/modal-quiz-list.html' %}
+
+</div>
+
+
+
+{% endblock %}
+{% block contentBottom %}{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js"></script>
+
+{% include '_includes/x-links-scripts-datatable.html' %}
+<script src="/static/app-core/instructors/jquery.courses.min.js?version={{app_version()}}"></script>
+<script src="/static/app-core/instructors/app.courses.min.js?version={{app_version()}}"></script>
+{% endblock %}

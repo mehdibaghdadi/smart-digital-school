@@ -1,0 +1,20 @@
+{% extends "_layouts/layout.html" %}
+{% block head %}
+{% include '_base/reportings/reporting_css.html' %}
+{% endblock %}
+
+{% block content %}
+<form name="formReport" class="formReport" ng-submit="generateReport({{instructor_id}})" method="post"
+      ng-controller="ReportCtrl" ng-init="init({{instructor_id}})">
+
+    {% include '_base/reportings/reporting_content.html' %}
+    {% include '_base/reportings/reporting_parametres_refresh.html' %}
+</form>
+{% endblock %}
+{% block contentBottom %}
+{% endblock %}
+
+{% block scripts %}
+{% include '_base/reportings/reporting_js.html' %}
+<script src="/static/app-core/reportings/instructor/app.rpt-my-students.min.js?version={{app_version()}}"></script>
+{% endblock %}

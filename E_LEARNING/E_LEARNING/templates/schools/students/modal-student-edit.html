@@ -1,0 +1,116 @@
+<!-- Modal -->
+<form class="modal fade" id="editModal" name="editModal" ng-submit="submitInfos(editUser,editModal)" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header p-2">
+                <h6 class="modal-title" id="myModalLabel"><i class="fas fa-user-edit mr-2"></i> <span class="text-info">{$editUser.email$}</span></h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body p-2" ng-model="editUser">
+                <!-- beginform -->
+                <div class="row m-0">
+                    <div class="form-group col-md-12">
+                        <label>{{JR.level_school}}</label>
+                        <select id="ns_select" ng-required="true" ng-model="editUser.school_qualification_id"
+                                class="text-uppercase form-control">
+                            <option value="" class="ml-2"> ---- {{JR.choose_class_level}}  ----</option>
+                            {% for r, list_group in qualification_school_list|groupby('level') %}
+                            {% for level, list in list_group|groupby('level') %}
+                            <optgroup label="{{ level }} ">
+                                {% for c in list %}
+                                <option ng-value="{{c.school_qualification_id}}" data-label="{{c.label}}" data-level="{{c.level}}" class="ml-2"> &bull;  {$ editUser.school_qualification_id =={{c.school_qualification_id}} ? "{{ level }} : &nbsp;  ":""  $}  {{c.label}}</option>
+                                {% endfor %}
+                            </optgroup>
+                            {% endfor %}
+                            {% endfor %}
+                        </select>
+                        <hr class="m-1" />
+                        <select class="form-control text-uppercase" ng-required="true" ng-model="editUser.classroom">
+                            <option value="" class="ml-2"> ---- {{JR.choose_class_name}}  ----</option>
+                            {% for item in qualification_school_list %}
+                            {% for classname in item.classrooms_names.split(",")|sort(attribute=1) %}
+                            <option ng-if="editUser.school_qualification_id=={{item.school_qualification_id}}" ng-value="'{{classname}}'.toString()" class="ml-2"> &bull; {$ editUser.classroom =='{{classname}}'.toString() ? "{{JR.classs}} : &nbsp;  ":""  $} {{classname}} </option>
+                            {% endfor %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label>{{JR.password}} </label>
+                        <br />
+                        <div class="input-group">
+                            <input type="password" required class="form-control " ng-model="editUser.password" id="editUser_pass{$ editUser.id $}"
+                                   value="{$ editUser.password $}" />
+                            <div class="input-group-append">
+                                <div class="input-group-text bg-info" ng-click="tooglePassword('#editUser_pass'+editUser.id,'#editUser_pass_eye'+editUser.id)" role="button">
+                                    <span id="editUser_pass_eye{$ editUser.id $}" class="fas fa-eye text-warning"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-right"><small>(*) {{JR.password_rules}}</small></div>
+
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label>{{JR.last_name}}</label>
+                        <input ng-model="editUser.last_name" type="text" required class="form-control text-capitalize  " placeholder="">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>{{JR.first_name}}</label>
+                        <input ng-model="editUser.first_name" type="text" required class="form-control text-capitalize " placeholder="">
+                    </div>
+
+                    <div class="form-group col-md-6"></div>
+                    <div class="form-group col-md-6">
+                        <label class="text-truncate">{{JR.date_birth}} </label>
+                        <input ng-model="editUser.date_birth" max="{$ dateBirthMax $}" type="date" class="form-control " placeholder="">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label>{{JR.phone1}}</label>
+                        <input ng-model="editUser.phone_primary" intl-tel-input type="tel" required class="form-control " placeholder="">
+                    </div>
+                    <div class="form-group col-md-6 ">
+                        <label>{{JR.phone2}}</label>
+                        <input ng-model="editUser.phone_secondary" intl-tel-input type="tel" class="form-control " placeholder="">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>{{JR.country}}</label>
+                        <select id="country-selector" ng-model="editUser.country_id" class="js-example-basic-single form-control rounded-0 p-0 ddl-selector">
+                            {% for c in countries %}
+                            <option ng-value="{{c.id}}" class="ml-2"> &bull; {{c.country}}</option>
+                            {% endfor %}
+                        </select>
+
+                    </div>
+                    <div class="form-group col-md-6" ng-hide="city_available.indexOf(editUser.country_id)<0">
+                        <label>{{JR.city}}</label>
+                        <select id="city-selector" ng-model="editUser.country_city_id" class="js-example-basic-single form-control rounded-0 p-0">
+                            {% for r, list_group in cities|groupby('region') %}
+                            {% for region, list in list_group|groupby('region') %}
+                            <optgroup label="{{ region }} ">
+                                {% for c in list %}
+                                <option ng-value="{{c.id}}" class="ml-2"> &bull; {{c.city}}</option>
+                                {% endfor %}
+                            </optgroup>
+                            {% endfor %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label>{{JR.address}}</label>
+                        <textarea ng-model="editUser.address" type="text" class="form-control rounded-0" placeholder=""></textarea>
+                    </div>
+
+                </div>
+                <!-- endform -->
+                <div class="pt-5 pb-5"></div>
+            </div>
+            <div class="footer-fix text-center">
+                <div class="d-inline-block text-center">
+                    <button hide-if-no-payment type="submit" class="btn btn-primary mr-2">{{JR.save}}</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{JR.close}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

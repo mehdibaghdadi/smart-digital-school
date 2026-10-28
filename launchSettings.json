@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "serviceActions": {
+        "e_website": "StartDebugging",
+        "e_gateway": "StartDebugging",
+        "e_mediahub": "StartDebugging",
+        "e_payment": "StartDebugging"
+      }
+    }
+  }
+}

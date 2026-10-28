@@ -1,0 +1,68 @@
+<!-- # VARS APPLICATION #-->
+{% set current_package = PACKAGE.get_package_by_id(current_user.package_id) %}
+{% set is_demo = PACKAGE.Demo.id==current_package.id %}
+{% set show_remaining_days = current_user.unused_days <= config.ALERT_PACKAGE_REMAINING_DAYS%}
+{% set show_package_alert = ( is_demo or show_remaining_days ) %}
+
+<!-- # VARS MENU APPLICATION #-->
+{% set menuJJ = [] %}
+<!--Current Menu-->
+    {% set menuJJ = app_menu() %}
+    {% set current_item = menuJJ.get_by_end_point(request.endpoint) %}
+
+    {% set current_icon = current_item.icon if current_item.icon else current_user.icon  %}
+    {% set current_title = (current_item.title if current_item.title else '')+ (title if title else '') %}
+    {% set current_title = current_title if current_title else JR.editing %}
+
+    {% set title_header = current_item.title_header %}
+    {% set current_title_header = title_header if title_header else current_title %}
+    {% set current_title_header = current_title_header if current_title_header else JR.editing %}
+
+    {% set user_image = current_user.picture %}
+    {% set school_image = current_user.picture_school %}
+
+<!--Home-->
+    {% set home_menu = menuJJ.get("home")%}
+    {% set url_home = home_menu.endpoint%}
+    {% set title_home = home_menu.title%}
+
+<!--Calendar-->
+    {% set calendar_menu = menuJJ.get("calendar_event_top")%}
+    {% set url_calendar = calendar_menu.endpoint%}
+    {% set title_calendar = calendar_menu.title%}
+
+<!--Assistance-->
+    {% if current_user.role != ROLES.School.value %}
+        {% set assistance_menu = menuJJ.get("calendar_assistance_new_top")%}
+        {% set url_assistance = assistance_menu.endpoint%}
+        {% set title_assistance = assistance_menu.title%}
+    {% endif %}
+
+<!--Contact-->
+    {% set contact_menu = menuJJ.get("contact")%}
+    {% set url_contact = contact_menu.endpoint%}
+    {% set title_contact = contact_menu.title%}
+
+<!--Messaging-->
+    {% set message_menu = menuJJ.get("message")%}
+    {% set url_message= message_menu.endpoint%}
+    {% set title_message = message_menu.title%}
+
+<!--Profil-->
+    {% set profile_menu = menuJJ.get("profile")%}
+    {% set url_profile = profile_menu.endpoint%}
+    {% set title_profile = profile_menu.title%}
+
+<!--password-->
+    {% set password_menu = menuJJ.get("password")%}
+    {% set url_password = password_menu.endpoint%}
+    {% set title_password = password_menu.title%}
+
+<!--url icon school-->
+    {% set url_icon_school = url_contact if current_user.role!=ROLES.School.value else url_profile %}
+
+<!--password-->
+    {% set controls_menu = menuJJ.get("controls")%}
+
+
+

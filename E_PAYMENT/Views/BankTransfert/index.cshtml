@@ -1,0 +1,212 @@
+﻿@model E_PAYMENT.Models.BankTransfertViewModel
+
+@{
+    ViewData["Title"] = @Resources.BankTransfer;
+    var controller = $"/{@CultureInfo.CurrentUICulture.TwoLetterISOLanguageName}/BankTransfert";
+    var bankAcount = @AppSettings.Value.BankAcount;
+}
+
+@if (Model.Status != null)
+{
+    <div class="alert alert-danger"><strong>Status:</strong> @Model.Status</div>
+}
+<div class="row p-0 m-0 pl-1 pr-1 text-center text-uppercase">
+    @if (Model.ShowPayment == "no")
+    {
+        <div class="col-md-4 m-1 rounded-lg p-1 bg-subscribe">
+            
+        </div>
+    }
+    else
+    {
+        <div class="col-md-4 m-1 rounded-lg p-1 ">
+
+            <div class="border shadow-sm rounded  bg-light">
+                <div class="bg-dark p-1 rounded-top text-white">
+                    <h5 class="m-0">&bull; @Resources.BankTransfer</h5>
+                </div>
+
+                <p class="mt-2">
+                    <span>@Resources.AmountToPay:</span><br />
+                    <strong style="font-size: 50px;color: #4669ae;"><span class="amount" data-raw="@Model.Amount"></span></strong>
+                </p>
+            </div>
+            <div class="mt-3  text-left">
+                @Resources.TransfertMoneyInfos :
+                <div class="mt-2"><b class="mr-1"><a href="mailto:@AppSettings.Value.Email">@AppSettings.Value.Email</a></b></div>
+            </div>
+
+            <div class="mt-3 border shadow-sm rounded  bg-light">
+                <div class="bg-warning p-1 rounded-top text-dark">
+                    <h5 class="m-0">&bull; @Resources.BankTransferDetails</h5>
+                </div>
+
+
+                <div class="pl-3 pb-3 text-left  bg-bank rounded-bottom shadow-sm text-bold border ">
+                    <u class="mt-2 d-block text-muted">@Resources.Holder:</u>
+                    @bankAcount.Holder
+                    <u class="mt-2 d-block text-muted">@Resources.RIB:</u>
+                    @bankAcount.RIB
+                    <u class="mt-2 d-block text-muted">@Resources.IBAN:</u>
+                    @bankAcount.IBAN
+                    <u class="mt-2 d-block text-muted">@Resources.SWIFT:</u>
+                    @bankAcount.SWIFT
+                    <u class="mt-2  d-block text-muted">@Resources.Bank:</u>
+                    @bankAcount.BANK
+                    <div>
+                        <a class="d-block border rounded bg-dark p-2 mt-3 mr-3 text-center text-white" target="_blank" href="~/docs/rib-eware.pdf">Download PDF</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    }
+
+    <div class="col-md-6 m-1 rounded-lg border shadow-sm text-center bg-light p-1">
+        <div class="bg-dark p-1 rounded text-white">
+            <h5 class="m-0">&bull; @Resources.SubscriptionForm</h5>
+        </div>
+        <p class="mt-2 small">
+            @Resources.SubscriptionInfo :
+        </p>
+        <div class="text-center p-0">
+
+
+            <form class=" p-1" id="subscribeForm" method="post" action="@controller/ProcessSubscription">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="token" value="@Model.Token">
+                <div class="form-group">
+                    <label for="lastName">@Resources.LastName:</label>
+                    <input type="text" class="form-control" id="lastName" name="LastName" required />
+                </div>
+                <div class="form-group">
+                    <label for="firstName">@Resources.FirstName:</label>
+                    <input type="text" class="form-control" id="firstName" name="FirstName" required />
+                </div>
+                <div class="form-group">
+                    <label for="email">@Resources.Email:</label>
+                    <input type="email" class="form-control" value="" id="email" name="Email" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">@Resources.Phone:</label>
+                    <input type="tel" class="form-control" value="" id="phone" name="Phone" required />
+                </div>
+                <div class="form-group">
+                    <label for="address">@Resources.Address:</label>
+                    <textarea type="text" class="form-control" id="address" name="Address" required></textarea>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="agreeTerms" name="terms" value="agree" required>
+                    <label class="form-check-label ml-2" for="agreeTerms">
+                        @Resources.IAgreeTo <a href="@AppSettings.Value.TermsConditionsURL" target="_blank">@Resources.TermsConditions</a>
+                    </label>
+                    <div class="invalid-feedback">
+                        @Resources.MustAgree.
+                    </div>
+                </div>
+
+                <!-- Hidden fields -->
+                <input type="hidden" name="paymentId" value="@Model.PaymentId" />
+                <input type="hidden" name="amount" value="@Model.Amount" />
+                <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+                <input type="hidden" name="returnCancelUrl" value="@Model.ReturnCancelUrl" />
+
+                <div class="text-center row ml-2 mt-2">
+                    <!-- Espace vide pour mise en page -->
+                    <div class="col-3"></div>
+
+                    <!-- Zone principale pour l'image CAPTCHA -->
+                    <div class="col-xs m-0 p-0">
+                        <div class="text-center div-captcha">
+                            <!-- Spinner en cas de chargement -->
+                            <div id="captcha-loading" style="display: none;">
+                                <small>Loading ...</small>
+                            </div>
+                            <!-- Affichage de l'image CAPTCHA -->
+                            <img id="captcha-image"
+                                 src=""
+                                 alt="CAPTCHA"
+                                 class="border elevation-1"
+                                 style="display: none;" />
+                            <br />
+                        </div>
+                        <!-- Champ pour entrer le code CAPTCHA -->
+                        <div class="mt-2">
+                            <input type="text"
+                                   id="captcha-input"
+                                   class="rounded text-center form-control-md form-control btn-warning text-uppercase"
+                                   required
+                                   placeholder="Entrez le texte affiché"
+                                   name="CaptchaAnswer" />
+                            <input type="hidden" id="captcha-id" name="CaptchaId" />
+                        </div>
+                    </div>
+
+                    <!-- Bouton pour régénérer le CAPTCHA -->
+                    <div class="col text-left m-0 p-0">
+                        <button id="reload-captcha-button"
+                                type="button"
+                                class="rounded text-white bg-dark"
+                                data-toggle="tooltip"
+                                title="CAPTCHA">
+                            &#x21BB;
+                        </button>
+
+                    </div>
+                </div>
+
+                <div class="form-group mt-2 ">
+                    <hr />
+                    <button id="subscribeButton" type="submit" class="btn btn-primary text-uppercase mr-2">
+                        @Resources.Submit
+                    </button>
+                    <button id="cancelButton" type="submit"
+                            formaction="@controller/Cancel"
+                            formnovalidate class="btn btn-danger text-uppercase ml-2">
+                        @Resources.Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-2 m-1">
+    </div>
+</div>
+
+
+<script>
+    const subscribeForm = document.getElementById('subscribeForm');
+    const cancelButton = document.getElementById('cancelButton');
+
+    subscribeForm.onsubmit = function (event) {
+        if (event.submitter === cancelButton) {
+            return true; // Allow cancellation
+        }
+        return validatesubscribeForm();
+    };
+
+    function validatesubscribeForm() {
+        const firstName = document.getElementById("firstName").value;
+        const lastName = document.getElementById("lastName").value;
+        const email = document.getElementById("email").value;
+
+        if (!firstName) {
+            alert("Please enter a valid first name.");
+            return false;
+        }
+
+        if (!email) {
+            alert("Please enter a valid email.");
+            return false;
+        }
+
+        if (!lastName) {
+            alert("Please enter a valid last name.");
+            return false;
+        }
+
+        return true;
+    }
+</script>

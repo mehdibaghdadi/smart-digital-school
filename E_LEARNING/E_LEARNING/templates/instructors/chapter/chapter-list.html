@@ -1,0 +1,125 @@
+<div class="pt-2 pb-2" ng-hide="showEditCourse">  
+        <h5 class="text-bold pb-1 text-black  text-uppercase pt-4 text-truncate border-bottom border-gray">
+            <span class="d-block"> <i class="fa fa-ew-notebook text-info"></i> {{JR.chapters}} </span>
+        </h5>
+  
+</div>
+<div class="text-uppercase text-left m-0 d-flex align-items-end justify-content-between" id="tb-chapters" ng-hide="showEditCourse">
+    <a class="btn btn-outline-dark border-bottom-0 btn-flat rounded-top-right  btn-sm">
+        <span class="text-bold ">
+           {{JR.total}} : {$ chapter_list.length $}
+        </span>
+    </a>
+
+   
+    <div class="mr-0">
+
+        <button id="btnAddChapter" 
+                 hide-if-no-payment ng-show="chapter_list.length<{{max_courses_per_prof}}"
+                class="btn btn-primary  border-bottom-0 btn-flat rounded-top btn-sm text-uppercase"
+                data-toggle="modal" data-target="#editModalChapter" ng-click="createChapter($event)">
+            <small>
+                <i class="fas fa-plus text-xs mr-2 text-warning"></i>{{JR.add}}
+            </small>
+        </button>
+
+        <button ng-show="chapter_list.length>=1" class="btn btn-primary ml-1 border-bottom-0 btn-flat rounded-top btn-sm text-uppercase"
+                ng-click="sortChapter($event)" data-toggle="modal"
+                data-target="{$ chapter_list.length>=2 ?'#editModalChapterList' : '' $}">
+            <small>
+                <i class="fa fa-grip-vertical text-xs mr-2 text-cyan"></i>{{JR.to_order}}
+            </small>
+        </button>
+
+    </div>
+</div>
+<div class="card" ng-hide="showEditCourse">
+    <div style="height:0.3rem" class="bg-primary border"></div>
+    <div class="card-body p-0  bg-graph">
+        <div class=" table-responsive">
+            <table class="table table-bordered  table-hover text-nowrap data-table bg-white mb-0" style="font-size:11px">
+                <thead>
+                    <tr class="text-center bg-primary">
+                        <th class="text-left pl-4 ">{{JR.chapter}}</th>
+                        <th class="" width="40" style="width:40px">{{JR.sequence}}<i class="fas fa-sort-numeric-down ml-1 text-yellow"></i></th>
+                        <th width="60">{{JR.contents}}</th>
+                        <th width="100">{{JR.date_creation}}</th>
+                        <th width="100">{{JR.update2}}</th>
+                        <th width="60" class="d-none">{{JR.readers}}</th>
+                        <th width="60" class="text-center">{{JR.online}}</th>
+                        <th width="60" class="text-center bg-success">{{JR.edit}}</th>
+                        <th width="60" class="text-center bg-red">{{JR.delete}}</th>
+                    </tr>
+                </thead>
+                <tbody id="id_body_c">
+                    <tr class="p-0 " ng-repeat="ch in chapter_list track by ch.id"
+                        ng-class="ch.is_visible ? '' : 'text-muted'">
+                        <td class="text-left pl-2 " title="{{JR.edit}}" data-toggle="tooltip"
+                            role="button" ng-click="editChapter($event,ch)" style="min-width:250px;max-width:260px;">
+                            <div class="text-clamp-div" data-src-url="{$ ch.content_url $}">
+                                <i class="fa fa-pen rounded border p-2 float-right text-red"></i>
+                                <b>{$ch.sequence | numberToLetter  $}</b> - {$ ch.chapter_title $}
+                            </div>
+                        </td>
+                        <td class="text-center text-sm text-info">
+                        <b>{$ch.sequence  $}</b></td>
+                        <td class="text-center text-info text-sm" ><b>{$ ch.num_of_contents ? ch.num_of_contents : '-'$}</b></td>
+                        <td class="text-center pl-1 pr-1  ">
+                            <!--{$ ch.date_chapter_creation | date:'dd-MM-yyyy HH:mm' $}-->
+                            {$ ch.date_chapter_creation| date:'yyyy-MM-dd' |localeDate $} {$ ch.date_chapter_creation| date:'HH:mm' $}
+                        </td>
+                        <td class="text-center pl-1 pr-1 " >
+                            <!--{$ ch.date_chapter_update | date:'dd-MM-yyyy HH:mm'  $}-->
+                            {$ ch.date_chapter_update| date:'yyyy-MM-dd' |localeDate $} {$ ch.date_chapter_update| date:'HH:mm' $}
+
+                        </td>
+                        <td class="text-center d-none" ><b>{$ch.num_of_reading ? ch.num_of_reading : '-' $}</b></td>
+                        <td class="text-center pl-0 pr-0">
+                            <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success" title="{{JR.status}} : {{JR.chapter}} {$ ch.is_visible==1 ? '{{JR.online}}' : '{{JR.offline}}' $}" data-toggle="tooltip">
+                                <input type="checkbox" class="custom-control-input" name="chapter_is_visible{$ ch.id $}" id="chapter_is_visible{$ ch.id $}" ng-model="ch.is_visible" ng-checked="ch.is_visible==1" ng-click="statusChangeChapter($event,ch)" onclick="return false;">
+                                <label class="custom-control-label" for="chapter_is_visible{$ ch.id $}"></label>
+                            </div>
+                        </td>
+                        <td class="text-center pl-0 pr-0">
+                            <button class="btn btn-default btn-xs" title="{{JR.edit}} {{JR.chapter}}" ng-click="editChapter($event,ch)" type="button"><i class="fas fa-edit"></i></button>
+                        </td>
+                        <td class="text-center pl-0 pr-0">
+                            <button class="btn btn-default btn-xs" title="{{JR.delete}} {{JR.chapter}}" ng-click="deleteChapterClick($event,ch,$index)" type="button"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot class="bg-light">
+                    <tr class="text-center text-default bg-light" style="font-size:12px" hide-if-no-payment ng-show="chapter_list.length<=0">
+                        <td colspan="100" class="p-4 text-uppercase">
+                            <i class="fa fa-2x fa-exclamation-triangle"></i><br />
+                            {{JR.add_at_least_chapter_course}}
+                            <br />
+                            <br />
+                            <button type="button" data-toggle="modal" data-target="#editModalChapter" class="btn btn-primary" ng-click="createChapter($event)">{{JR.add}} : {{JR.chapter}}</button>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="100">
+                            <div class="text-bold text-right p-2 text-uppercase">{{JR.total}} : {$ chapter_list.length $} </div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+
+<div style="min-height:20px" class=""  ng-hide="showEditCourse ">
+    <div  ng-show="chapter_list.length<{{max_courses_per_prof}}" hide-if-no-payment class="text-right">
+        <span class="" ng-hide=" chapter_list.length==0" role="button" data-toggle="modal" data-target="#editModalChapter" ng-click="createChapter($event)">
+            <i title="{{JR.add}} : {{JR.new}} {{JR.chapter}}" data-toggle="tooltip"
+               class="fa fa-plus-circle p-2 btn-info fa-2x  elevation-2 m-1 mt-2 rounded-pill" role="button"></i>
+        </span>
+    </div>
+</div>
+
+{% include 'instructors/chapter/chapter-new.html' %}
+{% include 'instructors/chapter/chapter-sequence.html' %}

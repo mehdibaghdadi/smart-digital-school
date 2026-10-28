@@ -1,0 +1,272 @@
+{% extends "_layouts/layout.html" %}
+
+{% block head %}
+<title>AI-Cours</title>
+<link href="/static/app-assets/css/course-ai.min.css" rel="stylesheet" />
+
+{% endblock %}
+
+
+{% block content %}
+
+<div ng-controller="CourseAIController" class="container-fluid ai-wizard text-sm" ng-init="init('{{config.E_AI_COURSE_API}}','{{course_publish_url}}')" data-ai-base="">
+
+    <div class="wizard-header">
+        <div>
+            <div class="wizard-title"><i class="fa fa-ew-ai-course"></i> AI Course Wizard</div>
+            <div class="muted">Générer un cours avec IA — version {{ app_version() }}</div>
+        </div>
+    </div>
+
+
+    <div class="ai-row">
+
+        <!--  FORM AI -->
+        <div class="card p-2 bg-light">
+
+            <form autocomplete="off">
+
+                <div ng-hide="generated">
+                    <div class="form-group">
+                        <label>Titre du cours</label>
+                        <input class="form-control"
+                               ng-model="form.title"
+                               placeholder="Ex : Développement Web moderne"
+                               required>
+                    </div>
+                    <div class="form-group">
+                        <label>Description courte</label>
+                        <textarea class="form-control"
+                                  rows="4"
+                                  ng-model="form.description"
+                                  placeholder="Objectifs d'apprentissage…"></textarea>
+                    </div>
+                    <div class="form-group" style="width:240px">
+                        <label>Durée estimée</label>
+                        <input class="form-control" ng-model="form.duration" placeholder="Ex: 8 heures ou 4 semaines">
+                    </div>
+                </div>
+
+                <div ng-hide="generated">
+                    <div class="d-flex" style="gap:8px;">
+                        <div class="form-group" style="flex:1">
+                            <label>Niveau</label>
+                            <select class="form-control" ng-model="form.level">
+                                <option>Débutant</option>
+                                <option>Intermédiaire</option>
+                                <option>Avancé</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" style="width:140px;">
+                            <label>Langue</label>
+                            <select class="form-control" ng-model="form.language">
+                                <option value="french">Français</option>
+                                <option value="english">English</option>
+                                <option value="spanish"> Español</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="d-flex" style="gap:8px;">
+                        <div class="form-group" style="flex:1">
+                            <label>Public cible</label>
+                            <input class="form-control" ng-model="form.audience"
+                                   placeholder="Ex: étudiants, dev juniors">
+                        </div>
+
+                        <div class="form-group" style="width:140px">
+                            <label>Modules</label>
+                            <input type="number" class="form-control"
+                                   min="1" max="40"
+                                   ng-model="form.modules">
+                        </div>
+                    </div>
+
+                    <div class="d-flex" style="gap:8px;">
+                        <div class="form-group" style="flex:1">
+                            <label>Style pédagogique</label>
+                            <select class="form-control" ng-model="form.style">
+                                <option>Théorie + exercices</option>
+                                <option>Projet pratique</option>
+                                <option>Micro-leçons</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" style="width:140px;">
+                            <label>Quiz</label>
+                            <select class="form-control" ng-model="form.include_quiz">
+                                <option value="yes">Oui</option>
+                                <option value="no">Non</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="footer-fix d-flex justify-content-center" style="gap:0 4px">
+
+                    <button type="button" class="btn btn-outline-warning"
+                            ng-click="generateCourse()"
+                            ng-disabled="loading" ng-if="!generated">
+                        {$ loading ? 'Génération' : 'Générer le cours' $}
+                        <i class="text-xs " ng-class="{'thinking-dots': loading, 'fa fa-stream': !loading}"></i>
+                    </button>
+                    <button type="button" class="btn btn-danger"
+                            ng-click="stopGeneration()"
+                            ng-if="loading">
+                        <i class="fa text-xs fa-square mr-2"></i>Stop
+                    </button>
+                    <button type="button" class="btn btn-outline-danger"
+                            ng-click="reset()"
+                            ng-if="!loading">
+                        <i class="fa text-xs fa-eraser"></i> Réinitialiser
+                    </button>
+
+                    <button class="btn btn-primary" ng-if="generated && !error" ng-click="publish()">
+                        <i class="fa fa-upload"></i> Publier le cours
+                    </button>
+
+
+
+                </div>
+            </form>
+        </div>
+
+
+        <!-- PREVIEW  -->
+        <div  id="preview-ai" class="card preview bg-black">
+
+            <div id="resultsContainer">
+
+                <div class="p-3 text-center">
+                    <strong class="text-uppercase">
+                        Prévisualisation
+                    </strong>
+                    <div class="text-sm text-muted text-uppercase">{$ warnings $}</div>
+
+                    <div ng-if="!generated">
+                        <div ng-hide="loading" class="text-muted text-xs text-uppercase">
+                            Aucune génération pour l'instant.
+                        </div>
+                        <div class="text-center text-xs text-uppercase mt-3" ng-show="loading && !result.markdown.length">
+                            Thinking <span class="thinking-dots"></span><i class="fa fa-ew-sds fa-bounce"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Header -->
+                <div class="result-card-ai" ng-if="generated">
+                    <h4 class="text-danger text-uppercase">{$ result.course_title || "..."$}</h4>
+                    <div class="text-sm">{$ result.course_summary $}</div>
+                </div>
+
+                <!-- Modules -->
+                <div class="result-card-ai" ng-if="result.modules && result.modules.length">
+                    <h5 class="d-block m-3 text-underline text-center text-uppercase  text-success">Modules</h5>
+                    <div ng-repeat="m in result.modules track by $index" style="margin-bottom:12px;">
+                        <div class="text-bold text-underline text-warning text-uppercase text-sm">{$ $index+1 | numberToLetter $}. {$ m.module_title || "..." $}</div>
+                        <div class="">{$ m.module_description || "..." $}</div>
+                        <!--lessons-->
+                        <ul style="margin-top:6px; padding-left:18px;"
+                            ng-if="m.lessons.length">
+                            <li class="d-block mb-1" ng-repeat="l in m.lessons track by $index">
+                                <span class="text-cyan text-bold  text-uppercse">{$ $index+1 $}. {$ l.lesson_summary || "..." $}</span>
+                                <div class=" mt-2 mb-2">{$ l.lesson_content || "..." $}</div>
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Quizzes  -->
+                <div class="result-card-ai" ng-if="result.quizzes && result.quizzes.length">
+                    <h5 class="d-block text-underline m-3 text-center text-uppercase  text-success">Quizzes</h5>
+
+                    <div ng-repeat="quiz in result.quizzes track by $index" style="margin-bottom:12px;">
+
+                        <!-- NOM DU QUIZ -->
+                        <div class="text-bold text-info  text-underline text-uppercase">
+                            {$ $index+1 | numberToLetter $}. {$ quiz.quiz_name || "..." $}
+                        </div>
+
+                        <!-- TIME LIMIT DU QUIZ -->
+                        <div ng-if="quiz.time_limit"
+                             class="text-danger text-sm"
+                             style="margin-bottom:4px;">
+                            Durée estimée : {$ quiz.time_limit $} min
+                        </div>
+
+                        <!-- NB DE QUESTIONS -->
+                        <div class=" text-sm" style="margin-bottom:6px;">
+                            Questions: {$ quiz.questions.length $}
+                        </div>
+
+                        <!-- LISTE DES QUESTIONS -->
+                        <ul class="text-sm" style="padding-left:18px; margin-bottom:6px;">
+                            <li ng-repeat="question in quiz.questions track by $index"
+                                style="margin-bottom:8px;">
+
+                                <div>
+                                    <strong>Q{$ $index + 1 $}.</strong>
+                                    {$ question.question || "..." $}
+                                </div>
+
+                                <ul style="margin-left:14px; padding-left:14px; list-style-type: lower-alpha;">
+                                    <li ng-repeat="choice in question.choices track by $index"
+                                        ng-class="{'text-warning': ($index === question.correct_answer)}">
+
+                                        <span ng-if="$index === question.correct_answer"
+                                              class="text-success">✔ </span>
+
+                                        {$ choice $}
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- AI MARKDOWN  -->
+                <div ng-if="result.markdown && !result.modules.length">
+                    <div id="markdown-id"
+                         class="card-markdown text-sm bg-black rounded" ng-bind-html="result.markdown | toHtml">
+                        {$$}
+                    </div>
+                </div>                
+            </div>
+
+            <!-- Actions -->
+            <div class="d-flex justify-content-end" style="gap:8px; padding:5px;" ng-if="generated">
+                <button type="button" title="copier" class="btn btn-outline-light btn-sm border-0" ng-click="copyResultsContainer()">
+                    <i class="fa fa-copy"></i>
+                </button>
+
+                <button type="button" title="imprimer" class="btn btn-outline-light btn-sm border-0" ng-click="printResultsContainer()">
+                    <i class="fa fa-print"></i>
+
+                </button>
+            </div>
+
+            <div class="bg-danger text-center p-2" style="margin-top:10px;" ng-if="error">
+               <i class="fa fa-circle-exclamation mr-1"></i> {$ error $}
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+{% block scripts %}
+{{ super() }}
+
+<script>
+    /* AngularJS APP */
+
+</script>
+<script src="/static/app-core/instructors/app.course-ai-wizard.min.js"></script>
+{% endblock %}

@@ -1,0 +1,29 @@
+﻿@model E_PAYMENT.Models.PaymentSuccessViewModel
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <title>Paiement terminé</title>
+    <script>
+        window.addEventListener("DOMContentLoaded", function () {
+            // Envoie le message au parent (la page contenant l’iframe)
+            window.parent.postMessage({
+                status: 'success',
+                redirect: '@Model.ReturnUrl',
+                paymentId: '@Model.PaymentId'
+            }, '*');
+
+            // Optionnel : redirection dans l’iframe elle-même après quelques secondes
+            setTimeout(function () {
+                window.location.href = '@Model.ReturnUrl';
+            }, 5000);
+        });
+    </script>
+</head>
+<body>
+    <h3>Paiement terminé ✅</h3>
+    <p>Merci, votre paiement a été traité avec succès.</p>
+    <p>Vous allez être redirigé sous peu...</p>
+</body>
+</html>

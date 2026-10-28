@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartDigitalSchoolApp.MainPage"
+             xmlns:local="clr-namespace:SmartDigitalSchoolApp.Helpers"
+             BackgroundColor="#010E1F"
+             NavigationPage.HasNavigationBar="False">
+
+    <Grid>
+        <RefreshView x:Name="MyRefreshView" 
+                     Refreshing="refreshView_Refreshing"  IsRefreshing="False">
+            <!-- WebView principale -->
+            <WebView x:Name="MyWebView"
+                 BackgroundColor="#010E1A"
+                 Source="{x:Static local:AppConstants.BaseUrl}"
+                 VerticalOptions="Fill"
+                 HorizontalOptions="Fill" />
+        </RefreshView>
+        <!-- Écran de chargement -->
+        <Grid x:Name="LoadingOverlay"
+      BackgroundColor="#80000000"
+      IsVisible="False"
+      VerticalOptions="Fill"
+      HorizontalOptions="Fill"
+      ZIndex="100">
+
+            <VerticalStackLayout VerticalOptions="Center"
+                         HorizontalOptions="Center"
+                         Spacing="8">
+                <!-- Logo (simple Image, plus de triggers XAML ici) -->
+                <Image x:Name="LogoImage"
+               Source="logo.svg"
+               WidthRequest="60"
+               HeightRequest="60"
+               HorizontalOptions="Center" />
+
+                <Label Text="LOADING"
+               TextColor="White"
+               FontSize="10"
+               HorizontalOptions="Center"
+               Opacity="0.9" />
+            </VerticalStackLayout>
+        </Grid>
+
+
+    </Grid>
+</ContentPage>

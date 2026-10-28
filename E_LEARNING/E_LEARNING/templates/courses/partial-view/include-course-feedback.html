@@ -1,0 +1,39 @@
+<div class="card mb-0">
+    <div class="card-header bg-primary p-1 pt-3 pb-3">
+        <div class=" text-center p-0 " style="font-size:14px">
+            <div class="text-uppercase">{{JR.was_this_course_useful_to_you}} ?</div>
+        </div>
+    </div>
+    <div class="card-body bg-light">
+        <div class="p-0">
+            <div class="row">
+                <div class="col-md-6 text-left ">
+                    <span class="ml-2"><small class="text-uppercase"><b>{{JR.evaluation}}</b></small></span>
+                    <div class="small-box text-center ml-2 mb-0 p-0">
+                        <div class="inner mb-1">
+                            <div class="mt-1">
+                                <div class='starrr mt-2 mr-2 text-pink'></div>
+                            </div>
+                        </div>
+                        <div href="#" class="bg-black"><b id="score" class=" text-yellow text-md">{$ ratingScore $}</b> <b class="text-xs text-uppercase">{{JR.stars}}</b></div>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+
+                    <span  class="ml-2"><small class="text-uppercase"><b>{{JR.comment}}</b></small></span>
+                    <textarea rows="4" class="form-control bg-white ml-2 p-2 " ng-model="commentText" style="width:100%"></textarea>
+                </div>
+
+                <div class="col-md-6"></div>
+                <div class="col-md-6 text-right">
+                    {% if isStudent %}
+                    <button ng-click="feedBackClik('{{course_feedback_url}}')" class="mt-2 btn btn-sm btn-outline-dark text-uppercase"><i class="fa fa-paper-plane mr-2"></i>{{JR.send_your_evaluation}}</button>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

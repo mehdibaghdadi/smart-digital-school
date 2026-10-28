@@ -1,0 +1,382 @@
+{% extends "_layouts/layout.html" %}
+
+{% block head %}
+{% include '_includes/x-links-css-datatable.html' %}
+{% include '_includes/x-links-css-summernote.html' %}
+<link href="/static/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" />
+<link href="/static/app-assets/css/assistance.css" rel="stylesheet" />
+<link href="/static/app-assets/css/media-player.css?version={{app_version()}}" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+
+<div ng-controller="DemandAssistanceListCtrl" ng-init="init({{demands_list.json}},{{listTasksFromToday.json}},{{list_type_events.json}},'{{url_save_response}}','{{url_save_group_response}}',{{school_id}},{{instructor_id}});">
+    <div>
+        <div class="text-uppercase text-center row p-0 m-0 border-bottom">
+            <div class="col-xs text-left">
+                <div class="d-sm-inline-block d-none">
+
+                    <button type="button" class="btn btn-default border-bottom-0 btn-flat rounded-top btn-sm text-uppercase" data-toggle="dropdown" aria-expanded="false">
+                        <small>
+                            <span class="text-bold ">{{JR.total}} : <span class="text-red">{$ demands_list.length $}</span> </span>
+                        </small>
+                    </button>
+
+                </div>
+            </div>
+
+            <div class="col m-0 p-0 text-center">
+
+            </div>
+            <div class="col-xs p-0 text-right">
+                <div class="text-uppercase text-right">
+
+                    <!--Group by-->
+                    <div class="btn-group mr-1">
+
+                        <button type="button" class="btn btn-default border-bottom-0 btn-flat rounded-top btn-sm text-uppercase" data-toggle="dropdown" aria-expanded="false">
+                            <small>
+                                {{JR.show_by}} <i class="ml-1 fa fa-ellipsis-v text-success"></i>
+                            </small>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" role="menu" style="">
+                            <a class="dropdown-item cursor-pointer" role="button" ng-click="groupBy(1)"><i class="fas fa-clock mr-2 text-green"></i>{{JR.date_demand}}</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item cursor-pointer" role="button" ng-click="groupBy(10)"><i class="fas fa-clock mr-2 text-red"></i>{{JR.date_schedule}}</a>
+                            <div class="dropdown-divider"></div>
+
+                            <a class="dropdown-item cursor-pointer" role="button" ng-click="groupBy(7)"> <i class="fa fa-ew-book mr-2"></i>{{JR.course_school}}</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item cursor-pointer" role="button" ng-click="groupBy(8)"><i class="fas fa-people-roof mr-2 text-purple"></i>{{JR.level_school}}</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item cursor-pointer" role="button" ng-click="groupBy(9)"><i class="fas  fa-user-graduate  mr-2 text-info"></i>{{JR.demand_student}}</a>
+
+                        </div>
+
+                    </div>
+                    <!--Create planning-->
+                    <div class="btn-group mr-1">
+
+                        <button type="button" class="btn btn-default border-bottom-0 btn-flat rounded-top btn-sm text-uppercase" data-toggle="dropdown" aria-expanded="false">
+                            <small>
+                                {{JR.selection}} ( <span class="text-bold" ng-bind="c=(demands_list | filter:{ selected: true }:true).length " ng-class="c ? 'text-danger' : ''">{$$} </span> )<i class="ml-1 fa fa-ellipsis-v text-success"></i>
+                            </small>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" role="menu" style="">
+
+                            <a class="dropdown-item cursor-pointer" role="button" ng-click="checkAllGroup(true)"><i class="far fa-circle-check mr-2 text-info"></i>{{JR.tick_all}}</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item cursor-pointer" role="button" ng-click="checkAllGroup(false)"><i class="far fa-times-circle mr-2 text-orange"></i>{{JR.untick_all}}</a>
+
+                        </div>
+                    </div>
+                    <!--less columns-->
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default border-bottom-0 btn-flat rounded-top btn-sm text-uppercase" data-toggle="dropdown" aria-expanded="false">
+                            <small>
+                                <span>{{JR.actions}}</span> <i class="ml-1 fa fa-ellipsis-v text-success"></i>
+                            </small>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" role="menu" style="">
+                            <a class="dropdown-item cursor-pointer" role="button" ng-click="compressTableClick()">
+                                <span ng-hide="compressTable"><i class="fa fa-minus-circle mr-2 text-warning"></i>{{JR.show_fewer_columns}}</span>
+                                <span ng-show="compressTable"><i class="fa fa-plus-circle text-primary mr-2"></i>{{JR.show_all_columns}}</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="card bg-graph mb-0 elevation-0">
+
+            <div class="card-body  p-0 mt-1">
+                <div class="table-responsive p-0">
+                    <table id="table-course" class="pr-0 table  table-bordered  table-hover text-nowrap data-table" style="font-size:11px;width:100%;min-width:700px!important">
+                        <thead>
+
+                            <tr class="text-center bg-primary">
+                                <th style="min-width: 380px;" class="text-left ml-0 pl-2">
+                                    {{JR.demand_assist}} - {{JR.answer}}
+                                </th>
+                                <th width="50" ng-hide="compressTable" title="{{JR.date_demand}}" class="bg-danger m-0 p-1">{{JR.date_demand2}}</th>
+                                <th class=" text-center pl-3">{{JR.course}} - {{JR.chapter}} - {{JR.section}}</th>
+                                <th ng-hide="compressTable" class=" text-center">{{JR.classs}}</th>
+
+                                <th ng-hide="compressTable" width="80" class="text-center p-1">{{JR.status}}</th>
+                                <th width="80" ng-hide="compressTable" title="{{JR.status}}" class="bg-info text-center p-1">{{JR.date_status}}</th>
+                                <th width="180" class="bg-black text-center p-1">{{JR.calendar}}</th>
+                                <th>{{JR.course}}</th>
+                                <th>{{JR.classs}}</th>
+                                <th>{{JR.student}}</th>
+                                <th>{{JR.date}} {{JR.schedule}}</th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody id="id_body" class="d-none">
+                            <tr class="text-left" ng-repeat="q in demands_list track by $index" ng-show="q.id>0" id="{$ q.id $}">
+
+
+                                <td class="rounded-0 pl-1 pt-2">
+
+                                    <!--actions assistance-->
+                                    <div class="btn-group text-right d-block" style="position: absolute; bottom: 0px;right:0">
+
+                                        <button ng-show="q.enableEvent" ng-disabled="q.selected" style="min-width:80px"
+                                                class="btn text-primary text-underline border-0 btn-flat   btn-sm p-1 pl-2 pr-2"
+                                                data-toggle="dropdown" aria-expanded="false">
+                                            <small class="text-uppercase">
+                                                <i class="fa mr-1" ng-class="(q.accepted==1) ? 'fa-edit':'fa-reply-all '"></i>
+                                                <b> {$ (q.accepted==1 || q.accepted==0) ? '{{JR.modify}}' :'{{JR.reply}}' $}</b>
+                                                <i class="ml-1 fa fa-ellipsis-v text-xs"></i>
+                                            </small>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right text-uppercase p-0" role="menu" style="">
+                                            <div>
+                                                <div class="p-1 text-xs pl-2  text-left border-bottom mb-3 bg-primary">
+                                                    <span class="text-bold text-xs">
+                                                        <i class="fa fa-ew-sos  text-warning mr-2 "></i>{{JR.demand_selected}} :
+                                                    </span>
+                                                </div>
+                                                <a class="dropdown-item cursor-pointer" role="button" ng-click="needAssistanceUserClick($event,q,false)">
+                                                    <i class="fas fa-calendar-check mr-2 text-info"></i>{{JR.schedule_support}}
+                                                </a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item cursor-pointer" role="button" ng-click="needAssistanceUserClick($event,q,true)">
+                                                    <i class="fas fa-calendar-plus mr-2 text-green"></i>{{JR.add_new}} {{JR.schedule}}
+                                                </a>
+                                                <div class="dropdown-divider" ng-hide="q.accepted==0"></div>
+                                                <a class="dropdown-item cursor-pointer" ng-hide="q.accepted==0" role="button" ng-click="rejectAssistanceUserClick($event,q)">
+                                                    <i class="fas fa-calendar-xmark mr-2 text-red"></i>{{JR.cancel}} {{JR.demand_student}}
+                                                </a>
+                                                <div class="p-1"> </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div ng-show="q.enableEvent" class="icheck-danger  m-0 ">
+                                        <input class="checkboxGroup" id="chk{$ q.id $}" onclick="addedGroupSelected()" ng-model="q.selected" type="checkbox" data-ids="{$ q.id $}" />
+                                        <label class="text-sm" title="{$ !q.selected ? '{{JR.add_to}}' : '{{JR.remove_from}}'$} {{JR.schedule}}"
+                                               data-toggle="tooltip" for="chk{$ q.id $}">
+                                            <small ng-class="q.selected ? 'text-red' : 'text-black' ">{{JR.plan}}</small>
+                                        </label>
+                                    </div>
+                                    <br />
+
+                                    <!--infos assistance-->
+
+                                    <div class="text-uppercase text-wrap ml-0 p-1 callout callout-success bg-light">
+                                        <div class="text-truncate p-1 text-uppercase text-bold">
+                                            {$q.student_last_name $} {$q.student_first_name $}.
+                                        </div>
+
+                                        <div class="text-dark  bg-white rounded-lg p-2">
+                                            {$q.description_demand $}
+                                        </div>
+                                    </div>
+
+
+                                    <div ng-show="q.response_demand" class="text-uppercase text-wrap ml-0 p-1 callout callout-warning bg-light">
+                                        <div>
+                                            <b class="text-dark mt-1 ml-1">{{JR.my_self}}.</b>
+                                            <div class="response-demand-prof  text-dark  bg-white rounded-lg p-2" ng-bind-html="q.response_demand | toHtml"> {$ $}</div>
+                                        </div>
+                                    </div>
+                                    <!--ATTACHEMENT/LINK-->
+                                    <div class="row m-0 p-2 mb-3" style="flex-direction: row-reverse">
+                                        <div ng-show="q.attachment_url" class="col-md-6 text-uppercase text-wrap  p-1 ">
+                                            <div class="text-xs  btn-group d-block"
+                                                 style="font-size:11px"
+                                                 data-type-extension="{$ type_file = getTypeFromExtensionURL(q.attachment_url) $}">
+
+                                                <div class="mr-2" role="button" data-toggle="dropdown" aria-expanded="false">
+                                                    <div class=" text-dark" ng-href="{$ q.attachment_url $}">
+                                                        <small><i class="fa fa-paperclip mr-2"></i>{{JR.attachment}}</small>
+                                                        <div ng-show="type_file.css" class="btn text-bold btn-xs  btn-outline-dark d-block">
+                                                            {$ type_file.text $}<i class="ml-1 mt-1 float-right fa fa-ellipsis-v"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="dropdown-menu dropdown-menu-right" role="menu" style="">
+                                                    <span class="dropdown-item cursor-pointer" role="button" ng-click="readUploadedContent($event,q.attachment_url,type_file)"> <span ng-show="type_file.css" class="text-dark"><i class="fa mr-1" ng-class="type_file.css +' '+ type_file.color"></i> {{JR.read_more2}} {$ type_file.text $}</span></span>
+                                                    <div class="dropdown-divider"></div>
+                                                    <span class="dropdown-item cursor-pointer" role="button" ng-click="deleteAttachmentFile($event,q,'{{url_update_file_attachement_assistance}}')"> <span ng-show="type_file.css" class="text-dark"><i class="fas fa-remove mr-1 text-red"></i> {{JR.delete}} {$ type_file.text $}</span></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div ng-show="q.response_demand_link" class="col-md-6 text-uppercase text-wrap  p-1 ">
+                                            <a ng-href="{$ q.response_demand_link $}" class="text-xs d-block" target="_blank">
+                                                <small class="text-dark"><i class="fa fa-globe mr-2"></i>{{JR.url_link}}</small>
+                                                <small class="btn text-bold btn-xs  btn-outline-dark d-block" ng-bind-html="q.response_demand_link | detectMeetingService">{$$}</small>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!--END ATTACHEMENT/LINK-->
+
+                                    <div class="p-1">&nbsp;</div>
+
+                                </td>
+                                <td ng-hide="compressTable" class="text-center text-bold">{$ q.date_demand | date:'dd/MM/yyyy' $}</td>
+                                <td style="max-width:300px;font-size:10px;" class="text-capitalize rounded-0 p-0">
+                                    <div class="text-truncate text-uppercase pl-2 pt-2 ">
+                                        <span><u><i class="fa fa-ew-book text-dark icon-user mr-2"></i>{$q.course_title  $}</u></span>
+                                        <!--<hr class="m-0 mb-2 mt-2" />-->
+                                    </div>
+                                    <div class="m-0 border-gray border-left pt-2 pl-2 mb-4 ml-3 text-uppercase text-truncate">
+
+                                        <span><u><i class="fa fa-ew-notebook text-dark icon-user mr-2"></i></u>{$q.chapter_title $}</span>
+                                        <div class="text-lef mt-2">
+                                            <i class="fab fa-dropbox text-info mr-1"></i> {$q.content_brief $}
+
+                                        </div>
+
+                                    </div>
+                                    <div style="position: absolute; bottom: 0px;right:0" class="text-center p-0 pb-1">
+
+                                        <a data-toggle="tooltip" title="{{JR.access_section}} ({{JR.student}})" target="_blank"
+                                           class="text-bold text-primary btn-flat rounded-left btn-sm p-0 pr-3 "
+                                           href="{{edit_chapter_section_url}}/{$ q.school_subject_id $}/{$ q.course_id $}/{$ q.student_id $}#header_content_{$q.course_chapter_content_id $}">
+                                            <span class=" text-uppercase">
+                                                <i class="fas fa-street-view mr-1 text-xs"></i><small class="text-underline ml-1">{{JR.section}}</small>
+                                            </span>
+                                        </a>
+
+                                    </div>
+                                </td>
+                                <td ng-hide="compressTable" class="text-uppercase text-center">
+                                    <b>{$ q.label_subject $}</b>
+                                    <hr />
+                                    {$ q.level $}<br />
+                                    {$ q.label_qualification $}<br />
+                                    {$ q.classroom $}
+                                </td>
+
+                                <td ng-hide="compressTable" class="text-center text-uppercase">
+                                    <span ng-switch="q.accepted">
+                                        <b ng-switch-when="1" class="text-success">{{JR.accepted2}}</b>
+                                        <b ng-switch-when="0" class="text-red">{{JR.canceled2}}</b>
+                                        <b ng-switch-default class="text-info ">{{JR.to_treat}} ...</b>
+                                    </span>
+                                </td>
+                                <td ng-hide="compressTable" class="text-center"
+                                    ng-class="q.accepted==1?'text-bold':''">
+                                    {$ q.acceptance_date ||  q.date_demand  | date:'dd/MM/yyyy' $}
+                                </td>
+                                <td class="text-center text-uppercase p-0" style="min-width:250px">
+                                    <div class="p-1 bg-black text-left  elevation-2"
+                                         ng-class="!q.pl ? 'rounded-bottom' : ''"
+                                         ng-show="q.enableEvent">
+                                        <div class="p-1 rounded" ng-class="q.selected ? 'bg-warning' :'bg-black'">
+                                            <div class="icheck-default m-0 p-1">
+                                                <input class="checkboxGroup" id="chkk{$ q.id $}" onclick="addedGroupSelected()" ng-model="q.selected" type="checkbox" data-ids="{$ q.id $}" />
+                                                <label class="text-sm" title="{$ !q.selected ? '{{JR.add_to}}' : '{{JR.remove_from}}'$} {{JR.schedule}}"
+                                                       data-toggle="tooltip" for="chkk{$ q.id $}">
+                                                    <small ng-class="!q.selected && q.pl ? 'text-warning' :''">
+                                                        {$ q.selected ? '{{JR.demand_selected}}' : (q.pl ? '{{JR.schedule}} {{JR.active}}' : ( q.response_demand ? '{{JR.answer}} {{JR.no_schedule}}' : '{{JR.plan}}' )   ) $}
+                                                    </small>
+                                                </label>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+                                    <div class="p-2 bg-dashed" ng-hide="q.enableEvent">
+                                        {{JR.status2}} : {{JR.finished}}
+                                    </div>
+                                    <div ng-class="!q.enableEvent ?'text-muted':''">
+                                        <div ng-show="q.pl">
+                                            <div class="p-1 rounded-bottom" ng-class="q.enableEvent ? 'bg-white  elevation-2' : 'text-muted'"> {$ q.pl.title $} </div>
+                                            <br />
+                                            <div class="text-bold text-sm">
+                                                {$ q.pl.start | date:'dd-MM-yyyy' $}
+                                            </div>
+                                            <hr class="m-1 border-0" />
+                                            <div class="font-weight-bold">
+                                                {$ q.pl.plannedTitle  $}
+                                            </div>
+                                            <i style="position: absolute; bottom: 3px;  right: 3px;" class="fa fa-circle" ng-style="{'color': q.pl.backgroundColor}"></i>
+                                        </div>
+                                        <br />
+                                        <div class="text-wrap" ng-if="q.pl.event_description" ng-bind-html="q.pl.event_description| toHtml">
+                                            {$$}
+                                        </div>
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <u class="text-red">{$ q.label_subject $}</u> : {$q.course_title  $}.
+                                </td>
+                                <td>
+                                    <u class="text-cyan">{$ q.label_subject $}</u> : {$ q.level $} - {$ q.label_qualification $} - {$ q.classroom $}
+                                </td>
+                                <td>
+                                    <u class="text-cyan">{$ q.label_subject $}</u> : {$q.student_last_name $} {$q.student_first_name $}
+                                </td>
+                                <td>
+                                    {$ (q.pl.start | date:'dd-MM-yyyy') || '01-01-7000'  $}
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <div class="footer-fix" ng-show="demands_list.length">
+                <!--Create planning-->
+                <div class="btn-group text-uppercase text-right">
+                    <button type="button" class="btn btn-primary p-1 pl-2 pr-2 btn-sm text-uppercase rounded-lg" data-toggle="dropdown" aria-expanded="false">
+                        <span>
+                            <i class="mr-2 fa fa-calendar-week i-calendar-week  text-teal"></i>{{JR.schedule_selection}} : <span class="text-bold text-md" ng-bind="nbr_selected=(demands_list | filter:{ selected: true }:true).length " ng-class="nbr_selected ? 'text-warning' : 'text-white'">{$$} </span> <i class="ml-2 fa fa-ellipsis-v "></i>
+                        </span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right p-0" role="menu" style="">
+                        <div ng-show="nbr_selected">
+                            <div class="p-1 text-xs pl-2  text-left border-bottom mb-3 bg-primary">
+                                <span class="text-bold ">
+                                    <i class="fa fa-ew-sos  text-warning mr-2"></i>{{JR.assign_selection}}  :
+                                </span>
+                            </div>
+                            <a class="dropdown-item cursor-pointer" role="button" ng-click="needAssistanceGroupClick($event,false)">
+                                <i class="fas fa-calendar-check mr-2 text-info"></i>{{JR.schedule_support}}
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item cursor-pointer" role="button" ng-click="needAssistanceGroupClick($event,true)">
+                                <i class="fas fa-calendar-plus mr-2 text-green"></i>{{JR.add_new}} {{JR.schedule}}
+                            </a>
+                        </div>
+                        <div class="p-2 text-center bg-red" ng-hide="nbr_selected">
+                            <i class="fa fa-exclamation-triangle fa-2x"></i><br />
+                            {{JR.select_at_least_one_request}}.
+
+                        </div>
+                        <div class="p-2"></div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+
+    {% include 'instructors/assistance/modal-calendar-response-assistance-user.html' %}
+    {% include 'instructors/assistance/modal-calendar-response-assistance-group.html' %}
+    {% include 'courses/chapter-content/show-player.html' %}
+</div>
+
+{% endblock %}
+{% block contentBottom %}{% endblock %}
+{% block scripts %}
+
+{% include '_includes/x-links-scripts-datatable.html' %}
+{% include '_includes/x-links-scripts-media-player.html' %}
+{% include '_includes/x-links-scripts-summernote.html' %}
+<script src="/static/app-core/instructors/jquery.demand-assistance.min.js?version={{app_version()}}"></script>
+<script src="/static/app-core/instructors/app.demand-assistance.min.js?version={{app_version()}}"></script>
+{% endblock %}

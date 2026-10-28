@@ -1,0 +1,1184 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>f95f8728-3a14-4400-9cee-7722f1710844</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <ProjectTypeGuids>{789894c7-04a9-4a11-a6b5-3f4435165112};{1b580a1a-fdb3-4b32-83e1-6407eb2722e6};{349c5851-65df-11da-9384-00065b846f21};{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <StartupFile>runserver.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <LaunchProvider>Web launcher</LaunchProvider>
+    <WebBrowserUrl>http://localhost</WebBrowserUrl>
+    <OutputPath>.</OutputPath>
+    <SuppressCollectPythonCloudServiceFiles>true</SuppressCollectPythonCloudServiceFiles>
+    <Name>E_LEARNING</Name>
+    <RootNamespace>E_LEARNING</RootNamespace>
+    <InterpreterId>MSBuild|env|$(MSBuildProjectFullPath)</InterpreterId>
+    <WebBrowserPort>7100</WebBrowserPort>
+    <SuppressEnvironmentCreationPrompt>True</SuppressEnvironmentCreationPrompt>
+    <SuppressPackageInstallationPrompt>True</SuppressPackageInstallationPrompt>
+    <Environment>GEVENT_SUPPORT=True
+</Environment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="E_LEARNING\commun\account\logging.py" />
+    <Compile Include="E_LEARNING\controllers\commun\school_type_controller.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="E_LEARNING\controllers\instructors\course_ai_controller.py" />
+    <Compile Include="E_LEARNING\controllers\instructors\quiz_controller.py" />
+    <Compile Include="E_LEARNING\controllers\packages\payment_controller.py" />
+    <Compile Include="E_LEARNING\controllers\packages\package_controller.py" />
+    <Compile Include="E_LEARNING\controllers\commun\school_type_qualification_controller.py" />
+    <Compile Include="E_LEARNING\controllers\commun\school_type_subject_controller.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="E_LEARNING\controllers\commun\theme_controller.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="E_LEARNING\controllers\packages\paypal_sandbox_controller.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="E_LEARNING\controllers\course_learning_views\quiz_form_controller.py" />
+    <Compile Include="E_LEARNING\controllers\reportings\reporting_controller.py" />
+    <Compile Include="E_LEARNING\controllers\reportings\reporting_school_controller.py" />
+    <Compile Include="E_LEARNING\controllers\schools\calendar_event_controller.py" />
+    <Compile Include="E_LEARNING\controllers\students\my_calendar_controller.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="E_LEARNING\commun\menu\menu_school.py" />
+    <Compile Include="E_LEARNING\commun\menu\menu_student.py" />
+    <Compile Include="E_LEARNING\commun\menu\menu_instructor.py" />
+    <Compile Include="E_LEARNING\commun\menu\menu_admin.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="E_LEARNING\commun\menu\menu.py" />
+    <Compile Include="E_LEARNING\commun\__init__.py" />
+    <Compile Include="E_LEARNING\controllers\accounts\account_controller.py" />
+    <Compile Include="E_LEARNING\controllers\accounts\captcha_controller.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="E_LEARNING\controllers\admins\index_admins_controller.py" />
+    <Compile Include="E_LEARNING\controllers\commun\country_controller.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="E_LEARNING\controllers\commun\language_controller.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="E_LEARNING\controllers\instructors\calendar_assistance_controller.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="E_LEARNING\controllers\instructors\calendar_event_controller.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="E_LEARNING\controllers\instructors\course_chapter_controller.py" />
+    <Compile Include="E_LEARNING\controllers\instructors\course_chapter_content_controller.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="E_LEARNING\controllers\instructors\course_instructor_controller.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="E_LEARNING\controllers\instructors\dashboard_controller.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="E_LEARNING\controllers\reportings\reporting_instructor_controller.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="E_LEARNING\controllers\instructors\subject_controller.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="E_LEARNING\controllers\messaging\messaging_controller.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="E_LEARNING\controllers\schools\dashboard_controller.py" />
+    <Compile Include="E_LEARNING\controllers\schools\student_controller.py" />
+    <Compile Include="E_LEARNING\controllers\schools\instructor_controller.py" />
+    <Compile Include="E_LEARNING\controllers\schools\subject_controller.py" />
+    <Compile Include="E_LEARNING\controllers\schools\qualification_controller.py" />
+    <Compile Include="E_LEARNING\controllers\instructors\profile_controller.py" />
+    <Compile Include="E_LEARNING\controllers\instructors\index_controller.py" />
+    <Compile Include="E_LEARNING\controllers\schools\index_controller.py" />
+    <Compile Include="E_LEARNING\controllers\schools\profile_controller.py" />
+    <Compile Include="E_LEARNING\controllers\course_learning_views\course_view_controller.py" />
+    <Compile Include="E_LEARNING\controllers\students\dashboard_controller.py" />
+    <Compile Include="E_LEARNING\controllers\students\demand_assistance_controller.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="E_LEARNING\controllers\students\instructor_controller.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="E_LEARNING\controllers\students\subject_controller.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="E_LEARNING\controllers\students\index_controller.py" />
+    <Compile Include="E_LEARNING\controllers\students\profile_controller.py" />
+    <Compile Include="E_LEARNING\commun\account\login_session.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="E_LEARNING\models\db_context.py" />
+    <Compile Include="E_LEARNING\commun\database\db_enums.py" />
+    <Compile Include="E_LEARNING\models\db_entities_tables.py" />
+    <Compile Include="E_LEARNING\models\db_commands.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="E_LEARNING\models\db_entities_views.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="E_LEARNING\models\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="E_LEARNING\resources\api_resources.py" />
+    <Compile Include="E_LEARNING\resources\javascript_resources.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="E_LEARNING\resources\jinja2_resources.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="E_LEARNING\utilities\database\stored_procedure.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="E_LEARNING\utilities\filters\validator.py" />
+    <Compile Include="E_LEARNING\utilities\flask\encoder.py" />
+    <Compile Include="E_LEARNING\utilities\filters\decorator.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="E_LEARNING\utilities\flask\flask_logging.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="E_LEARNING\utilities\flask\flask_menu.py" />
+    <Compile Include="E_LEARNING\utilities\flask\flask_services.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="E_LEARNING\utilities\__init__.py" />
+    <Compile Include="E_LEARNING\settings.py" />
+    <Compile Include="E_LEARNING\controllers\admins\api_docs_controller.py" />
+    <Compile Include="E_LEARNING\controllers\accounts\index_controller.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="E_LEARNING\controllers\__init__.py" />
+    <Compile Include="E_LEARNING\utilities\filters\token_authenticate.py" />
+    <Compile Include="E_LEARNING\utilities\flask\flask_view.py" />
+    <Compile Include="E_LEARNING\utilities\filters\limiter.py" />
+    <Compile Include="E_LEARNING\utilities\database\serializer.py" />
+    <Compile Include="E_LEARNING\utilities\database\sqlalchemy_pagination.py" />
+    <Compile Include="E_LEARNING\imports\__init__.py" />
+    <Compile Include="E_LEARNING\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="runserver.py" />
+    <Compile Include="wsgi.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bundleconfig.json" />
+    <Content Include=".env.production" />
+    <Content Include="Dockerfile" />
+    <Content Include=".env" />
+    <Content Include="E_LEARNING\babel.cfg" />
+    <Content Include="E_LEARNING\models\schema\nginx.conf" />
+    <Content Include="E_LEARNING\models\schema\performance.txt" />
+    <Content Include="E_LEARNING\models\schema\smart_digital_school.config" />
+    <Content Include="E_LEARNING\models\schema\codegen.txt" />
+    <Content Include="E_LEARNING\models\sql\elearningdb.sql" />
+    <Content Include="E_LEARNING\models\sql\init tables.txt" />
+    <Content Include="E_LEARNING\models\sql\insert demo data.txt" />
+    <Content Include="E_LEARNING\models\sql\VPS.txt" />
+    <Content Include="E_LEARNING\resources\menu_resources.py" />
+    <Content Include="E_LEARNING\static\app-assets\css\accounts.css" />
+    <Content Include="E_LEARNING\static\app-assets\css\assistance.css" />
+    <Content Include="E_LEARNING\static\app-assets\css\commun.css" />
+    <Content Include="E_LEARNING\static\app-assets\css\commun.min.css">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-assets\css\commun.css</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-assets\css\course-ai.css" />
+    <Content Include="E_LEARNING\static\app-assets\css\course-ai.min.css">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-assets\css\course-ai.css</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-assets\css\courses.css" />
+    <Content Include="E_LEARNING\static\app-assets\css\courses.min.css">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-assets\css\courses.css</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-assets\css\css-circular-prog-bar.css" />
+    <Content Include="E_LEARNING\static\app-assets\css\css-circular-prog-bar.min.css">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-assets\css\css-circular-prog-bar.css</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-assets\css\icons.css" />
+    <Content Include="E_LEARNING\static\app-assets\css\icons.min.css">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-assets\css\icons.css</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-assets\css\media-player.css" />
+    <Content Include="E_LEARNING\static\app-assets\css\message-box.css" />
+    <Content Include="E_LEARNING\static\app-assets\css\mobile.css" />
+    <Content Include="E_LEARNING\static\app-assets\css\packages.css" />
+    <Content Include="E_LEARNING\static\app-assets\css\profil.css" />
+    <Content Include="E_LEARNING\static\app-assets\css\reporting.css" />
+    <Content Include="E_LEARNING\static\app-assets\css\site.css" />
+    <Content Include="E_LEARNING\static\app-assets\css\site.min.css">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-assets\css\site.css</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-assets\img\avatar-sds.jpg" />
+    <Content Include="E_LEARNING\static\app-assets\img\bg-account-md.jpg" />
+    <Content Include="E_LEARNING\static\app-assets\img\bg-account.jpg" />
+    <Content Include="E_LEARNING\static\app-assets\img\bg-main-sidebar-md-v1.jpg" />
+    <Content Include="E_LEARNING\static\app-assets\img\bg-main-sidebar-md.jpg" />
+    <Content Include="E_LEARNING\static\app-assets\img\bg01.jpg" />
+    <Content Include="E_LEARNING\static\app-assets\img\bg02.jpg" />
+    <Content Include="E_LEARNING\static\app-assets\img\btn-bg-menu.jpg" />
+    <Content Include="E_LEARNING\static\app-assets\img\btn-bg-red.jpg" />
+    <Content Include="E_LEARNING\static\app-assets\img\favicon.png" />
+    <Content Include="E_LEARNING\static\app-assets\img\graph-paper-cardbody.jpg" />
+    <Content Include="E_LEARNING\static\app-assets\img\graph-paper.jpg" />
+    <Content Include="E_LEARNING\static\app-assets\img\graph-paper2.jpg" />
+    <Content Include="E_LEARNING\static\app-assets\img\loading.png" />
+    <Content Include="E_LEARNING\static\app-assets\img\logo-sds.png" />
+    <Content Include="E_LEARNING\static\app-assets\img\logo.png" />
+    <Content Include="E_LEARNING\static\app-assets\img\sds-text.png" />
+    <Content Include="E_LEARNING\static\app-assets\js\adminlte.extension.js" />
+    <Content Include="E_LEARNING\static\app-assets\js\adminlte.extension.min.js" />
+    <Content Include="E_LEARNING\static\app-assets\js\country-city-selector.js" />
+    <Content Include="E_LEARNING\static\app-assets\js\country-city-selector.min.js" />
+    <Content Include="E_LEARNING\static\app-assets\js\detect.url.js" />
+    <Content Include="E_LEARNING\static\app-assets\js\detect.url.min.js" />
+    <Content Include="E_LEARNING\static\app-assets\js\dropzone.profil.picture.js" />
+    <Content Include="E_LEARNING\static\app-assets\js\dropzone.profil.picture.min.js" />
+    <Content Include="E_LEARNING\static\app-assets\js\form-validators.js" />
+    <Content Include="E_LEARNING\static\app-assets\js\form-validators.min.js" />
+    <Content Include="E_LEARNING\static\app-assets\js\look-and-feel.js" />
+    <Content Include="E_LEARNING\static\app-assets\js\menu-app.js" />
+    <Content Include="E_LEARNING\static\app-assets\js\menu-app.min.js" />
+    <Content Include="E_LEARNING\static\app-assets\js\password-manager.js" />
+    <Content Include="E_LEARNING\static\app-assets\js\password-manager.min.js" />
+    <Content Include="E_LEARNING\static\app-assets\themes\brown.css" />
+    <Content Include="E_LEARNING\static\app-assets\themes\grena-pink.css" />
+    <Content Include="E_LEARNING\static\app-assets\themes\look-and-feel.css" />
+    <Content Include="E_LEARNING\static\app-assets\themes\olive.css" />
+    <Content Include="E_LEARNING\static\app-assets\themes\original.css" />
+    <Content Include="E_LEARNING\static\app-assets\themes\purple.css" />
+    <Content Include="E_LEARNING\static\app-core\accounts\app.register.js" />
+    <Content Include="E_LEARNING\static\app-core\accounts\app.account.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\accounts\app.account.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\accounts\app.profiles.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\accounts\app.profiles.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\accounts\app.register.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\accounts\app.register.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\course-learning\app.courses.js" />
+    <Content Include="E_LEARNING\static\app-core\course-learning\app.courses.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\course-learning\app.courses.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\course-learning\app.courses.min.js" />
+    <Content Include="E_LEARNING\static\app-core\course-learning\jquery.courses.js" />
+    <Content Include="E_LEARNING\static\app-core\course-learning\jquery.courses.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\course-learning\jquery.courses.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\instructors\app.course-ai-wizard.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\instructors\app.course-ai-wizard.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\instructors\app.quizzes.js" />
+    <Content Include="E_LEARNING\static\app-core\instructors\app.quizzes.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\instructors\app.quizzes.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\instructors\app.course-ai-wizard.js" />
+    <Content Include="E_LEARNING\static\app-core\instructors\jquery.chapters.js" />
+    <Content Include="E_LEARNING\static\app-core\instructors\jquery.chapters.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\instructors\jquery.chapters.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\packages\jquery.payments-list.js" />
+    <Content Include="E_LEARNING\static\app-core\packages\jquery.packages.js" />
+    <Content Include="E_LEARNING\static\app-core\packages\jquery.packages.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\packages\jquery.packages.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\packages\jquery.payments-list.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\packages\jquery.payments-list.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\packages\package-subscription.js" />
+    <Content Include="E_LEARNING\static\app-core\packages\package-subscription.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\packages\package-subscription.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\packages\packages-list.js" />
+    <Content Include="E_LEARNING\static\app-core\packages\packages-list.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\packages\packages-list.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\packages\payment-process.js" />
+    <Content Include="E_LEARNING\static\app-core\packages\payment-process.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\packages\payment-process.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\packages\payments-list.js" />
+    <Content Include="E_LEARNING\static\app-core\packages\payments-list.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\packages\payments-list.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\course-learning\app.quiz-form.js" />
+    <Content Include="E_LEARNING\static\app-core\course-learning\app.quiz-form.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\course-learning\app.quiz-form.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\reportings\instructor\app.rpt-enrollment-courses.js" />
+    <Content Include="E_LEARNING\static\app-core\reportings\instructor\app.rpt-enrollment-courses.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\reportings\instructor\app.rpt-enrollment-courses.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\reportings\instructor\app.rpt-my-students.js" />
+    <Content Include="E_LEARNING\static\app-core\reportings\instructor\app.rpt-my-students.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\reportings\instructor\app.rpt-my-students.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\reportings\instructor\app.rpt-quiz-courses.js" />
+    <Content Include="E_LEARNING\static\app-core\reportings\instructor\app.rpt-quiz-courses.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\reportings\instructor\app.rpt-quiz-courses.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\reportings\school\app.rpt-courses-assistance.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\reportings\school\app.rpt-courses-assistance.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\reportings\school\app.rpt-feedback-instructor-courses.js" />
+    <Content Include="E_LEARNING\static\app-core\reportings\school\app.rpt-feedback-instructor-courses.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\reportings\school\app.rpt-feedback-instructor-courses.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\reportings\school\app.rpt-courses-assistance.js" />
+    <Content Include="E_LEARNING\static\app-core\reportings\school\app.rpt-instructor-courses.js" />
+    <Content Include="E_LEARNING\static\app-core\reportings\school\app.rpt-instructor-courses.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\reportings\school\app.rpt-instructor-courses.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\reportings\school\app.rpt-instructor-enrollment-courses.js" />
+    <Content Include="E_LEARNING\static\app-core\reportings\school\app.rpt-instructor-enrollment-courses.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\reportings\school\app.rpt-instructor-enrollment-courses.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\reportings\school\app.rpt-my-instructors.js" />
+    <Content Include="E_LEARNING\static\app-core\reportings\school\app.rpt-my-instructors.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\reportings\school\app.rpt-my-instructors.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\reportings\school\app.rpt-school-qualifications.js" />
+    <Content Include="E_LEARNING\static\app-core\reportings\school\app.rpt-school-qualifications.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\reportings\school\app.rpt-school-qualifications.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\reportings\school\app.rpt-school-subjects.js" />
+    <Content Include="E_LEARNING\static\app-core\reportings\school\app.rpt-my-students.js" />
+    <Content Include="E_LEARNING\static\app-core\reportings\school\app.rpt-my-students.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\reportings\school\app.rpt-my-students.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\reportings\school\app.rpt-school-subjects.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\reportings\school\app.rpt-school-subjects.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\schools\app.calendar-events.js" />
+    <Content Include="E_LEARNING\static\app-core\schools\app.calendar-events.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\schools\app.calendar-events.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\schools\jquery.subjects.js" />
+    <Content Include="E_LEARNING\static\app-core\schools\jquery.subjects.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\schools\jquery.subjects.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\students\app.courses-list.js" />
+    <Content Include="E_LEARNING\static\app-core\students\app.courses-list.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\students\app.courses-list.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\students\app.my-calendar.js" />
+    <Content Include="E_LEARNING\static\app-core\students\app.my-calendar.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\students\app.my-calendar.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\_base\app-settings.js" />
+    <Content Include="E_LEARNING\static\app-core\_base\app-settings.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\_base\app-settings.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\_base\app-modules.js" />
+    <Content Include="E_LEARNING\static\app-core\_base\app.constants.js" />
+    <Content Include="E_LEARNING\static\app-core\_base\app.constants.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\_base\app.constants.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\_base\app.external.apis.js" />
+    <Content Include="E_LEARNING\static\app-core\_base\app.external.apis.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\_base\app.external.apis.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\_base\app.services.js" />
+    <Content Include="E_LEARNING\static\app-core\_base\app.services.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\_base\app.services.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\_base\mediaPlayer\media-player.js" />
+    <Content Include="E_LEARNING\static\app-core\_base\mediaPlayer\media-player.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\_base\mediaPlayer\media-player.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\_base\reporting\jquery.generate.reporting.viewer.js" />
+    <Content Include="E_LEARNING\static\app-core\_base\reporting\jquery.generate.reporting.viewer.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\_base\reporting\jquery.generate.reporting.viewer.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\_base\reporting\jquery.reporting-setting.js" />
+    <Content Include="E_LEARNING\static\app-core\_base\reporting\jquery.reporting-setting.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\_base\reporting\jquery.reporting-setting.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\instructors\app.calendar-events.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\instructors\app.calendar-events.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\instructors\app.chapters.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\instructors\app.chapters.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\instructors\app.demand-assistance.js" />
+    <Content Include="E_LEARNING\static\app-core\instructors\app.courses.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\instructors\app.courses.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\instructors\app.dashboard.js" />
+    <Content Include="E_LEARNING\static\app-core\instructors\app.dashboard.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\instructors\app.dashboard.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\instructors\app.demand-assistance.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\instructors\app.demand-assistance.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\instructors\app.subjects.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\instructors\app.subjects.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\instructors\app.calendar-events.js" />
+    <Content Include="E_LEARNING\static\app-core\instructors\jquery.demand-assistance.js" />
+    <Content Include="E_LEARNING\static\app-core\instructors\jquery.courses.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\instructors\jquery.courses.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\_base\app-modules.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\_base\app-modules.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\_base\dashboard\jquery.dashboard.js" />
+    <Content Include="E_LEARNING\static\app-core\instructors\jquery.demand-assistance.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\instructors\jquery.demand-assistance.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\instructors\jquery.subjects.js" />
+    <Content Include="E_LEARNING\static\app-core\instructors\jquery.subjects.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\instructors\jquery.subjects.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\messaging\app.messages-box.js" />
+    <Content Include="E_LEARNING\static\app-core\messaging\app.messages-box.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\messaging\app.messages-box.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\messaging\jquery.messages-box.js" />
+    <Content Include="E_LEARNING\static\app-core\messaging\jquery.messages-box.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\messaging\jquery.messages-box.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\reportings\instructor\app.rpt-feedback-courses.js" />
+    <Content Include="E_LEARNING\static\app-core\reportings\instructor\app.rpt-feedback-courses.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\reportings\instructor\app.rpt-feedback-courses.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\instructors\jquery.enrollment-courses.js" />
+    <Content Include="E_LEARNING\static\app-core\instructors\jquery.enrollment-courses.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\instructors\jquery.enrollment-courses.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\schools\app.dashboard.js" />
+    <Content Include="E_LEARNING\static\app-core\schools\app.dashboard.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\schools\app.dashboard.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\schools\app.instructor.subject.js" />
+    <Content Include="E_LEARNING\static\app-core\schools\app.instructor.subject.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\schools\app.instructor.subject.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\schools\app.students.js" />
+    <Content Include="E_LEARNING\static\app-core\schools\app.instructors.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\schools\app.instructors.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\schools\app.qualifications.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\schools\app.qualifications.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\schools\app.students.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\schools\app.students.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\schools\app.subjects.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\schools\app.subjects.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\schools\jquery.instructors.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\schools\jquery.instructors.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\schools\jquery.students.js" />
+    <Content Include="E_LEARNING\static\app-core\schools\jquery.students.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\schools\jquery.students.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\students\app.dashboard.js" />
+    <Content Include="E_LEARNING\static\app-core\students\app.dashboard.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\students\app.dashboard.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\students\app.demand-assistance.js" />
+    <Content Include="E_LEARNING\static\app-core\students\app.demand-assistance.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\students\app.demand-assistance.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\students\app.instructors.js" />
+    <Content Include="E_LEARNING\static\app-core\students\app.instructors.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\students\app.instructors.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\students\app.subjects.js" />
+    <Content Include="E_LEARNING\static\app-core\students\app.subjects.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\students\app.subjects.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\students\jquery.demand-assistance.js" />
+    <Content Include="E_LEARNING\static\app-core\students\jquery.demand-assistance.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\students\jquery.demand-assistance.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\_base\dashboard\jquery.dashboard.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\_base\dashboard\jquery.dashboard.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\_base\signalR\signalr.hub.js" />
+    <Content Include="E_LEARNING\static\app-core\_base\signalR\signalr.hub.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\_base\signalR\signalr.hub.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\_shared\app.look-and-feel.js" />
+    <Content Include="E_LEARNING\static\app-core\_shared\app.look-and-feel.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\_shared\app.look-and-feel.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\_shared\app.navigation.js" />
+    <Content Include="E_LEARNING\static\app-core\_shared\app.navigation.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\_shared\app.navigation.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\_shared\jquery.calendar-events.js" />
+    <Content Include="E_LEARNING\static\app-core\_shared\jquery.calendar-events.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\_shared\jquery.calendar-events.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\app-core\_shared\jquery.pack-validation.js" />
+    <Content Include="E_LEARNING\static\app-core\_shared\jquery.pack-validation.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\app-core\_shared\jquery.pack-validation.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\plugins\angular\angular-filter.min.js" />
+    <Content Include="E_LEARNING\static\plugins\angular\loading-bar\loading-bar.min.css">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\plugins\angular\loading-bar\loading-bar.css</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\plugins\angular\loading-bar\loading-bar.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\plugins\angular\loading-bar\loading-bar.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\plugins\chart.js\Chart.min.js" />
+    <Content Include="E_LEARNING\static\plugins\daterangepicker\daterangepicker.css" />
+    <Content Include="E_LEARNING\static\plugins\email.multiple\email.multiple.css" />
+    <Content Include="E_LEARNING\static\plugins\email.multiple\MultiMailPlugin.js" />
+    <Content Include="E_LEARNING\static\plugins\fontawesome-free\css\hack-ie.css" />
+    <Content Include="E_LEARNING\static\plugins\fontawesome-free\webfonts\fa-brands-400.ttf" />
+    <Content Include="E_LEARNING\static\plugins\fontawesome-free\webfonts\fa-brands-400.woff2" />
+    <Content Include="E_LEARNING\static\plugins\fontawesome-free\webfonts\fa-regular-400.ttf" />
+    <Content Include="E_LEARNING\static\plugins\fontawesome-free\webfonts\fa-regular-400.woff2" />
+    <Content Include="E_LEARNING\static\plugins\fontawesome-free\webfonts\fa-solid-900.ttf" />
+    <Content Include="E_LEARNING\static\plugins\fontawesome-free\webfonts\fa-solid-900.woff2" />
+    <Content Include="E_LEARNING\static\plugins\fontawesome-free\webfonts\fa-v4compatibility.ttf" />
+    <Content Include="E_LEARNING\static\plugins\fontawesome-free\webfonts\fa-v4compatibility.woff2" />
+    <Content Include="E_LEARNING\static\plugins\fullcalendar\lang\en.js" />
+    <Content Include="E_LEARNING\static\plugins\fullcalendar\lang\es.js" />
+    <Content Include="E_LEARNING\static\plugins\fullcalendar\main.extension.min.css">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\plugins\fullcalendar\main.extension.css</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\plugins\fullcalendar\main.min.css">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\plugins\fullcalendar\main.css</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\plugins\intl-tel-input\intlTelInput.css" />
+    <Content Include="E_LEARNING\static\plugins\intl-tel-input\intlTelInput.min.js" />
+    <Content Include="E_LEARNING\static\plugins\jquery\autocomplete.css" />
+    <Content Include="E_LEARNING\static\plugins\jquery\datatables\buttons.dataTables.min.css" />
+    <Content Include="E_LEARNING\static\plugins\jquery\datatables\angular-datatables.min.js" />
+    <Content Include="E_LEARNING\static\plugins\jquery\datatables\dataTables.date-eu.js" />
+    <Content Include="E_LEARNING\static\plugins\jquery\datatables\datatables.ext.js" />
+    <Content Include="E_LEARNING\static\plugins\jquery\datatables\dataTables.ext.min.css">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\plugins\jquery\datatables\dataTables.ext.css</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\plugins\jquery\datatables\datatables.ext.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\plugins\jquery\datatables\datatables.ext.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\plugins\jquery\datatables\dataTables.min.css" />
+    <Content Include="E_LEARNING\static\plugins\jquery\datatables\dataTables.min.js" />
+    <Content Include="E_LEARNING\static\plugins\jquery\datepicker\datepicker-en.js" />
+    <Content Include="E_LEARNING\static\plugins\jquery\datepicker\datepicker-es.js" />
+    <Content Include="E_LEARNING\static\plugins\jquery\i18n\data-table-es.json" />
+    <Content Include="E_LEARNING\static\plugins\jquery\i18n\data-table-en.json" />
+    <Content Include="E_LEARNING\static\plugins\jquery\jquery.ui.touch-punch.min.js" />
+    <Content Include="E_LEARNING\static\plugins\moments\moment-with-locales.min.js" />
+    <Content Include="E_LEARNING\static\plugins\moments\moment.min.js" />
+    <Content Include="E_LEARNING\static\plugins\pica\pica.ext.js" />
+    <Content Include="E_LEARNING\static\plugins\pica\pica.ext.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\plugins\pica\pica.ext.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\plugins\pica\pica.min.js" />
+    <Content Include="E_LEARNING\static\plugins\select2\select2.extension.css" />
+    <Content Include="E_LEARNING\static\app-core\accounts\app.account.js" />
+    <Content Include="E_LEARNING\static\app-core\accounts\app.profiles.js" />
+    <Content Include="E_LEARNING\static\app-core\instructors\app.chapters.js" />
+    <Content Include="E_LEARNING\static\app-core\instructors\app.courses.js" />
+    <Content Include="E_LEARNING\static\app-core\instructors\app.subjects.js" />
+    <Content Include="E_LEARNING\static\app-core\instructors\jquery.courses.js" />
+    <Content Include="E_LEARNING\static\app-core\schools\app.instructors.js" />
+    <Content Include="E_LEARNING\static\app-core\schools\app.subjects.js" />
+    <Content Include="E_LEARNING\static\app-core\schools\app.qualifications.js" />
+    <Content Include="E_LEARNING\static\app-core\schools\jquery.instructors.js" />
+    <Content Include="E_LEARNING\static\dist\css\adminlte.min.css" />
+    <Content Include="E_LEARNING\static\dist\img\avatar.png" />
+    <Content Include="E_LEARNING\static\dist\img\avatar2.png" />
+    <Content Include="E_LEARNING\static\dist\img\avatar3.png" />
+    <Content Include="E_LEARNING\static\dist\img\boxed-bg.jpg" />
+    <Content Include="E_LEARNING\static\dist\img\boxed-bg.png" />
+    <Content Include="E_LEARNING\static\dist\img\credit\american-express.png" />
+    <Content Include="E_LEARNING\static\dist\img\credit\cirrus.png" />
+    <Content Include="E_LEARNING\static\dist\img\credit\mastercard.png" />
+    <Content Include="E_LEARNING\static\dist\img\credit\paypal.png" />
+    <Content Include="E_LEARNING\static\dist\img\credit\paypal2.png" />
+    <Content Include="E_LEARNING\static\dist\img\credit\visa.png" />
+    <Content Include="E_LEARNING\static\dist\img\default-150x150.png" />
+    <Content Include="E_LEARNING\static\dist\img\icons.png" />
+    <Content Include="E_LEARNING\static\dist\js\adminlte.min.js" />
+    <Content Include="E_LEARNING\static\plugins\angular\angular-cookies.min.js" />
+    <Content Include="E_LEARNING\static\plugins\angular\angular.min.js" />
+    <Content Include="E_LEARNING\static\plugins\angular\loading-bar\loading-bar.css" />
+    <Content Include="E_LEARNING\static\plugins\angular\loading-bar\loading-bar.js" />
+    <Content Include="E_LEARNING\static\plugins\bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="E_LEARNING\static\plugins\draganddrop\src.txt" />
+    <Content Include="E_LEARNING\static\plugins\fontawesome-free\css\all.min.css" />
+    <Content Include="E_LEARNING\static\plugins\fullcalendar\lang\fr.js" />
+    <Content Include="E_LEARNING\static\plugins\fullcalendar\main.css" />
+    <Content Include="E_LEARNING\static\plugins\fullcalendar\main.js" />
+    <Content Include="E_LEARNING\static\plugins\fullcalendar\main.extension.css" />
+    <Content Include="E_LEARNING\static\plugins\fullcalendar\main.min.js" />
+    <Content Include="E_LEARNING\static\plugins\jquery\datepicker\datepicker-fr.js" />
+    <Content Include="E_LEARNING\static\plugins\jquery\images\ui-icons_444444_256x240.png" />
+    <Content Include="E_LEARNING\static\plugins\jquery\images\ui-icons_555555_256x240.png" />
+    <Content Include="E_LEARNING\static\plugins\jquery\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="E_LEARNING\static\plugins\select2\select2.min.css" />
+    <Content Include="E_LEARNING\static\plugins\select2\select2.min.js" />
+    <Content Include="E_LEARNING\static\plugins\signalr\signalr.min.js" />
+    <Content Include="E_LEARNING\static\plugins\starrr\starrr.css" />
+    <Content Include="E_LEARNING\static\plugins\starrr\starrr.js" />
+    <Content Include="E_LEARNING\static\plugins\summernote\ext\summernote-bs4.override.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\plugins\summernote\ext\summernote-bs4.override.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\plugins\summernote\ext\summernote-ext-print.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\plugins\summernote\ext\summernote-ext-print.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\plugins\summernote\ext\summernote-file.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\plugins\summernote\ext\summernote-file.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\plugins\summernote\fonts\summernote.eot" />
+    <Content Include="E_LEARNING\static\plugins\summernote\fonts\summernote.ttf" />
+    <Content Include="E_LEARNING\static\plugins\summernote\fonts\summernote.woff" />
+    <Content Include="E_LEARNING\static\plugins\summernote\fonts\summernote.woff2" />
+    <Content Include="E_LEARNING\static\plugins\icheck-bootstrap\icheck-bootstrap.min.css" />
+    <Content Include="E_LEARNING\static\plugins\icheck-bootstrap\LICENSE" />
+    <Content Include="E_LEARNING\static\plugins\jquery\i18n\data-table-fr.json" />
+    <Content Include="E_LEARNING\static\plugins\jquery\jquery-ui.min.css" />
+    <Content Include="E_LEARNING\static\plugins\jquery\jquery-ui.min.js" />
+    <Content Include="E_LEARNING\static\plugins\jquery\datatables\dataTables.ext.css" />
+    <Content Include="E_LEARNING\static\plugins\jquery\jquery.inputmask.min.js" />
+    <Content Include="E_LEARNING\static\plugins\jquery\jquery.min.js" />
+    <Content Include="E_LEARNING\static\plugins\dropzone\basic.min.css" />
+    <Content Include="E_LEARNING\static\plugins\dropzone\dropzone-amd-module.min.js" />
+    <Content Include="E_LEARNING\static\plugins\dropzone\dropzone.min.css" />
+    <Content Include="E_LEARNING\static\plugins\dropzone\dropzone.min.js" />
+    <Content Include="E_LEARNING\static\plugins\jquery\jquery.redirect.js" />
+    <Content Include="E_LEARNING\static\plugins\jquery\ecma262-5.js" />
+    <Content Include="E_LEARNING\static\plugins\jquery\polyfill.min.js" />
+    <Content Include="E_LEARNING\static\plugins\overlayScrollbars\css\OverlayScrollbars.css" />
+    <Content Include="E_LEARNING\static\plugins\overlayScrollbars\css\OverlayScrollbars.min.css" />
+    <Content Include="E_LEARNING\static\plugins\overlayScrollbars\js\jquery.overlayScrollbars.js" />
+    <Content Include="E_LEARNING\static\plugins\overlayScrollbars\js\jquery.overlayScrollbars.min.js" />
+    <Content Include="E_LEARNING\static\plugins\overlayScrollbars\js\OverlayScrollbars.js" />
+    <Content Include="E_LEARNING\static\plugins\overlayScrollbars\js\OverlayScrollbars.min.js" />
+    <Content Include="E_LEARNING\static\plugins\pace-progress\pace.js" />
+    <Content Include="E_LEARNING\static\plugins\pace-progress\pace.min.js" />
+    <Content Include="E_LEARNING\static\plugins\pace-progress\themes\red\pace-theme-barber-shop.css" />
+    <Content Include="E_LEARNING\static\plugins\pace-progress\themes\red\pace-theme-big-counter.css" />
+    <Content Include="E_LEARNING\static\plugins\pace-progress\themes\red\pace-theme-bounce.css" />
+    <Content Include="E_LEARNING\static\plugins\pace-progress\themes\red\pace-theme-center-atom.css" />
+    <Content Include="E_LEARNING\static\plugins\pace-progress\themes\red\pace-theme-center-circle.css" />
+    <Content Include="E_LEARNING\static\plugins\pace-progress\themes\red\pace-theme-center-radar.css" />
+    <Content Include="E_LEARNING\static\plugins\pace-progress\themes\red\pace-theme-center-simple.css" />
+    <Content Include="E_LEARNING\static\plugins\pace-progress\themes\red\pace-theme-corner-indicator.css" />
+    <Content Include="E_LEARNING\static\plugins\pace-progress\themes\red\pace-theme-fill-left.css" />
+    <Content Include="E_LEARNING\static\plugins\pace-progress\themes\red\pace-theme-flash.css" />
+    <Content Include="E_LEARNING\static\plugins\pace-progress\themes\red\pace-theme-flat-top.css" />
+    <Content Include="E_LEARNING\static\plugins\pace-progress\themes\red\pace-theme-loading-bar.css" />
+    <Content Include="E_LEARNING\static\plugins\pace-progress\themes\red\pace-theme-mac-osx.css" />
+    <Content Include="E_LEARNING\static\plugins\pace-progress\themes\red\pace-theme-material.css" />
+    <Content Include="E_LEARNING\static\plugins\pace-progress\themes\red\pace-theme-minimal.css" />
+    <Content Include="E_LEARNING\static\plugins\draganddrop\draganddrop.css" />
+    <Content Include="E_LEARNING\static\plugins\draganddrop\draganddrop.js" />
+    <Content Include="E_LEARNING\static\plugins\summernote\css\summernote-bs4.min.css" />
+    <Content Include="E_LEARNING\static\plugins\summernote\lang\summernote-en.js" />
+    <Content Include="E_LEARNING\static\plugins\summernote\lang\summernote-en.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\plugins\summernote\lang\summernote-en.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\plugins\summernote\lang\summernote-es.js" />
+    <Content Include="E_LEARNING\static\plugins\summernote\lang\summernote-es.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\plugins\summernote\lang\summernote-es.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\plugins\summernote\lang\summernote-fr.min.js">
+      <SubType>Content</SubType>
+      <DependentUpon>E_LEARNING\static\plugins\summernote\lang\summernote-fr.js</DependentUpon>
+    </Content>
+    <Content Include="E_LEARNING\static\plugins\summernote\summernote-bs4.min.js" />
+    <Content Include="E_LEARNING\static\plugins\summernote\css\summernote-bs4.override.css" />
+    <Content Include="E_LEARNING\static\plugins\summernote\ext\summernote-bs4.override.js" />
+    <Content Include="E_LEARNING\static\plugins\summernote\ext\summernote-ext-print.js" />
+    <Content Include="E_LEARNING\static\plugins\summernote\ext\summernote-file.js" />
+    <Content Include="E_LEARNING\static\plugins\summernote\lang\summernote-fr.js" />
+    <Content Include="E_LEARNING\static\plugins\sweetalert2\sweetalert2.all.min.js" />
+    <Content Include="E_LEARNING\static\plugins\toastr\toastr.css" />
+    <Content Include="E_LEARNING\static\plugins\toastr\toastr.js.map" />
+    <Content Include="E_LEARNING\static\plugins\toastr\toastr.min.css" />
+    <Content Include="E_LEARNING\static\plugins\toastr\toastr.min.js" />
+    <Content Include="E_LEARNING\static\plugins\tus\tus.js" />
+    <Content Include="E_LEARNING\static\plugins\tus\tus.min.js" />
+    <Content Include="E_LEARNING\static\plugins\video\38861cba61c66739c1452c3a71e39852.ttf" />
+    <Content Include="E_LEARNING\static\plugins\video\clappr-playback-rate-plugin.min.js" />
+    <Content Include="E_LEARNING\static\plugins\video\clappr.min.js" />
+    <Content Include="E_LEARNING\static\plugins\video\hls.min.js" />
+    <Content Include="E_LEARNING\static\plugins\video\hlsjs-playback.min.js" />
+    <Content Include="E_LEARNING\static\plugins\video\lang\ar.js" />
+    <Content Include="E_LEARNING\static\plugins\video\lang\es.js" />
+    <Content Include="E_LEARNING\static\plugins\video\lang\fr.js" />
+    <Content Include="E_LEARNING\static\plugins\video\level-selector.min.js" />
+    <Content Include="E_LEARNING\templates\accounts\account-deletion.html" />
+    <Content Include="E_LEARNING\templates\accounts\forgot-password.html" />
+    <Content Include="E_LEARNING\templates\accounts\login-unauthorized.html" />
+    <Content Include="E_LEARNING\templates\accounts\login.html" />
+    <Content Include="E_LEARNING\templates\accounts\change-password.html" />
+    <Content Include="E_LEARNING\templates\accounts\privacy.html" />
+    <Content Include="E_LEARNING\templates\accounts\profile\profile-form-user.html" />
+    <Content Include="E_LEARNING\templates\accounts\profile\profile-form-school.html" />
+    <Content Include="E_LEARNING\templates\accounts\profile\profile.html" />
+    <Content Include="E_LEARNING\templates\accounts\recover-password.html" />
+    <Content Include="E_LEARNING\templates\accounts\register-completed.html" />
+    <Content Include="E_LEARNING\templates\accounts\register.html" />
+    <Content Include="E_LEARNING\templates\accounts\terms-conditions.html" />
+    <Content Include="E_LEARNING\templates\admins\index.html" />
+    <Content Include="E_LEARNING\templates\courses\chapter-content\show-social-media.html" />
+    <Content Include="E_LEARNING\templates\courses\course-360.html" />
+    <Content Include="E_LEARNING\templates\commun\theme\look-and-feel.html" />
+    <Content Include="E_LEARNING\templates\courses\partial-view\include-chapter-items-flags.html" />
+    <Content Include="E_LEARNING\templates\courses\partial-view\include-course-details.html" />
+    <Content Include="E_LEARNING\templates\courses\partial-view\include-course-menu-top.html" />
+    <Content Include="E_LEARNING\templates\courses\partial-view\include-chapter-demand-assistance.html" />
+    <Content Include="E_LEARNING\templates\courses\partial-view\include-course-feedback.html" />
+    <Content Include="E_LEARNING\templates\courses\partial-view\include-chapter-footer.html" />
+    <Content Include="E_LEARNING\templates\courses\partial-view\include-chapter-header.html" />
+    <Content Include="E_LEARNING\templates\courses\partial-view\include-chapter-items.html" />
+    <Content Include="E_LEARNING\templates\courses\partial-view\include-student-profil.html" />
+    <Content Include="E_LEARNING\templates\courses\partial-view\include-course-progress.html" />
+    <Content Include="E_LEARNING\templates\instructors\chapter-content\chapter-content-list.html" />
+    <Content Include="E_LEARNING\templates\instructors\chapter-content\social-media-content.html" />
+    <Content Include="E_LEARNING\templates\instructors\course\course-ai-wizard.html" />
+    <Content Include="E_LEARNING\templates\instructors\course\course-start.html" />
+    <Content Include="E_LEARNING\templates\instructors\quiz\dropdown-menu-quizzes-list.html" />
+    <Content Include="E_LEARNING\templates\instructors\quiz\modal-quiz-list.html" />
+    <Content Include="E_LEARNING\templates\instructors\quiz\quiz-sequence.html" />
+    <Content Include="E_LEARNING\templates\courses\quizzes\include-quiz-list.html" />
+    <Content Include="E_LEARNING\templates\instructors\assistance\input-response.html" />
+    <Content Include="E_LEARNING\templates\instructors\chapter\modal-chapter-list.html" />
+    <Content Include="E_LEARNING\templates\instructors\quiz\quiz-new.html" />
+    <Content Include="E_LEARNING\templates\instructors\quiz\quiz-edit.html" />
+    <Content Include="E_LEARNING\templates\instructors\quiz\quiz-list.html" />
+    <Content Include="E_LEARNING\templates\packages\payment-process-to-validate.html" />
+    <Content Include="E_LEARNING\templates\packages\payment-process.html" />
+    <Content Include="E_LEARNING\templates\packages\payment-process-success.html" />
+    <Content Include="E_LEARNING\templates\helps\school\subject-if-empty.html" />
+    <Content Include="E_LEARNING\templates\helps\school\qualification-if-empty.html" />
+    <Content Include="E_LEARNING\templates\helps\school\qualification-header.html" />
+    <Content Include="E_LEARNING\templates\helps\school\subject-preselected.html" />
+    <Content Include="E_LEARNING\templates\instructors\chapter\dropdown-menu-chapters-list.html" />
+    <Content Include="E_LEARNING\templates\instructors\chapter-content\dropdown-menu-contents.html" />
+    <Content Include="E_LEARNING\templates\packages\payments-invoice.html" />
+    <Content Include="E_LEARNING\templates\packages\payments-list.html" />
+    <Content Include="E_LEARNING\templates\packages\payment-last-one.html" />
+    <Content Include="E_LEARNING\templates\packages\package-calculator.html" />
+    <Content Include="E_LEARNING\templates\packages\package-item.html" />
+    <Content Include="E_LEARNING\templates\packages\package-subscription.html" />
+    <Content Include="E_LEARNING\templates\packages\package-support.html" />
+    <Content Include="E_LEARNING\templates\packages\package-list.html" />
+    <Content Include="E_LEARNING\templates\courses\quizzes\quiz-form.html" />
+    <Content Include="E_LEARNING\templates\reportings\instructor\rpt-quiz-courses.html" />
+    <Content Include="E_LEARNING\templates\reportings\instructor\rpt-enrollment-courses.html" />
+    <Content Include="E_LEARNING\templates\reportings\instructor\rpt-my-students.html" />
+    <Content Include="E_LEARNING\templates\reportings\school\rpt-feedback-instructor-courses.html" />
+    <Content Include="E_LEARNING\templates\reportings\school\rpt-courses-assistance.html" />
+    <Content Include="E_LEARNING\templates\reportings\school\rpt-instructor-enrollment-courses.html" />
+    <Content Include="E_LEARNING\templates\reportings\school\rpt-instructor-courses.html" />
+    <Content Include="E_LEARNING\templates\reportings\school\rpt-my-instructors.html" />
+    <Content Include="E_LEARNING\templates\reportings\school\rpt-school-qualifications.html" />
+    <Content Include="E_LEARNING\templates\reportings\school\rpt-school-subjects.html" />
+    <Content Include="E_LEARNING\templates\reportings\school\rpt-my-students.html" />
+    <Content Include="E_LEARNING\templates\schools\calendar\calendar-planning-event.html" />
+    <Content Include="E_LEARNING\templates\students\calendar\my-calendar.html" />
+    <Content Include="E_LEARNING\templates\students\course\partial-view\include-course-sm-box.html" />
+    <Content Include="E_LEARNING\templates\commun\student\monitoring.html" />
+    <Content Include="E_LEARNING\templates\_base\alerts\exceeding-alert.html" />
+    <Content Include="E_LEARNING\templates\_base\alerts\package-alert.html" />
+    <Content Include="E_LEARNING\templates\_base\dashboard\dashboard-badges-top-school.html" />
+    <Content Include="E_LEARNING\templates\_base\dashboard\dashboard-badges-top-instructor.html" />
+    <Content Include="E_LEARNING\templates\_base\dashboard\dashboard-badges-top-student.html" />
+    <Content Include="E_LEARNING\templates\_base\dashboard\dashboard-calendar.html" />
+    <Content Include="E_LEARNING\templates\_base\dashboard\dashboard-contents-charts.html" />
+    <Content Include="E_LEARNING\templates\_includes\package-tag.html" />
+    <Content Include="E_LEARNING\templates\_includes\x-global-resourses-js.html" />
+    <Content Include="E_LEARNING\templates\_includes\x-links-css-country-select.html" />
+    <Content Include="E_LEARNING\templates\_includes\x-links-scripts-country-select.html" />
+    <Content Include="E_LEARNING\templates\_includes\x-links-scripts-fullcalendar.html" />
+    <Content Include="E_LEARNING\templates\_base\reportings\reporting_parametres_refresh.html" />
+    <Content Include="E_LEARNING\templates\_base\reportings\reporting_parametres_dates.html" />
+    <Content Include="E_LEARNING\templates\_base\reportings\reporting_content.html" />
+    <Content Include="E_LEARNING\templates\_base\reportings\reporting_translations.html" />
+    <Content Include="E_LEARNING\templates\_base\reportings\reporting_js.html" />
+    <Content Include="E_LEARNING\templates\_base\reportings\reporting_css.html" />
+    <Content Include="E_LEARNING\templates\instructors\assistance\input-file-attachement.html" />
+    <Content Include="E_LEARNING\templates\instructors\assistance\demand-assistance-list.html" />
+    <Content Include="E_LEARNING\templates\commun\assistance\modal-assistance-planning-event-details.html" />
+    <Content Include="E_LEARNING\templates\instructors\assistance\modal-calendar-response-assistance-group.html" />
+    <Content Include="E_LEARNING\templates\instructors\assistance\modal-calendar-response-assistance-user.html" />
+    <Content Include="E_LEARNING\templates\instructors\chapter\chapter-edit.html" />
+    <Content Include="E_LEARNING\templates\instructors\chapter-content\upload-content.html" />
+    <Content Include="E_LEARNING\templates\instructors\chapter-content\content-sequence.html" />
+    <Content Include="E_LEARNING\templates\instructors\chapter\chapter-sequence.html" />
+    <Content Include="E_LEARNING\templates\instructors\chapter\chapter-list.html" />
+    <Content Include="E_LEARNING\templates\instructors\course\course-list.html" />
+    <Content Include="E_LEARNING\templates\instructors\course\course-edit.html" />
+    <Content Include="E_LEARNING\templates\instructors\chapter\chapter-new.html" />
+    <Content Include="E_LEARNING\templates\instructors\chapter-content\write-content.html" />
+    <Content Include="E_LEARNING\templates\instructors\contact.html" />
+    <Content Include="E_LEARNING\templates\instructors\dashboard.html" />
+    <Content Include="E_LEARNING\templates\instructors\index.html" />
+    <Content Include="E_LEARNING\templates\instructors\calendar\calendar-planning-event.html" />
+    <Content Include="E_LEARNING\templates\reportings\instructor\rpt-feedback-courses.html" />
+    <Content Include="E_LEARNING\templates\instructors\course\enrollment.html" />
+    <Content Include="E_LEARNING\templates\instructors\subject.html" />
+    <Content Include="E_LEARNING\templates\messaging\modal-contacts-list.html" />
+    <Content Include="E_LEARNING\templates\messaging\composing-message.html" />
+    <Content Include="E_LEARNING\templates\messaging\message-box-list.html" />
+    <Content Include="E_LEARNING\templates\schools\dashboard.html" />
+    <Content Include="E_LEARNING\templates\schools\instructor\modal-instructor-edit.html" />
+    <Content Include="E_LEARNING\templates\schools\instructor\instructor-list.html" />
+    <Content Include="E_LEARNING\templates\schools\instructor\instructor-edit.html" />
+    <Content Include="E_LEARNING\templates\schools\instructor\instructor-subject.html" />
+    <Content Include="E_LEARNING\templates\schools\students\modal-student-edit.html" />
+    <Content Include="E_LEARNING\templates\schools\students\student-list.html" />
+    <Content Include="E_LEARNING\templates\schools\students\student-edit.html" />
+    <Content Include="E_LEARNING\templates\schools\subject.html" />
+    <Content Include="E_LEARNING\templates\schools\qualification.html" />
+    <Content Include="E_LEARNING\templates\schools\index.html" />
+    <Content Include="E_LEARNING\templates\courses\chapter-content\show-player.html" />
+    <Content Include="E_LEARNING\templates\courses\chapter-content\show-assistance-request.html" />
+    <Content Include="E_LEARNING\templates\courses\chapter-content\show-texteditor.html" />
+    <Content Include="E_LEARNING\templates\students\contact.html" />
+    <Content Include="E_LEARNING\templates\commun\filters\course-filter-top.html" />
+    <Content Include="E_LEARNING\templates\students\course\course-list.html" />
+    <Content Include="E_LEARNING\templates\students\dashboard\dashboard.html" />
+    <Content Include="E_LEARNING\templates\students\assistance\calendar-demand-assistance.html" />
+    <Content Include="E_LEARNING\templates\students\index.html" />
+    <Content Include="E_LEARNING\templates\students\instructor\instructor-list.html" />
+    <Content Include="E_LEARNING\templates\students\subject\subject-list.html" />
+    <Content Include="E_LEARNING\templates\_includes\content-title-header.html" />
+    <Content Include="E_LEARNING\templates\_base\dashboard\dashboard-enrollment-charts.html" />
+    <Content Include="E_LEARNING\templates\_includes\footer.html" />
+    <Content Include="E_LEARNING\templates\_includes\navigation-menu-top.html" />
+    <Content Include="E_LEARNING\templates\_includes\sidebar-control-right.html" />
+    <Content Include="E_LEARNING\templates\_includes\sidebar-menu-left.html" />
+    <Content Include="E_LEARNING\templates\_includes\x-links-css-datatable.html" />
+    <Content Include="E_LEARNING\templates\_includes\x-links-css-summernote.html" />
+    <Content Include="E_LEARNING\templates\_includes\x-links-header.html" />
+    <Content Include="E_LEARNING\templates\_includes\x-links-scripts-datatable.html" />
+    <Content Include="E_LEARNING\templates\_includes\x-links-scripts-media-player.html" />
+    <Content Include="E_LEARNING\templates\_includes\x-links-scripts-summernote.html" />
+    <Content Include="E_LEARNING\templates\_includes\x-links-footer.html" />
+    <Content Include="E_LEARNING\templates\_includes\x-global-variables.html" />
+    <Content Include="E_LEARNING\templates\_layouts\layout-account.html" />
+    <Content Include="E_LEARNING\templates\_layouts\layout.html" />
+    <Content Include="E_LEARNING\templates\_base\w_api\api.html" />
+    <Content Include="E_LEARNING\templates\_base\w_api\api_docs.html" />
+    <Content Include="E_LEARNING\translations\en\LC_MESSAGES\messages.po" />
+    <Content Include="E_LEARNING\translations\es\LC_MESSAGES\messages.po" />
+    <Content Include="E_LEARNING\resources\_init_babel.txt" />
+    <Content Include="E_LEARNING\translations\messages.pot" />
+    <Content Include="launcher.bat" />
+    <Content Include="README.md" />
+    <Content Include="requirements.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="E_LEARNING\" />
+    <Folder Include="E_LEARNING\commun\database\" />
+    <Folder Include="E_LEARNING\controllers\course_learning_views\" />
+    <Folder Include="E_LEARNING\controllers\packages\" />
+    <Folder Include="E_LEARNING\models\schema\" />
+    <Folder Include="E_LEARNING\commun\menu\" />
+    <Folder Include="E_LEARNING\controllers\" />
+    <Folder Include="E_LEARNING\controllers\accounts\" />
+    <Folder Include="E_LEARNING\controllers\instructors\" />
+    <Folder Include="E_LEARNING\controllers\admins\" />
+    <Folder Include="E_LEARNING\controllers\commun\" />
+    <Folder Include="E_LEARNING\controllers\messaging\" />
+    <Folder Include="E_LEARNING\controllers\reportings\" />
+    <Folder Include="E_LEARNING\controllers\schools\" />
+    <Folder Include="E_LEARNING\controllers\students\" />
+    <Folder Include="E_LEARNING\models\" />
+    <Folder Include="E_LEARNING\commun\" />
+    <Folder Include="E_LEARNING\commun\account\" />
+    <Folder Include="E_LEARNING\models\sql\" />
+    <Folder Include="E_LEARNING\services\" />
+    <Folder Include="E_LEARNING\static\app-assets\" />
+    <Folder Include="E_LEARNING\static\app-assets\css\" />
+    <Folder Include="E_LEARNING\static\app-assets\img\" />
+    <Folder Include="E_LEARNING\static\app-assets\js\" />
+    <Folder Include="E_LEARNING\static\app-assets\themes\" />
+    <Folder Include="E_LEARNING\static\app-core\course-learning\" />
+    <Folder Include="E_LEARNING\static\app-core\quizzes\" />
+    <Folder Include="E_LEARNING\static\app-core\packages\" />
+    <Folder Include="E_LEARNING\static\app-core\reportings\school\" />
+    <Folder Include="E_LEARNING\static\app-core\_base\mediaPlayer\" />
+    <Folder Include="E_LEARNING\static\app-core\_base\signalR\" />
+    <Folder Include="E_LEARNING\static\app-core\_shared\" />
+    <Folder Include="E_LEARNING\static\app-core\_base\reporting\" />
+    <Folder Include="E_LEARNING\static\plugins\jquery\datepicker\" />
+    <Folder Include="E_LEARNING\static\plugins\intl-tel-input\" />
+    <Folder Include="E_LEARNING\static\plugins\pica\" />
+    <Folder Include="E_LEARNING\static\plugins\signalr\" />
+    <Folder Include="E_LEARNING\static\plugins\summernote\lang\" />
+    <Folder Include="E_LEARNING\static\plugins\summernote\css\" />
+    <Folder Include="E_LEARNING\static\plugins\summernote\ext\" />
+    <Folder Include="E_LEARNING\templates\accounts\profile\" />
+    <Folder Include="E_LEARNING\templates\commun\assistance\" />
+    <Folder Include="E_LEARNING\templates\commun\filters\" />
+    <Folder Include="E_LEARNING\templates\commun\student\" />
+    <Folder Include="E_LEARNING\templates\commun\theme\" />
+    <Folder Include="E_LEARNING\templates\courses\chapter-content\" />
+    <Folder Include="E_LEARNING\templates\courses\partial-view\" />
+    <Folder Include="E_LEARNING\templates\helps\school\" />
+    <Folder Include="E_LEARNING\templates\commun\" />
+    <Folder Include="E_LEARNING\templates\instructors\assistance\" />
+    <Folder Include="E_LEARNING\templates\courses\" />
+    <Folder Include="E_LEARNING\templates\instructors\quiz\" />
+    <Folder Include="E_LEARNING\templates\courses\quizzes\" />
+    <Folder Include="E_LEARNING\templates\packages\" />
+    <Folder Include="E_LEARNING\templates\schools\calendar\" />
+    <Folder Include="E_LEARNING\templates\students\calendar\" />
+    <Folder Include="E_LEARNING\templates\students\course\partial-view\" />
+    <Folder Include="E_LEARNING\templates\students\dashboard\" />
+    <Folder Include="E_LEARNING\templates\_base\" />
+    <Folder Include="E_LEARNING\templates\_includes\" />
+    <Folder Include="E_LEARNING\templates\_layouts\" />
+    <Folder Include="E_LEARNING\templates\helps\" />
+    <Folder Include="E_LEARNING\templates\_base\dashboard\" />
+    <Folder Include="E_LEARNING\templates\_base\alerts\" />
+    <Folder Include="E_LEARNING\templates\_base\reportings\" />
+    <Folder Include="E_LEARNING\templates\_base\w_api\" />
+    <Folder Include="E_LEARNING\translations\" />
+    <Folder Include="E_LEARNING\resources\" />
+    <Folder Include="E_LEARNING\static\app-core\_base\dashboard\" />
+    <Folder Include="E_LEARNING\static\app-core\reportings\" />
+    <Folder Include="E_LEARNING\static\app-core\messaging\" />
+    <Folder Include="E_LEARNING\static\app-core\reportings\instructor\" />
+    <Folder Include="E_LEARNING\static\app-core\students\" />
+    <Folder Include="E_LEARNING\static\app-core\" />
+    <Folder Include="E_LEARNING\static\app-core\accounts\" />
+    <Folder Include="E_LEARNING\static\app-core\_base\" />
+    <Folder Include="E_LEARNING\static\app-core\instructors\" />
+    <Folder Include="E_LEARNING\static\app-core\schools\" />
+    <Folder Include="E_LEARNING\static\plugins\angular\loading-bar\" />
+    <Folder Include="E_LEARNING\static\plugins\fullcalendar\lang\" />
+    <Folder Include="E_LEARNING\static\plugins\icheck-bootstrap\" />
+    <Folder Include="E_LEARNING\static\plugins\angular\" />
+    <Folder Include="E_LEARNING\static\plugins\dropzone\" />
+    <Folder Include="E_LEARNING\static\plugins\jquery\i18n\" />
+    <Folder Include="E_LEARNING\static\plugins\jquery\images\" />
+    <Folder Include="E_LEARNING\static\plugins\fullcalendar\" />
+    <Folder Include="E_LEARNING\static\plugins\chart.js\" />
+    <Folder Include="E_LEARNING\static\plugins\daterangepicker\" />
+    <Folder Include="E_LEARNING\static\plugins\jquery\datatables\" />
+    <Folder Include="E_LEARNING\static\plugins\moments\" />
+    <Folder Include="E_LEARNING\static\plugins\email.multiple\" />
+    <Folder Include="E_LEARNING\static\plugins\select2\" />
+    <Folder Include="E_LEARNING\static\plugins\starrr\" />
+    <Folder Include="E_LEARNING\static\plugins\summernote\fonts\" />
+    <Folder Include="E_LEARNING\static\plugins\summernote\" />
+    <Folder Include="E_LEARNING\static\plugins\tus\" />
+    <Folder Include="E_LEARNING\static\plugins\pace-progress\" />
+    <Folder Include="E_LEARNING\static\plugins\pace-progress\themes\" />
+    <Folder Include="E_LEARNING\static\plugins\pace-progress\themes\red\" />
+    <Folder Include="E_LEARNING\static\plugins\draganddrop\" />
+    <Folder Include="E_LEARNING\static\plugins\sweetalert2\" />
+    <Folder Include="E_LEARNING\static\plugins\toastr\" />
+    <Folder Include="E_LEARNING\static\plugins\video\" />
+    <Folder Include="E_LEARNING\static\plugins\video\lang\" />
+    <Folder Include="E_LEARNING\templates\_base\errors\" />
+    <Folder Include="E_LEARNING\templates\reportings\" />
+    <Folder Include="E_LEARNING\templates\instructors\chapter-content\" />
+    <Folder Include="E_LEARNING\templates\instructors\chapter\" />
+    <Folder Include="E_LEARNING\templates\instructors\course\" />
+    <Folder Include="E_LEARNING\templates\instructors\calendar\" />
+    <Folder Include="E_LEARNING\templates\messaging\" />
+    <Folder Include="E_LEARNING\templates\reportings\instructor\" />
+    <Folder Include="E_LEARNING\templates\reportings\student\" />
+    <Folder Include="E_LEARNING\templates\reportings\school\" />
+    <Folder Include="E_LEARNING\templates\schools\" />
+    <Folder Include="E_LEARNING\templates\schools\instructor\" />
+    <Folder Include="E_LEARNING\templates\schools\students\" />
+    <Folder Include="E_LEARNING\templates\students\" />
+    <Folder Include="E_LEARNING\templates\students\course\" />
+    <Folder Include="E_LEARNING\templates\students\instructor\" />
+    <Folder Include="E_LEARNING\templates\students\assistance\" />
+    <Folder Include="E_LEARNING\templates\students\subject\" />
+    <Folder Include="E_LEARNING\translations\en\" />
+    <Folder Include="E_LEARNING\translations\en\LC_MESSAGES\" />
+    <Folder Include="E_LEARNING\translations\es\" />
+    <Folder Include="E_LEARNING\translations\es\LC_MESSAGES\" />
+    <Folder Include="E_LEARNING\utilities\filters\" />
+    <Folder Include="E_LEARNING\utilities\" />
+    <Folder Include="E_LEARNING\utilities\flask\" />
+    <Folder Include="E_LEARNING\utilities\database\" />
+    <Folder Include="E_LEARNING\imports\" />
+    <Folder Include="E_LEARNING\static\dist\" />
+    <Folder Include="E_LEARNING\static\dist\css\" />
+    <Folder Include="E_LEARNING\static\dist\img\" />
+    <Folder Include="E_LEARNING\static\dist\img\credit\" />
+    <Folder Include="E_LEARNING\static\dist\js\" />
+    <Folder Include="E_LEARNING\static\plugins\" />
+    <Folder Include="E_LEARNING\static\plugins\bootstrap\" />
+    <Folder Include="E_LEARNING\static\plugins\bootstrap\js\" />
+    <Folder Include="E_LEARNING\static\plugins\fontawesome-free\" />
+    <Folder Include="E_LEARNING\static\plugins\fontawesome-free\css\" />
+    <Folder Include="E_LEARNING\static\plugins\fontawesome-free\webfonts\" />
+    <Folder Include="E_LEARNING\static\plugins\jquery\" />
+    <Folder Include="E_LEARNING\static\plugins\overlayScrollbars\" />
+    <Folder Include="E_LEARNING\static\plugins\overlayScrollbars\css\" />
+    <Folder Include="E_LEARNING\static\plugins\overlayScrollbars\js\" />
+    <Folder Include="E_LEARNING\templates\" />
+    <Folder Include="E_LEARNING\static\" />
+    <Folder Include="E_LEARNING\templates\admins\" />
+    <Folder Include="E_LEARNING\templates\accounts\" />
+    <Folder Include="E_LEARNING\templates\instructors\" />
+    <Folder Include="logs\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Interpreter Include="env\">
+      <Id>env</Id>
+      <Version>3.11</Version>
+      <Description>env (Python 3.11 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Web.targets" />
+  <!-- Specify pre- and post-build commands in the BeforeBuild and 
+       AfterBuild targets below. -->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <AutoAssignPort>True</AutoAssignPort>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

@@ -1,0 +1,19 @@
+/* Mobile */
+@media (max-width: 768px) {
+    body {
+        overflow-y: auto;
+    }
+
+    .modal ::-webkit-scrollbar {
+        display: none;
+    }
+    .more-space-div-bottom{
+        height: 300px;
+    }
+    .content-wrapper .more-space-bottom {
+        min-height: 300px !important;
+    }
+}
+
+
+

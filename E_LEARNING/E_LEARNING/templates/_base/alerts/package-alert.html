@@ -1,0 +1,51 @@
+
+
+{% if show_package_alert %}
+<div class="alert alert-warning alert-dismissible text-center text-uppercase p-2" style="position: fixed; left:0;bottom: -16px; width: 100%; z-index: 9999;">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <h5><i class="icon fas fa-exclamation-triangle fa-fade"></i>{{JR.version}} {{ current_package.label }} </h5>
+    <div class="mt-3">
+        {{JR.date_end}} : <b class="text-md ">
+            <u>{{ format_date(current_user.renewal_date, format='long') }}</u>
+        </b>, {{JR.remaining}} :  <b class="text-md d-inline-block text-red"><u>{{'%02d' % (current_user.unused_days | int )}}</u></b> {{JR.days}}
+    </div>
+    <div class="mt-2">
+        {% if g.current_language == 'fr'%}
+        Vous utilisez actuellement la version <b>{{current_package.label}}</b> de cette application.
+        {%if is_demo %}
+        &nbsp; Certaines fonctionnalités peuvent être restreintes.
+        {%endif%}
+        <br />Lorsque la durée du package est expirée, l'ajout et la modification de contenu seront désactivés.
+
+        {% elif g.current_language == 'en'%}
+        You are currently using the <b>{{current_package.label}}</b> version of this application.
+        {%if is_demo %}
+                                    <&nbsp;Some features may be restricted.
+                                                {%endif%}
+        <br />When the package duration expires, adding and editing content will be disabled.
+
+        {% elif g.current_language == 'es'%}
+        Actualmente estás usando la versión <b>{{current_package.label}}</b> de esta aplicación.
+        {%if is_demo %}
+        &nbsp;Algunas funciones pueden estar restringidas.
+        {%endif%}
+
+        <br />Cuando la duración del paquete expire, se deshabilitará la adición y edición de contenido.
+        {%endif%}
+    </div>
+    <br />
+    <br />
+    <div class="p-2 pt-0">
+        {% if current_user.role == ROLES.School.value %}
+        <a role="button" class="btn btn-danger mr-3" href="{{url_for('PackageView:index')}}">
+            <span><i class="fa fa-arrow-up-from-ground-water mr-1"></i> {{JR.upgrade}}</span>
+        </a>
+        {%endif%}
+
+        <button type="button" class="btn btn-dark" data-dismiss="alert" aria-hidden="true">
+            {{JR.close}}
+        </button>
+    </div>
+
+</div>
+{%endif%}

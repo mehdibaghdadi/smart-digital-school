@@ -1,0 +1,122 @@
+{% extends "_layouts/layout.html" %}
+{% block head %}
+
+{% endblock %}
+
+{% block content %}
+<form class="row" ng-submit="submitForm('{{url_save_update}}')" method="post" ng-controller="SubjectCtrl" 
+      ng-init="init({{subject.json}},{{subject_db.json}})">
+    <div class="col-md-12 d-none" id="body-q">
+        <div class="card">
+            <div class="card-header p-1 pl-3 pb-0">               
+                <div class="text-right p-0 ">
+                    <a class="btn btn-default border-bottom-0 btn-flat rounded-top btn-sm accordion-expand-all "
+                       title="{{JR.show_all_actived_levels}}" data-toggle="tooltip">
+                        <i style="font-size:14px" class="fa fa-list-check text-dark"></i>
+                    </a>
+                    <a class="btn btn-default border-bottom-0 btn-flat rounded-top btn-sm accordion-collapse-all "
+                       title="{{JR.hide_all_actived_levels}}" data-toggle="tooltip">
+                        <i style="font-size:14px" class="fa fa-caret-up text-dark"></i>
+                    </a>
+                </div>
+               
+                <div id="accordion">
+                    <div class=" text-uppercase" ng-repeat-start="s in subjects track by $index">
+                        &nbsp;<span class="text-xs">{$ s.label $}</span>
+                        <span class="float-right">
+                            <abbr x-number-level="{$s.nbr_level=(s.qualifications|filter:{selected:true}).length$}" class="badge" ng-class="s.nbr_level>0?'badge-success':'badge-warning'">{$ s.nbr_level $}  </abbr>
+
+                        </span>
+                    </div>
+                    <div ng-repeat-end class="card-body table-responsive p-0" ng-class="s.nbr_level>0?'accordion-content-active':''">
+                        <div class="table-responsive"
+                             ng-repeat="(education,groupedEducationList) in s.qualifications | toArray:true | orderBy:'education' | groupBy:'education'">
+
+                            <table class="table table-bordered table-hover text-nowrap" style="font-size: 0.7rem;">
+                                <thead>
+                                    <tr class="bg-light elevation-1">
+                                        <th style="width:25px" class="p-0 p-2  bg-light"><i class="fa fa-graduation-cap"></i></th>
+                                        <th class="text-left p-1 pl-2" style="width: 300px;">{$education$}</th>
+                                        <th class="text-center p-1">{{JR.classs}}</th>
+                                        <th style="width: 50px" class="text-center p-1">
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat-start="q in groupedEducationList track by $index" class="text-uppercase " ng-init="q.classrooms_names_selected=[]"
+                                        ng-class="q.selected ? 'text-bold ui-state-yellow':''" callback-on-end="{$buildClasses(q,$last)$}">
+                                        <td rowspan="{$ q.selected ? 2 : 1 $}" class="p-1 pt-2 text-center" ng-class="q.selected ?'bg-green':''">{$ $index+1 $}</td>
+
+                                        <td class="pt-2" role="button" >
+                                            <span><i class="fa mr-2" ng-class="q.selected ?  'fa-minus-circle':'fa-plus-circle'"></i>{$ q.level $}</span>
+                                        </td>
+                                        <td class="text-center pt-2" role="button" >
+                                            {$ q.label_qualification $}
+                                        </td>
+                                        <td class="text-center p-0 pt-1">
+                                            <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success"
+                                                 title="{{JR.status}} : {$q.selected==1 ? '{{JR.active}}' : '{{JR.inactive}}'$}" data-toggle="tooltip">
+                                                <input disabled readonly type="checkbox" class="custom-control-input" id="{$ s.id $}_{$ q.id $}"
+                                                       ng-model="q.selected" ng-checked="q.selected">
+                                                <label class="custom-control-label" for="{$ s.id $}_{$ q.id $}"></label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr ng-repeat-end ng-show="q.selected==1">
+                                        <td ng-if="!q.selected">{$ $index+1 $}</td>
+                                        <td colspan="4" class="m-0 p-0">
+                                            <div class="text-left text-uppercase">
+                                                <div style="border: thin dotted #ccc" class="bg-light">
+
+                                                    <div class="text-uppercase p-2" x-number-class="{$ q.nbr_class_selected=(q.classrooms_names_selected|filter:{selected:true}).length $}">
+
+                                                        <u><i class="fa fa-layer-group mr-2 text-info"></i><b>{$ s.label $}</b>, {{JR.classs}} - <b>{$ q.label_qualification $}</b> : <b class="text-red text-sm text-bold">{$ q.nbr_class_selected $}</b></u>
+                                                        <hr class="m-1" />
+
+                                                        <div class=" bg-white rounded row justify-content-start align-items-start m-1 p-2" id="TextBoxContainer{$ q.id $}">
+                                                            <!--Classes Textboxes will be added here -->
+                                                            <div ng-repeat="cl in q.classrooms_names.split(',') track by $index"
+                                                                 ng-init="q.classrooms_names_selected[$index].selected=q.classrooms_teaching.indexOf(cl)>=0"
+                                                                 class='col-4 col-md-3 col-lg-2 pb-2 text-center m-0'>
+                                                                <div class="icheck-info d-inline">
+                                                                    <input readonly disabled type="checkbox" name="checkboxClasses"
+                                                                           ng-model="q.classrooms_names_selected[$index].selected"
+                                                                           ng-checked="q.classrooms_names_selected[$index].selected"
+                                                                           id="rb{$ q.id $}-{$ $index $}"
+                                                                           data-value="{$cl$}"
+                                                                           data-subject="{$ q.id $}">
+                                                                    <label for="rb{$ q.id $}-{$ $index $}">
+                                                                        {$cl$}
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class=" mt-2 text-center pr-5 pl-5 " ng-if="subjects.length==0">
+                    <div class=" alert alert-danger text-center text-bold text-uppercase">
+                        <i class="fa fa-exclamation-circle mr-1"></i> {{JR.school_must_define_prof_subjects}}.
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+</form>
+
+{% endblock %}
+{% block contentBottom %}{% endblock %}
+
+{% block scripts %}
+<script src="/static/app-core/instructors/app.subjects.min.js?version={{app_version()}}"></script>
+<script src="/static/app-core/instructors/jquery.subjects.min.js"></script>
+{% endblock %}

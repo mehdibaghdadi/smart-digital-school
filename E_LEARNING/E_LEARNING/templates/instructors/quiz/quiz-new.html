@@ -1,0 +1,55 @@
+<!-- Modal -->
+<form class="modal fade" id="editModalQuiz" name="editModalQuiz" ng-submit="qc.submitQuiz('{{url_for("QuizInstructorView:edit_1")}}')" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document" >
+        <div class="modal-content modal-lg">
+            <div class="modal-header bg-primary">                
+                <small class="modal-title mt-1 ml-1" id="myModalLabel"><i class="fa fa-ew-quiz mr-2"></i><span class="text-uppercase">{{JR.new}} {{JR.quiz}}</span> : <b class="badge text-xs badge-primary">{$ qc.newQuiz.sequence  $}</b></small>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body"  ng-model="qc.newQuiz" >
+                <!-- beginform -->
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <textarea ng-model="qc.newQuiz.quiz_name" rows="4" type="text" required class="form-control  "
+                                  placeholder="{{JR.quiz}} : {{JR.titled}} ..."></textarea>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <small class="text-uppercase"><i class="fas fa-stopwatch mr-2"></i>{{JR.time_limit}} ({{JR.minutes}})</small>
+
+                        <div class="input-group">
+                            <input id="time_limit" name="log" type="number" required ng-model="qc.newQuiz.time_limit" min="0"
+                                   class="form-control form-control-sm text-center text-lg text-bold text-info" autocomplete="new-password" placeholder="{{JR.minutes}}">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <small class="text-red text-uppercase" ng-hide="qc.newQuiz.time_limit">{{JR.illimited}}</small>
+                                    <small class="text-black text-bold" ng-show="qc.newQuiz.time_limit">{{JR.minutes}}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                    
+
+                    <div class="col-12 text-right pt-2 pb-2">
+                        <div class="switch text-xs text-uppercase">
+                            <span class="">
+                            <i class="fa" ng-class="qc.newQuiz.is_visible==1 ? 'fa-eye text-success' : 'fa-eye-slash text-muted'"></i></span>
+                            <span class="ml-1 font-weight-bold">
+                                <span>{$ qc.newQuiz.is_visible ? "{{JR.online}}":"{{JR.offline}}"$}</span>
+                                <label class="">
+                                    <input type="checkbox" ng-model="qc.newQuiz.is_visible" ng-true-value="1" ng-false-value="0" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <span class="lever"></span>
+                                </label>
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- endform -->
+
+            </div>
+            <div class="modal-footer bg-gray-dark">
+                <button type="submit" class="btn btn-primary">{{JR.save_then_fill_questions}} <i class="fa fa-angle-right"></i></button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{JR.close}}</button>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,239 @@
+{% extends "_layouts/layout.html" %}
+
+{% set current_chapter = chapter.json["response"] if chapter and chapter.json["status"]==200 and chapter_id >0 else None  %}
+
+{% block head %}
+{% include '_includes/x-links-css-summernote.html' %}
+
+<link href="/static/plugins/draganddrop/draganddrop.css" rel="stylesheet" />
+<link href="/static/app-assets/css/courses.min.css?version={{app_version()}}" rel="stylesheet" />
+<link href="/static/app-assets/css/media-player.css?version={{app_version()}}" rel="stylesheet" />
+<style>
+    .card {
+        margin-bottom: 0 !important;
+    }
+
+    .bg-graph *:not(textarea):not(input):not(.text-transform-none) {
+        text-transform: uppercase;
+    }
+
+    .note-editable * {
+        text-transform: none !important;
+    }
+</style>
+
+{% endblock %}
+
+{% block contentTitleHeader %}
+- {{current_chapter.chapter_title if current_chapter else '' }}
+{% endblock %}
+
+{% block content %}
+<div class="bg-graph" ng-controller="ChapterEditCtrl" ng-init="{%if chapter_id >0 %} init({{chapter.json}},{{content.json}},'{{course_edit_url}}','{{course_chapter_update_url}}','{{course_chapter_content_update_url}}','{{course_chapter_content_visibility_url}}','{{course_chapter_content_importance_url}}','{{course_chapter_content_sequence_update_url}}','{{course_chapter_content_delete_url}}','{{course_chapter_list_url}}','{{course_chapter_edit_url}}') {% endif %}">
+
+    {% if chapter_id > 0 %}
+    <div class="text-uppercase text-center d-flex justify-content-between align-items-end p-0 m-0">
+        <div class="text-right mr-1">
+            <a class="btn btn-default border-bottom-0 btn-flat rounded-top btn-sm " ng-click="editCourse($event,editChapter)">
+                <small><i class="fas fa-chevron-left mr-1 text-blue"></i>{{JR.the_course}}</small>
+            </a>
+        </div>
+
+
+        <div class="btn-group text-right">
+            <button type="button" class="btn btn-default border-bottom-0 btn-flat rounded-top btn-sm text-uppercase" data-toggle="dropdown" aria-expanded="false">
+                <small>
+                    <i class="fa fa-bolt"></i>{{JR.actions}}<i class="ml-1 fa fa-ellipsis-v"></i>
+                </small>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right" role="menu" style="">
+                <a class="dropdown-item cursor-pointer" onclick="window.SmootScrollView('tb-content'); return false;"> <i class="fab fa-dropbox  mr-1 text-red"></i> {{JR.chapter_contents}}</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" data-toggle="modal" data-target="#editModalChapter"
+                   ng-click="createChapter($event)" role="button">
+                    <i class="fas fa-plus text-xs mr-2 text-success"></i>{{JR.add}} {{JR.chapter}}
+                </a>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="card p-0 bg-graph">
+        <div class=" text-uppercase text-center p-2">
+
+            <div class="text-center mb-2 mt-2">
+                <small class="text-black pl-1 pr-1 text-bold">
+                    <u>{$editChapter.label_subject $}</u>
+                </small>
+
+            </div>
+            <h7 class="text-dark text-xs">
+                {$editChapter.course_title $}
+            </h7>
+        </div>
+        <div class="  m-0 p-0  text-left">
+            <div class="btn-group  text-left">
+                <a class="btn btn-dark border-bottom-0 btn-flat rounded-top btn-sm" data-toggle="dropdown" aria-expanded="false">
+                    <small class="text-bold">
+                        <i class="fa fa-list-ol text-warning mr-1"></i>{{JR.chapters}}<i class="ml-1 fa fa-ellipsis-v "></i>
+                    </small>
+                </a>
+                {% include 'instructors/chapter/dropdown-menu-chapters-list.html' %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+
+    {% include 'instructors/chapter/chapter-new.html' %}
+
+
+    <form id="editChapterId" name="editChapterId" ng-submit="submitForm(editChapter)" tabindex="-1">
+
+
+        <div>
+            <div class="card-divider p-4">
+                <h2 class="d-flex justify-content-center align-items-center text-bold text-center  mt-4 text-black  text-uppercase mb-4  text-truncate">
+                     <i class="fa fa-ew-notebook text-green "></i> <u>{{JR.chapter}} </u>
+                    <b class="badge bg-primary rounded-pill ml-2">{$ {{current_chapter.sequence}}  | numberToLetter  $}</b>
+                </h2>
+            </div>
+        </div>
+
+        <div class="text-uppercase text-center d-flex align-items-end justify-content-between p-0 m-0">
+            <div class=" m-0 p-0 text-left">
+                <a class="btn btn-danger border-bottom-0 btn-flat rounded-top-right  btn-sm" ng-click="showEditChapter=!showEditChapter">
+                    <i class="fas fa-pencil mr-1 text-yellow"></i> <small class="mt-2 text-bold">{$ !showEditChapter ? "{{JR.modify}}" : "{{JR.cancel}}" $}</small>
+
+                </a>
+            </div>
+            <div class="   m-0 p-0  text-right">
+                <a class="btn btn-outline-dark border-bottom-0 btn-flat rounded-top  btn-sm" aria-expanded="false" ng-click="showEditChapter=!showEditChapter">
+                    <small>
+                        {{JR.sequence}} <b class="rounded ml-1 bg-light elevation-1 pl-1 pr-1">{$editChapter.sequence  $}</b>
+                    </small>
+                </a>
+            </div>
+
+        </div>
+        <div class="card ">
+            <div class="card-body p-0">
+                <!-- beginform -->
+                <div class="text-center mt-3 mb-2 p-2" ng-hide="showEditChapter">
+                    <div class="text-md">
+
+                        <b class="text-primary text-uppercase ">{$editChapter.chapter_title $}</b>
+
+                        <div ng-show="editChapter.chapter_description"
+                             class="text-dark text-sm mt-2 text-transform-none">
+                            {$editChapter.chapter_description $}
+                        </div>
+
+                    </div>
+                    <div class="text-underline small text-bold pt-3" role="button" ng-click="showEditChapter=!showEditChapter">
+                        <i class="fa" ng-class="editChapter.is_visible==1 ? 'fa-eye text-success' : 'fa-eye-slash text-red'"></i> <span>{$ editChapter.is_visible ? "{{JR.online}}":"{{JR.offline}}"$}</span>
+                    </div>
+                </div>
+
+                <div class="row m-0 p-0 p-2 bg-graph" ng-show="showEditChapter">
+                    <div class="form-group col-md-12">
+
+                        <label class="small ">{{JR.titled}}</label>
+                        <textarea ng-model="editChapter.chapter_title" type="text" required class="form-control  "
+                                  placeholder="{{JR.chapter}} : {{JR.titled}} ..." rows="2"></textarea>
+
+                        <label class="small  mt-2 ">{{JR.description}}</label>
+                        <textarea ng-model="editChapter.chapter_description" type="text" class="form-control "
+                                  placeholder="{{JR.chapter}} : {{JR.summary}} ..." rows="4"></textarea>
+
+                    </div>
+                    <div class="col-12 text-right pt-2 pb-2">
+                        <div class="switch text-xs text-uppercase">
+                            <span class="">
+                                <i class="fa" ng-class="editChapter.is_visible==1 ? 'fa-eye text-success' : 'fa-eye-slash text-muted'"></i>
+                            </span>
+                            <span class="ml-2 font-weight-bold">
+                                <span>{$ editChapter.is_visible ? "{{JR.online}}":"{{JR.offline}}"$}</span>
+                                <label class="">
+                                    <input type="checkbox" ng-model="editChapter.is_visible" ng-true-value="1" ng-false-value="0" class="ng-pristine ng-untouched ng-valid ng-not-empty">
+                                    <span class="lever"></span>
+                                </label>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center  elevation-1 p-2 m-0" ng-hide="showEditChapter">
+                    <div class="d-flex justify-content-between d-block m-0 p-0 text-uppercase  text-muted text-xs">
+                        <!--<div class="col-12"></div>-->
+                        <small>
+
+                            <u>{{JR.creation}}</u>: <b>{$ editChapter.date_chapter_creation| date:'yyyy-MM-dd' |localeDate $} {$ editChapter.date_chapter_creation| date:'HH:mm' $}</b>
+
+                        </small>
+                        <small>
+                            <u>{{JR.editing}}</u>: <b>{$ editChapter.date_chapter_update| date:'yyyy-MM-dd' |localeDate $} {$ editChapter.date_chapter_update| date:'HH:mm' $}</b>
+                        </small>
+                    </div>
+                </div>
+                <div class="footer-fix" ng-show="showEditChapter">
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary m-1" hide-if-no-payment>
+                            <i class="fa fa-save mr-2"></i>{{JR.save}} {{JR.chapter}}
+                        </button>
+                        <button type="button" class="btn  btn-danger m-1" ng-click="showEditChapter=false">
+                            <i class="fa fa-minus-circle mr-2"></i> {{JR.cancel}}
+                        </button>
+
+                    </div>
+                </div>
+
+                <!-- endform -->
+            </div>
+
+        </div>
+
+        <div class="text-uppercase text-right p-0 m-0" ng-hide="showEditChapter">
+
+            <a title="{{JR.overall_view_course}}" data-toggle="tooltip"
+               class="btn btn-dark border-bottom-0 btn-flat rounded-bottom btn-sm pt-1 pb-1"
+               href="{{course_instructor_view360_url}}#header_chapter_{{chapter_id}}">
+                <span><i class="fas fa-street-view mr-1 text-yellow"></i> {{JR.view_360}}</span>
+            </a>
+        </div>
+
+    </form>
+
+    <!--BEGIN contents chapter list-->
+    {% include 'instructors/chapter-content/chapter-content-list.html' %}
+    <!--END contents chapter list-->
+
+    <div ng-show="content_list.length>={{max_content_per_chapter}}">
+        {% set alert_message_exceeding = "Max. {0} / {1} : <b class='text-md'>{2}</b> "
+        .format(JR.content,JR.chapter,max_content_per_chapter) | safe %}
+        {% include '_base/alerts/exceeding-alert.html' %}
+    </div>
+
+</div>
+{% endblock %}
+{% block contentBottom %}{% endblock %}
+
+{% block scripts %}
+
+{% include '_includes/x-links-scripts-datatable.html' %}
+{% include '_includes/x-links-scripts-media-player.html' %}
+{% include '_includes/x-links-scripts-summernote.html' %}
+<script src="/static/plugins/moments/moment.min.js"></script>
+<script src="/static/plugins/moments/moment-with-locales.min.js"></script>
+<script src="/static/plugins/draganddrop/draganddrop.js"></script>
+<script src="/static/plugins/pica/pica.min.js"></script>
+<script src="/static/app-core/instructors/jquery.chapters.min.js?version={{app_version()}}"></script>
+<script src="/static/app-core/instructors/app.chapters.min.js?version={{app_version()}}"></script>
+<script src="/static/app-core/courses/jquery.courses.min.js?version={{app_version()}}"></script>
+<script>
+    function addContentTrigger(e) {
+        $('#btnAddContent').dropdown().dropdown('toggle');
+        e.stopPropagation();
+    }
+</script>
+{% endblock %}
